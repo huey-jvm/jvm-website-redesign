@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { PageHero } from "@/components/site/PageHero";
+import { ImageHero } from "@/components/site/ImageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { TeamCard } from "@/components/site/TeamCard";
@@ -20,12 +19,13 @@ export default function AboutPage() {
   const founder = team[0];
   return (
     <>
-      <PageHero eyebrow="About" title="About JVM Solutions" lead={`A veteran-led, ${contact.office.locality} based company that brings operational discipline to federal and commercial health missions.`} crumbs={[{ label: "About" }]} />
-      <div className="container-content">
-        <div className="relative aspect-[3/2] w-full overflow-hidden bg-ink-100 md:aspect-[21/9]">
-          <Image src="/images/team/team-shirts.jpg" alt="The JVM Solutions team in matching shirts reading Success begins with the right team" fill priority sizes="100vw" className="object-cover" />
-        </div>
-      </div>
+      <ImageHero
+        eyebrow="About"
+        title="About JVM Solutions"
+        lead={`A veteran-led, ${contact.office.locality} based company that brings operational discipline to federal and commercial health missions.`}
+        crumbs={[{ label: "About" }]}
+        image={{ src: "/images/team/team-shirts.jpg", alt: "The JVM Solutions team in matching shirts reading Success begins with the right team", position: "object-[65%_center]" }}
+      />
 
       <Section surface="cream" backdrop="AS-13">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

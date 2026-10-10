@@ -1,6 +1,5 @@
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { PageHero } from "@/components/site/PageHero";
+import { ImageHero } from "@/components/site/ImageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { CredentialMark } from "@/components/site/CredentialMark";
@@ -23,12 +22,13 @@ export default function CareersPage() {
   const whv = credentials.find((c) => c.slug === "we-hire-vets")!;
   return (
     <>
-      <PageHero eyebrow="Careers" title="Success Begins With the Right Team" lead="JVM is an equal opportunity employer and a recognised veteran employer. If your work is a calling, you will find people here who feel the same." crumbs={[{ label: "Careers" }]} />
-      <div className="container-content">
-        <div className="relative aspect-[3/2] w-full overflow-hidden bg-ink-100 md:aspect-[21/9]">
-          <Image src="/images/team/team-walking.jpg" alt="The JVM Solutions team walking together" fill priority sizes="100vw" className="object-cover" />
-        </div>
-      </div>
+      <ImageHero
+        eyebrow="Careers"
+        title="Success Begins With the Right Team"
+        lead="JVM is an equal opportunity employer and a recognised veteran employer. If your work is a calling, you will find people here who feel the same."
+        crumbs={[{ label: "Careers" }]}
+        image={{ src: "/images/team/team-walking.jpg", alt: "The JVM Solutions team walking together", position: "object-[70%_center]" }}
+      />
 
       <Section>
         <Reveal>
