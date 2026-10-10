@@ -15,7 +15,7 @@ export type Service = {
   summary: string;
   intro: string;
   sections: ServiceSection[];
-  placeholder?: { id: string; what: string; who: string };
+  placeholders?: { id: string; what: string; who: string }[];
   relatedOutcomes: string[];
 };
 
@@ -94,7 +94,10 @@ export const services: Service[] = [
           }]
         : []),
     ],
-    placeholder: { id: "P7", what: "Health IT past performance, task orders and outcomes", who: "JVM, B4" },
+    placeholders: [
+      { id: "P13", what: "Page copy written by JVM to the brief in docs/briefs/health-it.md", who: "JVM, writes to a brief" },
+      { id: "P7", what: "Health IT past performance, task orders and outcomes", who: "JVM, B4" },
+    ],
     relatedOutcomes: ["operations", "readiness", "access"],
   },
   {
@@ -114,7 +117,7 @@ export const services: Service[] = [
         delivers: ["Facilities management", "Supply chain management", "Integrated logistics management", "Transportation management", "Carrier and claims management", "Quality assurance", "Inventory control", "Training"],
       },
     ],
-    placeholder: { id: "P13", what: "A written introduction and two or three examples for Logistics and Facilities Management", who: "JVM, writes to a brief" },
+    placeholders: [{ id: "P13", what: "A written introduction and two or three examples for Logistics and Facilities Management", who: "JVM, writes to a brief" }],
     relatedOutcomes: ["operations", "readiness"],
   },
   {
@@ -134,7 +137,7 @@ export const services: Service[] = [
         delivers: ["Daily operations support", "Administrative services", "Strategic planning support", "Process improvement"],
       },
     ],
-    placeholder: { id: "P13", what: "Specific examples of management and administration engagements", who: "JVM, writes to a brief" },
+    placeholders: [{ id: "P13", what: "Page copy written by JVM to the brief in docs/briefs/management-support.md", who: "JVM, writes to a brief" }],
     relatedOutcomes: ["operations", "experience"],
   },
 ];

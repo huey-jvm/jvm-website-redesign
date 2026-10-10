@@ -38,7 +38,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   return (
     <>
       <PageHero eyebrow="Services" title={service.name} lead={service.intro} crumbs={[{ label: "Services", href: "/services" }, { label: service.name }]}>
-        {service.placeholder ? <div className="mt-6 max-w-xl"><Placeholder id={service.placeholder.id} what={service.placeholder.what} who={service.placeholder.who} /></div> : null}
+        {service.placeholders?.map((p) => <div key={p.id} className="mt-6 max-w-xl"><Placeholder id={p.id} what={p.what} who={p.who} /></div>)}
       </PageHero>
 
       <Section surface="light" className="pt-0 md:pt-0 lg:pt-0">
