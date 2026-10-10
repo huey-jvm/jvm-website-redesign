@@ -5,10 +5,6 @@ import { cn } from "@/lib/cn";
 
 export type NavSection = { id: string; label: string };
 
-/**
- * Sticky sub navigation for long pages. A left rail from lg, a scrollable chip row below.
- * The current section is marked with a gold rule. Anchors respect the header offset via scroll-padding-top.
- */
 export function InPageNav({ sections, label = "On this page" }: { sections: NavSection[]; label?: string }) {
   const [active, setActive] = useState(sections[0]?.id);
 
