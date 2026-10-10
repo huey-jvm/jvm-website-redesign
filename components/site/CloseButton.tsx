@@ -2,7 +2,6 @@ import type { ComponentPropsWithoutRef } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/cn";
 
-/** Every close button on the site is this one. Rotates 90 degrees on hover, never 45. Outline, never border. */
 export function CloseButton({ tone = "light", className, label = "Close", ...rest }: ComponentPropsWithoutRef<"button"> & { tone?: "light" | "dark"; label?: string }) {
   return (
     <button

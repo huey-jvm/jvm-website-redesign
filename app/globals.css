@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colour. The only colour source on the site. Tailwind's stock palette is removed on purpose. */
   --color-*: initial;
   --color-white: #ffffff;
   --color-black: #000000;
@@ -24,7 +23,6 @@
   --color-success: #166534;
   --color-error: #b91c1c;
 
-  /* Type. Two faces, ten tokens. */
   --font-display: var(--font-cormorant), "Cormorant SC", Georgia, serif;
   --font-sans: var(--font-inter), Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
 
@@ -67,23 +65,19 @@
   --text-eyebrow--line-height: 1.2;
   --text-eyebrow--letter-spacing: 0.1em;
 
-  /* Shape. Four bands by role. */
   --radius-*: initial;
   --radius-none: 0;
   --radius-control: 0.5rem;
   --radius-container: 0.75rem;
   --radius-pill: 9999px;
 
-  /* Depth. Two levels. */
   --shadow-*: initial;
   --shadow-float: 0 8px 24px rgb(0 0 0 / 0.12);
   --shadow-header: 0 1px 0 #d9d9d9, 0 4px 16px rgb(0 0 0 / 0.06);
 
-  /* Motion. */
   --ease-enter: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-move: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  /* Layout. */
   --container-content: 75rem;
   --container-prose: 42rem;
 }
@@ -134,7 +128,6 @@
   max-width: var(--container-prose);
 }
 
-/* Underline drawn with a pseudo element so it cannot inherit a radius and shifts nothing. */
 @utility link-underline {
   position: relative;
   &::after {

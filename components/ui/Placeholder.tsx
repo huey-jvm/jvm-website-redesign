@@ -12,10 +12,6 @@ type Props = {
   inline?: boolean;
 };
 
-/**
- * Wraps a content gap. In preview it renders a visible, labelled block with the fallback beneath it.
- * In production it renders the fallback alone, or nothing.
- */
 export function Placeholder({ id, what, who, children, className, inline }: Props) {
   const entry = placeholderRegister[id];
   const label = what ?? entry?.what ?? "Content pending";

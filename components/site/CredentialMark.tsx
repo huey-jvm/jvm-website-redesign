@@ -6,10 +6,6 @@ import type { Credential } from "@/content/credentials";
 import { cn } from "@/lib/cn";
 import { withBasePath } from "@/lib/base-path";
 
-/**
- * One credential mark on a white tile. Always an image with alt text, or a text tile when the file is not yet in place.
- * Always a link to its evidence when one exists.
- */
 function imageExists(src?: string) {
   if (!src) return false;
   try {
