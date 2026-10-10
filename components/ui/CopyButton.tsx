@@ -27,11 +27,11 @@ export function CopyButton({ value, label, tone = "light" }: { value: string; la
         aria-label={copied ? `${label} copied` : `Copy ${label}`}
         className={cn(
           "peer inline-flex size-11 items-center justify-center rounded-control transition-[opacity,color,background-color] duration-150 ease",
-          "opacity-0 group-hover/fact:opacity-100 group-focus-within/fact:opacity-100 focus-visible:opacity-100",
+          "opacity-0 group-hover/fact:opacity-100 group-focus-within/fact:opacity-100 focus-visible:opacity-100 [@media(hover:none)]:opacity-100",
           "active:scale-[0.98] motion-reduce:active:scale-100",
           tone === "dark"
-            ? "text-ink-300 hover:bg-ink-800 hover:text-gold-500 focus-visible:outline-gold-500"
-            : "text-ink-500 hover:bg-ink-100 hover:text-gold-700 focus-visible:outline-gold-700",
+            ? "text-ink-300 hover:bg-ink-800 hover:text-gold-500 active:bg-ink-800 active:text-gold-500 focus-visible:outline-gold-500"
+            : "text-ink-500 hover:bg-ink-100 hover:text-gold-700 active:bg-ink-100 active:text-gold-700 focus-visible:outline-gold-700",
         )}
       >
         {copied ? <Check aria-hidden className="size-5" /> : <Copy aria-hidden className="size-5" />}
