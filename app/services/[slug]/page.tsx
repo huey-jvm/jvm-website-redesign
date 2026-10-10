@@ -8,6 +8,7 @@ import { OutcomeTile } from "@/components/site/OutcomeTile";
 import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { Button } from "@/components/ui/Button";
+import { Banner } from "@/components/site/Slot";
 import { services, getService } from "@/content/services";
 import { getOutcome } from "@/content/outcomes";
 import { pageMetadata } from "@/lib/seo";
@@ -40,6 +41,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <PageHero eyebrow="Services" title={service.name} lead={service.intro} crumbs={[{ label: "Services", href: "/services" }, { label: service.name }]}>
         {service.placeholders?.map((p) => <div key={p.id} className="mt-6 max-w-xl"><Placeholder id={p.id} what={p.what} who={p.who} /></div>)}
       </PageHero>
+
+      {service.bannerImage ? <Banner id={service.bannerImage} className="mb-10 md:mb-14" /> : null}
 
       <Section surface="light" className="pt-0 md:pt-0 lg:pt-0">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">

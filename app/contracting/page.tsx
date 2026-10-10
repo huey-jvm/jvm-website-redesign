@@ -11,6 +11,7 @@ import { starsIII, starsShown, pastPerformance } from "@/content/vehicles";
 import { contact } from "@/content/contact";
 import { team } from "@/content/team";
 import { pageMetadata } from "@/lib/seo";
+import { Slot } from "@/components/site/Slot";
 
 export const metadata = pageMetadata("Contracting", starsShown ? "UEI, CAGE, NAICS, set-aside status, GSA 8(a) STARS III and how to reach JVM Solutions business development." : "UEI, CAGE, NAICS, set-aside status and how to reach JVM Solutions business development.", "/contracting");
 
@@ -44,6 +45,7 @@ export default function ContractingPage() {
       </Section>
 
       <Section>
+        <Slot id="AS-11" className="mb-10 aspect-[21/9] w-full" sizes="(min-width: 1200px) 1200px, 100vw" />
         <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {cards.filter((c) => !c.withheld).map((c) => (
             <li key={c.href} className="h-full">

@@ -6,6 +6,7 @@ import { outcomes, outcomesIntro } from "@/content/outcomes";
 import { differentiators, differentiatorsIntro, theShift, valueProposition } from "@/content/differentiators";
 import { statements } from "@/content/statements";
 import { pageMetadata } from "@/lib/seo";
+import { Slot, presentAsset } from "@/components/site/Slot";
 
 export const metadata = pageMetadata("Why JVM", "From staffing vendor to integrated operations partner. The value proposition, five outcomes and four differentiators behind every JVM engagement.", "/why-jvm");
 
@@ -17,6 +18,7 @@ const nav = [
 ];
 
 export default function WhyPage() {
+  const shiftArt = presentAsset("AS-10");
   return (
     <>
       <PageHero eyebrow="Why JVM" title="Partner, Not Vendor" lead={statements.tagline} crumbs={[{ label: "Why JVM" }]} />
@@ -27,7 +29,7 @@ export default function WhyPage() {
             <section id="shift" className="scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">The Shift</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">JVM’s path forward is a deliberate pivot in how we position, package and present our capabilities. This is not a rebrand. It is a strategic elevation.</p>
-              <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div className={`mt-6 grid grid-cols-1 gap-4 md:grid-cols-2${shiftArt ? " lg:grid-cols-3" : ""}`}>
                 <div className="rounded-container border border-ink-200 bg-white p-6">
                   <p className="text-eyebrow font-semibold uppercase text-ink-500">From</p>
                   <h3 className="mt-2 text-h4 text-ink-700">{theShift.from.title}</h3>
@@ -38,6 +40,7 @@ export default function WhyPage() {
                   <h3 className="mt-2 text-h4">{theShift.to.title}</h3>
                   <p className="mt-2 text-body-sm text-ink-900">{theShift.to.body}</p>
                 </div>
+                {shiftArt ? <Slot id={shiftArt.id} className="hidden lg:block" sizes="(min-width: 1024px) 30vw, 100vw" /> : null}
               </div>
             </section>
 

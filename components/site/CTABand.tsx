@@ -5,7 +5,7 @@ import { OpenWidgetButton } from "./OpenWidgetButton";
 export function CTABand({ title = "Ready to Talk About Your Mission?", body, secondaryHref, secondaryLabel, surface = "cream", route }: { title?: string; body?: string; secondaryHref?: string; secondaryLabel?: string; surface?: "cream" | "dark"; route?: "contracting" | "health-system" | "careers" | "other" }) {
   const tone = surface === "dark" ? "dark" : "light";
   return (
-    <Section surface={surface} tight>
+    <Section surface={surface} tight backdrop={surface === "cream" ? "AS-05" : undefined}>
       <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
         <div>
           <h2 className={surface === "dark" ? "text-h2-sm text-cream md:text-h2" : "text-h2-sm md:text-h2"}>{title}</h2>

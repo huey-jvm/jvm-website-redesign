@@ -16,7 +16,7 @@ export default function ServicesPage() {
       <Section surface="cream" className="pt-0 md:pt-0 lg:pt-0">
         <ul className="grid grid-cols-1 gap-6 pt-12 md:grid-cols-2">
           {services.map((s) => (
-            <li key={s.slug} className="h-full"><ServiceCard service={s} headingLevel="h2" /></li>
+            <li key={s.slug} className="h-full"><ServiceCard service={s} slot={s.cardImage} headingLevel="h2" /></li>
           ))}
         </ul>
         <p className="mt-10 max-w-[65ch] text-body text-ink-700">

@@ -1,5 +1,6 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { Backdrop, presentAsset } from "./Slot";
 
 export type Surface = "light" | "cream" | "dark" | "ink50";
 
@@ -10,10 +11,12 @@ const surfaces: Record<Surface, string> = {
   dark: "surface-dark bg-ink-950 text-ink-200",
 };
 
-export function Section({ surface = "light", className, children, tight, ...rest }: ComponentPropsWithoutRef<"section"> & { surface?: Surface; tight?: boolean; children: ReactNode }) {
+export function Section({ surface = "light", className, children, tight, backdrop, backdropClassName, ...rest }: ComponentPropsWithoutRef<"section"> & { surface?: Surface; tight?: boolean; backdrop?: string; backdropClassName?: string; children: ReactNode }) {
+  const bg = backdrop ? presentAsset(backdrop) : undefined;
   return (
-    <section className={cn(surfaces[surface], tight ? "py-10 md:py-12" : "py-12 md:py-16 lg:py-20", className)} {...rest}>
-      <div className="container-content">{children}</div>
+    <section className={cn(surfaces[surface], tight ? "py-10 md:py-12" : "py-12 md:py-16 lg:py-20", bg && "relative isolate", className)} data-backdrop={bg?.id} {...rest}>
+      {bg ? <Backdrop id={bg.id} imgClassName={backdropClassName} /> : null}
+      <div className={cn("container-content", bg && "relative")}>{children}</div>
     </section>
   );
 }

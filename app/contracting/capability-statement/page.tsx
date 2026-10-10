@@ -11,6 +11,7 @@ import { services } from "@/content/services";
 import { statements } from "@/content/statements";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
+import { Slot, presentAsset } from "@/components/site/Slot";
 
 export const metadata = pageMetadata("Capability Statement", "A one page summary of JVM Solutions for your file: identifiers, core competencies, differentiators and contact.", "/contracting/capability-statement");
 
@@ -19,7 +20,7 @@ const pdfPath: string | undefined = undefined;
 export default function CapabilityPage() {
   return (
     <>
-      <PageHero eyebrow="Contracting" title="Capability Statement" lead="The one page summary a contracting officer keeps on file. The same facts are on this page, so nothing here depends on the download." crumbs={[{ label: "Contracting", href: "/contracting" }, { label: "Capability Statement" }]}>
+      <PageHero eyebrow="Contracting" title="Capability Statement" lead="The one page summary a contracting officer keeps on file. The same facts are on this page, so nothing here depends on the download." crumbs={[{ label: "Contracting", href: "/contracting" }, { label: "Capability Statement" }]} aside={presentAsset("AS-12") ? <Slot id="AS-12" className="aspect-[3/2] w-full" sizes="(min-width: 1024px) 40vw, 100vw" /> : undefined}>
         <div className="mt-6 flex flex-wrap items-center gap-4">
           {pdfPath ? (
             <Button href={pdfPath} variant="primary" icon={<Download className="size-4" />}>Download the PDF</Button>

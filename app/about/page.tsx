@@ -26,7 +26,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <Section surface="cream">
+      <Section surface="cream" backdrop="AS-13">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="@container rounded-container border border-cream-border bg-white p-6 md:p-8">
             <p className="text-eyebrow font-semibold uppercase text-gold-700">Mission</p>

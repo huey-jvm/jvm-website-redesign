@@ -16,12 +16,15 @@ export type Service = {
   intro: string;
   sections: ServiceSection[];
   placeholders?: { id: string; what: string; who: string }[];
+  cardImage?: string;
+  bannerImage?: string;
   relatedOutcomes: string[];
 };
 
 export const services: Service[] = [
   {
     slug: "healthcare-operations",
+    bannerImage: "AS-06",
     name: "Healthcare Staffing and Operations",
     short: "Healthcare",
     lead: true,
@@ -71,6 +74,8 @@ export const services: Service[] = [
   },
   {
     slug: "health-it",
+    cardImage: "AS-01",
+    bannerImage: "AS-07",
     name: "Health IT and Technology Services",
     short: "Health IT",
     lead: false,
@@ -102,6 +107,8 @@ export const services: Service[] = [
   },
   {
     slug: "logistics-facilities",
+    cardImage: "AS-02",
+    bannerImage: "AS-08",
     name: "Logistics and Facilities Management",
     short: "Logistics",
     lead: false,
@@ -122,6 +129,8 @@ export const services: Service[] = [
   },
   {
     slug: "management-support",
+    cardImage: "AS-03",
+    bannerImage: "AS-09",
     name: "Management and Administrative Support",
     short: "Management",
     lead: false,

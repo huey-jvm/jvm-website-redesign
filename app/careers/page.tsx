@@ -8,13 +8,14 @@ import { Button } from "@/components/ui/Button";
 import { credentials } from "@/content/credentials";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
+import { Slot } from "@/components/site/Slot";
 
 export const metadata = pageMetadata("Careers", "Join a veteran-led healthcare operations company. We hire veterans, healthcare professionals and experienced professionals who want their work to matter.", "/careers");
 
 const audiences = [
-  { title: "Veterans", body: "JVM appreciates the personal sacrifices of our veterans in serving our country. We recognise and value the leadership, character and discipline you bring, and we help you find where the skills you have acquired fit best in a civilian career." },
-  { title: "Healthcare Professionals", body: "We are committed to giving our clients more, with the most qualified and compassionate professionals in the industry. Your work is not just a job, it is a calling, and you deserve to get the most out of your profession. Our healthcare roles cover a wide array of specialty areas." },
-  { title: "Experienced Professionals", body: "Our success is a direct result of our people. We have the right people in the right places making the right decisions for our clients. Join us to share your expertise in solving our commercial and government clients' hardest operational problems." },
+  { title: "Veterans", image: "AS-15a", body: "JVM appreciates the personal sacrifices of our veterans in serving our country. We recognise and value the leadership, character and discipline you bring, and we help you find where the skills you have acquired fit best in a civilian career." },
+  { title: "Healthcare Professionals", image: "AS-15b", body: "We are committed to giving our clients more, with the most qualified and compassionate professionals in the industry. Your work is not just a job, it is a calling, and you deserve to get the most out of your profession. Our healthcare roles cover a wide array of specialty areas." },
+  { title: "Experienced Professionals", image: "AS-15c", body: "Our success is a direct result of our people. We have the right people in the right places making the right decisions for our clients. Join us to share your expertise in solving our commercial and government clients' hardest operational problems." },
 ];
 
 export default function CareersPage() {
@@ -31,9 +32,12 @@ export default function CareersPage() {
       <Section>
         <ul className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {audiences.map((a) => (
-            <li key={a.title} className="rounded-container border border-ink-200 bg-white p-6">
-              <h2 className="truncate text-h3" title={a.title}>{a.title}</h2>
-              <p className="mt-3 text-body text-ink-700">{a.body}</p>
+            <li key={a.title} className="overflow-hidden rounded-container border border-ink-200 bg-white">
+              <Slot id={a.image} className="aspect-[3/2] w-full" sizes="(min-width: 1024px) 33vw, 100vw" />
+              <div className="p-6">
+                <h2 className="truncate text-h3" title={a.title}>{a.title}</h2>
+                <p className="mt-3 text-body text-ink-700">{a.body}</p>
+              </div>
             </li>
           ))}
         </ul>

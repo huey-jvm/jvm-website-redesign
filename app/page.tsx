@@ -20,6 +20,7 @@ import { starsIII, starsShown, starsConfirmed, starsOrdering } from "@/content/v
 import { team } from "@/content/team";
 import { credentials } from "@/content/credentials";
 import { CredentialMark } from "@/components/site/CredentialMark";
+import { Backdrop, presentAsset } from "@/components/site/Slot";
 
 export const metadata: Metadata = {
   description: statements.positioning,
@@ -33,10 +34,12 @@ const serviceImages: Record<string, string | undefined> = {
 export default function HomePage() {
   const founder = team[0];
   const stars = credentials.find((c) => c.slug === "stars-iii");
+  const heroTexture = presentAsset("AS-04");
   return (
     <>
-      <section className="surface-dark bg-ink-950 text-ink-200">
-        <div className="container-content grid grid-cols-1 items-center gap-10 py-12 md:py-16 lg:grid-cols-12 lg:gap-12 lg:py-24">
+      <section className={`surface-dark bg-ink-950 text-ink-200${heroTexture ? " relative isolate" : ""}`} data-backdrop={heroTexture?.id}>
+        {heroTexture ? <Backdrop id={heroTexture.id} imgClassName="object-right opacity-60" /> : null}
+        <div className={`container-content grid grid-cols-1 items-center gap-10 py-12 md:py-16 lg:grid-cols-12 lg:gap-12 lg:py-24${heroTexture ? " relative" : ""}`}>
           <div className="relative order-first aspect-[3/2] w-full overflow-hidden rounded-container lg:order-last lg:col-span-6 lg:aspect-[4/5] lg:rounded-none lg:rounded-l-container">
             <Image src="/images/team/team-walking.jpg" alt="The JVM Solutions team walking together outside their office" fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
           </div>
@@ -69,7 +72,7 @@ export default function HomePage() {
         <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {services.map((s) => (
             <li key={s.slug} className={s.lead ? "h-full md:col-span-3" : "h-full"}>
-              <ServiceCard service={s} image={serviceImages[s.slug]} horizontal={s.lead} />
+              <ServiceCard service={s} image={serviceImages[s.slug]} slot={s.cardImage} horizontal={s.lead} />
             </li>
           ))}
         </ul>
@@ -91,7 +94,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section surface="dark">
+      <Section surface="dark" backdrop="AS-04" backdropClassName="object-right opacity-60">
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="text-eyebrow font-semibold uppercase text-gold-500">Contracting at a glance</p>
