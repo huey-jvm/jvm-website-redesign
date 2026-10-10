@@ -1,14 +1,22 @@
+import { services } from "./services";
+
 export type NavItem = { label: string; href: string; description?: string; lead?: boolean };
 export type NavGroup = { label: string; href?: string; items?: NavItem[] };
+
+const serviceDescriptions: Record<string, string> = {
+  "healthcare-operations": "Clinical and operational professionals, program and case management, credentialing",
+  "health-it": "IT services under GSA 8(a) STARS III",
+  "logistics-facilities": "Supply chain, transportation, facilities",
+  "management-support": "Operations and administrative support",
+};
+
+const serviceItems: NavItem[] = services.map((s) => ({ label: s.name, href: `/services/${s.slug}`, description: serviceDescriptions[s.slug], lead: s.lead }));
 
 export const primaryNav: NavGroup[] = [
   {
     label: "Services",
     items: [
-      { label: "Healthcare Operations", href: "/services/healthcare-operations", description: "Clinical and operational professionals, program and case management, credentialing", lead: true },
-      { label: "Health IT", href: "/services/health-it", description: "IT services under GSA 8(a) STARS III" },
-      { label: "Logistics and Facilities", href: "/services/logistics-facilities", description: "Supply chain, transportation, facilities" },
-      { label: "Management and Administration Support", href: "/services/management-support", description: "Operations and administrative support" },
+      ...serviceItems,
       { label: "All services", href: "/services" },
     ],
   },
@@ -36,12 +44,7 @@ export const primaryNav: NavGroup[] = [
 export const footerColumns: { heading: string; items: NavItem[] }[] = [
   {
     heading: "Services",
-    items: [
-      { label: "Healthcare Operations", href: "/services/healthcare-operations" },
-      { label: "Health IT", href: "/services/health-it" },
-      { label: "Logistics and Facilities", href: "/services/logistics-facilities" },
-      { label: "Management and Administration Support", href: "/services/management-support" },
-    ],
+    items: serviceItems,
   },
   {
     heading: "Contracting",

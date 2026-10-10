@@ -65,7 +65,7 @@ export default function HomePage() {
       </Section>
 
       <Section surface="cream">
-        <SectionHeader eyebrow="Services" title="One Accountable Partner Across Four Areas" lead="Healthcare operations leads. Health IT, logistics and facilities, and management support sit alongside it under the same accountability." />
+        <SectionHeader eyebrow="Services" title="One Accountable Partner Across Four Areas" lead="Healthcare staffing and operations leads. Health IT and technology services, logistics and facilities management, and management and administrative support sit alongside it under the same accountability." />
         <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {services.map((s) => (
             <li key={s.slug} className={s.lead ? "h-full md:col-span-3" : "h-full"}>

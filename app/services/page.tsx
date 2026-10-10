@@ -7,12 +7,12 @@ import { services } from "@/content/services";
 import { statements } from "@/content/statements";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata("Services", "Healthcare operations, Health IT, logistics and facilities, and management support, delivered by one accountable partner.", "/services");
+export const metadata = pageMetadata("Services", "Healthcare staffing and operations, Health IT and technology services, logistics and facilities management, and management and administrative support, delivered by one accountable partner.", "/services");
 
 export default function ServicesPage() {
   return (
     <>
-      <PageHero eyebrow={statements.category} title="Services" lead="Healthcare operations is the core of the company. Three more areas sit beside it, each delivered under the same accountability and the same quality system." crumbs={[{ label: "Services" }]} />
+      <PageHero eyebrow={statements.category} title="Services" lead="Healthcare staffing and operations is the core of the company. Three more areas sit beside it, each delivered under the same accountability and the same quality system." crumbs={[{ label: "Services" }]} />
       <Section surface="cream" className="pt-0 md:pt-0 lg:pt-0">
         <ul className="grid grid-cols-1 gap-6 pt-12 md:grid-cols-2">
           {services.map((s) => (

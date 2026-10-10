@@ -20,13 +20,13 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "healthcare-operations",
-    name: "Healthcare Operations",
+    name: "Healthcare Staffing and Operations",
     short: "Healthcare",
     lead: true,
     summary:
       "Clinical and operational professionals, occupational health, program and case management, credentialing and telehealth, delivered as one accountable partner.",
     intro:
-      "Healthcare operations is the core of JVM. We supply credentialed clinical and operational professionals and the management layer around them, so a facility gains capacity, compliance and continuity in one engagement rather than a roster of names.",
+      "Healthcare staffing and operations is the core of JVM. We supply credentialed clinical and operational professionals and the management layer around them, so a facility gains capacity, compliance and continuity in one engagement rather than a roster of names.",
     sections: [
       {
         id: "professional-services",
@@ -69,7 +69,7 @@ export const services: Service[] = [
   },
   {
     slug: "health-it",
-    name: "Health IT",
+    name: "Health IT and Technology Services",
     short: "Health IT",
     lead: false,
     summary:
@@ -94,7 +94,7 @@ export const services: Service[] = [
   },
   {
     slug: "logistics-facilities",
-    name: "Logistics and Facilities",
+    name: "Logistics and Facilities Management",
     short: "Logistics",
     lead: false,
     summary:
@@ -109,12 +109,12 @@ export const services: Service[] = [
         delivers: ["Facilities management", "Supply chain management", "Integrated logistics management", "Transportation management", "Carrier and claims management", "Quality assurance", "Inventory control", "Training"],
       },
     ],
-    placeholder: { id: "P13", what: "A written introduction and two or three examples for Logistics and Facilities", who: "JVM, writes to a brief" },
+    placeholder: { id: "P13", what: "A written introduction and two or three examples for Logistics and Facilities Management", who: "JVM, writes to a brief" },
     relatedOutcomes: ["operations", "readiness"],
   },
   {
     slug: "management-support",
-    name: "Management and Administration Support",
+    name: "Management and Administrative Support",
     short: "Management",
     lead: false,
     summary:
