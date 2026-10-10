@@ -1,4 +1,5 @@
-export type RouteKey = "contracting" | "health-system" | "careers" | "other";
+export const routeKeys = ["contracting", "health-system", "careers", "other"] as const;
+export type RouteKey = (typeof routeKeys)[number];
 
 const mainLine = { phone: "210-504-4707", phoneHref: "tel:+12105044707" };
 const office = { street: "7550 W I-10, Suite 800", locality: "San Antonio", region: "TX", regionName: "Texas", postalCode: "78229" };
