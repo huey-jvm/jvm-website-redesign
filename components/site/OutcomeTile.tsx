@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { Outcome } from "@/content/outcomes";
+import { cn } from "@/lib/cn";
 
 export function OutcomeTile({ outcome, href }: { outcome: Outcome; href?: string }) {
   const inner = (
@@ -16,9 +17,9 @@ export function OutcomeTile({ outcome, href }: { outcome: Outcome; href?: string
       ) : null}
     </>
   );
-  const classes = "group/card flex h-full flex-col rounded-container border border-ink-200 bg-white p-6 @container";
+  const classes = "group/card @container flex h-full flex-col rounded-container border border-ink-200 bg-white p-4 @[20rem]:p-6 @[35rem]:p-8";
   return href ? (
-    <Link href={href} className={`${classes} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700`} aria-label={outcome.title}>{inner}</Link>
+    <Link href={href} className={cn(classes, "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700")} aria-label={outcome.title}>{inner}</Link>
   ) : (
     <div className={classes}>{inner}</div>
   );
