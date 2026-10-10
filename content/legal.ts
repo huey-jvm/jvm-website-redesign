@@ -1,3 +1,5 @@
+import { contact } from "./contact";
+
 export type LegalSection = { id: string; title: string; paragraphs: string[]; list?: string[] };
 export type LegalPage = { slug: string; title: string; description: string; updated: string; draft: boolean; sections: LegalSection[] };
 
@@ -48,7 +50,7 @@ export const legalPages: LegalPage[] = [
     sections: [
       { id: "commitment", title: "Our Commitment", paragraphs: ["JVM Solutions wants everyone to be able to use this website. We build to the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA, and we test every page for keyboard access, screen reader compatibility, colour contrast and behaviour at every screen size."] },
       { id: "measures", title: "What We Do", paragraphs: ["Every page has a single main heading and a logical heading order. Every image carries a text description or is marked decorative. Every form field has a visible label. Every control can be reached and operated with a keyboard, and keyboard focus is always visible. Motion is reduced for visitors who ask their device to reduce it. Text can be resized without loss of content."] },
-      { id: "feedback", title: "Tell Us About a Problem", paragraphs: ["If you find something on this website that you cannot use, please tell us. Email info@jvmsolutions.net with the page address and a description of the problem, or call 210-504-4707. We aim to respond within two business days and to fix the problem as quickly as we can."] },
+      { id: "feedback", title: "Tell Us About a Problem", paragraphs: [`If you find something on this website that you cannot use, please tell us. Email info@jvmsolutions.net with the page address and a description of the problem, or call 210-504-4707. We aim to respond within ${contact.responseTime} and to fix the problem as quickly as we can.`] },
       { id: "third-party", title: "Third-Party Content", paragraphs: ["Our careers portal is provided by iSolved and some external links lead to government sites. We cannot control the accessibility of those sites, but we will help you reach the information another way if you ask."] },
     ],
   },

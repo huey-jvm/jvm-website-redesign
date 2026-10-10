@@ -20,8 +20,7 @@ export const contact = {
     bd: "BD@jvmsolutions.net",
     credentialing: "credentialing@jvmsolutions.net",
   },
-  responseTime: "two business days",
-  responseTimePlaceholder: { id: "P10", what: "A realistic response time and the owner of each inbox", who: "JVM, B7" },
+  responseTime: "one business day",
   social: [
     { name: "Facebook", href: "https://www.facebook.com/JVMSolutions", pendingCheck: true },
     { name: "LinkedIn", href: "https://www.linkedin.com/company/jvmsolutions", pendingCheck: true },
