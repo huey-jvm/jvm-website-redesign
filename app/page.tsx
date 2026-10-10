@@ -21,6 +21,7 @@ import { team } from "@/content/team";
 import { credentials } from "@/content/credentials";
 import { CredentialMark } from "@/components/site/CredentialMark";
 import { Backdrop, presentAsset } from "@/components/site/Slot";
+import { cn } from "@/lib/cn";
 
 export const metadata: Metadata = {
   description: statements.positioning,
@@ -37,9 +38,9 @@ export default function HomePage() {
   const heroTexture = presentAsset("AS-04");
   return (
     <>
-      <section className={`surface-dark bg-ink-950 text-ink-200${heroTexture ? " relative isolate" : ""}`} data-backdrop={heroTexture?.id}>
+      <section className={cn("surface-dark bg-ink-950 text-ink-200", heroTexture && "relative isolate")} data-backdrop={heroTexture?.id}>
         {heroTexture ? <Backdrop id={heroTexture.id} imgClassName="object-right opacity-60" /> : null}
-        <div className={`container-content grid grid-cols-1 items-center gap-10 py-12 md:py-16 lg:grid-cols-12 lg:gap-12 lg:py-24${heroTexture ? " relative" : ""}`}>
+        <div className={cn("container-content grid grid-cols-1 items-center gap-10 py-12 md:py-16 lg:grid-cols-12 lg:gap-12 lg:py-24", heroTexture && "relative")}>
           <div className="relative order-first aspect-[3/2] w-full overflow-hidden rounded-container lg:order-last lg:col-span-6 lg:aspect-[4/5] lg:rounded-none lg:rounded-l-container">
             <Image src="/images/team/team-walking.jpg" alt="The JVM Solutions team walking together outside their office" fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
           </div>

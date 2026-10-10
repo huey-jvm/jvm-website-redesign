@@ -87,3 +87,11 @@ test("STARS III follows one switch: zero mentions when starsIII.listed is no, pr
     expect(route.status()).toBe(200);
   }
 });
+
+test("no class list glues an interpolation onto a class name, which hides that class from the Tailwind scanner", () => {
+  const files = ["app", "components"].flatMap((dir) => fs.readdirSync(dir, { recursive: true, encoding: "utf8" }).filter((f) => f.endsWith(".tsx")).map((f) => path.join(dir, f)));
+  const glued = files.flatMap((f) => [...fs.readFileSync(f, "utf8").matchAll(/className={`[^`]*[^s`]${/g)].map((m) => `${f}: ${m[0].slice(0, 60)}`));
+  console.log(`class template scan: ${files.length} files`);
+  expect(files.length).toBeGreaterThan(20);
+  expect(glued).toEqual([]);
+});
