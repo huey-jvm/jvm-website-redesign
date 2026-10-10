@@ -64,8 +64,9 @@ Until the files are there, each credential renders as a text tile, so nothing is
 
 ## Version one, what is deliberately not here yet
 
-- The CMS (`../docs/03-Project-Architecture.md` section 3.2). Version one keeps the editable set in
-  `content/` so the site can ship before JVM's accounts exist. Wiring Sanity is the first version 1.1 task,
-  and the content types are already shaped for it.
+- The CMS (`../docs/03-Project-Architecture.md` section 3.2). The editable set is job postings, contract
+  vehicles and periods of performance, certifications, and leadership and team. Version one keeps that set in
+  `content/` so the site can ship before JVM's accounts exist, and the content types are already shaped for a
+  CMS. Contact details are not in the editable set. They are fixed in `content/contact.ts` by the client's choice.
 - Job listings pulled from iSolved. The careers page links through, with a slot for listings.
 - The capability statement PDF and the ISO certificate PDF.

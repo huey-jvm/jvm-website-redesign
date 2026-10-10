@@ -1,7 +1,3 @@
-/**
- * The one source for every address, phone, email and routing rule on the site.
- * In version 1.1 this record moves to the CMS `contactDetails` singleton. Until then it is edited here.
- */
 export type RouteKey = "contracting" | "health-system" | "careers" | "other";
 
 export const contact = {
