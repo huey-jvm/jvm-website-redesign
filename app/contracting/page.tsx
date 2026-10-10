@@ -11,14 +11,13 @@ import { starsIII, starsShown, pastPerformance } from "@/content/vehicles";
 import { contact } from "@/content/contact";
 import { team } from "@/content/team";
 import { pageMetadata } from "@/lib/seo";
-import { showPlaceholders } from "@/lib/placeholders";
 
 export const metadata = pageMetadata("Contracting", starsShown ? "UEI, CAGE, NAICS, set-aside status, GSA 8(a) STARS III and how to reach JVM Solutions business development." : "UEI, CAGE, NAICS, set-aside status and how to reach JVM Solutions business development.", "/contracting");
 
 const cards = [
   { href: "/contracting/stars-iii", title: "GSA 8(a) STARS III", body: "Our prime contract vehicle. Contract number, ordering period, scope and how to order.", withheld: !starsShown },
   { href: "/contracting/certifications", title: "Certifications and Set-Asides", body: "SBA 8(a), EDWOSB, SDVOSB, HUBZone and ISO 9001:2015, each with its evidence." },
-  { href: "/contracting/past-performance", title: "Past Performance", body: "Contracts, task orders and periods of performance.", withheld: pastPerformance.length === 0 && !showPlaceholders },
+  { href: "/contracting/past-performance", title: "Past Performance", body: "Contracts, task orders and periods of performance.", withheld: pastPerformance.length === 0 },
   { href: "/contracting/capability-statement", title: "Capability Statement", body: "A one page summary for your file." },
 ];
 
@@ -56,7 +55,7 @@ export default function ContractingPage() {
             </li>
           ))}
         </ul>
-        {pastPerformance.length === 0 && !showPlaceholders ? (
+        {pastPerformance.length === 0 ? (
           <p className="mt-6 text-body text-ink-700">Past performance details are available on request from <a href={`mailto:${contact.emails.bd}`} className="link-underline font-semibold text-gold-700 after:bg-current">{contact.emails.bd}</a>.</p>
         ) : null}
         <Placeholder id="P6" className="mt-6 max-w-xl" />

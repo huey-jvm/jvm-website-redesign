@@ -1,5 +1,5 @@
 import { services } from "./services";
-import { starsShown } from "./vehicles";
+import { pastPerformance, starsShown } from "./vehicles";
 
 export type NavItem = { label: string; href: string; description?: string; lead?: boolean };
 export type NavGroup = { label: string; href?: string; items?: NavItem[] };
@@ -28,7 +28,7 @@ export const primaryNav: NavGroup[] = [
       { label: "Contracting overview", href: "/contracting", description: "Identifiers, vehicles and how to reach us" },
       ...(starsShown ? [{ label: "GSA 8(a) STARS III", href: "/contracting/stars-iii", description: "Our prime contract vehicle" }] : []),
       { label: "Certifications and Set-Asides", href: "/contracting/certifications", description: "8(a), EDWOSB, SDVOSB, HUBZone, ISO 9001" },
-      { label: "Past Performance", href: "/contracting/past-performance", description: "Contracts and task orders" },
+      ...(pastPerformance.length ? [{ label: "Past Performance", href: "/contracting/past-performance", description: "Contracts and task orders" }] : []),
       { label: "Capability Statement", href: "/contracting/capability-statement", description: "One page summary to download" },
     ],
   },
