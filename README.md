@@ -37,6 +37,8 @@ When the full text is too long for a card, the card carries a high level version
 - A card that is itself the detail, such as a differentiator on the Why JVM page, shows its full text.
 - Hierarchy decides the picture. The top tier carries an illustration or a photo: the five outcomes and the service cards. Everything below is text only: differentiators, pillars, values and link cards.
 
+Illustrations share one shape. Landscape 8:5, 1200 by 750 pixels, a PNG with a transparent background, isometric 2:1 line art with a single gold accent object. They are registered in `content/assets.ts` with kind `illustration` and saved in `public/images/generated/`. Until a file exists the card draws a simple version of the same scene in code. `tests/e2e/assets.spec.ts` checks the size of every illustration file that exists.
+
 ## Where things are
 
 | Path | What |
