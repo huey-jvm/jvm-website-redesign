@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { emailKeyConfigured } from "./pages";
 
 test("contact widget opens, routes, validates and closes with Escape", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
@@ -14,6 +15,7 @@ test("contact widget opens, routes, validates and closes with Escape", async ({ 
 });
 
 test("contact form submits in simulated mode", async ({ page }) => {
+  test.skip(emailKeyConfigured(), "an email key is configured, so a valid message would send mail");
   await page.goto("/contact", { waitUntil: "networkidle" });
   await page.getByText("Something else").click();
   await page.getByLabel(/^Name/).fill("Test Person");

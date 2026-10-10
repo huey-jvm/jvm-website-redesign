@@ -1,6 +1,5 @@
-import fs from "node:fs";
 import { test, expect, type APIRequestContext } from "@playwright/test";
-import { pages } from "./pages";
+import { emailKeyConfigured, pages } from "./pages";
 import { legacyRedirects } from "../../content/redirects";
 
 async function resolveTargets(request: APIRequestContext, found: Map<string, Set<string>>) {
@@ -82,8 +81,7 @@ test("the contact API validates input, drops a filled honeypot before delivery a
   const unreadable = await request.post("/api/contact", { data: "not json", headers: { "Content-Type": "application/json" } });
   expect(unreadable.status()).toBe(400);
   expect((await request.get("/api/contact")).status()).toBe(405);
-  const keyFiles = [".env", ".env.local", ".env.production", ".env.production.local"].filter((f) => fs.existsSync(f) && /^RESEND_API_KEY=S+/m.test(fs.readFileSync(f, "utf8")));
-  if (process.env.RESEND_API_KEY || keyFiles.length) {
+  if (emailKeyConfigured()) {
     console.log("contact API: an email key is configured, so the honeypot and delivery requests are skipped to avoid sending mail");
     return;
   }
