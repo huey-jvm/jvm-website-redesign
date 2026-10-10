@@ -4,6 +4,7 @@ import { Section, SectionHeader } from "@/components/site/Section";
 import { TeamCard } from "@/components/site/TeamCard";
 import { FactBlock } from "@/components/site/FactBlock";
 import { CTABand } from "@/components/site/CTABand";
+import { QuoteCard } from "@/components/site/QuoteCard";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { statements } from "@/content/statements";
 import { values } from "@/content/values";
@@ -36,9 +37,14 @@ export default function AboutPage() {
             <p className="text-eyebrow font-semibold uppercase text-gold-700">Vision</p>
             <h2 className="mt-3 text-h3 md:text-h2-sm">Our Vision</h2>
             <p className="mt-4 text-lead-sm text-ink-900">{statements.vision}</p>
-            <div className="mt-4"><Placeholder id="P3" /></div>
           </div>
         </div>
+      </Section>
+
+      <Section surface="cream" className="pt-0 md:pt-0 lg:pt-0">
+        <SectionHeader eyebrow="Culture" title="Our Story" />
+        <QuoteCard className="max-w-3xl">{statements.story}</QuoteCard>
+        <Placeholder id="P3" inline what="Pending the CEO’s confirmation" who="the CEO" className="mt-4 inline-block" />
       </Section>
 
       <Section>

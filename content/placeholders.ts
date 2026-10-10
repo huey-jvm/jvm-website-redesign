@@ -1,7 +1,7 @@
 export const placeholderRegister: Record<string, { what: string; who: string }> = {
   P1: { what: "Service area names and order", who: "JVM, A3" },
   P2: { what: "Closed 10 October 2026. Values confirmed as R.I.T.A. with ROAR, D9", who: "closed" },
-  P3: { what: "Vision statement, and the faith led line", who: "JVM, A5b" },
+  P3: { what: "The deck vision as the vision and the faith led line as the company story, pending the CEO’s confirmation", who: "the CEO, D10" },
   P4: { what: "Office address and fax", who: "JVM, B1" },
   P5: { what: "STARS III current ordering period end", who: "JVM, B2" },
   P6: { what: "Subcontract vehicles, current names and dates", who: "JVM, B3" },
