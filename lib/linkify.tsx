@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
 
-const pattern = /([\w.+-]+@[\w-]+\.[\w.-]+)|(\b1-800-\d{3}-\d{4}\b|\b\d{3}-\d{3}-\d{4}\b)/g;
+const pattern = /([\w.+-]+@[\w-]+(?:\.[\w-]+)+)|(\b1-800-\d{3}-\d{4}\b|\b\d{3}-\d{3}-\d{4}\b)/g;
 
-/** Turns email addresses and phone numbers inside plain prose into mailto: and tel: links. */
 export function linkify(text: string, className = "link-underline font-semibold text-gold-700 after:bg-current"): ReactNode[] {
   const out: ReactNode[] = [];
   let last = 0;
