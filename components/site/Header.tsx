@@ -29,15 +29,35 @@ export function Header({ nav }: { nav: NavGroup[] }) {
   const pathname = usePathname();
   const scrolled = useSyncExternalStore(subscribeScroll, () => window.scrollY > 4, () => false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const [instant, setInstant] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [seenPath, setSeenPath] = useState(pathname);
   const navRef = useRef<HTMLElement>(null);
+  const closeTimer = useRef<number | undefined>(undefined);
 
   if (seenPath !== pathname) {
     setSeenPath(pathname);
     setOpenGroup(null);
     setMobileOpen(false);
   }
+
+  useEffect(() => () => window.clearTimeout(closeTimer.current), []);
+
+  const hoverOpen = (label: string) => {
+    window.clearTimeout(closeTimer.current);
+    setInstant(false);
+    setOpenGroup(label);
+  };
+  const hoverClose = () => {
+    window.clearTimeout(closeTimer.current);
+    closeTimer.current = window.setTimeout(() => setOpenGroup(null), 160);
+  };
+  const press = (label: string, e: React.MouseEvent) => {
+    window.clearTimeout(closeTimer.current);
+    const mouse = e.detail > 0 && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    setInstant(!mouse);
+    setOpenGroup(mouse || openGroup !== label ? label : null);
+  };
 
   useEffect(() => {
     if (!openGroup) return;
@@ -60,7 +80,7 @@ export function Header({ nav }: { nav: NavGroup[] }) {
       <div className="container-content flex h-15 items-center justify-between gap-4 lg:h-18">
         <button
           type="button"
-          className="inline-flex size-11 items-center justify-center rounded-control text-ink-900 hover:bg-ink-100 lg:hidden"
+          className="inline-flex size-11 items-center justify-center rounded-control text-ink-900 hover:bg-ink-100 focus-visible:bg-ink-100 active:bg-ink-100 lg:hidden"
           aria-label="Open menu"
           aria-expanded={mobileOpen}
           aria-controls="mobile-menu"
@@ -78,8 +98,8 @@ export function Header({ nav }: { nav: NavGroup[] }) {
             {nav.map((group) => {
               const current = groupIsCurrent(pathname, group);
               const baseItem = cn(
-                "relative inline-flex h-11 items-center gap-1 rounded-control px-3 text-body font-medium text-ink-900 transition-colors duration-150 ease hover:bg-ink-50",
-                "after:absolute after:inset-x-3 after:bottom-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-gold-500 after:transition-transform after:duration-150 after:ease-move hover:after:scale-x-100 motion-reduce:after:transition-none",
+                "relative inline-flex h-11 items-center gap-1 rounded-control px-3 text-body font-medium text-ink-900 transition-colors duration-150 ease hover:bg-ink-50 focus-visible:bg-ink-50 active:bg-ink-100",
+                "after:absolute after:inset-x-3 after:bottom-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-gold-500 after:transition-transform after:duration-150 after:ease-move hover:after:scale-x-100 focus-visible:after:scale-x-100 active:after:scale-x-100 motion-reduce:after:transition-none",
                 current && "after:scale-x-100",
               );
               if (group.href) {
@@ -89,7 +109,21 @@ export function Header({ nav }: { nav: NavGroup[] }) {
                   </li>
                 );
               }
-              return <MenuGroup key={group.label} group={group} current={current} open={openGroup === group.label} onToggle={() => setOpenGroup(openGroup === group.label ? null : group.label)} className={baseItem} pathname={pathname} />;
+              return (
+                <MenuGroup
+                  key={group.label}
+                  group={group}
+                  current={current}
+                  open={openGroup === group.label}
+                  instant={instant}
+                  onPress={(e) => press(group.label, e)}
+                  onHoverStart={() => hoverOpen(group.label)}
+                  onHoverEnd={hoverClose}
+                  onFocusLeave={() => { window.clearTimeout(closeTimer.current); setOpenGroup((g) => (g === group.label ? null : g)); }}
+                  className={baseItem}
+                  pathname={pathname}
+                />
+              );
             })}
           </ul>
         </nav>
@@ -103,40 +137,46 @@ export function Header({ nav }: { nav: NavGroup[] }) {
   );
 }
 
-function MenuGroup({ group, current, open, onToggle, className, pathname }: { group: NavGroup; current: boolean; open: boolean; onToggle: () => void; className: string; pathname: string }) {
+function MenuGroup({ group, current, open, instant, onPress, onHoverStart, onHoverEnd, onFocusLeave, className, pathname }: { group: NavGroup; current: boolean; open: boolean; instant: boolean; onPress: (e: React.MouseEvent) => void; onHoverStart: () => void; onHoverEnd: () => void; onFocusLeave: () => void; className: string; pathname: string }) {
   const id = useId();
   return (
-    <li className="relative">
-      <button type="button" className={className} aria-expanded={open} aria-controls={id} aria-current={current ? "true" : undefined} onClick={onToggle}>
+    <li
+      className="relative"
+      onPointerEnter={(e) => { if (e.pointerType === "mouse") onHoverStart(); }}
+      onPointerLeave={(e) => { if (e.pointerType === "mouse") onHoverEnd(); }}
+      onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) onFocusLeave(); }}
+    >
+      <button type="button" className={className} aria-expanded={open} aria-controls={id} aria-current={current ? "true" : undefined} onClick={onPress}>
         {group.label}
-        <ChevronDown aria-hidden className={cn("size-4 transition-transform duration-150 ease", open && "rotate-180")} />
+        <ChevronDown aria-hidden className={cn("size-4", !instant && "transition-transform duration-150 ease", open && "rotate-180")} />
       </button>
       <div
         id={id}
-        hidden={!open}
         className={cn(
-          "absolute left-0 top-full z-50 mt-1 w-[26rem] rounded-container border border-ink-200 bg-white p-2 shadow-float",
-          "origin-top-left transition-[opacity,transform] duration-200 ease-enter",
-          open ? "scale-100 opacity-100" : "pointer-events-none scale-95 opacity-0",
+          "absolute left-0 top-full z-50 w-[26rem] origin-top-left pt-1",
+          !instant && "transition-[opacity,transform,visibility] duration-150 ease-enter",
+          open ? "visible scale-100 opacity-100" : "pointer-events-none invisible scale-95 opacity-0",
         )}
       >
-        <ul>
-          {(group.items ?? []).map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
-                className={cn(
-                  "flex min-h-11 flex-col justify-center rounded-control px-3 py-2 transition-colors duration-150 ease hover:bg-cream focus-visible:outline-2 focus-visible:outline-gold-700",
-                  item.lead && "border border-gold-500 bg-cream/60",
-                )}
-              >
-                <span className="text-body font-medium text-ink-950">{item.label}</span>
-                {item.description ? <span className="text-body-sm text-ink-500">{item.description}</span> : null}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="rounded-container border border-ink-200 bg-white p-2 shadow-float">
+          <ul>
+            {(group.items ?? []).map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
+                  className={cn(
+                    "flex min-h-11 flex-col justify-center rounded-control px-3 py-2 transition-colors duration-150 ease hover:bg-cream focus-visible:bg-cream active:bg-cream focus-visible:outline-2 focus-visible:outline-gold-700",
+                    item.lead && "border border-gold-500 bg-cream/60",
+                  )}
+                >
+                  <span className="text-body font-medium text-ink-950">{item.label}</span>
+                  {item.description ? <span className="text-body-sm text-ink-500">{item.description}</span> : null}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </li>
   );
@@ -179,18 +219,18 @@ function MobileMenu({ nav, open, onClose, pathname }: { nav: NavGroup[]; open: b
             {nav.map((group) =>
               group.href ? (
                 <li key={group.label}>
-                  <Link href={group.href} aria-current={isCurrent(pathname, group.href) ? "page" : undefined} className={cn("flex min-h-11 items-center rounded-control px-3 text-body font-medium text-ink-950 hover:bg-cream", isCurrent(pathname, group.href) && "bg-gold-200")}>{group.label}</Link>
+                  <Link href={group.href} aria-current={isCurrent(pathname, group.href) ? "page" : undefined} className={cn("flex min-h-11 items-center rounded-control px-3 text-body font-medium text-ink-950 hover:bg-cream focus-visible:bg-cream active:bg-cream", isCurrent(pathname, group.href) && "bg-gold-200")}>{group.label}</Link>
                 </li>
               ) : (
                 <li key={group.label}>
-                  <button type="button" className="flex min-h-11 w-full items-center justify-between rounded-control px-3 text-left text-body font-medium text-ink-950 hover:bg-cream" aria-expanded={expanded === group.label} onClick={() => setExpanded(expanded === group.label ? null : group.label)}>
+                  <button type="button" className="flex min-h-11 w-full items-center justify-between rounded-control px-3 text-left text-body font-medium text-ink-950 hover:bg-cream focus-visible:bg-cream active:bg-cream" aria-expanded={expanded === group.label} onClick={() => setExpanded(expanded === group.label ? null : group.label)}>
                     {group.label}
                     <ChevronDown aria-hidden className={cn("size-4 transition-transform duration-150", expanded === group.label && "rotate-180")} />
                   </button>
                   <ul hidden={expanded !== group.label} className="mb-2 ml-3 border-l-2 border-ink-200">
                     {(group.items ?? []).map((item) => (
                       <li key={item.href}>
-                        <Link href={item.href} aria-current={isCurrent(pathname, item.href) ? "page" : undefined} className={cn("flex min-h-11 items-center px-3 text-body text-ink-900 hover:bg-cream", isCurrent(pathname, item.href) && "bg-gold-200")}>{item.label}</Link>
+                        <Link href={item.href} aria-current={isCurrent(pathname, item.href) ? "page" : undefined} className={cn("flex min-h-11 items-center px-3 text-body text-ink-900 hover:bg-cream focus-visible:bg-cream active:bg-cream", isCurrent(pathname, item.href) && "bg-gold-200")}>{item.label}</Link>
                       </li>
                     ))}
                   </ul>
