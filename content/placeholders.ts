@@ -1,0 +1,22 @@
+/** The placeholder register. Mirrors `docs/01-PRD.md` section 12. */
+export const placeholderRegister: Record<string, { what: string; who: string }> = {
+  P1: { what: "Service area names and order", who: "JVM, A3" },
+  P2: { what: "Values set and format", who: "JVM, A5a" },
+  P3: { what: "Vision statement, and the faith led line", who: "JVM, A5b" },
+  P4: { what: "Office address and fax", who: "JVM, B1" },
+  P5: { what: "STARS III current ordering period end", who: "JVM, B2" },
+  P6: { what: "Subcontract vehicles, current names and dates", who: "JVM, B3" },
+  P7: { what: "Past performance records", who: "JVM, B4" },
+  P8: { what: "Joint Commission position and wording", who: "JVM, B5" },
+  P9: { what: "Social accounts", who: "JVM, B6" },
+  P10: { what: "Inbox owners and response time", who: "JVM, B7" },
+  P11: { what: "Job listings on site", who: "JVM, B8" },
+  P12: { what: "Privacy, terms, accessibility text", who: "JVM, B9" },
+  P13: { what: "Logistics and Facilities intro, Management examples", who: "JVM writes to a brief" },
+  P14: { what: "Capability statement PDF", who: "JVM supplies or approves" },
+  P15: { what: "ISO certificate PDF and expiry", who: "JVM supplies" },
+  P16: { what: "Vector logo", who: "JVM supplies AI, EPS or SVG" },
+  P17: { what: "Four quality marks as separate files", who: "JVM or registrar" },
+  P18: { what: "Stock image licences", who: "JVM" },
+  P19: { what: "Coverage map data", who: "JVM" },
+};

@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colour. The only colour source on the site. Tailwind's stock palette is removed on purpose. */
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gold-200: #e8d9b8;
+  --color-gold-500: #c39f63;
+  --color-gold-700: #7a5c2a;
+  --color-cream: #f1e8da;
+  --color-cream-border: #d7cec0;
+  --color-ink-50: #f7f7f7;
+  --color-ink-100: #ededed;
+  --color-ink-200: #d9d9d9;
+  --color-ink-300: #bdbdbd;
+  --color-ink-400: #767676;
+  --color-ink-500: #5c5c5c;
+  --color-ink-700: #4a4a4a;
+  --color-ink-800: #333333;
+  --color-ink-900: #1a1a1a;
+  --color-ink-950: #000000;
+  --color-logo-red: #e81820;
+  --color-success: #166534;
+  --color-error: #b91c1c;
+
+  /* Type. Two faces, ten tokens. */
+  --font-display: var(--font-cormorant), "Cormorant SC", Georgia, serif;
+  --font-sans: var(--font-inter), Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --text-display: 3.5rem;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: 0.01em;
+  --text-display-sm: 2.5rem;
+  --text-display-sm--line-height: 1.05;
+  --text-display-sm--letter-spacing: 0.01em;
+  --text-h1: 2.75rem;
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: 0.01em;
+  --text-h1-sm: 2.25rem;
+  --text-h1-sm--line-height: 1.1;
+  --text-h1-sm--letter-spacing: 0.01em;
+  --text-h2: 2rem;
+  --text-h2--line-height: 1.15;
+  --text-h2--letter-spacing: 0.01em;
+  --text-h2-sm: 1.75rem;
+  --text-h2-sm--line-height: 1.15;
+  --text-h2-sm--letter-spacing: 0.01em;
+  --text-h3: 1.5rem;
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: 0.005em;
+  --text-h4: 1.25rem;
+  --text-h4--line-height: 1.3;
+  --text-h4--letter-spacing: 0;
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.5;
+  --text-lead-sm: 1.125rem;
+  --text-lead-sm--line-height: 1.5;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.5;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.4;
+  --text-caption--letter-spacing: 0.01em;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.1em;
+
+  /* Shape. Four bands by role. */
+  --radius-*: initial;
+  --radius-none: 0;
+  --radius-control: 0.5rem;
+  --radius-container: 0.75rem;
+  --radius-pill: 9999px;
+
+  /* Depth. Two levels. */
+  --shadow-*: initial;
+  --shadow-float: 0 8px 24px rgb(0 0 0 / 0.12);
+  --shadow-header: 0 1px 0 #d9d9d9, 0 4px 16px rgb(0 0 0 / 0.06);
+
+  /* Motion. */
+  --ease-enter: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-move: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Layout. */
+  --container-content: 75rem;
+  --container-prose: 42rem;
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 6rem;
+  }
+  body {
+    @apply bg-white text-ink-900 font-sans text-body antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display font-bold text-ink-950;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--color-gold-200);
+    color: var(--color-ink-950);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold-700);
+    outline-offset: 2px;
+  }
+  .surface-dark :focus-visible {
+    outline-color: var(--color-gold-500);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@utility container-content {
+  width: 100%;
+  max-width: var(--container-content);
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (min-width: 1024px) {
+    padding-inline: 1.5rem;
+  }
+}
+
+@utility prose-measure {
+  max-width: var(--container-prose);
+}
+
+/* Underline drawn with a pseudo element so it cannot inherit a radius and shifts nothing. */
+@utility link-underline {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.125em;
+    height: 1px;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+  &:hover::after, &:focus-visible::after {
+    opacity: 1;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}

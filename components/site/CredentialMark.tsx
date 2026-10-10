@@ -1,0 +1,48 @@
+import fs from "node:fs";
+import path from "node:path";
+import Image from "next/image";
+import Link from "next/link";
+import type { Credential } from "@/content/credentials";
+import { cn } from "@/lib/cn";
+
+/**
+ * One credential mark on a white tile. Always an image with alt text, or a text tile when the file is not yet in place.
+ * Always a link to its evidence when one exists.
+ */
+function imageExists(src?: string) {
+  if (!src) return false;
+  try {
+    return fs.existsSync(path.join(process.cwd(), "public", decodeURIComponent(src)));
+  } catch {
+    return false;
+  }
+}
+
+export function CredentialMark({ credential, size = "md", className }: { credential: Credential; size?: "sm" | "md"; className?: string }) {
+  const hasImage = imageExists(credential.image);
+  const tile = (
+    <span
+      className={cn(
+        "flex items-center justify-center rounded-control border border-ink-200 bg-white p-3",
+        size === "md" ? "h-20 min-w-28" : "h-14 min-w-20",
+        credential.wide && (size === "md" ? "min-w-40" : "min-w-28"),
+        className,
+      )}
+    >
+      {hasImage && credential.image ? (
+        <Image src={credential.image} alt={credential.name} width={credential.wide ? 160 : 96} height={size === "md" ? 56 : 32} className="h-full w-auto max-w-full object-contain" unoptimized />
+      ) : (
+        <span className="px-1 text-center font-display text-h4 leading-none text-ink-950">{credential.name}</span>
+      )}
+    </span>
+  );
+
+  if (!credential.evidenceHref) return tile;
+  const external = credential.evidenceHref.startsWith("http");
+  const classes = "group/mark inline-flex rounded-control focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700";
+  return external ? (
+    <a href={credential.evidenceHref} target="_blank" rel="noopener noreferrer" className={classes} aria-label={`${credential.name}, view the record (opens in a new tab)`}>{tile}</a>
+  ) : (
+    <Link href={credential.evidenceHref} className={classes} aria-label={`${credential.name}, learn more`}>{tile}</Link>
+  );
+}
