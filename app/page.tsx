@@ -6,7 +6,9 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { ProofStrip } from "@/components/site/ProofStrip";
+import { ContourArt } from "@/components/site/ContourArt";
 import { OutcomeTile } from "@/components/site/OutcomeTile";
+import { cn } from "@/lib/cn";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { FactBlock } from "@/components/site/FactBlock";
 import { CTABand } from "@/components/site/CTABand";
@@ -19,17 +21,13 @@ import { services } from "@/content/services";
 import { differentiators } from "@/content/differentiators";
 import { identifiers, naicsDescriptions } from "@/content/identifiers";
 import { starsIII, starsShown, starsConfirmed, starsOrdering } from "@/content/vehicles";
-import { team } from "@/content/team";
+import { team, teamPhoto } from "@/content/team";
 import { credentials } from "@/content/credentials";
 import { CredentialMark } from "@/components/site/CredentialMark";
 
 export const metadata: Metadata = {
   description: statements.positioning,
   alternates: { canonical: "/" },
-};
-
-const serviceImages: Record<string, string | undefined> = {
-  "healthcare-operations": "/images/team/team-walking.jpg",
 };
 
 export default function HomePage() {
@@ -42,7 +40,7 @@ export default function HomePage() {
         eyebrow={statements.category}
         title={statements.tagline}
         lead={statements.positioning}
-        image={{ src: "/images/team/team-walking.jpg", alt: "The JVM Solutions team walking together outside their office", position: "object-[70%_center]" }}
+        image={teamPhoto}
       >
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <OpenWidgetButton tone="dark" size="lg" route="contracting" />
@@ -55,9 +53,11 @@ export default function HomePage() {
       <Section surface="light" aria-labelledby="outcomes-title">
         <SectionHeader eyebrow="Five outcomes we sell" title="What Changes for Your Mission" lead="We do not sell labor categories. These five outcomes anchor every engagement." />
         <Reveal>
-          <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {outcomes.map((o) => (
-              <li key={o.id} className="h-full"><OutcomeTile outcome={o} href={`/why-jvm#${o.id}`} /></li>
+          <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-6">
+            {outcomes.map((o, i) => (
+              <li key={o.id} className={cn("h-full", i < 3 ? "lg:col-span-2" : "lg:col-span-3", i === outcomes.length - 1 && "md:col-span-2")}>
+                <OutcomeTile outcome={o} href={`/why-jvm#${o.id}`} />
+              </li>
             ))}
           </ul>
         </Reveal>
@@ -70,64 +70,67 @@ export default function HomePage() {
           <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {services.map((s) => (
               <li key={s.slug} className={s.lead ? "h-full md:col-span-3" : "h-full"}>
-                <ServiceCard service={s} image={serviceImages[s.slug]} slot={s.cardImage} horizontal={s.lead} />
+                <ServiceCard service={s} image={s.cardPhoto} slot={s.cardImage} horizontal={s.lead} />
               </li>
             ))}
           </ul>
         </Reveal>
       </Section>
 
-      <Section surface="light">
+      <Section surface="light" className="md:py-20 lg:py-28">
         <SectionHeader eyebrow="How we work" title="Four Differentiators That Do Not Commoditize" />
         <Reveal>
           <ol className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {differentiators.map((d) => (
-              <li key={d.n} className="@container rounded-container border border-ink-200 bg-white p-4 @[20rem]:p-6">
-                <span className="font-display text-h2 leading-none text-gold-500 tabular">{d.n}</span>
-                <h3 className="mt-3 truncate text-h4 text-ink-950" title={d.title}>{d.title}</h3>
-                <p className="mt-2 line-clamp-3 text-body-sm text-ink-700">{d.body}</p>
+              <li key={d.n} className="@container flex h-full flex-col rounded-container border border-ink-200 bg-white">
+                <div className="flex flex-1 flex-col p-6 @[20rem]:p-8">
+                  <span className="font-sans text-h2 font-semibold leading-none text-gold-700 tabular">{d.n}</span>
+                  <h3 className="mt-6 text-h3 text-ink-950">{d.title}</h3>
+                  <p className="mt-3 text-body text-ink-700">{d.teaser}</p>
+                </div>
               </li>
             ))}
           </ol>
         </Reveal>
-        <div className="mt-8">
+        <div className="mt-10">
           <Button href="/why-jvm" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing>Read how we work</Button>
         </div>
       </Section>
 
-      <Section surface="dark" backdrop="AS-04" backdropClassName="object-right opacity-60">
-        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <p className="text-eyebrow font-semibold uppercase text-gold-500">Contracting at a glance</p>
-            <h2 className="mt-3 text-h2-sm text-cream md:text-h2">Verify Us in a Minute</h2>
-            <p className="mt-3 max-w-[60ch] text-body text-ink-200">Everything a contracting officer checks, in one place. Each identifier can be copied, and the full record is on the contracting pages.</p>
-            <FactBlock
-              tone="dark"
-              className="mt-6"
-              facts={[
-                { label: "UEI", value: identifiers.uei, copy: true },
-                { label: "CAGE", value: identifiers.cage, copy: true },
-                { label: "Primary NAICS", value: identifiers.naicsPrimary, copy: true, note: naicsDescriptions[identifiers.naicsPrimary] },
-                { label: "Set-asides", value: identifiers.setAsides.join(", ") },
-                ...(starsShown
-                  ? [
-                      { label: "STARS III", value: starsIII.contractNumber, copy: true, note: "8(a) prime" },
-                      { label: "Ordering period", value: starsOrdering.current },
-                    ]
-                  : []),
-              ]}
-            />
-            {starsShown && !starsConfirmed ? <Placeholder id="P5" className="mt-4" /> : null}
-            {stars ? null : <Button href="/contracting" variant="secondary" tone="dark" className="mt-6">Go to contracting</Button>}
-          </div>
+      <Section surface="dark" backdrop="AS-04" backdropClassName="object-right opacity-60" art={<ContourArt />}>
+        <div>
+          <p className="text-eyebrow font-semibold uppercase text-gold-500">Contracting at a glance</p>
+          <h2 className="mt-3 text-h2-sm text-cream md:text-h2">Verify Us in a Minute</h2>
+          <p className="mt-3 max-w-[60ch] text-body text-ink-200">Everything a contracting officer checks, in one place. Each identifier can be copied, and the full record is on the contracting pages.</p>
+        </div>
+        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-stretch lg:gap-8">
+          <FactBlock
+            tone="dark"
+            className={cn("h-full", stars ? "lg:col-span-7" : "lg:col-span-12")}
+            facts={[
+              { label: "UEI", value: identifiers.uei, copy: true },
+              { label: "CAGE", value: identifiers.cage, copy: true },
+              { label: "Primary NAICS", value: identifiers.naicsPrimary, copy: true, note: naicsDescriptions[identifiers.naicsPrimary] },
+              { label: "Set-asides", value: identifiers.setAsides.join(", ") },
+              ...(starsShown
+                ? [
+                    { label: "STARS III", value: starsIII.contractNumber, copy: true, note: "8(a) prime" },
+                    { label: "Ordering period", value: starsOrdering.current },
+                  ]
+                : []),
+            ]}
+          />
           {stars ? (
-            <div className="flex flex-col items-start gap-6 lg:col-span-5 lg:pt-12">
-              <CredentialMark credential={stars} />
-              <p className="text-body text-ink-200">JVM is a prime on GSA 8(a) STARS III, a Best in Class governmentwide acquisition contract for IT services.</p>
-              <Button href="/contracting" variant="secondary" tone="dark">Go to contracting</Button>
+            <div className="flex flex-col rounded-container border border-ink-800 bg-ink-900 p-5 md:p-6 lg:col-span-5">
+              <p className="text-eyebrow font-semibold uppercase text-gold-500">Prime vehicle</p>
+              <div className="mt-4"><CredentialMark credential={stars} /></div>
+              <p className="mt-4 text-body text-ink-200">JVM is a prime on GSA 8(a) STARS III, a Best in Class governmentwide acquisition contract for IT services.</p>
+              <Button href="/contracting" variant="secondary" tone="dark" className="mt-6 self-start lg:mt-auto">Go to contracting</Button>
             </div>
           ) : null}
         </div>
+        {starsShown && !starsConfirmed ? <Placeholder id="P5" className="mt-4 max-w-xl" /> : null}
+        {stars ? null : <Button href="/contracting" variant="secondary" tone="dark" className="mt-6">Go to contracting</Button>}
       </Section>
 
       <Section surface="light">

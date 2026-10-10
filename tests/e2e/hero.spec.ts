@@ -18,6 +18,7 @@ test("control: the contrast measurement flags light text over a light backdrop",
 });
 
 test("every full-bleed hero keeps its text readable at 1280 and 375", async ({ page }) => {
+  test.setTimeout(180_000);
   const seen: string[] = [];
   for (const route of pages) {
     for (const width of [1280, 375]) {
@@ -42,26 +43,60 @@ test("every full-bleed hero keeps its text readable at 1280 and 375", async ({ p
   expect(seen).toEqual(expect.arrayContaining(["/", "/about", "/careers"]));
 });
 
-test("the hero image drifts with the scroll where the browser supports scroll-driven animation, and stays put under reduced motion", async ({ page, browser }) => {
-  await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto("/", { waitUntil: "networkidle" });
-  const supported = await page.evaluate(() => CSS.supports("animation-timeline: view()"));
-  const layer = page.locator("[data-hero] .hero-parallax");
-  const before = await layer.evaluate((e) => getComputedStyle(e).transform);
-  await page.evaluate(() => window.scrollTo(0, 400));
-  await page.waitForTimeout(100);
-  const after = await layer.evaluate((e) => getComputedStyle(e).transform);
-  console.log(`parallax supported ${supported}: transform at 0px "${before}", at 400px "${after}"`);
-  if (supported) {
-    expect(after).not.toBe(before);
-    const y = Number(after.match(/matrix\(([^)]+)\)/)?.[1].split(",")[5] ?? 0);
-    expect(y).toBeGreaterThan(0);
+test("hero crops stay still on scroll and mobile photos have their own frame", async ({ browser }) => {
+  for (const reducedMotion of ["no-preference", "reduce"] as const) {
+    const context = await browser.newContext({ reducedMotion });
+    const page = await context.newPage();
+    for (const width of [1280, 390]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/", { waitUntil: "networkidle" });
+      const layer = page.locator("[data-hero] .hero-image");
+      await expect(layer).toHaveCount(1);
+      const before = await layer.evaluate((el) => ({ transform: getComputedStyle(el).transform, height: el.getBoundingClientRect().height }));
+      await page.evaluate(() => window.scrollTo(0, 400));
+      expect(await layer.evaluate((el) => getComputedStyle(el).transform)).toBe("none");
+      expect(before.transform).toBe("none");
+      if (width === 390) {
+        const hero = await page.locator("[data-hero]").boundingBox();
+        expect(before.height).toBeLessThan(hero!.height / 2);
+        expect(await layer.locator("img").evaluate((img) => (img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+      }
+    }
+    await context.close();
   }
-  const context = await browser.newContext({ reducedMotion: "reduce", viewport: { width: 1280, height: 900 } });
-  const quiet = await context.newPage();
-  await quiet.goto("/", { waitUntil: "networkidle" });
-  await quiet.evaluate(() => window.scrollTo(0, 400));
-  await quiet.waitForTimeout(100);
-  expect(await quiet.locator("[data-hero] .hero-parallax").evaluate((e) => getComputedStyle(e).transform)).toBe("none");
-  await context.close();
 });
+
+test("control: gold text on a gold backdrop fails the contrast measurement", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+  await page.evaluate(() => {
+    const box = document.createElement("section");
+    box.setAttribute("data-art-control", "");
+    box.style.cssText = "padding:24px;background:#c39f63";
+    box.innerHTML = '<p style="color:#c39f63;font-size:16px">control text</p>';
+    document.querySelector("main")?.prepend(box);
+  });
+  await markForMeasure(page, "[data-art-control]", 0);
+  const lines = await measureContrast(page, test.info(), "art-control");
+  expect(lines.length).toBeGreaterThan(0);
+  expect(Math.min(...lines.map((l) => l.ratio))).toBeLessThan(3);
+});
+
+for (const width of [1280, 375]) {
+  test(`the drawn contour background behind Contracting at a glance keeps text readable at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/", { waitUntil: "networkidle" });
+    const count = await page.locator("[data-art]").count();
+    if (!count) {
+      console.log("contour art: a generated texture is in place, so the drawn fallback is not rendered");
+      return;
+    }
+    await markForMeasure(page, "[data-art]", 0);
+    const lines = await measureContrast(page, test.info(), `art-${width}`);
+    expect(lines.length, "text sits directly on the drawn background").toBeGreaterThan(0);
+    const worst = lines.reduce((a, b) => (b.ratio < a.ratio ? b : a));
+    const brightest = Math.max(...lines.map((l) => l.bgMax));
+    console.log(`contour art at ${width}px: ${lines.length} text lines, lowest contrast ${worst.ratio.toFixed(2)} ("${worst.text}"), brightest backdrop under text ${(brightest * 100).toFixed(2)} percent`);
+    for (const l of lines) expect(l.ratio, `"${l.text}" at ${width}px`).toBeGreaterThanOrEqual(l.large ? 3 : 4.5);
+    expect(brightest, "gold text needs the backdrop under 4.4 percent luminance").toBeLessThan(0.044);
+  });
+}

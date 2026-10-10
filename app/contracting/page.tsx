@@ -51,8 +51,8 @@ export default function ContractingPage() {
         <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {cards.filter((c) => !c.withheld).map((c) => (
             <li key={c.href} className="h-full">
-              <Link href={c.href} className="group/card flex h-full flex-col rounded-container border border-ink-200 bg-white p-6 transition-transform duration-150 ease-move hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700 motion-reduce:hover:translate-y-0">
-                <h2 className="truncate text-h3 group-hover/card:text-gold-700" title={c.title}>{c.title}</h2>
+              <Link href={c.href} className="group/card flex h-full flex-col rounded-container border border-ink-200 bg-white p-6 transition-transform duration-150 ease-move hover:-translate-y-0.5 active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700 motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100">
+                <h2 className="text-h3 group-hover/card:text-gold-700">{c.title}</h2>
                 <p className="mt-2 text-body text-ink-700">{c.body}</p>
                 <span className="mt-auto inline-flex items-center gap-1 pt-4 text-body-sm font-semibold text-ink-900">Open <ArrowRight aria-hidden className="size-4 transition-transform duration-150 ease group-hover/card:translate-x-1 motion-reduce:group-hover/card:translate-x-0" /></span>
               </Link>

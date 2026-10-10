@@ -11,8 +11,8 @@ export function CloseButton({ tone = "light", className, label = "Close", ...res
         "group/close inline-flex size-11 items-center justify-center rounded-control transition-[color,outline-color] duration-150 ease",
         "outline-2 outline-offset-0 outline-transparent active:scale-[0.98] motion-reduce:active:scale-100",
         tone === "dark"
-          ? "text-ink-300 hover:text-gold-500 hover:outline-gold-500 focus-visible:outline-gold-500 focus-visible:outline-offset-2"
-          : "text-ink-500 hover:text-gold-700 hover:outline-gold-700 focus-visible:outline-gold-700 focus-visible:outline-offset-2",
+          ? "text-ink-300 hover:text-gold-500 hover:outline-gold-500 active:text-gold-500 active:outline-gold-500 focus-visible:outline-gold-500 focus-visible:outline-offset-2"
+          : "text-ink-500 hover:text-gold-700 hover:outline-gold-700 active:text-gold-700 active:outline-gold-700 focus-visible:outline-gold-700 focus-visible:outline-offset-2",
         className,
       )}
       {...rest}

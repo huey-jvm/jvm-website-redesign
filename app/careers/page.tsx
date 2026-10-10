@@ -1,3 +1,4 @@
+import { teamPhoto } from "@/content/team";
 import { ArrowUpRight } from "lucide-react";
 import { ImageHero } from "@/components/site/ImageHero";
 import { Reveal } from "@/components/site/Reveal";
@@ -27,7 +28,7 @@ export default function CareersPage() {
         title="Success Begins With the Right Team"
         lead="JVM is an equal opportunity employer and a recognised veteran employer. If your work is a calling, you will find people here who feel the same."
         crumbs={[{ label: "Careers" }]}
-        image={{ src: "/images/team/team-walking.jpg", alt: "The JVM Solutions team walking together", position: "object-[70%_center]" }}
+        image={teamPhoto}
       />
 
       <Section>
@@ -37,7 +38,7 @@ export default function CareersPage() {
             <li key={a.title} className="@container overflow-hidden rounded-container border border-ink-200 bg-white">
               <Slot id={a.image} className="aspect-[3/2] w-full" sizes="(min-width: 1024px) 33vw, 100vw" />
               <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
-                <h2 className="truncate text-h3" title={a.title}>{a.title}</h2>
+                <h2 className="text-h3">{a.title}</h2>
                 <p className="mt-3 text-body text-ink-700">{a.body}</p>
               </div>
             </li>

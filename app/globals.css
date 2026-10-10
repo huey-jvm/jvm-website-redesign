@@ -141,32 +141,18 @@
     opacity: 0;
     transition: opacity 150ms ease;
   }
-  &:hover::after, &:focus-visible::after {
+  &:focus-visible::after, &:active::after {
     opacity: 1;
+  }
+  @media (hover: hover) {
+    &:hover::after {
+      opacity: 1;
+    }
   }
 }
 
 @utility tabular {
   font-variant-numeric: tabular-nums;
-}
-
-@keyframes hero-parallax {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(12%);
-  }
-}
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-parallax {
-      animation: hero-parallax linear both;
-      animation-timeline: view();
-      animation-range: exit 0% exit 100%;
-    }
-  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

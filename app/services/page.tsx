@@ -18,7 +18,7 @@ export default function ServicesPage() {
         <Reveal>
           <ul className="grid grid-cols-1 gap-6 pt-12 md:grid-cols-2">
             {services.map((s) => (
-              <li key={s.slug} className="h-full"><ServiceCard service={s} slot={s.cardImage} headingLevel="h2" /></li>
+              <li key={s.slug} className="h-full"><ServiceCard service={s} image={s.cardPhoto} slot={s.cardImage} headingLevel="h2" /></li>
             ))}
           </ul>
         </Reveal>

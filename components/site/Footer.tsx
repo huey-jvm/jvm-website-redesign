@@ -3,15 +3,12 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { footerColumns, legalNav } from "@/content/navigation";
 import { contact } from "@/content/contact";
-import { credentials, proofStripSlugs } from "@/content/credentials";
 import { statements } from "@/content/statements";
-import { CredentialMark } from "./CredentialMark";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { showPlaceholders } from "@/lib/placeholders";
 
 export function Footer() {
   const year = new Date().getFullYear();
-  const marks = proofStripSlugs.map((s) => credentials.find((c) => c.slug === s)).filter(Boolean);
   return (
     <footer className="surface-dark bg-ink-950 text-ink-200">
       <div className="container-content py-12 md:py-16">
@@ -66,13 +63,7 @@ export function Footer() {
           </div>
         </div>
 
-        <ul className="mt-12 flex flex-wrap items-center gap-3 border-t border-ink-800 pt-8" aria-label="Certifications">
-          {marks.map((c) => (
-            <li key={c!.slug}><CredentialMark credential={c!} size="sm" /></li>
-          ))}
-        </ul>
-
-        <div className="mt-8 flex flex-col gap-4 border-t border-ink-800 pt-6 text-caption text-ink-300 md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-ink-800 pt-6 text-caption text-ink-300 md:flex-row md:items-center md:justify-between">
           <ul className="flex flex-wrap gap-x-5 gap-y-2">
             {legalNav.map((l) => (
               <li key={l.href}><Link href={l.href} className="link-underline inline-flex min-h-9 items-center after:bg-cream hover:text-cream">{l.label}</Link></li>

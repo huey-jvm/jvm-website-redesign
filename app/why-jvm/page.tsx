@@ -56,7 +56,7 @@ export default function WhyPage() {
                 {valueProposition.pillars.map((p) => (
                   <li key={p.title} className="@container rounded-container border border-ink-200 bg-white">
                     <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
-                      <h3 className="truncate text-h3" title={p.title}>{p.title}</h3>
+                      <h3 className="text-h3">{p.title}</h3>
                       <p className="mt-2 text-body text-ink-700">{p.body}</p>
                     </div>
                   </li>
@@ -85,7 +85,7 @@ export default function WhyPage() {
               <ol className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
                 {differentiators.map((d) => (
                   <li key={d.n} className="rounded-container border border-ink-200 bg-white p-6">
-                    <span className="font-display text-h2 leading-none text-gold-500 tabular">{d.n}</span>
+                    <span className="font-sans text-h2 font-semibold leading-none text-gold-700 tabular">{d.n}</span>
                     <h3 className="mt-3 text-h3">{d.title}</h3>
                     <p className="mt-2 text-body text-ink-700">{d.body}</p>
                   </li>

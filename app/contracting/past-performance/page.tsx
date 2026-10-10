@@ -51,7 +51,7 @@ export default function PastPerformancePage() {
             <ul className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
               {confirmedSubcontractVehicles.map((v) => (
                 <li key={v.slug} className="rounded-container border border-ink-200 bg-white p-5">
-                  <h3 className="truncate text-h4" title={v.name}>{v.name}</h3>
+                  <h3 className="text-h4">{v.name}</h3>
                   <p className="mt-1 text-body-sm text-ink-700">{v.role}</p>
                   <p className="mt-1 text-body-sm text-ink-900 tabular">{v.orderingStart ? `${v.orderingStart} to ${v.currentEnd}` : `Through ${v.currentEnd}`}</p>
                 </li>
