@@ -40,16 +40,33 @@ test("reduced motion never hides a card", async ({ browser }) => {
   await context.close();
 });
 
-test("the floating launcher waits for a scroll on large screens and is always there on small ones", async ({ page }) => {
+test("the floating launcher stays hidden over the first section and appears once it has scrolled past, at every width", async ({ page }) => {
+  const launcher = page.locator("button[aria-controls='contact-widget-panel']");
+  const visibility = () => launcher.evaluate((e) => getComputedStyle(e).visibility);
+  for (const width of [1280, 375]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/", { waitUntil: "networkidle" });
+    expect(await visibility(), `${width}px at the top`).toBe("hidden");
+    const heroBottom = await page.evaluate(() => document.querySelector("main > :first-child")!.getBoundingClientRect().bottom + window.scrollY);
+    await page.evaluate((y) => window.scrollTo(0, y - 300), heroBottom);
+    await page.waitForTimeout(250);
+    expect(await visibility(), `${width}px with the hero still on screen`).toBe("hidden");
+    await page.evaluate((y) => window.scrollTo(0, y + 200), heroBottom);
+    await expect.poll(visibility, { message: `${width}px past the hero` }).toBe("visible");
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect.poll(visibility, { message: `${width}px back at the top` }).toBe("hidden");
+  }
+});
+
+test("the launcher also waits on a page that opens with a different first section", async ({ page }) => {
   const launcher = page.locator("button[aria-controls='contact-widget-panel']");
   await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto("/", { waitUntil: "networkidle" });
+  await page.goto("/contact", { waitUntil: "networkidle" });
   expect(await launcher.evaluate((e) => getComputedStyle(e).visibility)).toBe("hidden");
-  await page.evaluate(() => window.scrollTo(0, 600));
-  await expect.poll(() => launcher.evaluate((e) => getComputedStyle(e).visibility)).toBe("visible");
-  await page.setViewportSize({ width: 375, height: 800 });
-  await page.goto("/", { waitUntil: "networkidle" });
-  expect(await launcher.evaluate((e) => getComputedStyle(e).visibility)).toBe("visible");
+  await page.getByRole("link", { name: "Careers" }).first().click();
+  await page.waitForURL("**/careers**");
+  await page.waitForTimeout(300);
+  expect(await launcher.evaluate((e) => getComputedStyle(e).visibility), "after client navigation the new hero hides it again").toBe("hidden");
 });
 
 test("closing the widget returns focus to the control that opened it", async ({ page }) => {
