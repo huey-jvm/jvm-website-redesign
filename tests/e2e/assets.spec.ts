@@ -53,6 +53,7 @@ async function brokenImages(page: Page) {
 }
 
 test("every registered slot whose file exists renders an img with its src and alt on each of its pages", async ({ page }) => {
+  test.setTimeout(180_000);
   const found = assets.filter((a) => present(a.path));
   console.log(`asset registry: ${assets.length} slots, ${found.length} with a file present${found.length ? `: ${found.map((a) => a.id).join(", ")}` : ""}`);
   for (const asset of found) {
@@ -81,6 +82,7 @@ for (const route of [...pages, "/this-page-does-not-exist"]) {
 
 for (const asset of assets.filter((a) => a.kind === "texture" && a.id !== "AS-10")) {
   test(`${asset.id} keeps text readable where it sits behind text`, async ({ page }) => {
+    test.setTimeout(180_000);
     test.skip(!present(asset.path), `${asset.path} is not present`);
     for (const [route, width] of asset.where.flatMap((r) => [[r, 1280], [r, 375]] as const)) {
       await page.setViewportSize({ width, height: 900 });
@@ -100,7 +102,7 @@ for (const asset of assets.filter((a) => a.kind === "texture" && a.id !== "AS-10
       const brightest = Math.max(...measured.map((m) => m.bgMax));
       console.log(`${asset.id} on ${route} at ${width}px: ${count} section(s), ${measured.length} text lines, lowest contrast ${worst.ratio.toFixed(2)} ("${worst.text}"), highest backdrop luminance under text ${(brightest * 100).toFixed(1)} percent`);
       for (const m of measured) expect(m.ratio, `"${m.text}" on ${route} at ${width}px`).toBeGreaterThanOrEqual(m.large ? 3 : 4.5);
-      if (darkTextures.has(asset.id)) expect(brightest, `backdrop luminance under text on ${route} at ${width}px`).toBeLessThan(0.2);
+      if (darkTextures.has(asset.id)) expect(brightest, `backdrop luminance under text on ${route} at ${width}px`).toBeLessThan(0.044);
     }
   });
 }

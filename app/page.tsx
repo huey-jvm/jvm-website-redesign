@@ -21,17 +21,13 @@ import { services } from "@/content/services";
 import { differentiators } from "@/content/differentiators";
 import { identifiers, naicsDescriptions } from "@/content/identifiers";
 import { starsIII, starsShown, starsConfirmed, starsOrdering } from "@/content/vehicles";
-import { team } from "@/content/team";
+import { team, teamPhoto } from "@/content/team";
 import { credentials } from "@/content/credentials";
 import { CredentialMark } from "@/components/site/CredentialMark";
 
 export const metadata: Metadata = {
   description: statements.positioning,
   alternates: { canonical: "/" },
-};
-
-const serviceImages: Record<string, string | undefined> = {
-  "healthcare-operations": "/images/team/team-walking.jpg",
 };
 
 export default function HomePage() {
@@ -44,7 +40,7 @@ export default function HomePage() {
         eyebrow={statements.category}
         title={statements.tagline}
         lead={statements.positioning}
-        image={{ src: "/images/team/team-walking.jpg", alt: "The JVM Solutions team walking together outside their office", position: "object-[70%_center]" }}
+        image={teamPhoto}
       >
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <OpenWidgetButton tone="dark" size="lg" route="contracting" />
@@ -74,7 +70,7 @@ export default function HomePage() {
           <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {services.map((s) => (
               <li key={s.slug} className={s.lead ? "h-full md:col-span-3" : "h-full"}>
-                <ServiceCard service={s} image={serviceImages[s.slug]} slot={s.cardImage} horizontal={s.lead} />
+                <ServiceCard service={s} image={s.cardPhoto} slot={s.cardImage} horizontal={s.lead} />
               </li>
             ))}
           </ul>

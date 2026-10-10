@@ -1,5 +1,6 @@
 import { starsShown } from "./vehicles";
 import { identifiers } from "./identifiers";
+import { teamPhoto } from "./team";
 
 export type ServiceSection = {
   id: string;
@@ -19,6 +20,7 @@ export type Service = {
   sections: ServiceSection[];
   placeholders?: { id: string; what: string; who: string }[];
   cardImage?: string;
+  cardPhoto?: string;
   bannerImage?: string;
   relatedOutcomes: string[];
 };
@@ -26,6 +28,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "healthcare-operations",
+    cardPhoto: teamPhoto.src,
     bannerImage: "AS-06",
     name: "Healthcare Staffing and Operations",
     short: "Healthcare",

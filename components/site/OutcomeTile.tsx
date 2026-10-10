@@ -11,12 +11,12 @@ export function OutcomeTile({ outcome, href }: { outcome: Outcome; href?: string
         <OutcomeArt outcomeId={outcome.id} />
       </div>
       <div className="flex flex-1 flex-col p-4 @[20rem]:p-6 @[35rem]:p-8">
-        <h3 className="text-h4 text-ink-950 group-hover/card:text-gold-700">{outcome.title}</h3>
+        <h3 className="text-h4 text-ink-950 group-hover/card:text-gold-700 group-focus-visible/card:text-gold-700">{outcome.title}</h3>
         <p className="mt-2 text-body-sm text-ink-700">{outcome.teaser}</p>
         {href ? (
           <span className="mt-auto inline-flex items-center gap-1 pt-4 text-body-sm font-semibold text-ink-900">
             Read more
-            <ArrowRight aria-hidden className="size-4 transition-transform duration-150 ease group-hover/card:translate-x-1 motion-reduce:group-hover/card:translate-x-0" />
+            <ArrowRight aria-hidden className="size-4 transition-transform duration-150 ease-move group-hover/card:translate-x-1 group-focus-visible/card:translate-x-1 group-focus-visible/card:transition-none motion-reduce:group-hover/card:translate-x-0" />
           </span>
         ) : null}
       </div>
