@@ -6,6 +6,7 @@ import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { Button } from "@/components/ui/Button";
 import { identifiers } from "@/content/identifiers";
+import { differentiators } from "@/content/differentiators";
 import { starsIII, starsShown } from "@/content/vehicles";
 import { services } from "@/content/services";
 import { statements } from "@/content/statements";
@@ -36,7 +37,7 @@ export default function CapabilityPage() {
           <div className="space-y-8 lg:col-span-7">
             <div>
               <h2 className="text-h3">Company</h2>
-              <p className="prose-measure mt-2 text-body text-ink-700">{statements.companyName} is an {statements.category.toLowerCase()} company based in San Antonio, Texas. {statements.positioning}</p>
+              <p className="prose-measure mt-2 text-body text-ink-700">{statements.companyName} is an {statements.category.toLowerCase()} company based in {contact.office.locality}, {contact.office.regionName}. {statements.positioning}</p>
             </div>
             <div>
               <h2 className="text-h3">Core Competencies</h2>
@@ -47,7 +48,7 @@ export default function CapabilityPage() {
             <div>
               <h2 className="text-h3">Differentiators</h2>
               <ul className="mt-3 grid grid-cols-1 gap-x-8 gap-y-2 text-body text-ink-900 md:grid-cols-2">
-                {["Mission Understanding", "Integrated Expertise", "Operational Excellence", "Trusted Partnership"].map((d) => <li key={d} className="flex items-start gap-2"><span aria-hidden className="mt-2.5 h-0.5 w-4 shrink-0 bg-gold-500" />{d}</li>)}
+                {differentiators.map((d) => <li key={d.n} className="flex items-start gap-2"><span aria-hidden className="mt-2.5 h-0.5 w-4 shrink-0 bg-gold-500" />{d.title}</li>)}
               </ul>
             </div>
             <div>

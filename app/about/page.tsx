@@ -13,13 +13,13 @@ import { identifiers } from "@/content/identifiers";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata("About JVM", "Mission, vision, values and leadership of Johnson Venture Management Solutions, Inc., a San Antonio based healthcare operations and professional services company.", "/about");
+export const metadata = pageMetadata("About JVM", `Mission, vision, values and leadership of ${statements.companyName}, a ${contact.office.locality} based healthcare operations and professional services company.`, "/about");
 
 export default function AboutPage() {
   const founder = team[0];
   return (
     <>
-      <PageHero eyebrow="About" title="About JVM Solutions" lead="A veteran-led, San Antonio based company that brings operational discipline to federal and commercial health missions." crumbs={[{ label: "About" }]} />
+      <PageHero eyebrow="About" title="About JVM Solutions" lead={`A veteran-led, ${contact.office.locality} based company that brings operational discipline to federal and commercial health missions.`} crumbs={[{ label: "About" }]} />
       <div className="container-content">
         <div className="relative aspect-[3/2] w-full overflow-hidden rounded-container bg-ink-100 md:aspect-[21/9]">
           <Image src="/images/team/team-shirts.jpg" alt="The JVM Solutions team in matching shirts reading Success begins with the right team" fill priority sizes="100vw" className="object-cover" />
@@ -91,7 +91,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <FactBlock title="Company" facts={[
             { label: "Legal name", value: statements.companyName },
-            { label: "Headquarters", value: "San Antonio, Texas" },
+            { label: "Headquarters", value: `${contact.office.locality}, ${contact.office.regionName}` },
             { label: "Ownership", value: "Veteran owned, woman owned" },
             { label: "Set-asides", value: identifiers.setAsides.join(", ") },
             { label: "Quality", value: "ISO 9001:2015" },
