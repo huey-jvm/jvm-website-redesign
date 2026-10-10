@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
 import { InPageNav } from "@/components/site/InPageNav";
@@ -7,7 +8,7 @@ import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { Button } from "@/components/ui/Button";
 import { ExternalLink } from "@/components/ui/ExternalLink";
-import { starsIII } from "@/content/vehicles";
+import { starsIII, starsShown, starsConfirmed, starsOrdering } from "@/content/vehicles";
 import { identifiers, naicsDescriptions } from "@/content/identifiers";
 import { team } from "@/content/team";
 import { pageMetadata } from "@/lib/seo";
@@ -23,6 +24,7 @@ const nav = [
 ];
 
 export default function StarsPage() {
+  if (!starsShown) notFound();
   const pm = team[1];
   const ceo = team[0];
   return (
@@ -35,13 +37,9 @@ export default function StarsPage() {
           </div>
           <div className="rounded-container border border-ink-200 bg-white p-5">
             <p className="text-eyebrow font-semibold uppercase text-ink-500">Ordering period</p>
-            {starsIII.currentEnd ? (
-              <p className="mt-1 font-sans text-h3 font-medium text-ink-950 tabular">Through {starsIII.currentEnd}</p>
-            ) : (
-              <Placeholder id="P5" className="mt-2">
-                <p className="text-body-sm text-ink-900">Base period {starsIII.orderingStart} to {starsIII.basePeriodEnd}, with one option to {starsIII.optionEnd}.</p>
-              </Placeholder>
-            )}
+            <p className="mt-1 font-sans text-h3 font-medium text-ink-950 tabular">{starsOrdering.current}</p>
+            {starsOrdering.history ? <p className="mt-1 text-body-sm text-ink-700 tabular">{starsOrdering.history}</p> : null}
+            {starsConfirmed ? null : <Placeholder id="P5" className="mt-3" />}
             <p className="mt-2 text-body-sm text-ink-500">{starsIII.performanceTail}</p>
           </div>
         </div>

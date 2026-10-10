@@ -5,6 +5,7 @@ import { ContactForm } from "@/components/site/ContactForm";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { ExternalLink } from "@/components/ui/ExternalLink";
 import { contact } from "@/content/contact";
+import { starsIII, starsShown } from "@/content/vehicles";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata("Contact", "Reach JVM Solutions. Choose who you are and your message goes to the right inbox. Office address, phone and email.", "/contact");
@@ -37,7 +38,7 @@ export default function ContactPage() {
               <h2 className="text-h4">Who Answers What</h2>
               <dl className="mt-4 grid grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] gap-x-4 gap-y-3 text-body-sm">
                 <dt className="text-ink-500">Contracting and capture</dt><dd><a href={`mailto:${contact.emails.bd}`} className="link-underline break-all font-medium text-ink-900 after:bg-gold-700">{contact.emails.bd}</a></dd>
-                <dt className="text-ink-500">STARS III</dt><dd><a href={`mailto:${contact.emails.stars3}`} className="link-underline break-all font-medium text-ink-900 after:bg-gold-700">{contact.emails.stars3}</a></dd>
+                {starsShown ? <><dt className="text-ink-500">STARS III</dt><dd><a href={`mailto:${starsIII.jvmEmail}`} className="link-underline break-all font-medium text-ink-900 after:bg-gold-700">{starsIII.jvmEmail}</a></dd></> : null}
                 <dt className="text-ink-500">General enquiries</dt><dd><a href={`mailto:${contact.emails.general}`} className="link-underline break-all font-medium text-ink-900 after:bg-gold-700">{contact.emails.general}</a></dd>
                 <dt className="text-ink-500">Employment verification</dt><dd><a href={`mailto:${contact.emails.credentialing}?subject=Employment%20Verification`} className="link-underline break-all font-medium text-ink-900 after:bg-gold-700">{contact.emails.credentialing}</a></dd>
               </dl>

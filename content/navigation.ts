@@ -1,11 +1,12 @@
 import { services } from "./services";
+import { starsShown } from "./vehicles";
 
 export type NavItem = { label: string; href: string; description?: string; lead?: boolean };
 export type NavGroup = { label: string; href?: string; items?: NavItem[] };
 
 const serviceDescriptions: Record<string, string> = {
   "healthcare-operations": "Clinical and operational professionals, program and case management, credentialing",
-  "health-it": "IT services under GSA 8(a) STARS III",
+  "health-it": "Software, systems integration, service desk and cybersecurity",
   "logistics-facilities": "Supply chain, transportation, facilities",
   "management-support": "Operations and administrative support",
 };
@@ -25,7 +26,7 @@ export const primaryNav: NavGroup[] = [
     label: "Contracting",
     items: [
       { label: "Contracting overview", href: "/contracting", description: "Identifiers, vehicles and how to reach us" },
-      { label: "GSA 8(a) STARS III", href: "/contracting/stars-iii", description: "Our prime contract vehicle" },
+      ...(starsShown ? [{ label: "GSA 8(a) STARS III", href: "/contracting/stars-iii", description: "Our prime contract vehicle" }] : []),
       { label: "Certifications and Set-Asides", href: "/contracting/certifications", description: "8(a), EDWOSB, SDVOSB, HUBZone, ISO 9001" },
       { label: "Past Performance", href: "/contracting/past-performance", description: "Contracts and task orders" },
       { label: "Capability Statement", href: "/contracting/capability-statement", description: "One page summary to download" },
@@ -50,7 +51,7 @@ export const footerColumns: { heading: string; items: NavItem[] }[] = [
     heading: "Contracting",
     items: [
       { label: "Contracting overview", href: "/contracting" },
-      { label: "GSA 8(a) STARS III", href: "/contracting/stars-iii" },
+      ...(starsShown ? [{ label: "GSA 8(a) STARS III", href: "/contracting/stars-iii" }] : []),
       { label: "Certifications and Set-Asides", href: "/contracting/certifications" },
       { label: "Capability Statement", href: "/contracting/capability-statement" },
     ],

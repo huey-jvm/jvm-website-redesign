@@ -19,7 +19,6 @@ export const contact = {
     general: "info@jvmsolutions.net",
     bd: "BD@jvmsolutions.net",
     credentialing: "credentialing@jvmsolutions.net",
-    stars3: "stars3@jvmsolutions.net",
   },
   responseTime: "two business days",
   responseTimePlaceholder: { id: "P10", what: "A realistic response time and the owner of each inbox", who: "JVM, B7" },

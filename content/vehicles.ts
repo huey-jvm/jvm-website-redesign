@@ -11,16 +11,17 @@ export type Vehicle = {
   status: "current" | "pending-confirmation";
 };
 
+export type Listing = "pending" | "yes" | "no";
+
 export const starsIII = {
   slug: "stars-iii",
+  listed: "pending" as Listing,
   name: "GSA 8(a) STARS III",
   role: "Prime",
   contractNumber: "47QTCB22D0653",
   orderingStart: "2 July 2021",
   basePeriodEnd: "1 July 2026",
   optionEnd: "1 July 2029",
-  currentEnd: undefined as string | undefined,
-  currentEndPlaceholder: { id: "P5", what: "The current ordering period end date, and whether the option to 1 July 2029 was exercised", who: "JVM, B2" },
   performanceTail: "Performance on awarded task orders can extend five years beyond the ordering end date.",
   ceiling: "$50 billion",
   accessFee: "0.75%, the same as GSA Schedules",
@@ -42,6 +43,12 @@ export const starsIII = {
   description:
     "GSA 8(a) STARS III is a multiple-award, indefinite-delivery, indefinite-quantity governmentwide acquisition contract designed to provide federal agencies with IT services and IT services-based solutions. It is designated Best in Class, and it gives agencies an easy to use, streamlined procurement route to 8(a) prime contractors, with an emphasis on emerging technology and performance outside the continental United States.",
 } as const;
+
+export const starsShown = starsIII.listed !== "no";
+export const starsConfirmed = starsIII.listed === "yes";
+export const starsOrdering = starsConfirmed
+  ? { current: `Through ${starsIII.optionEnd}`, history: `Base period ${starsIII.orderingStart} to ${starsIII.basePeriodEnd}, option exercised to ${starsIII.optionEnd}.` }
+  : { current: "Confirmation pending", history: undefined };
 
 export const subcontractVehicles: Vehicle[] = [
   { slug: "cio-sp3", name: "NIH CIO-SP3", role: "Subcontractor", scope: [], status: "pending-confirmation", currentEndPlaceholder: { id: "P6", what: "Current vehicle name (CIO-SP3 or its successor) and period of performance", who: "JVM, B3" } },

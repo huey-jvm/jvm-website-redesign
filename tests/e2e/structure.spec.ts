@@ -1,5 +1,7 @@
+import fs from "node:fs";
+import path from "node:path";
 import { test, expect } from "@playwright/test";
-import { pages } from "./pages";
+import { pages, starsOff } from "./pages";
 
 const forbidden = ["Double click", "This is your", "Add answer here", "wix", "Columbus", "lorem ipsum"];
 
@@ -46,7 +48,7 @@ for (const path of pages) {
 }
 
 test("legacy Wix paths redirect", async ({ page }) => {
-  for (const [from, to] of [["/about-us", "/about"], ["/services-2", "/services/healthcare-operations"], ["/contractvehicles", "/contracting"], ["/gsa-8a-stars-iii", "/contracting/stars-iii"], ["/job-seekers", "/careers"], ["/contact-us", "/contact"]]) {
+  for (const [from, to] of [["/about-us", "/about"], ["/services-2", "/services/healthcare-operations"], ["/contractvehicles", "/contracting"], ["/gsa-8a-stars-iii", starsOff ? "/contracting" : "/contracting/stars-iii"], ["/job-seekers", "/careers"], ["/contact-us", "/contact"]]) {
     const res = await page.goto(from);
     expect(new URL(res!.url()).pathname).toBe(to);
   }
@@ -57,4 +59,31 @@ test("identifiers render whole at 320px", async ({ page }) => {
   await page.goto("/contracting", { waitUntil: "networkidle" });
   const clipped = await page.locator("[data-figure]").evaluateAll((els) => els.filter((e) => e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent?.slice(0, 40)));
   expect(clipped).toEqual([]);
+});
+
+test("STARS III follows one switch: zero mentions when starsIII.listed is no, present otherwise", async ({ request }) => {
+  const swept = [...pages, "/sitemap.xml", "/robots.txt", "/this-page-does-not-exist"];
+  const hits: string[] = [];
+  for (const path of swept) {
+    const res = await request.get(path, { maxRedirects: 0 });
+    const body = await res.text();
+    const count = (body.match(/stars/gi) ?? []).length;
+    if (count) hits.push(`${path}: ${count}`);
+  }
+  const total = hits.reduce((n, h) => n + Number(h.split(": ")[1]), 0);
+  console.log(`STARS sweep, switch "${starsOff ? "no" : "not no"}", ${swept.length} responses, ${total} hits${hits.length ? `: ${hits.join(", ")}` : ""}`);
+  const chunkDir = path.join(process.cwd(), ".next", "static");
+  const chunks = fs.readdirSync(chunkDir, { recursive: true, encoding: "utf8" }).filter((f) => f.endsWith(".js")).map((f) => fs.readFileSync(path.join(chunkDir, f), "utf8"));
+  expect(chunks.some((c) => c.includes("BD@jvmsolutions.net")), "control: the chunk scan reads the shipped client bundle").toBe(true);
+  const starsChunks = chunks.filter((c) => /stars/i.test(c)).length;
+  console.log(`client chunks scanned ${chunks.length}, mentioning STARS ${starsChunks}`);
+  const route = await request.get("/contracting/stars-iii", { maxRedirects: 0 });
+  if (starsOff) {
+    expect(hits, "no response mentions STARS").toEqual([]);
+    expect(starsChunks, "no client chunk mentions STARS").toBe(0);
+    expect(route.status(), "the STARS III route is gone").toBe(404);
+  } else {
+    expect(total, "control: the same sweep finds STARS while the switch is on").toBeGreaterThan(0);
+    expect(route.status()).toBe(200);
+  }
 });

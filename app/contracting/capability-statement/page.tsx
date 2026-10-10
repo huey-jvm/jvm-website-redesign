@@ -6,7 +6,7 @@ import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { Button } from "@/components/ui/Button";
 import { identifiers } from "@/content/identifiers";
-import { starsIII } from "@/content/vehicles";
+import { starsIII, starsShown } from "@/content/vehicles";
 import { services } from "@/content/services";
 import { statements } from "@/content/statements";
 import { contact } from "@/content/contact";
@@ -63,7 +63,7 @@ export default function CapabilityPage() {
               { label: "Primary NAICS", value: identifiers.naicsPrimary, copy: true },
               { label: "Other NAICS", value: identifiers.naicsSecondary.join(", ") },
               { label: "Set-asides", value: identifiers.setAsides.join(", ") },
-              { label: "STARS III", value: starsIII.contractNumber, copy: true },
+              ...(starsShown ? [{ label: "STARS III", value: starsIII.contractNumber, copy: true }] : []),
               { label: "Quality", value: "ISO 9001:2015" },
               { label: "Contact", value: contact.emails.bd, copy: true, href: `mailto:${contact.emails.bd}` },
               { label: "Phone", value: contact.office.phone, copy: true, href: contact.office.phoneHref },

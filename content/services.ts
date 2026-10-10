@@ -1,3 +1,5 @@
+import { starsShown } from "./vehicles";
+
 export type ServiceSection = {
   id: string;
   title: string;
@@ -72,22 +74,25 @@ export const services: Service[] = [
     name: "Health IT and Technology Services",
     short: "Health IT",
     lead: false,
-    summary:
-      "Software development, systems design and integration, service desk, information assurance and cybersecurity, delivered through our GSA 8(a) STARS III prime contract.",
+    summary: starsShown
+      ? "Software development, systems design and integration, service desk, information assurance and cybersecurity, delivered through our GSA 8(a) STARS III prime contract."
+      : "Software development, systems design and integration, service desk, information assurance and cybersecurity, delivered as part of the healthcare operation.",
     intro:
-      "Health IT is the technology dimension of the healthcare operation, not a separate practice. JVM delivers IT services and IT services-based solutions through GSA 8(a) STARS III, from software development and systems design to service desk, information assurance and cybersecurity, so the systems a facility depends on perform as reliably as the people who use them.",
+      `Health IT is the technology dimension of the healthcare operation, not a separate practice. JVM delivers IT services and IT services-based solutions${starsShown ? " through GSA 8(a) STARS III" : ""}, from software development and systems design to service desk, information assurance and cybersecurity, so the systems a facility depends on perform as reliably as the people who use them.`,
     sections: [
       {
         id: "capabilities",
         title: "What We Deliver",
-        body: "Our offering under STARS III ranges from simple to complex IT services, centred on NAICS 541512 and including related IT services codes. Every engagement is scoped to the mission it supports and delivered under the same accountability as our healthcare work.",
+        body: `Our offering${starsShown ? " under STARS III" : ""} ranges from simple to complex IT services, centred on NAICS 541512 and including related IT services codes. Every engagement is scoped to the mission it supports and delivered under the same accountability as our healthcare work.`,
         delivers: ["Software development", "Systems design and integration", "IT operations and maintenance", "IT help desk and service desk support", "Information assurance and cybersecurity", "Data tools and enabling platforms, including applied artificial intelligence"],
       },
-      {
-        id: "stars-iii",
-        title: "How to Buy",
-        body: "Federal agencies reach JVM through GSA 8(a) STARS III, a Best in Class governmentwide acquisition contract with streamlined ordering, directed awards up to the 8(a) competitive threshold, and 8(a) socioeconomic credit transferable to the agency.",
-      },
+      ...(starsShown
+        ? [{
+            id: "stars-iii",
+            title: "How to Buy",
+            body: "Federal agencies reach JVM through GSA 8(a) STARS III, a Best in Class governmentwide acquisition contract with streamlined ordering, directed awards up to the 8(a) competitive threshold, and 8(a) socioeconomic credit transferable to the agency.",
+          }]
+        : []),
     ],
     placeholder: { id: "P7", what: "Health IT past performance, task orders and outcomes", who: "JVM, B4" },
     relatedOutcomes: ["operations", "readiness", "access"],

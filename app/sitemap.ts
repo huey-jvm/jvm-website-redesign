@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/seo";
 import { services } from "@/content/services";
-import { pastPerformance } from "@/content/vehicles";
+import { pastPerformance, starsShown } from "@/content/vehicles";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const paths = [
     "/", "/services", ...services.map((s) => `/services/${s.slug}`), "/why-jvm",
-    "/contracting", "/contracting/stars-iii", "/contracting/certifications", "/contracting/capability-statement",
+    "/contracting", ...(starsShown ? ["/contracting/stars-iii"] : []), "/contracting/certifications", "/contracting/capability-statement",
     ...(pastPerformance.length ? ["/contracting/past-performance"] : []),
     "/about", "/about/quality-compliance", "/careers", "/contact",
     "/legal/privacy", "/legal/terms", "/legal/accessibility", "/legal/sms-consent",

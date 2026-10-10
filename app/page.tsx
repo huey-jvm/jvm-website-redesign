@@ -16,7 +16,7 @@ import { outcomes } from "@/content/outcomes";
 import { services } from "@/content/services";
 import { differentiators } from "@/content/differentiators";
 import { identifiers } from "@/content/identifiers";
-import { starsIII } from "@/content/vehicles";
+import { starsIII, starsShown, starsConfirmed, starsOrdering } from "@/content/vehicles";
 import { team } from "@/content/team";
 import { credentials } from "@/content/credentials";
 import { CredentialMark } from "@/components/site/CredentialMark";
@@ -32,7 +32,7 @@ const serviceImages: Record<string, string | undefined> = {
 
 export default function HomePage() {
   const founder = team[0];
-  const stars = credentials.find((c) => c.slug === "stars-iii")!;
+  const stars = credentials.find((c) => c.slug === "stars-iii");
   return (
     <>
       <section className="surface-dark bg-ink-950 text-ink-200">
@@ -105,20 +105,24 @@ export default function HomePage() {
                 { label: "CAGE", value: identifiers.cage, copy: true },
                 { label: "Primary NAICS", value: identifiers.naicsPrimary, copy: true, note: "Computer Systems Design Services" },
                 { label: "Set-asides", value: identifiers.setAsides.join(", ") },
-                { label: "STARS III", value: starsIII.contractNumber, copy: true, note: "8(a) prime" },
+                ...(starsShown
+                  ? [
+                      { label: "STARS III", value: starsIII.contractNumber, copy: true, note: "8(a) prime" },
+                      { label: "Ordering period", value: starsOrdering.current },
+                    ]
+                  : []),
               ]}
             />
-            <div className="mt-4">
-              <Placeholder id="P5">
-                <p className="text-body-sm text-ink-300">Ordering period: current end date to be confirmed.</p>
-              </Placeholder>
+            {starsShown && !starsConfirmed ? <Placeholder id="P5" className="mt-4" /> : null}
+            {stars ? null : <Button href="/contracting" variant="secondary" tone="dark" className="mt-6">Go to contracting</Button>}
+          </div>
+          {stars ? (
+            <div className="flex flex-col items-start gap-6 lg:col-span-5 lg:pt-12">
+              <CredentialMark credential={stars} />
+              <p className="text-body text-ink-200">JVM is a prime on GSA 8(a) STARS III, a Best in Class governmentwide acquisition contract for IT services.</p>
+              <Button href="/contracting" variant="secondary" tone="dark">Go to contracting</Button>
             </div>
-          </div>
-          <div className="flex flex-col items-start gap-6 lg:col-span-5 lg:pt-12">
-            <CredentialMark credential={stars} />
-            <p className="text-body text-ink-200">JVM is a prime on GSA 8(a) STARS III, a Best in Class governmentwide acquisition contract for IT services.</p>
-            <Button href="/contracting" variant="secondary" tone="dark">Go to contracting</Button>
-          </div>
+          ) : null}
         </div>
       </Section>
 
