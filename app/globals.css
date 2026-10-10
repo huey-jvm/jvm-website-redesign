@@ -141,8 +141,13 @@
     opacity: 0;
     transition: opacity 150ms ease;
   }
-  &:hover::after, &:focus-visible::after {
+  &:focus-visible::after, &:active::after {
     opacity: 1;
+  }
+  @media (hover: hover) {
+    &:hover::after {
+      opacity: 1;
+    }
   }
 }
 
