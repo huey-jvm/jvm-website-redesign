@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import { ChevronDown, Menu, Phone, Mail } from "lucide-react";
-import { primaryNav, type NavGroup } from "@/content/navigation";
+import type { NavGroup } from "@/content/navigation";
 import { contact } from "@/content/contact";
 import { cn } from "@/lib/cn";
 import { OpenWidgetButton } from "./OpenWidgetButton";
@@ -25,7 +25,7 @@ function groupIsCurrent(pathname: string, group: NavGroup) {
   return (group.items ?? []).some((i) => isCurrent(pathname, i.href));
 }
 
-export function Header() {
+export function Header({ nav }: { nav: NavGroup[] }) {
   const pathname = usePathname();
   const scrolled = useSyncExternalStore(subscribeScroll, () => window.scrollY > 4, () => false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
@@ -75,7 +75,7 @@ export function Header() {
 
         <nav ref={navRef} aria-label="Primary" className="hidden lg:block">
           <ul className="flex items-center gap-1">
-            {primaryNav.map((group) => {
+            {nav.map((group) => {
               const current = groupIsCurrent(pathname, group);
               const baseItem = cn(
                 "relative inline-flex h-11 items-center gap-1 rounded-control px-3 text-body font-medium text-ink-900 transition-colors duration-150 ease hover:bg-ink-50",
@@ -98,7 +98,7 @@ export function Header() {
         <span className="hidden lg:inline-flex"><OpenWidgetButton /></span>
       </div>
 
-      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} pathname={pathname} />
+      <MobileMenu nav={nav} open={mobileOpen} onClose={() => setMobileOpen(false)} pathname={pathname} />
     </header>
   );
 }
@@ -142,7 +142,7 @@ function MenuGroup({ group, current, open, onToggle, className, pathname }: { gr
   );
 }
 
-function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose: () => void; pathname: string }) {
+function MobileMenu({ nav, open, onClose, pathname }: { nav: NavGroup[]; open: boolean; onClose: () => void; pathname: string }) {
   const panelRef = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState<string | null>(null);
 
@@ -176,7 +176,7 @@ function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose: () =>
         </div>
         <nav aria-label="Primary" className="flex-1 overflow-y-auto px-2 py-3">
           <ul>
-            {primaryNav.map((group) =>
+            {nav.map((group) =>
               group.href ? (
                 <li key={group.label}>
                   <Link href={group.href} aria-current={isCurrent(pathname, group.href) ? "page" : undefined} className={cn("flex min-h-11 items-center rounded-control px-3 text-body font-medium text-ink-950 hover:bg-cream", isCurrent(pathname, group.href) && "bg-gold-200")}>{group.label}</Link>

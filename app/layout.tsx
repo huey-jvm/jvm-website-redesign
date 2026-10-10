@@ -8,6 +8,7 @@ import { ContactWidget } from "@/components/site/ContactWidget";
 import { SkipLink } from "@/components/site/SkipLink";
 import { AnnouncementBanner } from "@/components/site/AnnouncementBanner";
 import { announcement } from "@/content/announcements";
+import { primaryNav } from "@/content/navigation";
 import { statements } from "@/content/statements";
 import { organizationJsonLd, siteUrl } from "@/lib/seo";
 
@@ -51,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-full flex-col pb-14 md:pb-0">
         <SkipLink />
         <AnnouncementBanner announcement={announcement} />
-        <Header />
+        <Header nav={primaryNav} />
         <main id="main" className="flex-1">{children}</main>
         <Footer />
         <ContactWidget />
