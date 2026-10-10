@@ -9,7 +9,7 @@ export const contactSchema = z.object({
   email: z.string().trim().email("Please enter a valid email address.").max(200),
   phone: z.string().trim().max(40).optional().or(z.literal("")),
   message: z.string().trim().min(10, "Please tell us a little more, at least ten characters.").max(4000),
-  website: z.string().max(0).optional().or(z.literal("")),
+  website: z.string().max(500).optional().or(z.literal("")),
   turnstileToken: z.string().optional(),
 });
 
