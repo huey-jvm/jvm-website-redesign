@@ -4,7 +4,7 @@ export const placeholderRegister: Record<string, { what: string; who: string }> 
   P3: { what: "The deck vision as the vision and the faith led line as the company story, pending the CEO’s confirmation", who: "the CEO, D10" },
   P4: { what: "Whether the Broadway mailing address and either fax number are still in use. No fax is shown until one is confirmed", who: "JVM, records check, B1" },
   P5: { what: "Whether JVM is on the current STARS III Industry Partner list. No option dates are shown until it is confirmed", who: "JVM, Industry Partner list check, B2" },
-  P6: { what: "Subcontract vehicles, current names and dates", who: "JVM, B3" },
+  P6: { what: "The confirmed subcontract vehicles, each with JVM’s role and period of performance. None is named until the list arrives", who: "JVM, B3" },
   P7: { what: "Past performance records", who: "JVM, B4" },
   P8: { what: "Joint Commission position and wording", who: "JVM, B5" },
   P9: { what: "Social accounts", who: "JVM, B6" },

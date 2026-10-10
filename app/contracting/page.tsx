@@ -59,6 +59,7 @@ export default function ContractingPage() {
         {pastPerformance.length === 0 && !showPlaceholders ? (
           <p className="mt-6 text-body text-ink-700">Past performance details are available on request from <a href={`mailto:${contact.emails.bd}`} className="link-underline font-semibold text-gold-700 after:bg-current">{contact.emails.bd}</a>.</p>
         ) : null}
+        <Placeholder id="P6" className="mt-6 max-w-xl" />
       </Section>
 
       <Section surface="light" className="pt-0 md:pt-0 lg:pt-0">

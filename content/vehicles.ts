@@ -50,11 +50,9 @@ export const starsOrdering = starsConfirmed
   ? { current: `Through ${starsIII.optionEnd}`, history: `Base period ${starsIII.orderingStart} to ${starsIII.basePeriodEnd}, option exercised to ${starsIII.optionEnd}.` }
   : { current: "Confirmation pending", history: undefined };
 
-export const subcontractVehicles: Vehicle[] = [
-  { slug: "cio-sp3", name: "NIH CIO-SP3", role: "Subcontractor", scope: [], status: "pending-confirmation", currentEndPlaceholder: { id: "P6", what: "Current vehicle name (CIO-SP3 or its successor) and period of performance", who: "JVM, B3" } },
-  { slug: "va-vector", name: "VA VECTOR", role: "Subcontractor", scope: [], status: "pending-confirmation", currentEndPlaceholder: { id: "P6", what: "Period of performance", who: "JVM, B3" } },
-  { slug: "gsa-schedule-70", name: "GSA Schedule 70", role: "Subcontractor", scope: [], status: "pending-confirmation", currentEndPlaceholder: { id: "P6", what: "Current vehicle name (Schedule 70 or the consolidated Multiple Award Schedule) and period of performance", who: "JVM, B3" } },
-];
+export const subcontractVehicles: Vehicle[] = [];
+
+export const confirmedSubcontractVehicles = subcontractVehicles.filter((v) => v.status === "current" && v.currentEnd);
 
 export type PastPerformance = {
   title: string;
@@ -66,5 +64,4 @@ export type PastPerformance = {
   publishable: boolean;
 };
 
-/** Empty until JVM supplies publishable records (P7). The page withholds itself in production while this is empty. */
 export const pastPerformance: PastPerformance[] = [];

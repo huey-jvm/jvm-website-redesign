@@ -3,7 +3,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
 import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
-import { pastPerformance, subcontractVehicles } from "@/content/vehicles";
+import { pastPerformance, confirmedSubcontractVehicles } from "@/content/vehicles";
 import { contact } from "@/content/contact";
 import { showPlaceholders } from "@/lib/placeholders";
 import { pageMetadata } from "@/lib/seo";
@@ -45,17 +45,20 @@ export default function PastPerformancePage() {
           </div>
         )}
 
-        <h2 className="mt-14 text-h2-sm md:text-h2">Subcontract Vehicles</h2>
-        <p className="prose-measure mt-4 text-body text-ink-700">A vehicle is published with its current name, JVM’s role and its period of performance. Until those are confirmed, each one below is marked.</p>
-        <ul className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
-          {subcontractVehicles.map((v) => (
-            <li key={v.slug} className="rounded-container border border-ink-200 bg-white p-5">
-              <h3 className="truncate text-h4" title={v.name}>{v.name}</h3>
-              <p className="mt-1 text-body-sm text-ink-700">{v.role}</p>
-              {v.currentEndPlaceholder ? <div className="mt-3"><Placeholder id={v.currentEndPlaceholder.id} what={v.currentEndPlaceholder.what} who={v.currentEndPlaceholder.who} /></div> : null}
-            </li>
-          ))}
-        </ul>
+        {confirmedSubcontractVehicles.length ? (
+          <>
+            <h2 className="mt-14 text-h2-sm md:text-h2">Subcontract Vehicles</h2>
+            <ul className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+              {confirmedSubcontractVehicles.map((v) => (
+                <li key={v.slug} className="rounded-container border border-ink-200 bg-white p-5">
+                  <h3 className="truncate text-h4" title={v.name}>{v.name}</h3>
+                  <p className="mt-1 text-body-sm text-ink-700">{v.role}</p>
+                  <p className="mt-1 text-body-sm text-ink-900 tabular">{v.orderingStart ? `${v.orderingStart} to ${v.currentEnd}` : `Through ${v.currentEnd}`}</p>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null}
       </Section>
       <CTABand route="contracting" />
     </>

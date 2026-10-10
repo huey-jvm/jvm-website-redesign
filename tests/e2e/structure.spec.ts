@@ -3,7 +3,7 @@ import path from "node:path";
 import { test, expect } from "@playwright/test";
 import { pages, starsOff } from "./pages";
 
-const forbidden = ["Double click", "This is your", "Add answer here", "wix", "Columbus", "lorem ipsum"];
+const forbidden = ["Double click", "This is your", "Add answer here", "wix", "Columbus", "lorem ipsum", "CIO-SP3", "CIO-SP4", "Schedule 70", "VECTOR"];
 
 for (const path of pages) {
   test(`${path} has one h1, ordered headings, a description, and no template text`, async ({ page }) => {
