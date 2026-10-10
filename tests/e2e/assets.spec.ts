@@ -120,21 +120,22 @@ async function contrastOverBackdrop(page: Page, id: string, index: number, info:
 for (const asset of assets.filter((a) => a.kind === "texture" && a.id !== "AS-10")) {
   test(`${asset.id} keeps text readable where it sits behind text`, async ({ page }) => {
     test.skip(!present(asset.path), `${asset.path} is not present`);
-    for (const route of asset.where) {
+    for (const [route, width] of asset.where.flatMap((r) => [[r, 1280], [r, 375]] as const)) {
+      await page.setViewportSize({ width, height: 900 });
       await page.goto(route, { waitUntil: "networkidle" });
       const count = await page.locator(`[data-backdrop="${asset.id}"]`).count();
       expect(count, `${asset.id} backdrop on ${route}`).toBeGreaterThan(0);
       const measured = [];
       for (let i = 0; i < count; i++) measured.push(...(await contrastOverBackdrop(page, asset.id, i, test.info(), route)));
       if (!measured.length) {
-        console.log(`${asset.id} on ${route}: no text sits directly on the backdrop`);
+        console.log(`${asset.id} on ${route} at ${width}px: no text sits directly on the backdrop`);
         continue;
       }
       const worst = measured.reduce((a, b) => (b.ratio < a.ratio ? b : a));
       const brightest = Math.max(...measured.map((m) => m.bgMax));
-      console.log(`${asset.id} on ${route}: ${count} section(s), ${measured.length} text lines, lowest contrast ${worst.ratio.toFixed(2)} ("${worst.text}"), highest backdrop luminance under text ${(brightest * 100).toFixed(1)} percent`);
-      for (const m of measured) expect(m.ratio, `"${m.text}" on ${route}`).toBeGreaterThanOrEqual(m.large ? 3 : 4.5);
-      if (darkTextures.has(asset.id)) expect(brightest, `backdrop luminance under text on ${route}`).toBeLessThan(0.2);
+      console.log(`${asset.id} on ${route} at ${width}px: ${count} section(s), ${measured.length} text lines, lowest contrast ${worst.ratio.toFixed(2)} ("${worst.text}"), highest backdrop luminance under text ${(brightest * 100).toFixed(1)} percent`);
+      for (const m of measured) expect(m.ratio, `"${m.text}" on ${route} at ${width}px`).toBeGreaterThanOrEqual(m.large ? 3 : 4.5);
+      if (darkTextures.has(asset.id)) expect(brightest, `backdrop luminance under text on ${route} at ${width}px`).toBeLessThan(0.2);
     }
   });
 }
