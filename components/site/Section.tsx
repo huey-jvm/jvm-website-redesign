@@ -11,12 +11,13 @@ const surfaces: Record<Surface, string> = {
   dark: "surface-dark bg-ink-950 text-ink-200",
 };
 
-export function Section({ surface = "light", className, children, tight, backdrop, backdropClassName, ...rest }: ComponentPropsWithoutRef<"section"> & { surface?: Surface; tight?: boolean; backdrop?: string; backdropClassName?: string; children: ReactNode }) {
+export function Section({ surface = "light", className, children, tight, backdrop, backdropClassName, art, ...rest }: ComponentPropsWithoutRef<"section"> & { surface?: Surface; tight?: boolean; backdrop?: string; backdropClassName?: string; art?: ReactNode; children: ReactNode }) {
   const bg = backdrop ? presentAsset(backdrop) : undefined;
+  const layered = Boolean(bg || art);
   return (
-    <section className={cn(surfaces[surface], tight ? "py-10 md:py-12" : "py-12 md:py-16 lg:py-20", bg && "relative isolate", className)} data-backdrop={bg?.id} {...rest}>
-      {bg ? <Backdrop id={bg.id} imgClassName={backdropClassName} /> : null}
-      <div className={cn("container-content", bg && "relative")}>{children}</div>
+    <section className={cn(surfaces[surface], tight ? "py-10 md:py-12" : "py-12 md:py-16 lg:py-20", layered && "relative isolate", className)} data-backdrop={bg?.id} data-art={!bg && art ? "" : undefined} {...rest}>
+      {bg ? <Backdrop id={bg.id} imgClassName={backdropClassName} /> : art ? <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden contrast-more:hidden">{art}</div> : null}
+      <div className={cn("container-content", layered && "relative")}>{children}</div>
     </section>
   );
 }
