@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ImageHero } from "@/components/site/ImageHero";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
@@ -21,8 +22,6 @@ import { starsIII, starsShown, starsConfirmed, starsOrdering } from "@/content/v
 import { team } from "@/content/team";
 import { credentials } from "@/content/credentials";
 import { CredentialMark } from "@/components/site/CredentialMark";
-import { Backdrop, presentAsset } from "@/components/site/Slot";
-import { cn } from "@/lib/cn";
 
 export const metadata: Metadata = {
   description: statements.positioning,
@@ -36,26 +35,20 @@ const serviceImages: Record<string, string | undefined> = {
 export default function HomePage() {
   const founder = team[0];
   const stars = credentials.find((c) => c.slug === "stars-iii");
-  const heroTexture = presentAsset("AS-04");
   return (
     <>
-      <section className={cn("surface-dark bg-ink-950 text-ink-200", heroTexture && "relative isolate")} data-backdrop={heroTexture?.id}>
-        {heroTexture ? <Backdrop id={heroTexture.id} imgClassName="object-right opacity-60" /> : null}
-        <div className={cn("container-content grid grid-cols-1 items-center gap-10 py-12 md:py-16 lg:grid-cols-12 lg:gap-12 lg:py-24", heroTexture && "relative")}>
-          <div className="relative order-first aspect-[3/2] w-full overflow-hidden rounded-container lg:order-last lg:col-span-6 lg:aspect-[4/5] lg:rounded-none lg:rounded-l-container">
-            <Image src="/images/team/team-walking.jpg" alt="The JVM Solutions team walking together outside their office" fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
-          </div>
-          <div className="lg:col-span-6">
-            <p className="text-eyebrow font-semibold uppercase text-gold-500">{statements.category}</p>
-            <h1 className="mt-4 text-display-sm text-cream md:text-display">{statements.tagline}</h1>
-            <p className="mt-6 max-w-[60ch] text-lead-sm text-ink-200 md:text-lead">{statements.positioning}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <OpenWidgetButton tone="dark" size="lg" route="contracting" />
-              <Button href="/contracting/capability-statement" variant="secondary" tone="dark" size="lg">Capability statement</Button>
-            </div>
-          </div>
+      <ImageHero
+        size="display"
+        eyebrow={statements.category}
+        title={statements.tagline}
+        lead={statements.positioning}
+        image={{ src: "/images/team/team-walking.jpg", alt: "The JVM Solutions team walking together outside their office", position: "object-[70%_center]" }}
+      >
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <OpenWidgetButton tone="dark" size="lg" route="contracting" />
+          <Button href="/contracting/capability-statement" variant="secondary" tone="dark" size="lg">Capability statement</Button>
         </div>
-      </section>
+      </ImageHero>
 
       <ProofStrip />
 
