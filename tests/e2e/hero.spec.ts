@@ -65,3 +65,38 @@ test("the hero image drifts with the scroll where the browser supports scroll-dr
   expect(await quiet.locator("[data-hero] .hero-parallax").evaluate((e) => getComputedStyle(e).transform)).toBe("none");
   await context.close();
 });
+
+test("control: the contrast measurement fails when the drawn background is replaced by solid gold", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/", { waitUntil: "networkidle" });
+  await page.evaluate(() => {
+    const layer = document.querySelector("[data-art] > div");
+    const slab = document.createElement("div");
+    slab.style.cssText = "position:absolute;inset:0;background:#c39f63";
+    layer?.append(slab);
+  });
+  await markForMeasure(page, "[data-art]", 0);
+  const lines = await measureContrast(page, test.info(), "art-control");
+  expect(lines.length).toBeGreaterThan(0);
+  expect(Math.min(...lines.map((l) => l.ratio))).toBeLessThan(3);
+});
+
+for (const width of [1280, 375]) {
+  test(`the drawn contour background behind Contracting at a glance keeps text readable at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/", { waitUntil: "networkidle" });
+    const count = await page.locator("[data-art]").count();
+    if (!count) {
+      console.log("contour art: a generated texture is in place, so the drawn fallback is not rendered");
+      return;
+    }
+    await markForMeasure(page, "[data-art]", 0);
+    const lines = await measureContrast(page, test.info(), `art-${width}`);
+    expect(lines.length, "text sits directly on the drawn background").toBeGreaterThan(0);
+    const worst = lines.reduce((a, b) => (b.ratio < a.ratio ? b : a));
+    const brightest = Math.max(...lines.map((l) => l.bgMax));
+    console.log(`contour art at ${width}px: ${lines.length} text lines, lowest contrast ${worst.ratio.toFixed(2)} ("${worst.text}"), brightest backdrop under text ${(brightest * 100).toFixed(2)} percent`);
+    for (const l of lines) expect(l.ratio, `"${l.text}" at ${width}px`).toBeGreaterThanOrEqual(l.large ? 3 : 4.5);
+    expect(brightest, "gold text needs the backdrop under 4.4 percent luminance").toBeLessThan(0.044);
+  });
+}
