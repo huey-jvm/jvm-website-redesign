@@ -52,9 +52,11 @@ export default function WhyPage() {
               <p className="prose-measure mt-4 text-body text-ink-700">{valueProposition.intro}</p>
               <ul className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
                 {valueProposition.pillars.map((p) => (
-                  <li key={p.title} className="@container rounded-container border border-ink-200 bg-white p-4 @[20rem]:p-6 @[35rem]:p-8">
-                    <h3 className="truncate text-h3" title={p.title}>{p.title}</h3>
-                    <p className="mt-2 text-body text-ink-700">{p.body}</p>
+                  <li key={p.title} className="@container rounded-container border border-ink-200 bg-white">
+                    <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
+                      <h3 className="truncate text-h3" title={p.title}>{p.title}</h3>
+                      <p className="mt-2 text-body text-ink-700">{p.body}</p>
+                    </div>
                   </li>
                 ))}
               </ul>
