@@ -1,3 +1,5 @@
+import { starsShown } from "./vehicles";
+
 export type AssetKind = "photo" | "texture";
 export type Asset = { id: string; path: string; alt: string; kind: AssetKind; where: string[] };
 
@@ -5,7 +7,7 @@ const dir = "/images/generated";
 
 const ctaPages = [
   "/", "/services", "/services/healthcare-operations", "/services/health-it", "/services/logistics-facilities", "/services/management-support",
-  "/why-jvm", "/contracting", "/contracting/stars-iii", "/contracting/certifications", "/contracting/capability-statement",
+  "/why-jvm", "/contracting", ...(starsShown ? ["/contracting/stars-iii"] : []), "/contracting/certifications", "/contracting/capability-statement",
   "/about", "/about/quality-compliance", "/careers",
 ];
 
