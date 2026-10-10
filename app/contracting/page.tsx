@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
+import { Reveal } from "@/components/site/Reveal";
 import { Section } from "@/components/site/Section";
 import { FactBlock } from "@/components/site/FactBlock";
 import { TeamCard } from "@/components/site/TeamCard";
@@ -46,10 +47,11 @@ export default function ContractingPage() {
 
       <Section>
         <Slot id="AS-11" className="mb-10 aspect-[21/9] w-full" sizes="(min-width: 1200px) 1200px, 100vw" />
+        <Reveal>
         <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {cards.filter((c) => !c.withheld).map((c) => (
             <li key={c.href} className="h-full">
-              <Link href={c.href} className="group/card flex h-full flex-col rounded-container border border-ink-200 bg-white p-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700">
+              <Link href={c.href} className="group/card flex h-full flex-col rounded-container border border-ink-200 bg-white p-6 transition-transform duration-150 ease-move hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700 motion-reduce:hover:translate-y-0">
                 <h2 className="truncate text-h3 group-hover/card:text-gold-700" title={c.title}>{c.title}</h2>
                 <p className="mt-2 text-body text-ink-700">{c.body}</p>
                 <span className="mt-auto inline-flex items-center gap-1 pt-4 text-body-sm font-semibold text-ink-900">Open <ArrowRight aria-hidden className="size-4 transition-transform duration-150 ease group-hover/card:translate-x-1 motion-reduce:group-hover/card:translate-x-0" /></span>
@@ -57,6 +59,7 @@ export default function ContractingPage() {
             </li>
           ))}
         </ul>
+        </Reveal>
         {pastPerformance.length === 0 ? (
           <p className="mt-6 text-body text-ink-700">Past performance details are available on request from <a href={`mailto:${contact.emails.bd}`} className="link-underline font-semibold text-gold-700 after:bg-current">{contact.emails.bd}</a>.</p>
         ) : null}

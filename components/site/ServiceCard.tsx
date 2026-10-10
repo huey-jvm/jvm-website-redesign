@@ -13,7 +13,7 @@ export function ServiceCard({ service, image, slot, className, horizontal = fals
       href={`/services/${service.slug}`}
       aria-label={service.name}
       className={cn(
-        "group/card @container flex h-full overflow-hidden rounded-container border border-ink-200 bg-white",
+        "group/card @container flex h-full overflow-hidden rounded-container border border-ink-200 bg-white transition-transform duration-150 ease-move hover:-translate-y-0.5 motion-reduce:hover:translate-y-0",
         horizontal ? "flex-col md:flex-row" : "flex-col",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700",
         className,
