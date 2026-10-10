@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
 import { MessageSquareText } from "lucide-react";
 import { ContactForm } from "./ContactForm";
 import { CloseButton } from "./CloseButton";
@@ -15,17 +16,13 @@ function subscribeReducedMotion(cb: () => void) {
   return () => mq.removeEventListener("change", cb);
 }
 function readReducedMotion() { return window.matchMedia(RM_QUERY).matches; }
-function subscribeScroll(cb: () => void) {
-  window.addEventListener("scroll", cb, { passive: true });
-  return () => window.removeEventListener("scroll", cb);
-}
-function readScrolled() { return window.scrollY > 240; }
 
 export function ContactWidget() {
   const [open, setOpen] = useState(false);
   const [route, setRoute] = useState<WidgetRoute | undefined>();
   const reduceMotion = useSyncExternalStore(subscribeReducedMotion, readReducedMotion, () => false);
-  const scrolled = useSyncExternalStore(subscribeScroll, readScrolled, () => false);
+  const pathname = usePathname();
+  const [pastHero, setPastHero] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
   const openerRef = useRef<HTMLElement | null>(null);
@@ -36,6 +33,20 @@ export function ContactWidget() {
     const opener = openerRef.current;
     (opener && opener.isConnected ? opener : launcherRef.current)?.focus();
   }, []);
+
+  useEffect(() => {
+    const hero = document.querySelector("main > :first-child");
+    if (!hero) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setPastHero(!entry.isIntersecting && entry.boundingClientRect.bottom < (entry.rootBounds?.top ?? 0) + 1),
+      { rootMargin: "-112px 0px 0px 0px" },
+    );
+    observer.observe(hero);
+    return () => {
+      observer.disconnect();
+      setPastHero(false);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     const onOpen = (e: Event) => {
@@ -81,7 +92,7 @@ export function ContactWidget() {
           "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500 active:scale-[0.98] motion-reduce:active:scale-100",
           "inset-x-0 bottom-0 h-14 justify-center rounded-none md:inset-x-auto md:bottom-6 md:left-6 md:h-14 md:min-w-14 md:rounded-pill md:px-4 lg:px-5",
           open && "pointer-events-none opacity-0 md:pointer-events-auto md:opacity-100",
-          !scrolled && "lg:invisible lg:translate-y-2 lg:opacity-0",
+          !pastHero && "invisible translate-y-2 opacity-0",
         )}
       >
         <MessageSquareText aria-hidden className="size-6" />
