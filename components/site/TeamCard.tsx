@@ -14,7 +14,7 @@ export function TeamCard({ name, role, note, image, email }: { name: string; rol
         )}
       </div>
       <div className="p-5">
-        <h3 className="truncate text-h4 text-ink-950" title={name}>{name}</h3>
+        <h3 className="text-h4 text-ink-950">{name}</h3>
         <p className="mt-1 text-body-sm text-ink-700">{role}</p>
         {note ? <p className="mt-1 text-body-sm text-ink-500">{note}</p> : null}
         {email ? <a href={`mailto:${email}`} className="link-underline mt-3 inline-block text-body-sm font-semibold text-gold-700 after:bg-current">{email}</a> : null}

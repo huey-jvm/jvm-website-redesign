@@ -56,7 +56,7 @@ export default function AboutPage() {
         <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {values.rita.items.map((v) => (
             <li key={v.title} className="rounded-container border border-ink-200 bg-white p-5">
-              <h4 className="truncate text-h4" title={v.title}>{v.title}</h4>
+              <h4 className="text-h4">{v.title}</h4>
               <p className="mt-2 text-body-sm text-ink-700">{v.line}</p>
             </li>
           ))}

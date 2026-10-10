@@ -2,10 +2,10 @@ export const differentiatorsIntro =
   "In a crowded government and commercial health services market, JVM's competitive advantage is not defined by contract vehicles or labor categories. It is defined by four enduring differentiators that are difficult to replicate and impossible to commoditize.";
 
 export const differentiators = [
-  { n: 1, title: "Mission Understanding", body: "JVM's leadership and workforce understand the unique demands of military, federal, and community health missions. We don't need a learning curve. We arrive ready to contribute." },
-  { n: 2, title: "Integrated Expertise", body: "From clinical staffing and behavioral health to health IT, administrative operations, and program management, JVM delivers across the full operational spectrum under a single, accountable partner." },
-  { n: 3, title: "Operational Excellence", body: "We bring structured methodologies, performance metrics, and continuous improvement frameworks that drive sustained, measurable results, not short-term performance spikes." },
-  { n: 4, title: "Trusted Partnership", body: "JVM earns trust through transparency, accountability, and consistent follow-through. Our clients don't manage us. They rely on us as an extension of their own leadership team." },
+  { n: 1, title: "Mission Understanding", teaser: "A workforce that already understands military, federal and community health missions.", body: "JVM's leadership and workforce understand the unique demands of military, federal, and community health missions. We don't need a learning curve. We arrive ready to contribute." },
+  { n: 2, title: "Integrated Expertise", teaser: "Clinical staffing, health IT, administration and program management under one accountable partner.", body: "From clinical staffing and behavioral health to health IT, administrative operations, and program management, JVM delivers across the full operational spectrum under a single, accountable partner." },
+  { n: 3, title: "Operational Excellence", teaser: "Structured methods and metrics that drive sustained, measurable results.", body: "We bring structured methodologies, performance metrics, and continuous improvement frameworks that drive sustained, measurable results, not short-term performance spikes." },
+  { n: 4, title: "Trusted Partnership", teaser: "Transparency, accountability and consistent follow-through, as an extension of your leadership team.", body: "JVM earns trust through transparency, accountability, and consistent follow-through. Our clients don't manage us. They rely on us as an extension of their own leadership team." },
 ];
 
 export const valueProposition = {

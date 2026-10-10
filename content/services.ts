@@ -14,6 +14,7 @@ export type Service = {
   short: string;
   lead: boolean;
   summary: string;
+  teaser: string;
   intro: string;
   sections: ServiceSection[];
   placeholders?: { id: string; what: string; who: string }[];
@@ -29,6 +30,7 @@ export const services: Service[] = [
     name: "Healthcare Staffing and Operations",
     short: "Healthcare",
     lead: true,
+    teaser: "Clinical and operational professionals, delivered as one accountable partner.",
     summary:
       "Clinical and operational professionals, occupational health, program and case management, credentialing and telehealth, delivered as one accountable partner.",
     intro:
@@ -80,6 +82,7 @@ export const services: Service[] = [
     name: "Health IT and Technology Services",
     short: "Health IT",
     lead: false,
+    teaser: "Software, systems and cybersecurity, delivered as part of the healthcare operation.",
     summary: starsShown
       ? "Software development, systems design and integration, service desk, information assurance and cybersecurity, delivered through our GSA 8(a) STARS III prime contract."
       : "Software development, systems design and integration, service desk, information assurance and cybersecurity, delivered as part of the healthcare operation.",
@@ -113,6 +116,7 @@ export const services: Service[] = [
     name: "Logistics and Facilities Management",
     short: "Logistics",
     lead: false,
+    teaser: "Supply chain, transportation and facilities management for mission-critical operations.",
     summary:
       "Supply chain, integrated logistics, transportation, inventory control, quality assurance and facilities management for mission-critical operations.",
     intro:
@@ -135,6 +139,7 @@ export const services: Service[] = [
     name: "Management and Administrative Support",
     short: "Management",
     lead: false,
+    teaser: "Flexible management and administrative support, from daily operations to strategic planning.",
     summary:
       "Flexible management and administrative support, from daily operations to strategic planning, so the organisation can focus on its mission.",
     intro:
