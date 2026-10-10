@@ -1,19 +1,21 @@
 export type RouteKey = "contracting" | "health-system" | "careers" | "other";
 
+const mainLine = { phone: "210-504-4707", phoneHref: "tel:+12105044707" };
+const office = { street: "7550 W I-10, Suite 800", locality: "San Antonio", region: "TX", postalCode: "78229" };
+
 export const contact = {
   office: {
     label: "Texas Office",
-    lines: ["7550 W I-10, Suite 800", "San Antonio, TX 78229"],
-    phone: "210-504-4707",
-    phoneHref: "tel:+12105044707",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=7550+W+I-10+Suite+800+San+Antonio+TX+78229",
+    ...office,
+    lines: [office.street, `${office.locality}, ${office.region} ${office.postalCode}`],
+    ...mainLine,
+    mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([office.street, office.locality, office.region, office.postalCode].join(" "))}`,
   },
   compliance: {
     label: "Ethics and Compliance Department",
     purpose: "Mailing address",
     lines: ["118 Broadway, Suite 525", "San Antonio, TX 78205"],
-    phone: "210-504-4707",
-    phoneHref: "tel:+12105044707",
+    ...mainLine,
   },
   emails: {
     general: "info@jvmsolutions.net",
