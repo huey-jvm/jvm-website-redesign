@@ -68,5 +68,6 @@ Until the files are there, each credential renders as a text tile, so nothing is
   vehicles and periods of performance, certifications, and leadership and team. Version one keeps that set in
   `content/` so the site can ship before JVM's accounts exist, and the content types are already shaped for a
   CMS. Contact details are not in the editable set. They are fixed in `content/contact.ts` by the client's choice.
-- Job listings pulled from iSolved. The careers page links through, with a slot for listings.
+- Job listings on the site. The careers page links through to the iSolved portal, which exposes no public
+  feed. If JVM's iSolved administrator enables the job feed, listing openings here is a small follow up.
 - The capability statement PDF and the ISO certificate PDF.

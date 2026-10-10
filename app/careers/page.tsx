@@ -4,7 +4,6 @@ import { PageHero } from "@/components/site/PageHero";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { CredentialMark } from "@/components/site/CredentialMark";
 import { CTABand } from "@/components/site/CTABand";
-import { Placeholder } from "@/components/ui/Placeholder";
 import { Button } from "@/components/ui/Button";
 import { credentials } from "@/content/credentials";
 import { contact } from "@/content/contact";
@@ -55,7 +54,7 @@ export default function CareersPage() {
           <SectionHeader align="center" eyebrow="Open roles" title="View Current Openings" lead="Applications are handled on our careers portal, hosted by iSolved." />
           <Button href={contact.careersPortal} external variant="primary" size="lg" icon={<ArrowUpRight className="size-5" />} iconTrailing className="max-w-full whitespace-normal text-center">View open roles on iSolved</Button>
           <p className="mt-3 text-body-sm text-ink-500">Opens the JVM careers portal in a new tab.</p>
-          <div className="mt-10 text-left"><Placeholder id="P11"><p className="text-body-sm text-ink-900">Slot for current openings listed on this page, if iSolved exposes a feed.</p></Placeholder></div>
+          <p className="mt-2 text-body text-ink-700">Openings are posted on our careers portal as they arise.</p>
         </div>
       </Section>
 
