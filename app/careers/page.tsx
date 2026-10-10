@@ -1,3 +1,4 @@
+import { teamPhoto } from "@/content/team";
 import { ArrowUpRight } from "lucide-react";
 import { ImageHero } from "@/components/site/ImageHero";
 import { Reveal } from "@/components/site/Reveal";
@@ -27,7 +28,7 @@ export default function CareersPage() {
         title="Success Begins With the Right Team"
         lead="JVM is an equal opportunity employer and a recognised veteran employer. If your work is a calling, you will find people here who feel the same."
         crumbs={[{ label: "Careers" }]}
-        image={{ src: "/images/team/team-walking.jpg", alt: "The JVM Solutions team walking together", position: "object-[70%_center]" }}
+        image={teamPhoto}
       />
 
       <Section>

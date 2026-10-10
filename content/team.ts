@@ -1,6 +1,12 @@
 import { starsIII, starsShown } from "./vehicles";
 import { contact } from "./contact";
 
+export const teamPhoto = {
+  src: "/images/team/team-walking.jpg",
+  alt: "The JVM Solutions team walking together outside their office",
+  position: "object-[70%_center]",
+};
+
 export const team = [
   {
     slug: "margie-johnson",
