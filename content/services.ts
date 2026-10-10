@@ -126,9 +126,9 @@ export const services: Service[] = [
     short: "Management",
     lead: false,
     summary:
-      "Flexible management and administration support, from daily operations to strategic planning, so the organisation can focus on its mission.",
+      "Flexible management and administrative support, from daily operations to strategic planning, so the organisation can focus on its mission.",
     intro:
-      "JVM provides flexible management and administration support services tailored to the needs of each organisation. Our experienced team handles everything from daily operations to strategic planning, so our clients can focus on what matters most.",
+      "JVM provides flexible management and administrative support services tailored to the needs of each organisation. Our experienced team handles everything from daily operations to strategic planning, so our clients can focus on what matters most.",
     sections: [
       {
         id: "what-we-deliver",
