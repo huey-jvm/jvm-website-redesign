@@ -15,7 +15,7 @@ import { statements } from "@/content/statements";
 import { outcomes } from "@/content/outcomes";
 import { services } from "@/content/services";
 import { differentiators } from "@/content/differentiators";
-import { identifiers } from "@/content/identifiers";
+import { identifiers, naicsDescriptions } from "@/content/identifiers";
 import { starsIII, starsShown, starsConfirmed, starsOrdering } from "@/content/vehicles";
 import { team } from "@/content/team";
 import { credentials } from "@/content/credentials";
@@ -103,7 +103,7 @@ export default function HomePage() {
               facts={[
                 { label: "UEI", value: identifiers.uei, copy: true },
                 { label: "CAGE", value: identifiers.cage, copy: true },
-                { label: "Primary NAICS", value: identifiers.naicsPrimary, copy: true, note: "Computer Systems Design Services" },
+                { label: "Primary NAICS", value: identifiers.naicsPrimary, copy: true, note: naicsDescriptions[identifiers.naicsPrimary] },
                 { label: "Set-asides", value: identifiers.setAsides.join(", ") },
                 ...(starsShown
                   ? [

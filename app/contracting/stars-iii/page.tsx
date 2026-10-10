@@ -11,6 +11,7 @@ import { ExternalLink } from "@/components/ui/ExternalLink";
 import { starsIII, starsShown, starsConfirmed, starsOrdering } from "@/content/vehicles";
 import { identifiers, naicsDescriptions } from "@/content/identifiers";
 import { team } from "@/content/team";
+import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata("GSA 8(a) STARS III", `JVM Solutions is a prime on GSA 8(a) STARS III, contract ${starsIII.contractNumber}. Scope, NAICS codes, ordering period and how to order.`, "/contracting/stars-iii");
@@ -112,7 +113,7 @@ export default function StarsPage() {
                 <TeamCard name={pm.name} role={pm.role} email={starsIII.jvmEmail} />
                 <TeamCard name={ceo.name} role={ceo.role} note={ceo.note} image={ceo.image} />
               </div>
-              <p className="mt-4 text-body-sm text-ink-500">Main line <a href="tel:+12105044707" className="link-underline after:bg-current">210-504-4707</a>. GSA program information at <ExternalLink href={starsIII.gsaUrl} className="text-gold-700">gsa.gov/stars3</ExternalLink>.</p>
+              <p className="mt-4 text-body-sm text-ink-500">Main line <a href={contact.office.phoneHref} className="link-underline after:bg-current">{contact.office.phone}</a>. GSA program information at <ExternalLink href={starsIII.gsaUrl} className="text-gold-700">gsa.gov/stars3</ExternalLink>.</p>
             </section>
           </div>
         </div>
