@@ -7,8 +7,8 @@ export function OutcomeTile({ outcome, href }: { outcome: Outcome; href?: string
   const inner = (
     <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
       <span aria-hidden className="block h-0.5 w-10 origin-left bg-gold-500 transition-transform duration-150 ease-move group-hover/card:scale-x-150 motion-reduce:group-hover/card:scale-x-100" />
-      <h3 className="mt-4 line-clamp-3 min-h-[3.9em] text-h4 text-ink-950 group-hover/card:text-gold-700" title={outcome.title}>{outcome.title}</h3>
-      <p className="mt-2 line-clamp-3 text-body-sm text-ink-700">{outcome.body}</p>
+      <h3 className="mt-4 text-h4 text-ink-950 group-hover/card:text-gold-700">{outcome.title}</h3>
+      <p className="mt-2 text-body-sm text-ink-700">{outcome.teaser}</p>
       {href ? (
         <span className="mt-4 inline-flex items-center gap-1 text-body-sm font-semibold text-ink-900">
           Read more

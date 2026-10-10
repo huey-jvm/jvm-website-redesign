@@ -7,7 +7,7 @@ export type Fact = { label: string; value: string; copy?: boolean; note?: ReactN
 export function FactBlock({ facts, tone = "light", className, title, headingLevel: Tag = "h3" }: { facts: Fact[]; tone?: "light" | "dark"; className?: string; title?: string; headingLevel?: "h2" | "h3" }) {
   return (
     <div className={cn("rounded-container border p-5 md:p-6", tone === "dark" ? "border-ink-800 bg-ink-900" : "border-ink-200 bg-white", className)}>
-      {title ? <Tag className={cn("mb-4 truncate text-h4", tone === "dark" ? "text-cream" : "text-ink-950")} title={title}>{title}</Tag> : null}
+      {title ? <Tag className={cn("mb-4 text-h4", tone === "dark" ? "text-cream" : "text-ink-950")}>{title}</Tag> : null}
       <dl className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] gap-x-4 gap-y-3 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
         {facts.map((f) => (
           <div key={f.label} className="group/fact contents">

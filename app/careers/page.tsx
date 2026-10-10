@@ -37,7 +37,7 @@ export default function CareersPage() {
             <li key={a.title} className="@container overflow-hidden rounded-container border border-ink-200 bg-white">
               <Slot id={a.image} className="aspect-[3/2] w-full" sizes="(min-width: 1024px) 33vw, 100vw" />
               <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
-                <h2 className="truncate text-h3" title={a.title}>{a.title}</h2>
+                <h2 className="text-h3">{a.title}</h2>
                 <p className="mt-3 text-body text-ink-700">{a.body}</p>
               </div>
             </li>

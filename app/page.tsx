@@ -84,8 +84,8 @@ export default function HomePage() {
             {differentiators.map((d) => (
               <li key={d.n} className="@container rounded-container border border-ink-200 bg-white p-4 @[20rem]:p-6">
                 <span className="font-display text-h2 leading-none text-gold-500 tabular">{d.n}</span>
-                <h3 className="mt-3 truncate text-h4 text-ink-950" title={d.title}>{d.title}</h3>
-                <p className="mt-2 line-clamp-3 text-body-sm text-ink-700">{d.body}</p>
+                <h3 className="mt-3 text-h4 text-ink-950">{d.title}</h3>
+                <p className="mt-2 text-body-sm text-ink-700">{d.teaser}</p>
               </li>
             ))}
           </ol>

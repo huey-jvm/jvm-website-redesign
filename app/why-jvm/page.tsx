@@ -56,7 +56,7 @@ export default function WhyPage() {
                 {valueProposition.pillars.map((p) => (
                   <li key={p.title} className="@container rounded-container border border-ink-200 bg-white">
                     <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
-                      <h3 className="truncate text-h3" title={p.title}>{p.title}</h3>
+                      <h3 className="text-h3">{p.title}</h3>
                       <p className="mt-2 text-body text-ink-700">{p.body}</p>
                     </div>
                   </li>
