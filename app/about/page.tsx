@@ -43,7 +43,6 @@ export default function AboutPage() {
 
       <Section>
         <SectionHeader eyebrow="Values" title="Living Our Core Values" lead={values.intro} />
-        <div className="mb-4"><Placeholder id="P2" className="max-w-xl" /></div>
         <h3 className="text-h3">{values.rita.name}</h3>
         <p className="prose-measure mt-2 text-body text-ink-700">{values.rita.description}</p>
         <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
