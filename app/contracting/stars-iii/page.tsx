@@ -14,7 +14,7 @@ import { team } from "@/content/team";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata("GSA 8(a) STARS III", `JVM Solutions is a prime on GSA 8(a) STARS III, contract ${starsIII.contractNumber}. Scope, NAICS codes, ordering period and how to order.`, "/contracting/stars-iii");
+export const metadata = starsShown ? pageMetadata("GSA 8(a) STARS III", `JVM Solutions is a prime on GSA 8(a) STARS III, contract ${starsIII.contractNumber}. Scope, NAICS codes, ordering period and how to order.`, "/contracting/stars-iii") : {};
 
 const nav = [
   { id: "about", label: "About the vehicle" },

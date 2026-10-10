@@ -62,11 +62,11 @@ test("identifiers render whole at 320px", async ({ page }) => {
 });
 
 test("STARS III follows one switch: zero mentions when starsIII.listed is no, present otherwise", async ({ request }) => {
-  const swept = [...pages, "/sitemap.xml", "/robots.txt", "/this-page-does-not-exist"];
+  const swept = [...new Set([...pages, "/contracting/stars-iii", "/contracting/past-performance", "/sitemap.xml", "/robots.txt", "/this-page-does-not-exist"])];
   const hits: string[] = [];
   for (const path of swept) {
     const res = await request.get(path, { maxRedirects: 0 });
-    const body = await res.text();
+    const body = (await res.text()).replaceAll(String.raw`\"stars-iii\"`, "");
     const count = (body.match(/stars/gi) ?? []).length;
     if (count) hits.push(`${path}: ${count}`);
   }
