@@ -6,10 +6,6 @@ import { CloseButton } from "./CloseButton";
 
 export type Announcement = { id: string; title: string; body?: string; href?: string; linkLabel?: string; start?: string; end?: string };
 
-/**
- * The one banner on the site. In the layout, so it pushes content. Persistent until dismissed or ended.
- * Dismissal is remembered per announcement id, not per session.
- */
 const listeners = new Set<() => void>();
 function subscribe(cb: () => void) { listeners.add(cb); return () => { listeners.delete(cb); }; }
 function keyFor(id: string) { return `jvm:announcement:${id}`; }

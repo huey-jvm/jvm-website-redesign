@@ -1,14 +1,15 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { PageHero } from "@/components/site/PageHero";
+import { ImageHero } from "@/components/site/ImageHero";
+import { Reveal } from "@/components/site/Reveal";
 import { Section } from "@/components/site/Section";
 import { InPageNav } from "@/components/site/InPageNav";
 import { OutcomeTile } from "@/components/site/OutcomeTile";
 import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { Button } from "@/components/ui/Button";
-import { Banner } from "@/components/site/Slot";
+import { presentAsset } from "@/components/site/Slot";
 import { services, getService } from "@/content/services";
 import { getOutcome } from "@/content/outcomes";
 import { pageMetadata } from "@/lib/seo";
@@ -40,13 +41,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <PageHero eyebrow="Services" title={service.name} lead={service.intro} crumbs={[{ label: "Services", href: "/services" }, { label: service.name }]}>
+      <ImageHero eyebrow="Services" title={service.name} lead={service.intro} crumbs={[{ label: "Services", href: "/services" }, { label: service.name }]} slot={service.bannerImage}>
         {service.placeholders?.map((p) => <div key={p.id} className="mt-6 max-w-xl"><Placeholder id={p.id} what={p.what} who={p.who} /></div>)}
-      </PageHero>
+      </ImageHero>
 
-      {service.bannerImage ? <Banner id={service.bannerImage} className="mb-10 md:mb-14" /> : null}
-
-      <Section surface="light" className="pt-0 md:pt-0 lg:pt-0">
+      <Section surface="light" className={service.bannerImage && presentAsset(service.bannerImage) ? undefined : "pt-0 md:pt-0 lg:pt-0"}>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
           <InPageNav sections={navSections} />
           <div className="min-w-0 space-y-14">
@@ -80,11 +79,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
             <section id="outcomes" className="scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">Related Outcomes</h2>
-              <ul className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
-                {related.map((o) => (
-                  <li key={o!.id} className="h-full"><OutcomeTile outcome={o!} href={`/why-jvm#${o!.id}`} /></li>
-                ))}
-              </ul>
+              <Reveal>
+                <ul className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+                  {related.map((o) => (
+                    <li key={o!.id} className="h-full"><OutcomeTile outcome={o!} href={`/why-jvm#${o!.id}`} /></li>
+                  ))}
+                </ul>
+              </Reveal>
             </section>
           </div>
         </div>

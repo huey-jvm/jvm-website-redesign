@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { PageHero } from "@/components/site/PageHero";
+import { ImageHero } from "@/components/site/ImageHero";
+import { Reveal } from "@/components/site/Reveal";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { TeamCard } from "@/components/site/TeamCard";
 import { FactBlock } from "@/components/site/FactBlock";
@@ -13,18 +13,19 @@ import { identifiers } from "@/content/identifiers";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata("About JVM", "Mission, vision, values and leadership of Johnson Venture Management Solutions, Inc., a San Antonio based healthcare operations and professional services company.", "/about");
+export const metadata = pageMetadata("About JVM", `Mission, vision, values and leadership of ${statements.companyName}, a ${contact.office.locality} based healthcare operations and professional services company.`, "/about");
 
 export default function AboutPage() {
   const founder = team[0];
   return (
     <>
-      <PageHero eyebrow="About" title="About JVM Solutions" lead="A veteran-led, San Antonio based company that brings operational discipline to federal and commercial health missions." crumbs={[{ label: "About" }]} />
-      <div className="container-content">
-        <div className="relative aspect-[3/2] w-full overflow-hidden rounded-container bg-ink-100 md:aspect-[21/9]">
-          <Image src="/images/team/team-shirts.jpg" alt="The JVM Solutions team in matching shirts reading Success begins with the right team" fill priority sizes="100vw" className="object-cover" />
-        </div>
-      </div>
+      <ImageHero
+        eyebrow="About"
+        title="About JVM Solutions"
+        lead={`A veteran-led, ${contact.office.locality} based company that brings operational discipline to federal and commercial health missions.`}
+        crumbs={[{ label: "About" }]}
+        image={{ src: "/images/team/team-shirts.jpg", alt: "The JVM Solutions team in matching shirts reading Success begins with the right team", position: "object-[65%_center]" }}
+      />
 
       <Section surface="cream" backdrop="AS-13">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -51,6 +52,7 @@ export default function AboutPage() {
         <SectionHeader eyebrow="Values" title="Living Our Core Values" lead={values.intro} />
         <h3 className="text-h3">{values.rita.name}</h3>
         <p className="prose-measure mt-2 text-body text-ink-700">{values.rita.description}</p>
+        <Reveal>
         <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {values.rita.items.map((v) => (
             <li key={v.title} className="rounded-container border border-ink-200 bg-white p-5">
@@ -59,6 +61,7 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
+        </Reveal>
         <div className="mt-6 rounded-container bg-cream p-6 md:p-8">
           <h3 className="text-h3">{values.roar.name}</h3>
           <p className="mt-2 text-body text-ink-700">{values.roar.description}</p>
@@ -91,7 +94,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <FactBlock title="Company" facts={[
             { label: "Legal name", value: statements.companyName },
-            { label: "Headquarters", value: "San Antonio, Texas" },
+            { label: "Headquarters", value: `${contact.office.locality}, ${contact.office.regionName}` },
             { label: "Ownership", value: "Veteran owned, woman owned" },
             { label: "Set-asides", value: identifiers.setAsides.join(", ") },
             { label: "Quality", value: "ISO 9001:2015" },

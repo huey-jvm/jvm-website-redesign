@@ -1,10 +1,10 @@
-import { PageHero } from "@/components/site/PageHero";
+import { ImageHero } from "@/components/site/ImageHero";
 import { Section } from "@/components/site/Section";
 import { FactBlock } from "@/components/site/FactBlock";
 import { CredentialMark } from "@/components/site/CredentialMark";
 import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
-import { Banner } from "@/components/site/Slot";
+import { presentAsset } from "@/components/site/Slot";
 import { credentials } from "@/content/credentials";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
@@ -15,10 +15,9 @@ export default function QualityPage() {
   const iso = credentials.find((c) => c.slug === "iso-9001")!;
   return (
     <>
-      <PageHero eyebrow="About" title="Quality and Compliance" lead="JVM Solutions is committed to a higher standard of service and to the delivery of safe, quality patient care. This page says exactly which standards we hold and which we work to, and how to raise a concern." crumbs={[{ label: "About", href: "/about" }, { label: "Quality and Compliance" }]} />
-      <Banner id="AS-14" className="mb-10 md:mb-14" />
+      <ImageHero eyebrow="About" title="Quality and Compliance" lead="JVM Solutions is committed to a higher standard of service and to the delivery of safe, quality patient care. This page says exactly which standards we hold and which we work to, and how to raise a concern." crumbs={[{ label: "About", href: "/about" }, { label: "Quality and Compliance" }]} slot="AS-14" />
 
-      <Section className="pt-0 md:pt-0 lg:pt-0">
+      <Section className={presentAsset("AS-14") ? undefined : "pt-0 md:pt-0 lg:pt-0"}>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="space-y-12 lg:col-span-8">
             <section>

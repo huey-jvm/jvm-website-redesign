@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ImageHero } from "@/components/site/ImageHero";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/site/Reveal";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { ProofStrip } from "@/components/site/ProofStrip";
 import { OutcomeTile } from "@/components/site/OutcomeTile";
@@ -20,8 +22,6 @@ import { starsIII, starsShown, starsConfirmed, starsOrdering } from "@/content/v
 import { team } from "@/content/team";
 import { credentials } from "@/content/credentials";
 import { CredentialMark } from "@/components/site/CredentialMark";
-import { Backdrop, presentAsset } from "@/components/site/Slot";
-import { cn } from "@/lib/cn";
 
 export const metadata: Metadata = {
   description: statements.positioning,
@@ -35,61 +35,61 @@ const serviceImages: Record<string, string | undefined> = {
 export default function HomePage() {
   const founder = team[0];
   const stars = credentials.find((c) => c.slug === "stars-iii");
-  const heroTexture = presentAsset("AS-04");
   return (
     <>
-      <section className={cn("surface-dark bg-ink-950 text-ink-200", heroTexture && "relative isolate")} data-backdrop={heroTexture?.id}>
-        {heroTexture ? <Backdrop id={heroTexture.id} imgClassName="object-right opacity-60" /> : null}
-        <div className={cn("container-content grid grid-cols-1 items-center gap-10 py-12 md:py-16 lg:grid-cols-12 lg:gap-12 lg:py-24", heroTexture && "relative")}>
-          <div className="relative order-first aspect-[3/2] w-full overflow-hidden rounded-container lg:order-last lg:col-span-6 lg:aspect-[4/5] lg:rounded-none lg:rounded-l-container">
-            <Image src="/images/team/team-walking.jpg" alt="The JVM Solutions team walking together outside their office" fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
-          </div>
-          <div className="lg:col-span-6">
-            <p className="text-eyebrow font-semibold uppercase text-gold-500">{statements.category}</p>
-            <h1 className="mt-4 text-display-sm text-cream md:text-display">{statements.tagline}</h1>
-            <p className="mt-6 max-w-[60ch] text-lead-sm text-ink-200 md:text-lead">{statements.positioning}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <OpenWidgetButton tone="dark" size="lg" route="contracting" />
-              <Button href="/contracting/capability-statement" variant="secondary" tone="dark" size="lg">Capability statement</Button>
-            </div>
-          </div>
+      <ImageHero
+        size="display"
+        eyebrow={statements.category}
+        title={statements.tagline}
+        lead={statements.positioning}
+        image={{ src: "/images/team/team-walking.jpg", alt: "The JVM Solutions team walking together outside their office", position: "object-[70%_center]" }}
+      >
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <OpenWidgetButton tone="dark" size="lg" route="contracting" />
+          <Button href="/contracting/capability-statement" variant="secondary" tone="dark" size="lg">Capability statement</Button>
         </div>
-      </section>
+      </ImageHero>
 
       <ProofStrip />
 
       <Section surface="light" aria-labelledby="outcomes-title">
         <SectionHeader eyebrow="Five outcomes we sell" title="What Changes for Your Mission" lead="We do not sell labor categories. These five outcomes anchor every engagement." />
-        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {outcomes.map((o) => (
-            <li key={o.id} className="h-full"><OutcomeTile outcome={o} href={`/why-jvm#${o.id}`} /></li>
-          ))}
-        </ul>
+        <Reveal>
+          <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            {outcomes.map((o) => (
+              <li key={o.id} className="h-full"><OutcomeTile outcome={o} href={`/why-jvm#${o.id}`} /></li>
+            ))}
+          </ul>
+        </Reveal>
         <span id="outcomes-title" className="sr-only">Outcomes</span>
       </Section>
 
       <Section surface="cream">
         <SectionHeader eyebrow="Services" title="One Accountable Partner Across Four Areas" lead="Healthcare staffing and operations leads. Health IT and technology services, logistics and facilities management, and management and administrative support sit alongside it under the same accountability." />
-        <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {services.map((s) => (
-            <li key={s.slug} className={s.lead ? "h-full md:col-span-3" : "h-full"}>
-              <ServiceCard service={s} image={serviceImages[s.slug]} slot={s.cardImage} horizontal={s.lead} />
-            </li>
-          ))}
-        </ul>
+        <Reveal>
+          <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {services.map((s) => (
+              <li key={s.slug} className={s.lead ? "h-full md:col-span-3" : "h-full"}>
+                <ServiceCard service={s} image={serviceImages[s.slug]} slot={s.cardImage} horizontal={s.lead} />
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </Section>
 
       <Section surface="light">
         <SectionHeader eyebrow="How we work" title="Four Differentiators That Do Not Commoditize" />
-        <ol className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {differentiators.map((d) => (
-            <li key={d.n} className="@container rounded-container border border-ink-200 bg-white p-4 @[20rem]:p-6">
-              <span className="font-display text-h2 leading-none text-gold-500 tabular">{d.n}</span>
-              <h3 className="mt-3 truncate text-h4 text-ink-950" title={d.title}>{d.title}</h3>
-              <p className="mt-2 line-clamp-3 text-body-sm text-ink-700">{d.body}</p>
-            </li>
-          ))}
-        </ol>
+        <Reveal>
+          <ol className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {differentiators.map((d) => (
+              <li key={d.n} className="@container rounded-container border border-ink-200 bg-white p-4 @[20rem]:p-6">
+                <span className="font-display text-h2 leading-none text-gold-500 tabular">{d.n}</span>
+                <h3 className="mt-3 truncate text-h4 text-ink-950" title={d.title}>{d.title}</h3>
+                <p className="mt-2 line-clamp-3 text-body-sm text-ink-700">{d.body}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
         <div className="mt-8">
           <Button href="/why-jvm" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing>Read how we work</Button>
         </div>

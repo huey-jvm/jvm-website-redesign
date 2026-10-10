@@ -15,23 +15,32 @@ function subscribeReducedMotion(cb: () => void) {
   return () => mq.removeEventListener("change", cb);
 }
 function readReducedMotion() { return window.matchMedia(RM_QUERY).matches; }
+function subscribeScroll(cb: () => void) {
+  window.addEventListener("scroll", cb, { passive: true });
+  return () => window.removeEventListener("scroll", cb);
+}
+function readScrolled() { return window.scrollY > 240; }
 
 export function ContactWidget() {
   const [open, setOpen] = useState(false);
   const [route, setRoute] = useState<WidgetRoute | undefined>();
   const reduceMotion = useSyncExternalStore(subscribeReducedMotion, readReducedMotion, () => false);
+  const scrolled = useSyncExternalStore(subscribeScroll, readScrolled, () => false);
   const panelRef = useRef<HTMLDivElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
 
   const close = useCallback(() => {
     setOpen(false);
     try { sessionStorage.setItem(SESSION_KEY, "1"); } catch {}
-    launcherRef.current?.focus();
+    const opener = openerRef.current;
+    (opener && opener.isConnected ? opener : launcherRef.current)?.focus();
   }, []);
 
   useEffect(() => {
     const onOpen = (e: Event) => {
       const detail = (e as CustomEvent<{ route?: WidgetRoute }>).detail;
+      openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       setRoute(detail?.route);
       setOpen(true);
     };
@@ -63,15 +72,16 @@ export function ContactWidget() {
       <button
         ref={launcherRef}
         type="button"
-        onClick={() => { setRoute(undefined); setOpen(true); }}
+        onClick={() => { openerRef.current = launcherRef.current; setRoute(undefined); setOpen(true); }}
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls="contact-widget-panel"
         className={cn(
-          "group/launcher fixed z-50 flex items-center gap-3 bg-ink-950 text-gold-500 shadow-float transition-[transform,background-color] duration-150 ease",
+          "group/launcher fixed z-50 flex items-center gap-3 bg-ink-950 text-gold-500 shadow-float transition-[transform,opacity,visibility] duration-200 ease-enter",
           "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500 active:scale-[0.98] motion-reduce:active:scale-100",
           "inset-x-0 bottom-0 h-14 justify-center rounded-none md:inset-x-auto md:bottom-6 md:left-6 md:h-14 md:min-w-14 md:rounded-pill md:px-4 lg:px-5",
           open && "pointer-events-none opacity-0 md:pointer-events-auto md:opacity-100",
+          !scrolled && "lg:invisible lg:translate-y-2 lg:opacity-0",
         )}
       >
         <MessageSquareText aria-hidden className="size-6" />

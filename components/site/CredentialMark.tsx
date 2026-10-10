@@ -6,10 +6,6 @@ import type { Credential } from "@/content/credentials";
 import { cn } from "@/lib/cn";
 import { withBasePath } from "@/lib/base-path";
 
-/**
- * One credential mark on a white tile. Always an image with alt text, or a text tile when the file is not yet in place.
- * Always a link to its evidence when one exists.
- */
 function imageExists(src?: string) {
   if (!src) return false;
   try {
@@ -24,7 +20,7 @@ export function CredentialMark({ credential, size = "md", className }: { credent
   const tile = (
     <span
       className={cn(
-        "flex items-center justify-center rounded-control border border-ink-200 bg-white p-3",
+        "flex items-center justify-center rounded-control border border-ink-200 bg-white p-3 transition-transform duration-150 ease-move group-hover/mark:-translate-y-0.5 motion-reduce:group-hover/mark:translate-y-0",
         size === "md" ? "h-20 min-w-28" : "h-14 min-w-20",
         credential.wide && (size === "md" ? "min-w-40" : "min-w-28"),
         className,

@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { PageHero } from "@/components/site/PageHero";
+import { ImageHero } from "@/components/site/ImageHero";
+import { Reveal } from "@/components/site/Reveal";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { CredentialMark } from "@/components/site/CredentialMark";
 import { CTABand } from "@/components/site/CTABand";
@@ -22,25 +22,28 @@ export default function CareersPage() {
   const whv = credentials.find((c) => c.slug === "we-hire-vets")!;
   return (
     <>
-      <PageHero eyebrow="Careers" title="Success Begins With the Right Team" lead="JVM is an equal opportunity employer and a recognised veteran employer. If your work is a calling, you will find people here who feel the same." crumbs={[{ label: "Careers" }]} />
-      <div className="container-content">
-        <div className="relative aspect-[3/2] w-full overflow-hidden rounded-container bg-ink-100 md:aspect-[21/9]">
-          <Image src="/images/team/team-walking.jpg" alt="The JVM Solutions team walking together" fill priority sizes="100vw" className="object-cover" />
-        </div>
-      </div>
+      <ImageHero
+        eyebrow="Careers"
+        title="Success Begins With the Right Team"
+        lead="JVM is an equal opportunity employer and a recognised veteran employer. If your work is a calling, you will find people here who feel the same."
+        crumbs={[{ label: "Careers" }]}
+        image={{ src: "/images/team/team-walking.jpg", alt: "The JVM Solutions team walking together", position: "object-[70%_center]" }}
+      />
 
       <Section>
+        <Reveal>
         <ul className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {audiences.map((a) => (
-            <li key={a.title} className="overflow-hidden rounded-container border border-ink-200 bg-white">
+            <li key={a.title} className="@container overflow-hidden rounded-container border border-ink-200 bg-white">
               <Slot id={a.image} className="aspect-[3/2] w-full" sizes="(min-width: 1024px) 33vw, 100vw" />
-              <div className="p-6">
+              <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
                 <h2 className="truncate text-h3" title={a.title}>{a.title}</h2>
                 <p className="mt-3 text-body text-ink-700">{a.body}</p>
               </div>
             </li>
           ))}
         </ul>
+        </Reveal>
       </Section>
 
       <Section surface="cream" tight>

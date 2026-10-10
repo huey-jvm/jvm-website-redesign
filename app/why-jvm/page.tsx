@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/site/PageHero";
+import { Reveal } from "@/components/site/Reveal";
 import { Section } from "@/components/site/Section";
 import { InPageNav } from "@/components/site/InPageNav";
 import { CTABand } from "@/components/site/CTABand";
@@ -50,14 +51,18 @@ export default function WhyPage() {
             <section id="value" className="scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">{valueProposition.title}</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">{valueProposition.intro}</p>
+              <Reveal>
               <ul className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
                 {valueProposition.pillars.map((p) => (
-                  <li key={p.title} className="rounded-container border border-ink-200 bg-white p-6">
-                    <h3 className="truncate text-h3" title={p.title}>{p.title}</h3>
-                    <p className="mt-2 text-body text-ink-700">{p.body}</p>
+                  <li key={p.title} className="@container rounded-container border border-ink-200 bg-white">
+                    <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
+                      <h3 className="truncate text-h3" title={p.title}>{p.title}</h3>
+                      <p className="mt-2 text-body text-ink-700">{p.body}</p>
+                    </div>
                   </li>
                 ))}
               </ul>
+              </Reveal>
             </section>
 
             <section id="outcomes" className="scroll-mt-28">
@@ -76,6 +81,7 @@ export default function WhyPage() {
             <section id="differentiators" className="scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">Our Competitive Differentiators</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">{differentiatorsIntro}</p>
+              <Reveal>
               <ol className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
                 {differentiators.map((d) => (
                   <li key={d.n} className="rounded-container border border-ink-200 bg-white p-6">
@@ -85,6 +91,7 @@ export default function WhyPage() {
                   </li>
                 ))}
               </ol>
+              </Reveal>
             </section>
           </div>
         </div>

@@ -1,6 +1,5 @@
 import { z } from "zod";
-
-export const routeKeys = ["contracting", "health-system", "careers", "other"] as const;
+import { routeKeys } from "@/content/contact";
 
 export const contactSchema = z.object({
   route: z.enum(routeKeys),

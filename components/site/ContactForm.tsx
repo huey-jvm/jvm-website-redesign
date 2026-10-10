@@ -3,8 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { contact, type RouteKey } from "@/content/contact";
-import { routeKeys } from "@/lib/validation";
+import { contact, routeKeys, type RouteKey } from "@/content/contact";
 import { cn } from "@/lib/cn";
 
 type Status = "idle" | "submitting" | "success" | "error";
