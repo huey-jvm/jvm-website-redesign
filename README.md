@@ -55,7 +55,7 @@ Until the files are there, each credential renders as a text tile, so nothing is
 
 ## Deploy
 
-1. Create a Vercel project from this folder. Framework preset Next.js, root `site/`.
+1. Create a Vercel project from this repository. Framework preset Next.js, root directory left at the repository root.
 2. Environment variables, from `.env.example`. Production: `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`,
    `CONTACT_FROM`, and the two Turnstile keys if used. Preview: add `NEXT_PUBLIC_SHOW_PLACEHOLDERS=true`
    and `NEXT_PUBLIC_NOINDEX=true`.
