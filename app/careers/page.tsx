@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
+import { Reveal } from "@/components/site/Reveal";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { CredentialMark } from "@/components/site/CredentialMark";
 import { CTABand } from "@/components/site/CTABand";
@@ -30,6 +31,7 @@ export default function CareersPage() {
       </div>
 
       <Section>
+        <Reveal>
         <ul className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {audiences.map((a) => (
             <li key={a.title} className="@container overflow-hidden rounded-container border border-ink-200 bg-white">
@@ -41,6 +43,7 @@ export default function CareersPage() {
             </li>
           ))}
         </ul>
+        </Reveal>
       </Section>
 
       <Section surface="cream" tight>

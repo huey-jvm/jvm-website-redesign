@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/site/Reveal";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { ProofStrip } from "@/components/site/ProofStrip";
 import { OutcomeTile } from "@/components/site/OutcomeTile";
@@ -60,36 +61,42 @@ export default function HomePage() {
 
       <Section surface="light" aria-labelledby="outcomes-title">
         <SectionHeader eyebrow="Five outcomes we sell" title="What Changes for Your Mission" lead="We do not sell labor categories. These five outcomes anchor every engagement." />
-        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {outcomes.map((o) => (
-            <li key={o.id} className="h-full"><OutcomeTile outcome={o} href={`/why-jvm#${o.id}`} /></li>
-          ))}
-        </ul>
+        <Reveal>
+          <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            {outcomes.map((o) => (
+              <li key={o.id} className="h-full"><OutcomeTile outcome={o} href={`/why-jvm#${o.id}`} /></li>
+            ))}
+          </ul>
+        </Reveal>
         <span id="outcomes-title" className="sr-only">Outcomes</span>
       </Section>
 
       <Section surface="cream">
         <SectionHeader eyebrow="Services" title="One Accountable Partner Across Four Areas" lead="Healthcare staffing and operations leads. Health IT and technology services, logistics and facilities management, and management and administrative support sit alongside it under the same accountability." />
-        <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {services.map((s) => (
-            <li key={s.slug} className={s.lead ? "h-full md:col-span-3" : "h-full"}>
-              <ServiceCard service={s} image={serviceImages[s.slug]} slot={s.cardImage} horizontal={s.lead} />
-            </li>
-          ))}
-        </ul>
+        <Reveal>
+          <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {services.map((s) => (
+              <li key={s.slug} className={s.lead ? "h-full md:col-span-3" : "h-full"}>
+                <ServiceCard service={s} image={serviceImages[s.slug]} slot={s.cardImage} horizontal={s.lead} />
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </Section>
 
       <Section surface="light">
         <SectionHeader eyebrow="How we work" title="Four Differentiators That Do Not Commoditize" />
-        <ol className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {differentiators.map((d) => (
-            <li key={d.n} className="@container rounded-container border border-ink-200 bg-white p-4 @[20rem]:p-6">
-              <span className="font-display text-h2 leading-none text-gold-500 tabular">{d.n}</span>
-              <h3 className="mt-3 truncate text-h4 text-ink-950" title={d.title}>{d.title}</h3>
-              <p className="mt-2 line-clamp-3 text-body-sm text-ink-700">{d.body}</p>
-            </li>
-          ))}
-        </ol>
+        <Reveal>
+          <ol className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {differentiators.map((d) => (
+              <li key={d.n} className="@container rounded-container border border-ink-200 bg-white p-4 @[20rem]:p-6">
+                <span className="font-display text-h2 leading-none text-gold-500 tabular">{d.n}</span>
+                <h3 className="mt-3 truncate text-h4 text-ink-950" title={d.title}>{d.title}</h3>
+                <p className="mt-2 line-clamp-3 text-body-sm text-ink-700">{d.body}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
         <div className="mt-8">
           <Button href="/why-jvm" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing>Read how we work</Button>
         </div>

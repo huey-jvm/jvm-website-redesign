@@ -149,3 +149,14 @@
 @utility tabular {
   font-variant-numeric: tabular-nums;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="armed"] > :is(ul, ol) > li {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  [data-reveal="in"] > :is(ul, ol) > li {
+    transition: opacity 250ms var(--ease-enter), transform 250ms var(--ease-enter);
+    transition-delay: calc(var(--i, 0) * 50ms);
+  }
+}

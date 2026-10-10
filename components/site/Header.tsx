@@ -79,8 +79,8 @@ export function Header({ nav }: { nav: NavGroup[] }) {
               const current = groupIsCurrent(pathname, group);
               const baseItem = cn(
                 "relative inline-flex h-11 items-center gap-1 rounded-control px-3 text-body font-medium text-ink-900 transition-colors duration-150 ease hover:bg-ink-50",
-                "after:absolute after:inset-x-3 after:bottom-1 after:h-0.5 after:bg-gold-500 after:opacity-0 after:transition-opacity after:duration-150",
-                current && "after:opacity-100",
+                "after:absolute after:inset-x-3 after:bottom-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-gold-500 after:transition-transform after:duration-150 after:ease-move hover:after:scale-x-100 motion-reduce:after:transition-none",
+                current && "after:scale-x-100",
               );
               if (group.href) {
                 return (

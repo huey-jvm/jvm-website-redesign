@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { PageHero } from "@/components/site/PageHero";
+import { Reveal } from "@/components/site/Reveal";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { TeamCard } from "@/components/site/TeamCard";
 import { FactBlock } from "@/components/site/FactBlock";
@@ -51,6 +52,7 @@ export default function AboutPage() {
         <SectionHeader eyebrow="Values" title="Living Our Core Values" lead={values.intro} />
         <h3 className="text-h3">{values.rita.name}</h3>
         <p className="prose-measure mt-2 text-body text-ink-700">{values.rita.description}</p>
+        <Reveal>
         <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {values.rita.items.map((v) => (
             <li key={v.title} className="rounded-container border border-ink-200 bg-white p-5">
@@ -59,6 +61,7 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
+        </Reveal>
         <div className="mt-6 rounded-container bg-cream p-6 md:p-8">
           <h3 className="text-h3">{values.roar.name}</h3>
           <p className="mt-2 text-body text-ink-700">{values.roar.description}</p>

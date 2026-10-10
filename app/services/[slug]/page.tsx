@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
+import { Reveal } from "@/components/site/Reveal";
 import { Section } from "@/components/site/Section";
 import { InPageNav } from "@/components/site/InPageNav";
 import { OutcomeTile } from "@/components/site/OutcomeTile";
@@ -80,11 +81,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
             <section id="outcomes" className="scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">Related Outcomes</h2>
-              <ul className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
-                {related.map((o) => (
-                  <li key={o!.id} className="h-full"><OutcomeTile outcome={o!} href={`/why-jvm#${o!.id}`} /></li>
-                ))}
-              </ul>
+              <Reveal>
+                <ul className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+                  {related.map((o) => (
+                    <li key={o!.id} className="h-full"><OutcomeTile outcome={o!} href={`/why-jvm#${o!.id}`} /></li>
+                  ))}
+                </ul>
+              </Reveal>
             </section>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageHero } from "@/components/site/PageHero";
+import { Reveal } from "@/components/site/Reveal";
 import { Section } from "@/components/site/Section";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { CTABand } from "@/components/site/CTABand";
@@ -14,11 +15,13 @@ export default function ServicesPage() {
     <>
       <PageHero eyebrow={statements.category} title="Services" lead="Healthcare staffing and operations is the core of the company. Three more areas sit beside it, each delivered under the same accountability and the same quality system." crumbs={[{ label: "Services" }]} />
       <Section surface="cream" className="pt-0 md:pt-0 lg:pt-0">
-        <ul className="grid grid-cols-1 gap-6 pt-12 md:grid-cols-2">
-          {services.map((s) => (
-            <li key={s.slug} className="h-full"><ServiceCard service={s} slot={s.cardImage} headingLevel="h2" /></li>
-          ))}
-        </ul>
+        <Reveal>
+          <ul className="grid grid-cols-1 gap-6 pt-12 md:grid-cols-2">
+            {services.map((s) => (
+              <li key={s.slug} className="h-full"><ServiceCard service={s} slot={s.cardImage} headingLevel="h2" /></li>
+            ))}
+          </ul>
+        </Reveal>
         <p className="mt-10 max-w-[65ch] text-body text-ink-700">
           Commercial health systems are served under the same model, in the vocabulary of their own operations. See{" "}
           <Link href="/services/healthcare-operations#commercial" className="link-underline font-semibold text-gold-700 after:bg-current">how we work with commercial health systems</Link>.
