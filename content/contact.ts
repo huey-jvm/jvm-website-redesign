@@ -23,8 +23,8 @@ export const contact = {
   responseTime: "two business days",
   responseTimePlaceholder: { id: "P10", what: "A realistic response time and the owner of each inbox", who: "JVM, B7" },
   social: [
-    { name: "Facebook", href: "https://www.facebook.com/JVMSolutions" },
-    { name: "LinkedIn", href: "https://www.linkedin.com/company/jvmsolutions" },
+    { name: "Facebook", href: "https://www.facebook.com/JVMSolutions", pendingCheck: true },
+    { name: "LinkedIn", href: "https://www.linkedin.com/company/jvmsolutions", pendingCheck: true },
   ],
   careersPortal: "https://jvmsolutions.isolvedhire.com/jobs/",
   routes: {

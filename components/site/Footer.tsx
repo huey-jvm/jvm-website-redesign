@@ -6,6 +6,8 @@ import { contact } from "@/content/contact";
 import { credentials, proofStripSlugs } from "@/content/credentials";
 import { statements } from "@/content/statements";
 import { CredentialMark } from "./CredentialMark";
+import { Placeholder } from "@/components/ui/Placeholder";
+import { showPlaceholders } from "@/lib/placeholders";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -59,6 +61,7 @@ export function Footer() {
                   </a>
                 </li>
               ))}
+              {showPlaceholders && contact.social.some((s) => s.pendingCheck) ? <li><Placeholder id="P9" inline /></li> : null}
             </ul>
           </div>
         </div>

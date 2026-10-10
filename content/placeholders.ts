@@ -7,7 +7,7 @@ export const placeholderRegister: Record<string, { what: string; who: string }> 
   P6: { what: "The confirmed subcontract vehicles, each with JVM’s role and period of performance. None is named until the list arrives", who: "JVM, B3" },
   P7: { what: "Past performance records", who: "JVM, B4" },
   P8: { what: "Joint Commission position and wording", who: "JVM, B5" },
-  P9: { what: "Social accounts", who: "JVM, B6" },
+  P9: { what: "Facebook and the LinkedIn company page, both pending an activity check", who: "JVM, B6" },
   P10: { what: "Inbox owners and response time", who: "JVM, B7" },
   P11: { what: "Job listings on site", who: "JVM, B8" },
   P12: { what: "Privacy, terms, accessibility text", who: "JVM, B9" },
