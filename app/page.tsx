@@ -81,20 +81,22 @@ export default function HomePage() {
         </Reveal>
       </Section>
 
-      <Section surface="light">
+      <Section surface="light" className="md:py-20 lg:py-28">
         <SectionHeader eyebrow="How we work" title="Four Differentiators That Do Not Commoditize" />
         <Reveal>
           <ol className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {differentiators.map((d) => (
-              <li key={d.n} className="@container rounded-container border border-ink-200 bg-white p-4 @[20rem]:p-6">
-                <span className="font-display text-h2 leading-none text-gold-500 tabular">{d.n}</span>
-                <h3 className="mt-3 text-h4 text-ink-950">{d.title}</h3>
-                <p className="mt-2 text-body-sm text-ink-700">{d.teaser}</p>
+              <li key={d.n} className="@container flex h-full flex-col rounded-container border border-ink-200 bg-white">
+                <div className="flex flex-1 flex-col p-6 @[20rem]:p-8">
+                  <span className="font-sans text-h2 font-semibold leading-none text-gold-700 tabular">{d.n}</span>
+                  <h3 className="mt-6 text-h3 text-ink-950">{d.title}</h3>
+                  <p className="mt-3 text-body text-ink-700">{d.teaser}</p>
+                </div>
               </li>
             ))}
           </ol>
         </Reveal>
-        <div className="mt-8">
+        <div className="mt-10">
           <Button href="/why-jvm" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing>Read how we work</Button>
         </div>
       </Section>

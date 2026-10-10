@@ -85,7 +85,7 @@ export default function WhyPage() {
               <ol className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
                 {differentiators.map((d) => (
                   <li key={d.n} className="rounded-container border border-ink-200 bg-white p-6">
-                    <span className="font-display text-h2 leading-none text-gold-500 tabular">{d.n}</span>
+                    <span className="font-sans text-h2 font-semibold leading-none text-gold-700 tabular">{d.n}</span>
                     <h3 className="mt-3 text-h3">{d.title}</h3>
                     <p className="mt-2 text-body text-ink-700">{d.body}</p>
                   </li>

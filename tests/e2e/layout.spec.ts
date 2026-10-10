@@ -59,3 +59,21 @@ test("the outcome cards form three above two on a wide screen, fill the last row
   await page.setViewportSize({ width: 375, height: 800 });
   expect(grouped(await geometry()).map((r) => r.length), "control: a single column on a phone").toEqual([1, 1, 1, 1, 1]);
 });
+
+test("the differentiators section is tall enough and its cards show the whole teaser", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/", { waitUntil: "networkidle" });
+  const section = page.locator("section").filter({ has: page.getByRole("heading", { name: "Four Differentiators That Do Not Commoditize" }) });
+  const heights = () => section.evaluate((s) => ({ section: Math.round(s.getBoundingClientRect().height), cards: Array.from(s.querySelectorAll("ol > li")).map((l) => Math.round(l.getBoundingClientRect().height)) }));
+  const measured = await heights();
+  console.log(`differentiators at 1280px: section ${measured.section} px, cards ${measured.cards.join(", ")} px`);
+  expect(measured.section, "the section is at least 640 px tall").toBeGreaterThanOrEqual(640);
+  expect(measured.cards, "four cards").toHaveLength(4);
+  for (const h of measured.cards) expect(h, "each card is at least 260 px tall").toBeGreaterThanOrEqual(260);
+  expect(new Set(measured.cards).size, "the four cards are the same height").toBe(1);
+  const credentials = await page.locator("section[aria-labelledby='credentials-title']").evaluate((s) => Math.round(s.getBoundingClientRect().height));
+  expect(credentials, "control: a short section is reported as short").toBeLessThan(640);
+  const text = await section.locator("ol > li").allInnerTexts();
+  const { differentiators } = await import("../../content/differentiators");
+  differentiators.forEach((d, i) => { expect(text[i]).toContain(d.title); expect(text[i]).toContain(d.teaser); });
+});
