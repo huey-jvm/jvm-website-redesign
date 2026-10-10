@@ -1,12 +1,50 @@
 import fs from "node:fs";
 import path from "node:path";
 import { test, expect, type Page } from "@playwright/test";
-import { assets } from "../../content/assets";
+import { assets, illustrationShape, outcomeIllustrationId } from "../../content/assets";
+import { outcomes } from "../../content/outcomes";
 import { pages } from "./pages";
 import { markForMeasure, measureContrast } from "./contrast";
 
 const present = (p: string) => fs.existsSync(path.join(process.cwd(), "public", p));
 const darkTextures = new Set(["AS-04"]);
+
+const pngSizeOf = (b: Buffer) => ({ ok: b.subarray(0, 8).toString("hex") === "89504e470d0a1a0a", width: b.readUInt32BE(16), height: b.readUInt32BE(20) });
+
+test("control: the PNG reader tells a wrong shape from the right one", () => {
+  const make = (w: number, h: number) => {
+    const b = Buffer.alloc(33);
+    Buffer.from("89504e470d0a1a0a", "hex").copy(b);
+    b.writeUInt32BE(w, 16);
+    b.writeUInt32BE(h, 20);
+    return b;
+  };
+  const right = pngSizeOf(make(illustrationShape.width, illustrationShape.height));
+  const wrong = pngSizeOf(make(1200, 800));
+  expect(right.ok).toBe(true);
+  expect([right.width, right.height]).toEqual([illustrationShape.width, illustrationShape.height]);
+  expect([wrong.width, wrong.height]).not.toEqual([illustrationShape.width, illustrationShape.height]);
+});
+
+test("each outcome has one illustration slot that lists the pages showing it", () => {
+  const slots = assets.filter((a) => a.kind === "illustration");
+  expect(slots).toHaveLength(outcomes.length);
+  for (const o of outcomes) {
+    const slot = slots.find((a) => a.id === outcomeIllustrationId(o.id));
+    expect(slot, `slot for ${o.id}`).toBeTruthy();
+    expect(slot!.where, `pages for ${o.id}`).toContain("/");
+  }
+});
+
+test("every illustration file that exists is a PNG in the shared shape", () => {
+  const found = assets.filter((a) => a.kind === "illustration" && present(a.path));
+  console.log(`illustrations: ${assets.filter((a) => a.kind === "illustration").length} registered, ${found.length} present, shape ${illustrationShape.width} by ${illustrationShape.height}`);
+  for (const a of found) {
+    const size = pngSizeOf(fs.readFileSync(path.join(process.cwd(), "public", a.path)));
+    expect(size.ok, `${a.id} is a PNG`).toBe(true);
+    expect([size.width, size.height], `${a.id} size`).toEqual([illustrationShape.width, illustrationShape.height]);
+  }
+});
 
 async function brokenImages(page: Page) {
   await page.evaluate(() => document.querySelectorAll("img").forEach((i) => { i.loading = "eager"; }));

@@ -1,9 +1,23 @@
 import { starsShown } from "./vehicles";
+import { outcomes } from "./outcomes";
+import { services } from "./services";
 
-export type AssetKind = "photo" | "texture";
+export type AssetKind = "photo" | "texture" | "illustration";
 export type Asset = { id: string; path: string; alt: string; kind: AssetKind; where: string[] };
 
 const dir = "/images/generated";
+
+export const illustrationShape = { width: 1200, height: 750 } as const;
+
+export const outcomeIllustrationId = (outcomeId: string) => `IL-${String(outcomes.findIndex((o) => o.id === outcomeId) + 1).padStart(2, "0")}`;
+
+const outcomeIllustrations: Asset[] = outcomes.map((o) => ({
+  id: outcomeIllustrationId(o.id),
+  path: `${dir}/${outcomeIllustrationId(o.id).toLowerCase()}-${o.id}.png`,
+  alt: "",
+  kind: "illustration",
+  where: ["/", ...services.filter((s) => s.relatedOutcomes.includes(o.id)).map((s) => `/services/${s.slug}`)],
+}));
 
 const ctaPages = [
   "/", "/services", "/services/healthcare-operations", "/services/health-it", "/services/logistics-facilities", "/services/management-support",
@@ -30,5 +44,7 @@ export const assets: Asset[] = [
   { id: "AS-15b", path: `${dir}/as-15b-healthcare.jpg`, alt: "A stethoscope and a lanyard on a clean nurses station counter", kind: "photo", where: ["/careers"] },
   { id: "AS-15c", path: `${dir}/as-15c-professionals.jpg`, alt: "A closed laptop, a notebook and a coffee on a desk by a window", kind: "photo", where: ["/careers"] },
 ];
+
+assets.push(...outcomeIllustrations);
 
 export const getAsset = (id: string) => assets.find((a) => a.id === id);

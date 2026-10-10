@@ -7,6 +7,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { ProofStrip } from "@/components/site/ProofStrip";
 import { OutcomeTile } from "@/components/site/OutcomeTile";
+import { cn } from "@/lib/cn";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { FactBlock } from "@/components/site/FactBlock";
 import { CTABand } from "@/components/site/CTABand";
@@ -55,9 +56,11 @@ export default function HomePage() {
       <Section surface="light" aria-labelledby="outcomes-title">
         <SectionHeader eyebrow="Five outcomes we sell" title="What Changes for Your Mission" lead="We do not sell labor categories. These five outcomes anchor every engagement." />
         <Reveal>
-          <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {outcomes.map((o) => (
-              <li key={o.id} className="h-full"><OutcomeTile outcome={o} href={`/why-jvm#${o.id}`} /></li>
+          <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-6">
+            {outcomes.map((o, i) => (
+              <li key={o.id} className={cn("h-full", i < 3 ? "lg:col-span-2" : "lg:col-span-3", i === outcomes.length - 1 && "md:col-span-2")}>
+                <OutcomeTile outcome={o} href={`/why-jvm#${o.id}`} />
+              </li>
             ))}
           </ul>
         </Reveal>
