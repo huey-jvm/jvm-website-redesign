@@ -53,6 +53,14 @@ Run `../download-assets.ps1` once on a Windows machine, then copy the resulting 
 `public/assets/`. The paths in `content/credentials.ts` already match the file names that script produces.
 Until the files are there, each credential renders as a text tile, so nothing is broken, it is just plain.
 
+## Preview on GitHub Pages
+
+Every push to `main` runs `.github/workflows/pages.yml`, which publishes a static preview with placeholders visible and
+search indexing off. Pages cannot run a server, so that build drops the contact API (the form says it cannot send and offers
+the direct email), the old Wix redirects and the security headers. Set the repository Pages source to GitHub Actions once.
+To rehearse it locally: move `app/api` aside, run `PAGES_BASE_PATH=/jvm-website-redesign pnpm build`, then
+`node scripts/pages-postbuild.mjs out`, and put `app/api` back.
+
 ## Deploy
 
 1. Create a Vercel project from this repository. Framework preset Next.js, root directory left at the repository root.
