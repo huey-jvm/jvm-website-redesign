@@ -43,9 +43,10 @@ export default function QualityPage() {
           <div className="space-y-6 lg:col-span-4">
             <FactBlock title="JVM Ethics and Compliance" facts={[
               { label: "Department", value: contact.compliance.label },
-              { label: "Address", value: contact.compliance.lines.join(", ") },
+              { label: contact.compliance.purpose, value: contact.compliance.lines.join(", ") },
               { label: "Phone", value: contact.compliance.phone, copy: true, href: contact.compliance.phoneHref },
             ]} />
+            <Placeholder id="P4" />
             <FactBlock title="The Joint Commission" facts={[
               { label: "Office", value: "Office of Quality and Patient Safety" },
               { label: "Address", value: "One Renaissance Boulevard, Oakbrook Terrace, IL 60181" },

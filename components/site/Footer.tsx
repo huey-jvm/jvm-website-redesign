@@ -6,7 +6,6 @@ import { contact } from "@/content/contact";
 import { credentials, proofStripSlugs } from "@/content/credentials";
 import { statements } from "@/content/statements";
 import { CredentialMark } from "./CredentialMark";
-import { Placeholder } from "@/components/ui/Placeholder";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -40,15 +39,11 @@ export function Footer() {
             <dl className="mt-4 grid grid-cols-[4.5rem_minmax(0,1fr)] gap-x-3 gap-y-2 text-body-sm">
               <dt className="text-ink-300">Address</dt>
               <dd className="text-ink-200">
-                <Placeholder id="P4" inline>
-                  <span className="block">{contact.office.lines[0]}</span>
-                  <span className="block">{contact.office.lines[1]}</span>
-                </Placeholder>
+                <span className="block">{contact.office.lines[0]}</span>
+                <span className="block">{contact.office.lines[1]}</span>
               </dd>
               <dt className="text-ink-300">Phone</dt>
               <dd><a href={contact.office.phoneHref} className="link-underline text-ink-200 after:bg-cream hover:text-cream">{contact.office.phone}</a></dd>
-              <dt className="text-ink-300">Fax</dt>
-              <dd className="text-ink-200">{contact.office.fax}</dd>
               <dt className="text-ink-300">Email</dt>
               <dd><a href={`mailto:${contact.emails.general}`} className="link-underline break-all text-ink-200 after:bg-cream hover:text-cream">{contact.emails.general}</a></dd>
               <dt className="text-ink-300">Verify</dt>

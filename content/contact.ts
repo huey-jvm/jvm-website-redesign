@@ -6,12 +6,11 @@ export const contact = {
     lines: ["7550 W I-10, Suite 800", "San Antonio, TX 78229"],
     phone: "210-504-4707",
     phoneHref: "tel:+12105044707",
-    fax: "210-764-5854",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=7550+W+I-10+Suite+800+San+Antonio+TX+78229",
-    placeholder: { id: "P4", what: "Confirm which address is the office and which fax is live", who: "JVM, B1" },
   },
   compliance: {
     label: "Ethics and Compliance Department",
+    purpose: "Mailing address",
     lines: ["118 Broadway, Suite 525", "San Antonio, TX 78205"],
     phone: "210-504-4707",
     phoneHref: "tel:+12105044707",

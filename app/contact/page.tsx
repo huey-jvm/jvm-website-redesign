@@ -22,15 +22,11 @@ export default function ContactPage() {
               <dl className="mt-4 grid grid-cols-[5.5rem_minmax(0,1fr)] gap-x-4 gap-y-2 text-body">
                 <dt className="text-ink-500">Address</dt>
                 <dd className="text-ink-900">
-                  <Placeholder id="P4" inline>
-                    <span className="block">{contact.office.lines[0]}</span>
-                    <span className="block">{contact.office.lines[1]}</span>
-                  </Placeholder>
+                  <span className="block">{contact.office.lines[0]}</span>
+                  <span className="block">{contact.office.lines[1]}</span>
                 </dd>
                 <dt className="text-ink-500">Phone</dt>
                 <dd><a href={contact.office.phoneHref} className="link-underline font-medium text-ink-900 after:bg-gold-700">{contact.office.phone}</a></dd>
-                <dt className="text-ink-500">Fax</dt>
-                <dd className="text-ink-900 tabular">{contact.office.fax}</dd>
                 <dt className="text-ink-500">Hours</dt>
                 <dd className="text-ink-900">Monday to Friday, 8am to 5pm Central</dd>
               </dl>
