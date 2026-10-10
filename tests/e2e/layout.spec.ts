@@ -18,3 +18,10 @@ test("the credentials strip has a heading and lays its marks out evenly", async 
   await page.setViewportSize({ width: 375, height: 800 });
   expect((await rows(page, marks)).length, "control: the row counter sees several rows on a phone").toBeGreaterThan(1);
 });
+
+test("the footer no longer repeats the certification marks", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+  expect(await page.locator("footer [aria-label='Certifications']").count()).toBe(0);
+  expect(await page.locator("footer").getByText("SBA 8(a) Certified").count()).toBe(0);
+  expect(await page.locator("section[aria-labelledby='credentials-title']").getByText("SBA 8(a) Certified").count(), "control: the marks are still on the page above").toBe(1);
+});
