@@ -7,6 +7,8 @@ import { legalPages, getLegalPage } from "@/content/legal";
 import { pageMetadata } from "@/lib/seo";
 import { linkify } from "@/lib/linkify";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return legalPages.map((p) => ({ slug: p.slug }));
 }

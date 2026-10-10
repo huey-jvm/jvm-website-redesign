@@ -3,6 +3,8 @@ import { siteUrl } from "@/lib/seo";
 import { services } from "@/content/services";
 import { pastPerformance, starsShown } from "@/content/vehicles";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const paths = [

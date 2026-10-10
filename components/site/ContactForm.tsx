@@ -76,6 +76,11 @@ export function ContactForm({ initialRoute, compact = false, tone = "light", aut
       formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
       return;
     }
+    if (process.env.NEXT_PUBLIC_STATIC_EXPORT === "true") {
+      setServerMessage("This preview of the site cannot send messages yet.");
+      setStatus("error");
+      return;
+    }
     setStatus("submitting");
     setServerMessage(null);
     try {

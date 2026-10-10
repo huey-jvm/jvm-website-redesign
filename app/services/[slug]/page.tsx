@@ -13,6 +13,8 @@ import { services, getService } from "@/content/services";
 import { getOutcome } from "@/content/outcomes";
 import { pageMetadata } from "@/lib/seo";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }

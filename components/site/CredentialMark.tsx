@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Credential } from "@/content/credentials";
 import { cn } from "@/lib/cn";
+import { withBasePath } from "@/lib/base-path";
 
 /**
  * One credential mark on a white tile. Always an image with alt text, or a text tile when the file is not yet in place.
@@ -30,7 +31,7 @@ export function CredentialMark({ credential, size = "md", className }: { credent
       )}
     >
       {hasImage && credential.image ? (
-        <Image src={credential.image} alt={credential.name} width={credential.wide ? 160 : 96} height={size === "md" ? 56 : 32} className="h-full w-auto max-w-full object-contain" unoptimized />
+        <Image src={withBasePath(credential.image)} alt={credential.name} width={credential.wide ? 160 : 96} height={size === "md" ? 56 : 32} className="h-full w-auto max-w-full object-contain" unoptimized />
       ) : (
         <span className="px-1 text-center font-display text-h4 leading-none text-ink-950">{credential.name}</span>
       )}
