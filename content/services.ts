@@ -1,3 +1,4 @@
+export const leadEyebrow = "Our core";
 import { starsShown } from "./vehicles";
 import { identifiers } from "./identifiers";
 import { teamPhoto } from "./team";

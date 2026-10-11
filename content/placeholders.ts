@@ -13,7 +13,7 @@ export const placeholderRegister: Record<string, { what: string; who: string }> 
   P12: { what: "Privacy policy and terms of use, drafts for review", who: "the CEO and counsel, D22" },
   P13: { what: "Health IT and Management page copy, written by JVM to the two briefs in docs/briefs", who: "JVM, writes to a brief" },
   P14: { what: "Capability statement PDF", who: "JVM supplies or approves" },
-  P15: { what: "ISO certificate PDF and expiry", who: "JVM supplies" },
+  P15: { what: "ISO certificate PDF, registrar, scope and expiry", who: "JVM supplies" },
   P16: { what: "Vector logo", who: "JVM supplies AI, EPS or SVG" },
   P17: { what: "Four quality marks as separate files", who: "JVM or registrar" },
   P18: { what: "Stock image licences", who: "JVM" },

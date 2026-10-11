@@ -37,8 +37,9 @@ export const starsIII = {
     "Access to a pool of contractors with industry credentials",
     "Supports timely order award for optimal mission support",
   ],
+  summary: "a Best in Class governmentwide acquisition contract for IT services",
   gsaUrl: "https://www.gsa.gov/stars3",
-  gsaContact: { org: "The Small Business GWAC Center", email: "S3@gsa.gov", phone: "(877) 327-8732" },
+  gsaContact: { org: "the Small Business GWAC Center", email: "S3@gsa.gov", phone: "(877) 327-8732", phoneHref: "tel:+18773278732" },
   jvmEmail: "stars3@jvmsolutions.net",
   description:
     "GSA 8(a) STARS III is a multiple-award, indefinite-delivery, indefinite-quantity governmentwide acquisition contract designed to provide federal agencies with IT services and IT services-based solutions. It is designated Best in Class, and it gives agencies an easy to use, streamlined procurement route to 8(a) prime contractors, with an emphasis on emerging technology and performance outside the continental United States.",

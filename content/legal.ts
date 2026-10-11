@@ -1,4 +1,5 @@
 import { contact } from "./contact";
+import { statements } from "./statements";
 
 export type LegalSection = { id: string; title: string; paragraphs: string[]; list?: string[] };
 export type LegalPage = { slug: string; title: string; description: string; updated: string; draft: boolean; sections: LegalSection[] };
@@ -6,7 +7,7 @@ export type LegalPage = { slug: string; title: string; description: string; upda
 const email = contact.emails.general;
 const address = contact.office.lines.join(", ");
 
-const company = "Johnson Venture Management Solutions, Inc. (JVM Solutions, \"we\", \"us\")";
+const company = `${statements.companyName} (${statements.shortName}, \"we\", \"us\")`;
 const updated = "1 October 2026";
 
 export const legalPages: LegalPage[] = [
