@@ -1,9 +1,37 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
+
+async function openSurface(page: Page, path: string) {
+  await page.goto(path, { waitUntil: "domcontentloaded" });
+  await expect(page.locator("main")).toBeVisible();
+  await page.evaluate(() => document.fonts.ready);
+}
+
+test("control: surface readiness does not wait for an unfinished background request", async ({ page }) => {
+  let release!: () => void;
+  let requested = false;
+  const held = new Promise<void>(resolve => { release = resolve; });
+  await page.route("**/pending-readiness-control", async route => {
+    requested = true;
+    await held;
+    await route.fulfill({ status: 204, body: "" });
+  });
+  await page.addInitScript(() => { void fetch("/pending-readiness-control"); });
+  try {
+    await openSurface(page, "/");
+    await expect.poll(() => requested).toBe(true);
+    await expect(page.locator(".outcomes-row > li")).toHaveCount(5);
+    await expect(page.waitForLoadState("networkidle", { timeout: 1000 })).rejects.toThrow(/Timeout/);
+  } finally {
+    release();
+    await page.unrouteAll({ behavior: "wait" });
+  }
+});
 
 test("dropdown selection follows the route rather than the first service", async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
-  await page.goto("/", { waitUntil: "networkidle" });
+  await openSurface(page, "/");
   const nav = page.locator('header nav[aria-label="Primary"]:visible');
+  await expect(nav.getByRole("link", { name: "Why JVM" })).toHaveAttribute("data-current", "false");
   await nav.getByRole("button", { name: "Services" }).click();
   const first = nav.getByRole("link", { name: /Healthcare Staffing and Operations/ });
   await expect(first).toBeVisible();
@@ -18,8 +46,7 @@ test("dropdown selection follows the route rather than the first service", async
 
 test("the cream proof strip follows a content-sized hero and outcomes share one uncropped row", async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
-  await page.goto("/", { waitUntil: "domcontentloaded" });
-  await page.evaluate(() => document.fonts.ready);
+  await openSurface(page, "/");
   const hero = page.locator("[data-hero]");
   await expect(page.locator("[data-hero] + section").getByRole("heading", { name: "Certifications and Contract Vehicles" })).toBeVisible();
   const heroBox = await hero.boundingBox();
@@ -51,14 +78,14 @@ test("the floating conversation control has hover and open states and toggles cl
 
 test("sections and cards size to their content without viewport height floors", async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
-  await page.goto("/", { waitUntil: "networkidle" });
+  await openSurface(page, "/");
   const hasFloor = await page.locator("main > section, .outcomes-row > li, .outcomes-row > li > a").evaluateAll(els => els.some(el => parseFloat(getComputedStyle(el).minHeight) > 0));
   expect(hasFloor).toBe(false);
   const cta = page.locator("main > section").filter({ has: page.locator(".cta-content") });
   expect((await cta.boundingBox())!.height).toBeLessThan(500);
-  await page.goto("/services", { waitUntil: "networkidle" });
+  await openSurface(page, "/services");
   expect((await page.locator("main > section").first().boundingBox())!.height).toBeLessThan(500);
-  await page.goto("/legal/privacy", { waitUntil: "networkidle" });
+  await openSurface(page, "/legal/privacy");
   const chapters = page.locator(".chapter-section");
   expect(await chapters.count()).toBeGreaterThan(0);
   expect(await chapters.evaluateAll(els => els.every(el => getComputedStyle(el).minHeight === "0px"))).toBe(true);
