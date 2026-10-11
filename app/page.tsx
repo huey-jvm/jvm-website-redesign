@@ -37,10 +37,10 @@ export default function HomePage() {
     <>
       <ImageHero
         size="display"
-        eyebrow={statements.category}
         title={statements.tagline}
         lead={statements.positioning}
         image={teamPhoto}
+        footer={<ProofStrip embedded />}
       >
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <OpenWidgetButton tone="dark" size="lg" route="contracting" />
@@ -48,14 +48,12 @@ export default function HomePage() {
         </div>
       </ImageHero>
 
-      <ProofStrip />
-
-      <Section surface="light" aria-labelledby="outcomes-title">
-        <SectionHeader eyebrow="Five outcomes we sell" title="What Changes for Your Mission" lead="We do not sell labor categories. These five outcomes anchor every engagement." />
+      <Section viewport surface="light" aria-labelledby="outcomes-title">
+        <SectionHeader eyebrow="Five outcomes" title="What Changes for Your Mission" />
         <Reveal>
-          <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-6">
-            {outcomes.map((o, i) => (
-              <li key={o.id} className={cn("h-full", i < 3 ? "lg:col-span-2" : "lg:col-span-3", i === outcomes.length - 1 && "md:col-span-2")}>
+          <ul className="outcomes-row">
+            {outcomes.map((o) => (
+              <li key={o.id}>
                 <OutcomeTile outcome={o} href={`/why-jvm#${o.id}`} />
               </li>
             ))}
@@ -64,25 +62,25 @@ export default function HomePage() {
         <span id="outcomes-title" className="sr-only">Outcomes</span>
       </Section>
 
-      <Section surface="cream">
+      <Section viewport surface="cream">
         <SectionHeader eyebrow="Services" title="One Accountable Partner Across Four Areas" lead="Healthcare staffing and operations leads. Health IT and technology services, logistics and facilities management, and management and administrative support sit alongside it under the same accountability." />
         <Reveal>
-          <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <ul className="service-row grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
             {services.map((s) => (
-              <li key={s.slug} className={s.lead ? "h-full md:col-span-3" : "h-full"}>
-                <ServiceCard service={s} image={s.cardPhoto} slot={s.cardImage} horizontal={s.lead} />
+              <li key={s.slug} className="h-full">
+                <ServiceCard service={s} image={s.cardPhoto} slot={s.cardImage} />
               </li>
             ))}
           </ul>
         </Reveal>
       </Section>
 
-      <Section surface="light" className="md:py-20 lg:py-28">
+      <Section viewport surface="light" className="md:py-20 lg:py-28">
         <SectionHeader eyebrow="How we work" title="Four Differentiators That Do Not Commoditize" />
         <Reveal>
           <ol className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {differentiators.map((d) => (
-              <li key={d.n} className="@container flex h-full flex-col rounded-container border border-ink-200 bg-white">
+              <li key={d.n} className="differentiator-card @container flex h-full flex-col rounded-container border border-ink-200 bg-white">
                 <div className="flex flex-1 flex-col p-6 @[20rem]:p-8">
                   <span className="font-sans text-h2 font-semibold leading-none text-gold-700 tabular">{d.n}</span>
                   <h3 className="mt-6 text-h3 text-ink-950">{d.title}</h3>
@@ -92,7 +90,7 @@ export default function HomePage() {
             ))}
           </ol>
         </Reveal>
-        <div className="mt-10">
+        <div className="mt-10 flex justify-end">
           <Button href="/why-jvm" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing>Read how we work</Button>
         </div>
       </Section>
@@ -135,10 +133,10 @@ export default function HomePage() {
 
       <Section surface="light">
         <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-12">
-          <div className="relative aspect-square w-full max-w-[14rem] overflow-hidden rounded-container bg-ink-100 md:col-span-3">
+          <div className="relative aspect-square w-full overflow-hidden rounded-container bg-ink-100 md:col-span-4">
             <Image src={founder.image!} alt={`Portrait of ${founder.name}`} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover object-top" />
           </div>
-          <div className="md:col-span-9">
+          <div className="md:col-span-8">
             <p className="text-eyebrow font-semibold uppercase text-gold-700">Leadership</p>
             <h2 className="mt-3 text-h2-sm md:text-h2">Led From Inside the Mission</h2>
             <p className="mt-4 max-w-[65ch] text-body text-ink-700">{founder.name}, {founder.role}, is a United States Air Force veteran with 18 years inside the Department of Defense environment as a contracting officer, logistician, project manager and acquisition liaison. JVM is built on that understanding of how federal health missions actually run.</p>
@@ -147,7 +145,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <CTABand title="Ready to Talk About Your Mission?" body="Tell us who you are and we will route your message to the right person." secondaryHref="/contracting/capability-statement" secondaryLabel="Capability statement" />
+      <CTABand title="Ready to Talk About Your Mission?" secondaryHref="/contracting/capability-statement" secondaryLabel="Capability statement" />
     </>
   );
 }

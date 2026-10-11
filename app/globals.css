@@ -78,8 +78,114 @@
   --ease-enter: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-move: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  --container-content: 75rem;
+  --container-content: 100rem;
   --container-prose: 42rem;
+}
+
+:root {
+  --header-height: 4.5rem;
+  --section-height: 100svh;
+  --section-space: clamp(3rem, 6svh, 5rem);
+  --card-height: clamp(26rem, 50svh, 38rem);
+  --illustration-height: clamp(12rem, 24svh, 18rem);
+  --hero-photo-width: 60%;
+  --hero-gradient-width: 33.333%;
+  --hero-gradient: radial-gradient(ellipse at bottom left, var(--color-ink-950) 0%, transparent 72%), linear-gradient(60deg, var(--color-ink-950) 0%, transparent 85%);
+  --section-title-size: clamp(2rem, 2.5vw, 3rem);
+}
+
+.outcome-frame {
+  height: var(--illustration-height);
+}
+.outcome-card {
+  min-height: var(--card-height);
+}
+.outcomes-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.outcomes-row > li {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .viewport-section {
+    min-height: var(--section-height);
+  }
+  .viewport-section {
+    display: flex;
+    align-items: center;
+    padding-block: var(--section-space);
+  }
+  .image-hero {
+    display: flex;
+    min-height: calc(var(--section-height) - var(--header-height));
+  }
+  .image-hero .hero-image {
+    left: auto;
+    width: var(--hero-photo-width);
+  }
+  .image-hero .hero-image::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: var(--hero-gradient-width);
+    background: var(--hero-gradient);
+  }
+  .hero-content {
+    padding-top: 0;
+  }
+  .hero-main {
+    flex: 1;
+    padding-block: var(--section-space);
+  }
+  .hero-copy {
+    padding-right: 1.5rem;
+    background: transparent;
+  }
+  .hero-credentials {
+    position: relative;
+  }
+  .outcomes-row {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0.25rem;
+    scroll-snap-type: x proximity;
+  }
+  .outcomes-row > li {
+    flex: 0 0 30%;
+    scroll-snap-align: start;
+  }
+  .service-row > li > a {
+    min-height: var(--card-height);
+  }
+  .differentiator-card {
+    min-height: calc(var(--card-height) * 0.8);
+  }
+  .feature-card {
+    min-height: calc(var(--card-height) * 0.65);
+  }
+  .value-card {
+    min-height: calc(var(--card-height) * 0.5);
+  }
+  .chapter-section > p, .chapter-section > ul {
+    font-size: var(--text-lead);
+    line-height: var(--text-lead--line-height);
+  }
+  .cta-content > div:first-child {
+    max-width: 60%;
+  }
+  .section-title, .chapter-section > h2 {
+    font-size: var(--section-title-size);
+  }
+}
+
+@media (min-width: 1536px) {
+  .outcomes-row > li {
+    flex: 1 1 0;
+  }
 }
 
 @layer base {

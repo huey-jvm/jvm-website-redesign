@@ -20,7 +20,7 @@ export default function QualityPage() {
       <Section className={presentAsset("AS-14") ? undefined : "pt-0 md:pt-0 lg:pt-0"}>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="space-y-12 lg:col-span-8">
-            <section>
+            <section className="chapter-section">
               <div className="flex flex-wrap items-center gap-6">
                 <CredentialMark credential={iso} />
                 <h2 className="text-h2-sm md:text-h2">ISO 9001:2015</h2>
@@ -29,13 +29,13 @@ export default function QualityPage() {
               <div className="mt-4 max-w-xl"><Placeholder id="P15" /></div>
             </section>
 
-            <section>
+            <section className="chapter-section">
               <h2 className="text-h2-sm md:text-h2">Joint Commission Standards</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">JVM works to the Joint Commission’s Standards for Health Care Staffing Services. The Joint Commission is an independent, non-profit organisation that accredits and certifies health care organisations across the country. Its standards address organisational quality of care and the safety of the environment in which care is provided. Working to those standards shapes how we screen, credential, place and support every healthcare professional.</p>
               <div className="mt-4 max-w-xl"><Placeholder id="P8"><p className="text-body-sm text-ink-900">Default wording. If JVM holds Health Care Staffing Services certification, this section changes to say so and carries the certificate and its expiry.</p></Placeholder></div>
             </section>
 
-            <section>
+            <section className="chapter-section">
               <h2 className="text-h2-sm md:text-h2">Raising a Concern</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">As an employee, patient, customer or potential customer, you have the right to raise any concern about the quality of care, the safety of care, or the safety of the environment in which care is provided, without fear of retaliation. Please contact the JVM management team first. If we cannot resolve the issue, you may contact the Joint Commission directly.</p>
             </section>

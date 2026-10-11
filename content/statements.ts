@@ -3,8 +3,9 @@ export const statements = {
   shortName: "JVM Solutions",
   category: "Integrated Healthcare Operations and Professional Services",
   tagline: "We don't just support healthcare, we help transform how it's delivered.",
+  conversationPrompt: "Let’s talk about your goals and build the right team to deliver them.",
   positioning:
-    "JVM Solutions is an integrated healthcare operations and professional services partner for DHA, VA and HHS programs. We lead with outcomes rather than headcount, and we arrive ready to perform from day one.",
+    "Healthcare operations and professional services for DHA, VA and HHS. Mission-ready teams, better care and measurable outcomes from day one.",
   mission:
     "Driven by excellence and integrity, we deliver exceptional, client-focused solutions shaped by our core values.",
   vision:

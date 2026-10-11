@@ -20,7 +20,7 @@ export function Slot({ id, className, imgClassName, sizes = "100vw", priority, c
   if (!asset) return children ? <>{children}</> : null;
   return (
     <div className={cn("relative overflow-hidden", className)} data-slot={asset.id} aria-hidden={asset.alt ? undefined : true}>
-      <Image src={asset.path} alt={asset.alt} fill sizes={sizes} priority={priority} className={cn("object-cover", imgClassName)} />
+      <Image src={asset.path} alt={asset.alt} fill sizes={sizes} priority={priority} className={cn(!imgClassName?.includes("object-contain") && "object-cover", imgClassName)} />
     </div>
   );
 }

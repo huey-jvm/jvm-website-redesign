@@ -19,7 +19,7 @@ test("contact form submits in simulated mode", async ({ page }) => {
   await page.goto("/contact", { waitUntil: "networkidle" });
   await page.getByText("Something else").click();
   await page.getByLabel(/^Name/).fill("Test Person");
-  await page.getByLabel(/^Email/).fill("test@example.com");
+  await page.getByRole("textbox", { name: /^Email/ }).fill("test@example.com");
   await page.getByLabel(/^Message/).fill("This is a test message from the suite.");
   await page.getByRole("button", { name: "Send message" }).click();
   await expect(page.getByRole("status").or(page.getByRole("alert")).first()).toContainText(/message sent|could not|not configured/i);

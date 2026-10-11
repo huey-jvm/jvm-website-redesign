@@ -11,13 +11,13 @@ const surfaces: Record<Surface, string> = {
   dark: "surface-dark bg-ink-950 text-ink-200",
 };
 
-export function Section({ surface = "light", className, children, tight, backdrop, backdropClassName, art, ...rest }: ComponentPropsWithoutRef<"section"> & { surface?: Surface; tight?: boolean; backdrop?: string; backdropClassName?: string; art?: ReactNode; children: ReactNode }) {
+export function Section({ surface = "light", className, children, tight, viewport = false, backdrop, backdropClassName, art, ...rest }: ComponentPropsWithoutRef<"section"> & { surface?: Surface; tight?: boolean; viewport?: boolean; backdrop?: string; backdropClassName?: string; art?: ReactNode; children: ReactNode }) {
   const bg = backdrop ? presentAsset(backdrop) : undefined;
   const layered = Boolean(bg || art);
   return (
-    <section className={cn(surfaces[surface], tight ? "py-10 md:py-12" : "py-12 md:py-16 lg:py-20", layered && "relative isolate", className)} data-backdrop={bg?.id} data-art={!bg && art ? "" : undefined} {...rest}>
+    <section className={cn(viewport && "viewport-section", surfaces[surface], tight ? "py-10 md:py-12" : "py-12 md:py-16 lg:py-20", layered && "relative isolate", className)} data-backdrop={bg?.id} data-art={!bg && art ? "" : undefined} {...rest}>
       {bg ? <Backdrop id={bg.id} imgClassName={backdropClassName} /> : art ? <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden contrast-more:hidden">{art}</div> : null}
-      <div className={cn("container-content", layered && "relative")}>{children}</div>
+      <div className={cn("container-content section-content", layered && "relative")}>{children}</div>
     </section>
   );
 }
@@ -26,7 +26,7 @@ export function SectionHeader({ eyebrow, title, lead, tone = "light", align = "l
   return (
     <div className={cn("mb-8 md:mb-10", align === "center" && "mx-auto text-center", className)}>
       {eyebrow ? <p className={cn("mb-3 text-eyebrow font-semibold uppercase", tone === "dark" ? "text-gold-500" : "text-gold-700")}>{eyebrow}</p> : null}
-      <Tag className={cn(Tag === "h1" ? "text-h1-sm md:text-h1" : "text-h2-sm md:text-h2", tone === "dark" ? "text-cream" : "text-ink-950")}>{title}</Tag>
+      <Tag className={cn("section-title", Tag === "h1" ? "text-h1-sm md:text-h1" : "text-h2-sm md:text-h2", tone === "dark" ? "text-cream" : "text-ink-950")}>{title}</Tag>
       {lead ? <p className={cn("mt-4 text-lead-sm md:text-lead prose-measure", align === "center" && "mx-auto", tone === "dark" ? "text-ink-200" : "text-ink-700")}>{lead}</p> : null}
     </div>
   );

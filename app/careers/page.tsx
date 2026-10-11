@@ -31,7 +31,7 @@ export default function CareersPage() {
         image={teamPhoto}
       />
 
-      <Section>
+      <Section viewport>
         <Reveal>
         <ul className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {audiences.map((a) => (

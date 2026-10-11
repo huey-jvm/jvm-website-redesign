@@ -13,7 +13,7 @@ export const metadata = pageMetadata("Contact", "Reach JVM Solutions. Choose who
 export default function ContactPage() {
   return (
     <>
-      <PageHero eyebrow="Contact" title="Start a Conversation" lead="Choose who you are and your message goes straight to the right person. Or use the office details on this page." crumbs={[{ label: "Contact" }]} />
+      <PageHero eyebrow="Contact" title="Let’s Move Your Mission Forward" lead="Talk with our team about your goals, your next program or your career. We’ll help you take the next step." crumbs={[{ label: "Contact" }]} />
       <Section className="pt-0 md:pt-0 lg:pt-0">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7"><ContactForm /></div>

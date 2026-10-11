@@ -135,7 +135,7 @@ export function OutcomeArt({ outcomeId }: { outcomeId: string }) {
   const id = outcomeIllustrationId(outcomeId);
   const Scene = scenes[outcomeId];
   return (
-    <Slot id={id} className="h-full w-full" imgClassName="object-contain transition-transform duration-200 ease-move group-hover/card:scale-[1.03] motion-reduce:group-hover/card:scale-100" sizes="(min-width: 1024px) 30vw, 100vw">
+    <Slot id={id} className="h-full w-full" imgClassName="object-contain" sizes="(min-width: 1536px) 20vw, (min-width: 1024px) 30vw, 100vw">
       {Scene ? (
         <svg
           viewBox={`0 0 ${illustrationShape.width / 5} ${illustrationShape.height / 5}`}

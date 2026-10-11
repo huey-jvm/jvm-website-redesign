@@ -50,7 +50,7 @@ export default function StarsPage() {
         <div className="grid grid-cols-1 gap-10 pt-12 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
           <InPageNav sections={nav} />
           <div className="min-w-0 space-y-14">
-            <section id="about" className="scroll-mt-28">
+            <section id="about" className="chapter-section scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">About the Vehicle</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">{starsIII.description}</p>
               <FactBlock className="mt-6" facts={[
@@ -62,7 +62,7 @@ export default function StarsPage() {
               ]} />
             </section>
 
-            <section id="scope" className="scroll-mt-28">
+            <section id="scope" className="chapter-section scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">Scope</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">Federal agencies reach JVM through an established vehicle rather than open market methods, which saves time and money and gives access to proven service and technical capabilities. The offering ranges from simple to complex IT services and services-based solutions.</p>
               <ul className="mt-5 grid grid-cols-1 gap-x-8 gap-y-2 text-body text-ink-900 md:grid-cols-2">
@@ -70,7 +70,7 @@ export default function StarsPage() {
               </ul>
             </section>
 
-            <section id="naics" className="scroll-mt-28">
+            <section id="naics" className="chapter-section scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">NAICS Codes</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">The vehicle is centred on NAICS {identifiers.naicsPrimary} and may include other codes that are predominantly IT services.</p>
               <div className="mt-5 overflow-hidden rounded-container border border-ink-200">
@@ -95,7 +95,7 @@ export default function StarsPage() {
               </div>
             </section>
 
-            <section id="ordering" className="scroll-mt-28">
+            <section id="ordering" className="chapter-section scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">How to Order</h2>
               <ul className="mt-5 space-y-2 text-body text-ink-900">
                 {starsIII.benefits.map((b) => <li key={b} className="flex items-start gap-2"><span aria-hidden className="mt-2.5 h-0.5 w-4 shrink-0 bg-gold-500" />{b}</li>)}
@@ -106,7 +106,7 @@ export default function StarsPage() {
               <p className="mt-4 text-body-sm text-ink-700">For GSA’s own guidance, contact {starsIII.gsaContact.org} at <a href={`mailto:${starsIII.gsaContact.email}`} className="link-underline font-semibold text-gold-700 after:bg-current">{starsIII.gsaContact.email}</a> or {starsIII.gsaContact.phone}.</p>
             </section>
 
-            <section id="contacts" className="scroll-mt-28">
+            <section id="contacts" className="chapter-section scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">JVM Contacts for STARS III</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">STARS III enquiries go to <a href={`mailto:${starsIII.jvmEmail}`} className="link-underline font-semibold text-gold-700 after:bg-current">{starsIII.jvmEmail}</a>.</p>
               <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

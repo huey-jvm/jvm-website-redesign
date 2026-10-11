@@ -35,7 +35,7 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
           <InPageNav sections={page.sections.map((s) => ({ id: s.id, label: s.title }))} />
           <div className="min-w-0 space-y-10">
             {page.sections.map((s) => (
-              <section key={s.id} id={s.id} className="scroll-mt-28">
+              <section key={s.id} id={s.id} className="chapter-section scroll-mt-28">
                 <h2 className="text-h3">{s.title}</h2>
                 {s.paragraphs.map((p) => <p key={p.slice(0, 32)} className="prose-measure mt-3 text-body text-ink-700">{linkify(p)}</p>)}
                 {s.list ? <ul className="prose-measure mt-3 list-disc space-y-1 pl-5 text-body text-ink-700">{s.list.map((l) => <li key={l}>{l}</li>)}</ul> : null}

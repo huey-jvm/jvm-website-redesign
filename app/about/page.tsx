@@ -29,12 +29,12 @@ export default function AboutPage() {
 
       <Section surface="cream" backdrop="AS-13">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div className="@container rounded-container border border-cream-border bg-white p-6 md:p-8">
+          <div className="feature-card @container rounded-container border border-cream-border bg-white p-6 md:p-8">
             <p className="text-eyebrow font-semibold uppercase text-gold-700">Mission</p>
             <h2 className="mt-3 text-h3 md:text-h2-sm">Our Mission</h2>
             <p className="mt-4 text-lead-sm text-ink-900">{statements.mission}</p>
           </div>
-          <div className="@container rounded-container border border-cream-border bg-white p-6 md:p-8">
+          <div className="feature-card @container rounded-container border border-cream-border bg-white p-6 md:p-8">
             <p className="text-eyebrow font-semibold uppercase text-gold-700">Vision</p>
             <h2 className="mt-3 text-h3 md:text-h2-sm">Our Vision</h2>
             <p className="mt-4 text-lead-sm text-ink-900">{statements.vision}</p>
@@ -48,14 +48,14 @@ export default function AboutPage() {
         <Placeholder id="P3" inline what="Pending the CEO’s confirmation" who="the CEO" className="mt-4 inline-block" />
       </Section>
 
-      <Section>
+      <Section viewport>
         <SectionHeader eyebrow="Values" title="Living Our Core Values" lead={values.intro} />
         <h3 className="text-h3">{values.rita.name}</h3>
         <p className="prose-measure mt-2 text-body text-ink-700">{values.rita.description}</p>
         <Reveal>
         <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {values.rita.items.map((v) => (
-            <li key={v.title} className="rounded-container border border-ink-200 bg-white p-5">
+            <li key={v.title} className="value-card rounded-container border border-ink-200 bg-white p-5">
               <h4 className="text-h4">{v.title}</h4>
               <p className="mt-2 text-body-sm text-ink-700">{v.line}</p>
             </li>

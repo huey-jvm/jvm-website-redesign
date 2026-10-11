@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { PageHero } from "@/components/site/PageHero";
+import { ImageHero } from "@/components/site/ImageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { Section } from "@/components/site/Section";
 import { FactBlock } from "@/components/site/FactBlock";
@@ -12,7 +12,6 @@ import { starsIII, starsShown, pastPerformance } from "@/content/vehicles";
 import { contact } from "@/content/contact";
 import { team } from "@/content/team";
 import { pageMetadata } from "@/lib/seo";
-import { Slot } from "@/components/site/Slot";
 
 export const metadata = pageMetadata("Contracting", starsShown ? "UEI, CAGE, NAICS, set-aside status, GSA 8(a) STARS III and how to reach JVM Solutions business development." : "UEI, CAGE, NAICS, set-aside status and how to reach JVM Solutions business development.", "/contracting");
 
@@ -27,7 +26,7 @@ export default function ContractingPage() {
   const bd = team[0];
   return (
     <>
-      <PageHero eyebrow="Contracting" title="Everything a Contracting Officer Checks" lead={starsShown ? "Identifiers, set-aside standing, our prime vehicle and a named route to business development. Each value below can be copied." : "Identifiers, set-aside standing and a named route to business development. Each value below can be copied."} crumbs={[{ label: "Contracting" }]} surface="cream" />
+      <ImageHero eyebrow="Contracting" title="Everything a Contracting Officer Checks" lead={starsShown ? "Identifiers, set-aside standing, our prime vehicle and a named route to business development. Each value below can be copied." : "Identifiers, set-aside standing and a named route to business development. Each value below can be copied."} crumbs={[{ label: "Contracting" }]} slot="AS-11" />
       <Section surface="cream" className="pt-0 md:pt-0 lg:pt-0">
         <FactBlock
           title="Identifiers"
@@ -46,13 +45,12 @@ export default function ContractingPage() {
       </Section>
 
       <Section>
-        <Slot id="AS-11" className="mb-10 aspect-[21/9] w-full" sizes="(min-width: 1200px) 1200px, 100vw" />
         <Reveal>
-        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {cards.filter((c) => !c.withheld).map((c) => (
             <li key={c.href} className="h-full">
-              <Link href={c.href} className="group/card flex h-full flex-col rounded-container border border-ink-200 bg-white p-6 transition-transform duration-150 ease-move hover:-translate-y-0.5 active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700 motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100">
-                <h2 className="text-h3 group-hover/card:text-gold-700">{c.title}</h2>
+              <Link href={c.href} className="feature-card group/card flex h-full flex-col rounded-container border border-ink-200 bg-white p-6 transition-transform duration-150 ease-move hover:-translate-y-0.5 active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700 motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100">
+                <h2 className="text-h3 group-hover/card:text-gold-700 group-focus-visible/card:text-gold-700">{c.title}</h2>
                 <p className="mt-2 text-body text-ink-700">{c.body}</p>
                 <span className="mt-auto inline-flex items-center gap-1 pt-4 text-body-sm font-semibold text-ink-900">Open <ArrowRight aria-hidden className="size-4 transition-transform duration-150 ease group-hover/card:translate-x-1 motion-reduce:group-hover/card:translate-x-0" /></span>
               </Link>

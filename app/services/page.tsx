@@ -14,9 +14,9 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero eyebrow={statements.category} title="Services" lead="Healthcare staffing and operations is the core of the company. Three more areas sit beside it, each delivered under the same accountability and the same quality system." crumbs={[{ label: "Services" }]} />
-      <Section surface="cream" className="pt-0 md:pt-0 lg:pt-0">
+      <Section viewport surface="cream" className="pt-0 md:pt-0 lg:pt-0">
         <Reveal>
-          <ul className="grid grid-cols-1 gap-6 pt-12 md:grid-cols-2">
+          <ul className="service-row grid grid-cols-1 gap-6 pt-12 md:grid-cols-2 xl:grid-cols-4">
             {services.map((s) => (
               <li key={s.slug} className="h-full"><ServiceCard service={s} image={s.cardPhoto} slot={s.cardImage} headingLevel="h2" /></li>
             ))}

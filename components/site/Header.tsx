@@ -70,13 +70,6 @@ export function Header({ nav }: { nav: NavGroup[] }) {
 
   return (
     <header className={cn("sticky top-0 z-40 bg-white transition-shadow duration-150 ease", scrolled ? "shadow-header" : "border-b border-ink-200")}>
-      <div className="hidden bg-ink-50 lg:block">
-        <div className="container-content flex h-9 items-center justify-end gap-6 text-body-sm text-ink-700">
-          <a href={contact.office.phoneHref} className="link-underline inline-flex items-center gap-1.5 after:bg-current hover:text-ink-950"><Phone aria-hidden className="size-3.5" />{contact.office.phone}</a>
-          <a href={`mailto:${contact.emails.general}`} className="link-underline inline-flex items-center gap-1.5 after:bg-current hover:text-ink-950"><Mail aria-hidden className="size-3.5" />{contact.emails.general}</a>
-        </div>
-      </div>
-
       <div className="container-content flex h-15 items-center justify-between gap-4 lg:h-18">
         <button
           type="button"
@@ -129,7 +122,11 @@ export function Header({ nav }: { nav: NavGroup[] }) {
         </nav>
 
         <span className="lg:hidden"><OpenWidgetButton size="sm" label="Contact us" /></span>
-        <span className="hidden lg:inline-flex"><OpenWidgetButton /></span>
+        <div className="hidden items-center gap-2 lg:flex">
+          <a href={contact.office.phoneHref} aria-label={`Call ${contact.office.phone}`} className="header-contact hidden xl:inline-flex size-11 items-center justify-center rounded-control text-ink-700 hover:bg-cream focus-visible:bg-cream active:bg-gold-200"><Phone aria-hidden className="size-4" /></a>
+          <a href={`mailto:${contact.emails.general}`} aria-label={`Email ${contact.emails.general}`} className="header-contact hidden xl:inline-flex size-11 items-center justify-center rounded-control text-ink-700 hover:bg-cream focus-visible:bg-cream active:bg-gold-200"><Mail aria-hidden className="size-4" /></a>
+          <OpenWidgetButton />
+        </div>
       </div>
 
       <MobileMenu nav={nav} open={mobileOpen} onClose={() => setMobileOpen(false)} pathname={pathname} />
@@ -159,15 +156,15 @@ function MenuGroup({ group, current, open, instant, onPress, onHoverStart, onHov
         )}
       >
         <div className="rounded-container border border-ink-200 bg-white p-2 shadow-float">
-          <ul>
+          <ul className="space-y-2">
             {(group.items ?? []).map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
+                  aria-current={pathname === item.href ? "page" : undefined}
                   className={cn(
-                    "flex min-h-11 flex-col justify-center rounded-control px-3 py-2 transition-colors duration-150 ease hover:bg-cream focus-visible:bg-cream active:bg-cream focus-visible:outline-2 focus-visible:outline-gold-700",
-                    item.lead && "border border-gold-500 bg-cream/60",
+                    "flex min-h-11 flex-col justify-center gap-1 rounded-control border border-transparent px-4 py-3 hover:bg-cream focus-visible:bg-cream active:bg-gold-200 focus-visible:outline-2 focus-visible:outline-gold-700",
+                    pathname === item.href && "border-gold-700 bg-cream",
                   )}
                 >
                   <span className="text-body font-medium text-ink-950">{item.label}</span>
@@ -230,7 +227,7 @@ function MobileMenu({ nav, open, onClose, pathname }: { nav: NavGroup[]; open: b
                   <ul hidden={expanded !== group.label} className="mb-2 ml-3 border-l-2 border-ink-200">
                     {(group.items ?? []).map((item) => (
                       <li key={item.href}>
-                        <Link href={item.href} aria-current={isCurrent(pathname, item.href) ? "page" : undefined} className={cn("flex min-h-11 items-center px-3 text-body text-ink-900 hover:bg-cream focus-visible:bg-cream active:bg-cream", isCurrent(pathname, item.href) && "bg-gold-200")}>{item.label}</Link>
+                        <Link href={item.href} aria-current={pathname === item.href ? "page" : undefined} className={cn("flex min-h-11 items-center px-3 text-body text-ink-900 hover:bg-cream focus-visible:bg-cream active:bg-cream", isCurrent(pathname, item.href) && "bg-gold-200")}>{item.label}</Link>
                       </li>
                     ))}
                   </ul>

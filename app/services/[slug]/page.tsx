@@ -50,7 +50,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <InPageNav sections={navSections} />
           <div className="min-w-0 space-y-14">
             {service.sections.map((sec) => (
-              <section key={sec.id} id={sec.id} className="scroll-mt-28">
+              <section key={sec.id} id={sec.id} className="chapter-section scroll-mt-28">
                 <h2 className="text-h2-sm md:text-h2">{sec.title}</h2>
                 <p className="prose-measure mt-4 text-body text-ink-700">{sec.body}</p>
                 {sec.delivers?.length ? (
@@ -67,7 +67,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             ))}
 
             {service.lead ? (
-              <section id="commercial" className="scroll-mt-28 rounded-container bg-cream p-6 md:p-8">
+              <section id="commercial" className="chapter-section scroll-mt-28 rounded-container bg-cream p-6 md:p-8">
                 <p className="text-eyebrow font-semibold uppercase text-gold-700">For commercial health systems</p>
                 <h2 className="mt-3 text-h2-sm md:text-h2">The Same Model, in Your Terms</h2>
                 <p className="prose-measure mt-4 text-body text-ink-700">
@@ -77,7 +77,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </section>
             ) : null}
 
-            <section id="outcomes" className="scroll-mt-28">
+            <section id="outcomes" className="chapter-section scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">Related Outcomes</h2>
               <Reveal>
                 <ul className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">

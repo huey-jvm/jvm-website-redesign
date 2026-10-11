@@ -7,7 +7,7 @@ import { OutcomeArt } from "./OutcomeArt";
 export function OutcomeTile({ outcome, href }: { outcome: Outcome; href?: string }) {
   const inner = (
     <>
-      <div className="h-36 border-b border-ink-200 bg-ink-50 @[20rem]:h-40 @[35rem]:h-44">
+      <div className="outcome-frame shrink-0 border-b border-ink-200 bg-ink-50">
         <OutcomeArt outcomeId={outcome.id} />
       </div>
       <div className="flex flex-1 flex-col p-4 @[20rem]:p-6 @[35rem]:p-8">
@@ -22,7 +22,7 @@ export function OutcomeTile({ outcome, href }: { outcome: Outcome; href?: string
       </div>
     </>
   );
-  const classes = "group/card @container flex h-full flex-col overflow-hidden rounded-container border border-ink-200 bg-white transition-transform duration-150 ease-move hover:-translate-y-0.5 active:scale-[0.99] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100";
+  const classes = "outcome-card group/card @container flex h-full flex-col overflow-hidden rounded-container border border-ink-200 bg-white transition-transform duration-150 ease-move hover:-translate-y-0.5 active:scale-[0.99] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100";
   return href ? (
     <Link href={href} className={cn(classes, "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700")} aria-label={outcome.title}>{inner}</Link>
   ) : (

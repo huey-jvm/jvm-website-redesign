@@ -39,7 +39,7 @@ export function ContactWidget() {
     if (!hero) return;
     const observer = new IntersectionObserver(
       ([entry]) => setPastHero(!entry.isIntersecting && entry.boundingClientRect.bottom < (entry.rootBounds?.top ?? 0) + 1),
-      { rootMargin: "-112px 0px 0px 0px" },
+      { rootMargin: "-72px 0px 0px 0px" },
     );
     observer.observe(hero);
     return () => {
@@ -83,21 +83,22 @@ export function ContactWidget() {
       <button
         ref={launcherRef}
         type="button"
-        onClick={() => { openerRef.current = launcherRef.current; setRoute(undefined); setOpen(true); }}
+        onClick={() => { if (open) close(); else { openerRef.current = launcherRef.current; setRoute(undefined); setOpen(true); } }}
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls="contact-widget-panel"
         className={cn(
-          "group/launcher fixed z-50 flex items-center gap-3 bg-ink-950 text-gold-500 shadow-float transition-[transform,opacity,visibility,background-color] duration-200 ease-enter",
-          "hover:bg-ink-800 focus-visible:bg-ink-800 active:bg-ink-800",
+          "widget-launcher group/launcher fixed z-50 flex items-center gap-3 border-2 border-transparent bg-ink-950 text-gold-500 shadow-float transition-[transform,opacity] duration-150 ease-enter",
+          "hover:border-gold-500 hover:bg-gold-200 hover:text-ink-950 focus-visible:border-gold-500 focus-visible:bg-gold-200 focus-visible:text-ink-950 focus-visible:transition-none active:bg-gold-500 active:text-ink-950",
           "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500 active:scale-[0.98] motion-reduce:active:scale-100",
           "inset-x-0 bottom-0 h-14 justify-center rounded-none md:inset-x-auto md:bottom-6 md:left-6 md:h-14 md:min-w-14 md:rounded-pill md:px-4 lg:px-5",
           open && "pointer-events-none opacity-0 md:pointer-events-auto md:opacity-100",
+          open && "border-gold-500 bg-gold-200 text-ink-950",
           !pastHero && "invisible translate-y-2 opacity-0",
         )}
       >
         <MessageSquareText aria-hidden className="size-6" />
-        <span className="text-body font-semibold text-white">Start a conversation</span>
+        <span className="text-body font-semibold text-white group-hover/launcher:text-ink-950 group-focus-visible/launcher:text-ink-950 group-active/launcher:text-ink-950 group-aria-expanded/launcher:text-ink-950">{open ? "Close conversation" : "Start a conversation"}</span>
       </button>
 
       <div

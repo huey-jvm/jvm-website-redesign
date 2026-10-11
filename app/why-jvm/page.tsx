@@ -28,7 +28,7 @@ export default function WhyPage() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
           <InPageNav sections={[...nav, ...outcomes.map((o) => ({ id: o.id, label: o.title }))]} />
           <div className="min-w-0 space-y-16">
-            <section id="shift" className="scroll-mt-28">
+            <section id="shift" className="chapter-section scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">The Shift</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">JVM’s path forward is a deliberate pivot in how we position, package and present our capabilities. This is not a rebrand. It is a strategic elevation.</p>
               <div className={shiftArt ? "mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-center" : "mt-6"}>
@@ -48,7 +48,7 @@ export default function WhyPage() {
               </div>
             </section>
 
-            <section id="value" className="scroll-mt-28">
+            <section id="value" className="chapter-section scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">{valueProposition.title}</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">{valueProposition.intro}</p>
               <Reveal>
@@ -65,12 +65,12 @@ export default function WhyPage() {
               </Reveal>
             </section>
 
-            <section id="outcomes" className="scroll-mt-28">
+            <section id="outcomes" className="chapter-section scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">Five Outcomes We Sell</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">{outcomesIntro}</p>
               <div className="mt-8 space-y-10">
                 {outcomes.map((o) => (
-                  <section key={o.id} id={o.id} className="scroll-mt-28 border-l-2 border-gold-500 pl-6">
+                  <section key={o.id} id={o.id} className="chapter-section scroll-mt-28 border-l-2 border-gold-500 pl-6">
                     <h3 className="text-h3">{o.title}</h3>
                     <p className="prose-measure mt-2 text-body text-ink-700">{o.body}</p>
                   </section>
@@ -78,7 +78,7 @@ export default function WhyPage() {
               </div>
             </section>
 
-            <section id="differentiators" className="scroll-mt-28">
+            <section id="differentiators" className="chapter-section scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">Our Competitive Differentiators</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">{differentiatorsIntro}</p>
               <Reveal>
