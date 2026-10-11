@@ -11,10 +11,10 @@ export default defineConfig({
   reporter: [["list"]],
   use: { baseURL, trace: "retain-on-failure" },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"], launchOptions: { executablePath: process.env.PW_CHROMIUM || undefined } } }],
-  webServer: {
+  webServer: process.env.BASE_URL ? undefined : {
     command: `pnpm start --port ${port}`,
     url: baseURL,
-    reuseExistingServer: true,
+    reuseExistingServer: false,
     timeout: 120_000,
     env: { NEXT_PUBLIC_SHOW_PLACEHOLDERS: process.env.NEXT_PUBLIC_SHOW_PLACEHOLDERS ?? "" },
   },

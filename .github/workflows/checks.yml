@@ -35,11 +35,17 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
       - name: Test
         run: pnpm test
+      - name: Lighthouse, mobile
+        run: pnpm lighthouse:mobile
+      - name: Lighthouse, desktop
+        run: pnpm lighthouse:desktop
       - name: Keep the traces of any failure
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-test-results
-          path: test-results
+          path: |
+            test-results
+            .lighthouseci
           if-no-files-found: ignore
           retention-days: 7
