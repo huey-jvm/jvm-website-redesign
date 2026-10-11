@@ -7,7 +7,6 @@ type P = [number, number];
 const pts = (...p: P[]) => p.map(([x, y]) => `${x},${y}`).join(" ");
 const r1 = (n: number) => Math.round(n * 10) / 10;
 
-const bob = "transition-transform duration-200 ease-move group-hover/card:-translate-y-1 motion-reduce:group-hover/card:translate-y-0";
 
 function Platform({ x, y, w, d = 8, gold = false }: { x: number; y: number; w: number; d?: number; gold?: boolean }) {
   const h = w / 2;
@@ -59,7 +58,7 @@ function Access() {
       <Platform x={main[0]} y={main[1]} w={50} />
       {sats.slice(2).map((s) => <Platform key={s.join()} x={s[0]} y={s[1]} w={20} d={5} />)}
       {sats.map((s) => <Cube key={s.join()} x={s[0]} y={s[1]} w={6} h={7} />)}
-      <g className={bob}><Cube x={main[0]} y={main[1]} w={14} h={18} gold /></g>
+      <g><Cube x={main[0]} y={main[1]} w={14} h={18} gold /></g>
     </>
   );
 }
@@ -70,7 +69,7 @@ function WholePerson() {
       <line x1={120} y1={36} x2={120} y2={124} strokeDasharray="3 4" className="stroke-ink-400" />
       <Platform x={120} y={112} w={52} d={10} />
       <Platform x={120} y={88} w={52} d={10} />
-      <g className={bob}><Platform x={120} y={64} w={52} d={10} gold /></g>
+      <g><Platform x={120} y={64} w={52} d={10} gold /></g>
     </>
   );
 }
@@ -83,7 +82,7 @@ function Operations() {
       <Dash from={spots[1]} to={spots[2]} arrow />
       {spots.map((s) => <Platform key={s.join()} x={s[0]} y={s[1]} w={28} d={6} />)}
       <Cube x={spots[0][0]} y={spots[0][1]} w={8} h={9} />
-      <g className={bob}><Cube x={spots[1][0]} y={spots[1][1]} w={11} h={15} gold /></g>
+      <g><Cube x={spots[1][0]} y={spots[1][1]} w={11} h={15} gold /></g>
       <Cube x={spots[2][0]} y={spots[2][1]} w={8} h={9} />
     </>
   );
@@ -96,7 +95,7 @@ function Experience() {
       <ellipse cx={120} cy={100} rx={36} ry={18} fill="none" strokeDasharray="3 4" className="stroke-ink-400" />
       <ellipse cx={120} cy={100} rx={50} ry={25} fill="none" strokeDasharray="3 4" className="stroke-ink-300" />
       <ellipse cx={120} cy={100} rx={14} ry={7} className="fill-ink-200" />
-      <g className={bob}>
+      <g>
         <circle cx={120} cy={84} r={14} className="fill-gold-500 stroke-gold-700" />
         <ellipse cx={115} cy={78} rx={5} ry={4} className="fill-gold-200" />
       </g>
@@ -113,7 +112,7 @@ function Readiness() {
   return (
     <>
       <Platform x={x} y={y} w={62} />
-      <g className={bob}><Cube x={x} y={y} w={12} h={14} gold /></g>
+      <g><Cube x={x} y={y} w={12} h={14} gold /></g>
       <g strokeLinejoin="round" className="stroke-ink-400">
         <polygon points={pts([x - w, y - h], [x, y - h + q], [x, y + q], [x - w, y])} className="fill-white/25" />
         <polygon points={pts([x, y - h + q], [x + w, y - h], [x + w, y], [x, y + q])} className="fill-white/35" />

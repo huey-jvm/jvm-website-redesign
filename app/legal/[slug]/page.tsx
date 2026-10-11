@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
@@ -28,7 +29,7 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
     <>
       <PageHero eyebrow="Legal" title={page.title} lead={page.description} crumbs={[{ label: page.title }]}>
         <p className="mt-4 text-caption text-ink-500">Last updated {page.updated}</p>
-        {page.draft ? <div className="mt-4 max-w-xl"><Placeholder id="P12"><p className="text-body-sm text-ink-900">Developer draft for JVM’s review. Approved text replaces this page before launch.</p></Placeholder></div> : null}
+        {page.draft ? <div className="mt-4 max-w-xl"><Placeholder id="P12" /></div> : null}
       </PageHero>
       <Section className="pt-0 md:pt-0 lg:pt-0">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
@@ -37,7 +38,7 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
             {page.sections.map((s) => (
               <section key={s.id} id={s.id} className="chapter-section scroll-mt-28">
                 <h2 className="text-h3">{s.title}</h2>
-                {s.paragraphs.map((p) => <p key={p.slice(0, 32)} className="prose-measure mt-3 text-body text-ink-700">{linkify(p)}</p>)}
+                {s.paragraphs.map((p) => <p key={p.slice(0, 32)} className="prose-measure mt-3 text-body text-ink-700">{s.id === "sms" ? p.split("SMS Consent notice").map((part,i) => <span key={i}>{i > 0 ? <Link href="/legal/sms-consent" className="link-underline font-semibold text-gold-700 after:bg-current">SMS Consent notice</Link> : null}{linkify(part)}</span>) : linkify(p)}</p>)}
                 {s.list ? <ul className="prose-measure mt-3 list-disc space-y-1 pl-5 text-body text-ink-700">{s.list.map((l) => <li key={l}>{l}</li>)}</ul> : null}
               </section>
             ))}

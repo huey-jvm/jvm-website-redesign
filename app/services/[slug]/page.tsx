@@ -1,15 +1,14 @@
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ImageHero } from "@/components/site/ImageHero";
-import { Reveal } from "@/components/site/Reveal";
+import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
 import { InPageNav } from "@/components/site/InPageNav";
 import { OutcomeTile } from "@/components/site/OutcomeTile";
 import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { Button } from "@/components/ui/Button";
-import { presentAsset } from "@/components/site/Slot";
+import { Banner } from "@/components/site/Slot";
 import { services, getService } from "@/content/services";
 import { getOutcome } from "@/content/outcomes";
 import { pageMetadata } from "@/lib/seo";
@@ -41,11 +40,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <ImageHero eyebrow="Services" title={service.name} lead={service.intro} crumbs={[{ label: "Services", href: "/services" }, { label: service.name }]} slot={service.bannerImage}>
+      <PageHero eyebrow="Services" title={service.name} lead={service.intro} crumbs={[{ label: "Services", href: "/services" }, { label: service.name }]}>
         {service.placeholders?.map((p) => <div key={p.id} className="mt-6 max-w-xl"><Placeholder id={p.id} what={p.what} who={p.who} /></div>)}
-      </ImageHero>
+      </PageHero>
+      {service.bannerImage ? <Banner id={service.bannerImage} className="pb-12 lg:pb-16" /> : null}
 
-      <Section surface="light" className={service.bannerImage && presentAsset(service.bannerImage) ? undefined : "pt-0 md:pt-0 lg:pt-0"}>
+      <Section surface="light" className="pt-0 md:pt-0 lg:pt-0">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
           <InPageNav sections={navSections} />
           <div className="min-w-0 space-y-14">
@@ -61,31 +61,31 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   </ul>
                 ) : null}
                 {sec.id === "stars-iii" ? (
-                  <div className="mt-5"><Button href="/contracting/stars-iii" variant="secondary" icon={<ArrowRight className="size-4" />} iconTrailing>About STARS III</Button></div>
+                  <div className="mt-5"><Button href="/contracting/stars-iii" variant="secondary" icon={<ArrowRight className="size-4" />} iconTrailing>Read about STARS III</Button></div>
                 ) : null}
               </section>
             ))}
 
             {service.lead ? (
               <section id="commercial" className="chapter-section scroll-mt-28 rounded-container bg-cream p-6 md:p-8">
-                <p className="text-eyebrow font-semibold uppercase text-gold-700">For commercial health systems</p>
+                <Eyebrow tone="light">For commercial health systems</Eyebrow>
                 <h2 className="mt-3 text-h2-sm md:text-h2">The Same Model, in Your Terms</h2>
                 <p className="prose-measure mt-4 text-body text-ink-700">
-                  Health systems outside government face the same pressures: access, throughput, staffing continuity and compliance. We bring the same credentialed professionals, the same program and case management discipline, and the same quality system, scoped to your network, your payer mix and your patient population. Credentialing and occupational health are typically where a commercial engagement begins.
+                  Health systems outside government face the same pressures: access, throughput, staffing continuity and compliance. We bring the same credentialed professionals, the same program and case management discipline, scoped to your network, your payer mix and your patient population.
                 </p>
-                <Link href="/contact" className="link-underline mt-5 inline-flex items-center gap-1 text-body font-semibold text-ink-900 after:bg-gold-700">Talk to us about your system <ArrowRight aria-hidden className="size-4" /></Link>
+                <Button href="/contact" variant="tertiary" className="max-w-full whitespace-normal text-left mt-5" icon={<ArrowRight className="size-4" />} iconTrailing>Talk to us about your system</Button>
               </section>
             ) : null}
 
             <section id="outcomes" className="chapter-section scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">Related Outcomes</h2>
-              <Reveal>
-                <ul className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+
+                <ul className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
                   {related.map((o) => (
                     <li key={o!.id} className="h-full"><OutcomeTile outcome={o!} href={`/why-jvm#${o!.id}`} /></li>
                   ))}
                 </ul>
-              </Reveal>
+
             </section>
           </div>
         </div>

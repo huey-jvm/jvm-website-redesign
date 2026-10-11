@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import Image from "next/image";
+import Image from "@/components/ui/Image";
 import type { ReactNode } from "react";
 import { getAsset } from "@/content/assets";
 import { cn } from "@/lib/cn";

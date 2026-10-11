@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { Analytics } from "@vercel/analytics/next";
+import { SiteAnalytics } from "@/components/site/Analytics";
 import "./globals.css";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -44,7 +44,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#000000",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -58,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <ContactWidget />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }} />
-        {process.env.NEXT_PUBLIC_STATIC_EXPORT === "true" ? null : <Analytics />}
+        {process.env.NEXT_PUBLIC_STATIC_EXPORT === "true" ? null : <SiteAnalytics />}
       </body>
     </html>
   );

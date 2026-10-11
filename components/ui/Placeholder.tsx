@@ -1,3 +1,4 @@
+import { Eyebrow } from "./Eyebrow";
 import type { ReactNode } from "react";
 import { showPlaceholders } from "@/lib/placeholders";
 import { placeholderRegister } from "@/content/placeholders";
@@ -10,9 +11,10 @@ type Props = {
   children?: ReactNode;
   className?: string;
   inline?: boolean;
+  nested?: boolean;
 };
 
-export function Placeholder({ id, what, who, children, className, inline }: Props) {
+export function Placeholder({ id, what, who, children, className, inline, nested }: Props) {
   const entry = placeholderRegister[id];
   const label = what ?? entry?.what ?? "Content pending";
   const owner = who ?? entry?.who ?? "JVM";
@@ -22,15 +24,15 @@ export function Placeholder({ id, what, who, children, className, inline }: Prop
   if (inline) {
     return (
       <span className={cn("rounded-control border-2 border-dashed border-gold-700 bg-cream px-2 py-0.5 text-body-sm text-ink-900", className)} title={`${label}. Settled by ${owner}.`}>
-        <span className="font-semibold uppercase tracking-[0.1em] text-caption text-gold-700">Placeholder · {id}</span>{" "}
+        <Eyebrow as="span" tone="light">Placeholder · {id}</Eyebrow>{" "}
         {children ?? label}
       </span>
     );
   }
 
   return (
-    <div className={cn("rounded-container border-2 border-dashed border-gold-700 bg-cream p-4", className)} role="note" aria-label={`Placeholder ${id}`}>
-      <p className="text-eyebrow font-semibold uppercase text-gold-700">Placeholder · {id}</p>
+    <div className={cn(nested ? "rounded-control" : "rounded-container", "border-2 border-dashed border-gold-700 bg-cream p-4", className)} role="note" aria-label={`Placeholder ${id}`}>
+      <Eyebrow tone="light">Placeholder · {id}</Eyebrow>
       <p className="mt-1 text-body-sm text-ink-900">
         {label}. <span className="text-ink-500">Settled by {owner}.</span>
       </p>

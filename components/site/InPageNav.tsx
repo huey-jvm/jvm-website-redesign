@@ -1,4 +1,5 @@
 "use client";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
@@ -26,9 +27,9 @@ export function InPageNav({ sections, label = "On this page" }: { sections: NavS
   }, [sections]);
 
   return (
-    <nav aria-label={label} className="lg:sticky lg:top-28 lg:self-start">
-      <p className="mb-3 hidden text-eyebrow font-semibold uppercase text-gold-700 lg:block">{label}</p>
-      <ul className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 lg:mx-0 lg:flex-col lg:gap-0 lg:overflow-visible lg:px-0 lg:pb-0">
+    <nav aria-label={label} className="sticky top-15 z-30 -mx-4 bg-white px-4 py-2 lg:top-28 lg:mx-0 lg:self-start lg:bg-transparent lg:px-0 lg:py-0">
+      <Eyebrow tone="light" className="mb-3 hidden     lg:block">{label}</Eyebrow>
+      <ul className="-mx-4 flex gap-2 overflow-x-auto px-4 py-2 lg:mx-0 lg:flex-col lg:gap-0 lg:overflow-visible lg:px-0 lg:pb-0">
         {sections.map((s) => {
           const current = s.id === active;
           return (
@@ -37,10 +38,10 @@ export function InPageNav({ sections, label = "On this page" }: { sections: NavS
                 href={`#${s.id}`}
                 aria-current={current ? "location" : undefined}
                 className={cn(
-                  "block whitespace-nowrap rounded-pill px-3 py-1.5 text-body-sm font-medium transition-colors duration-150 ease lg:whitespace-normal lg:rounded-none lg:border-l-2 lg:px-3 lg:py-2",
+                  "flex min-h-11 items-center whitespace-nowrap rounded-pill px-3 py-1.5 text-body-sm font-medium transition-colors duration-150 ease-hover focus-visible:transition-none lg:whitespace-normal lg:rounded-none lg:border-l-2 lg:px-3 lg:py-2",
                   current
                     ? "bg-gold-200 text-ink-950 lg:border-gold-500 lg:bg-transparent"
-                    : "bg-ink-100 text-ink-700 hover:text-ink-950 lg:border-ink-200 lg:bg-transparent lg:hover:border-ink-400",
+                    : "bg-ink-100 text-ink-700 hover:text-ink-950 focus-visible:text-ink-950 lg:border-ink-200 lg:bg-transparent lg:hover:border-ink-400 lg:focus-visible:border-ink-400",
                 )}
               >
                 {s.label}
