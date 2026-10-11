@@ -54,11 +54,38 @@ test("legacy Wix paths redirect", async ({ page }) => {
   }
 });
 
-test("identifiers render whole at 320px", async ({ page }) => {
+async function clippedFigures(page: import("@playwright/test").Page) {
+  return page.locator("[data-figure]").evaluateAll(els => els.filter(e => {
+    const rect = e.getBoundingClientRect();
+    if (e.scrollWidth > e.clientWidth + 1 || getComputedStyle(e).textOverflow === "ellipsis") return true;
+    for (let a = e.parentElement; a; a = a.parentElement) {
+      if (["hidden", "clip"].includes(getComputedStyle(a).overflowX)) {
+        const ar = a.getBoundingClientRect();
+        if (rect.right > ar.right + 1 || rect.left < ar.left - 1) return true;
+      }
+    }
+    return false;
+  }).map(e => e.textContent?.slice(0, 60)));
+}
+
+test("identifiers render whole on every page at 320px", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 });
-  await page.goto("/contracting", { waitUntil: "networkidle" });
-  const clipped = await page.locator("[data-figure]").evaluateAll((els) => els.filter((e) => e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent?.slice(0, 40)));
-  expect(clipped).toEqual([]);
+  let measured = 0;
+  for (const route of pages) {
+    await page.goto(route, {waitUntil:"networkidle"});
+    const count = await page.locator("[data-figure]").count();
+    measured += count;
+    if (["/", "/contracting", "/contracting/capability-statement", "/about", "/contracting/stars-iii"].includes(route)) expect(count, route).toBeGreaterThan(0);
+    expect(await clippedFigures(page), route).toEqual([]);
+  }
+  expect(measured).toBeGreaterThan(0);
+  console.log("identifier sweep: " + pages.length + " pages, " + measured + " figures, zero clipped");
+  await page.evaluate(() => {
+    const el = document.createElement("div");
+    el.innerHTML = '<div style="width:80px;overflow:hidden"><span data-figure style="display:block;white-space:nowrap">47QTCB22D0653-CONTROL</span></div><div style="width:60px;overflow:hidden"><table><tr><td data-figure>541512541512541512</td></tr></table></div>';
+    document.body.append(el);
+  });
+  expect(await clippedFigures(page)).toHaveLength(2);
 });
 
 test("STARS III follows one switch: zero mentions when starsIII.listed is no, present otherwise", async ({ request }) => {

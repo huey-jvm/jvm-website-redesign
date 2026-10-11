@@ -1,6 +1,6 @@
 import { test, expect, type Locator } from "@playwright/test";
 
-const paint = (el: Locator) => el.evaluate((e) => { const s = getComputedStyle(e); return `${s.backgroundColor} | ${s.color}`; });
+const paint = (el: Locator) => el.evaluate((e) => { const s = getComputedStyle(e); const u=e.querySelector(":scope > .link-underline"); return `${s.backgroundColor} | ${s.color} | ${s.boxShadow} | ${u ? getComputedStyle(u,"::after").opacity : ""}`; });
 
 test("control: a paint reading that never changes is reported as unchanged", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
@@ -17,8 +17,7 @@ test("every button variant changes its paint on hover with a mouse", async ({ pa
   const targets: [string, Locator][] = [
     ["light primary, header", page.locator("header").getByRole("button", { name: "Start a conversation" })],
     ["dark primary, hero", page.locator("[data-hero]").getByRole("button", { name: "Start a conversation" })],
-    ["dark secondary, hero", page.locator("[data-hero]").getByRole("link", { name: "Capability statement" })],
-    ["light secondary, call to action band", page.locator("main").getByRole("link", { name: "Capability statement" }).last()],
+    ["dark secondary, hero", page.locator("[data-hero]").getByRole("link", { name: "Read the capability statement" })],
     ["tertiary, read how we work", page.getByRole("link", { name: "Read how we work" })],
   ];
   for (const [name, el] of targets) {
@@ -38,7 +37,7 @@ test("on a touch device hover does nothing and the pressed state shows instead",
   await page.goto("/", { waitUntil: "networkidle" });
   const canHover = await page.evaluate(() => matchMedia("(hover: hover)").matches);
   expect(canHover, "the emulated device cannot hover").toBe(false);
-  const button = page.locator("[data-hero]").getByRole("link", { name: "Capability statement" });
+  const button = page.locator("[data-hero]").getByRole("link", { name: "Read the capability statement" });
   await button.scrollIntoViewIfNeeded();
   const rest = await paint(button);
   const box = (await button.boundingBox())!;
@@ -58,6 +57,14 @@ test("copy buttons are visible without hover on a touch device", async ({ browse
   await page.goto("/contracting", { waitUntil: "networkidle" });
   const copy = page.getByRole("button", { name: /^Copy UEI$/ });
   expect(await copy.evaluate((e) => getComputedStyle(e).opacity)).toBe("1");
+  const row = page.locator("main dl > div").filter({ has: page.locator("dt").filter({ hasText: /^UEI$/ }) });
+  const status = row.getByRole("status");
+  await expect(status).toHaveText("");
+  await page.evaluate(() => Object.defineProperty(navigator, "clipboard", { value: { writeText: async () => {} }, configurable: true }));
+  await copy.click();
+  await expect(status).toHaveText("UEI copied");
+  await expect(row.locator("span[aria-hidden]")).toHaveText("Copied");
+  await expect(status).toHaveText("");
   await context.close();
   const desktop = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   const dpage = await desktop.newPage();
