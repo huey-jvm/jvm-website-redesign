@@ -25,15 +25,18 @@ pnpm check         # all of the above in order
 ```
 
 The test suite starts `pnpm start` on port 3100 by itself. Browsers: `pnpm exec playwright install chromium` once.
-Lighthouse budgets live in `lighthouserc.json` and run with `npx @lhci/cli autorun`.
+The test server is never reused. Stop anything on port 3100 before running it, or set `BASE_URL` to an explicitly managed server.
+Lighthouse budgets live in `lighthouserc.json`. Run `pnpm lighthouse:mobile` and `pnpm lighthouse:desktop` after the production build. They use port 3200 and retain the 90 performance and 95 accessibility, best practices and SEO thresholds.
+
+The JavaScript gate measures gzip bytes of the initial module scripts on every route, with a 150 KiB limit. Modules loaded after opening a menu or form, idle analytics and legacy `nomodule` scripts are outside that initial-load measurement.
 
 ## Cards and illustrations
 
-A card never clips its text. There is no ellipsis, no line clamp and no fixed height that hides overflow. `tests/e2e/cards.spec.ts` fails if one appears in the source or in any rendered page.
+Card titles occupy one line and expose the full title through a title attribute. Summary prose uses a two-line clamp; detail prose remains complete. Numbers and identifiers never truncate or clip. Card height follows content and row stretch, without a minimum height.
 
 When the full text is too long for a card, the card carries a high level version and the detail sits one click away.
 
-- A teaser card points to detail elsewhere, such as an outcome, a service or a differentiator on the home page. It shows the `teaser` field of its content item, a complete sentence of at most 120 characters. The full text is the item's `body` or `intro`, shown where Read more goes.
+- Outcome and differentiator summaries use the deck sentence. Service summaries use their complete `teaser` sentence, at most 120 characters. Complete copy is available at the linked detail.
 - A card that is itself the detail, such as a differentiator on the Why JVM page, shows its full text.
 - Hierarchy decides the picture. The top tier carries an illustration or a photo: the five outcomes and the service cards. Everything below is text only: differentiators, pillars, values and link cards.
 
@@ -45,7 +48,7 @@ Illustrations share one shape. Landscape 8:5, 1200 by 750 pixels, a PNG with a t
 |---|---|
 | `app/globals.css` | The token layer. Every colour, type step, radius, shadow and easing, as `@theme`. Tailwind's stock palette is removed so a component cannot reach for a colour that is not a token |
 | `content/` | One fact, one file. `contact.ts` holds the only address, phone and routing table. `services.ts` holds the four service areas. `identifiers.ts`, `vehicles.ts`, `credentials.ts`, `team.ts`, `values.ts`, `statements.ts`, `legal.ts`, `navigation.ts`, `redirects.ts`, `placeholders.ts` |
-| `components/ui/` | Primitives that carry the interaction contract once: `Button`, `Placeholder`, `Chip`, `CopyButton`, `ExternalLink`, `Eyebrow` |
+| `components/ui/` | Primitives that carry the interaction contract once: `Button`, `Placeholder`, `CopyButton`, `ExternalLink`, `Eyebrow` |
 | `components/site/` | Site components: header, footer, contact widget and form, proof strip, cards, fact block, in-page nav, close button, banner |
 | `app/` | Routes. One folder per page, plus `api/contact`, `sitemap.ts`, `robots.ts` |
 | `tests/e2e/` | The gates |

@@ -1,15 +1,18 @@
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/site/Section";
+
+export const metadata = { title: "Page Not Found" };
 
 export default function NotFound() {
   return (
     <Section>
-      <p className="text-eyebrow font-semibold uppercase text-gold-700">404</p>
+      <Eyebrow tone="light">404</Eyebrow>
       <h1 className="mt-3 text-h1-sm md:text-h1">Page Not Found</h1>
       <p className="prose-measure mt-4 text-body text-ink-700">The page you asked for is not here. It may have moved when the site was rebuilt.</p>
       <div className="mt-6 flex flex-wrap gap-3">
         <Button href="/" variant="primary">Go to the homepage</Button>
-        <Button href="/contracting" variant="secondary">Contracting</Button>
+        <Button href="/contracting" variant="secondary">Go to contracting</Button>
       </div>
     </Section>
   );

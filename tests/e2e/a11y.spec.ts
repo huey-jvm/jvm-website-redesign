@@ -10,3 +10,5 @@ for (const path of pages) {
     expect(serious.map((v) => `${v.id}: ${v.help} (${v.nodes.length} nodes) ${v.nodes.slice(0, 2).map((n) => n.target.join(" ")).join(" | ")}`)).toEqual([]);
   });
 }
+
+test("control: the accessibility gate catches unnamed controls and missing image alternatives", async ({page}) => {await page.goto("/"); await page.evaluate(()=>{const host=document.createElement("div");host.innerHTML='<button></button><img src="/images/team/team-walking.jpg">';document.querySelector("main")!.prepend(host);}); const result=await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21a","wcag21aa","wcag22aa"]).analyze(); const serious=result.violations.filter(v=>v.impact === "serious" || v.impact === "critical").map(v=>v.id); expect(serious).toContain("button-name");expect(serious).toContain("image-alt");});

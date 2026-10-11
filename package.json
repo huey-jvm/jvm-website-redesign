@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit",
     "test": "playwright test",
     "test:gates": "playwright test tests/e2e/width-sweep.spec.ts tests/e2e/structure.spec.ts tests/e2e/a11y.spec.ts",
-    "check": "pnpm lint && pnpm typecheck && pnpm build && pnpm test"
+    "check": "pnpm lint && pnpm typecheck && pnpm build && pnpm test",
+    "lighthouse:mobile": "lhci collect && lhci assert",
+    "lighthouse:desktop": "lhci collect --settings.preset=desktop && lhci assert"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -25,6 +27,7 @@
     "@axe-core/playwright": "^4.13.0",
     "@fontsource-variable/inter": "^5.3.0",
     "@fontsource/cormorant-sc": "^5.3.0",
+    "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",

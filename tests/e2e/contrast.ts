@@ -9,13 +9,13 @@ export async function markForMeasure(page: Page, selector: string, index: number
   }, { selector, index });
 }
 
-export async function measureContrast(page: Page, info: TestInfo, name: string) {
+export async function measureContrast(page: Page, info: TestInfo, name: string, includeOwnSurfaces = false) {
   const selector = "[data-measure]";
   const section = page.locator(selector);
   await section.scrollIntoViewIfNeeded();
   await page.evaluate(() => document.querySelectorAll("img").forEach((i) => { i.loading = "eager"; }));
   await page.waitForFunction(() => Array.from(document.images).every((i) => i.complete), null, { timeout: 15_000 });
-  const lines: Line[] = await section.evaluate((root) => {
+  const lines: Line[] = await section.evaluate((root, includeOwnSurfaces) => {
     const lin = (v: number) => { const s = v / 255; return s <= 0.04045 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4); };
     const lum = (c: number[]) => 0.2126 * lin(c[0]) + 0.7152 * lin(c[1]) + 0.0722 * lin(c[2]);
     const nums = (s: string) => (s.match(/[\d.]+/g) ?? []).map(Number);
@@ -32,7 +32,7 @@ export async function measureContrast(page: Page, info: TestInfo, name: string) 
         const bg = nums(getComputedStyle(a).backgroundColor);
         if (bg.length >= 3 && (bg[3] ?? 1) > 0) { onOwnSurface = true; break; }
       }
-      if (onOwnSurface) continue;
+      if (onOwnSurface && !includeOwnSurfaces) continue;
       const cs = getComputedStyle(el);
       const size = parseFloat(cs.fontSize);
       const large = size >= 24 || (size >= 18.66 && Number(cs.fontWeight) >= 700);
@@ -44,7 +44,7 @@ export async function measureContrast(page: Page, info: TestInfo, name: string) 
       }
     }
     return out;
-  });
+  }, includeOwnSurfaces);
   await page.evaluate((sel) => {
     const root = document.querySelector(sel);
     document.querySelectorAll("body *").forEach((el) => {

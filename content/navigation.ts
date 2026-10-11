@@ -1,3 +1,4 @@
+import { certificationSummary } from "./credentials";
 import { services } from "./services";
 import { pastPerformance, starsShown } from "./vehicles";
 
@@ -27,7 +28,7 @@ export const primaryNav: NavGroup[] = [
     items: [
       { label: "Contracting overview", href: "/contracting", description: "Identifiers, vehicles and how to reach us" },
       ...(starsShown ? [{ label: "GSA 8(a) STARS III", href: "/contracting/stars-iii", description: "Our prime contract vehicle" }] : []),
-      { label: "Certifications and Set-Asides", href: "/contracting/certifications", description: "8(a), EDWOSB, SDVOSB, HUBZone, ISO 9001" },
+      { label: "Certifications and Set-Asides", href: "/contracting/certifications", description: certificationSummary },
       ...(pastPerformance.length ? [{ label: "Past Performance", href: "/contracting/past-performance", description: "Contracts and task orders" }] : []),
       { label: "Capability Statement", href: "/contracting/capability-statement", description: "One page summary to download" },
     ],

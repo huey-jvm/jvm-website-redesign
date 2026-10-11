@@ -5,6 +5,7 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  { files: ["components/ui/Image.tsx"], rules: { "@next/next/no-img-element": "off" } },
   globalIgnores([
     ".next/**",
     "out/**",

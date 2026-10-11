@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import { CloseButton } from "./CloseButton";
 
-export type Announcement = { id: string; title: string; body?: string; href?: string; linkLabel?: string; start?: string; end?: string };
+export type Announcement = { id: string; title: string; body?: string; start?: string; end?: string } & ({href: string; linkLabel: string} | {href?: undefined; linkLabel?: undefined});
 
 const listeners = new Set<() => void>();
 function subscribe(cb: () => void) { listeners.add(cb); return () => { listeners.delete(cb); }; }
@@ -33,7 +33,8 @@ export function AnnouncementBanner({ announcement }: { announcement?: Announceme
   if (!announcement || dismissed || !inWindow(announcement)) return null;
 
   return (
-    <div role="region" aria-label="Announcement" className="border-b border-cream-border bg-cream">
+    <div role="region" aria-label="Announcement" className="grid grid-rows-[1fr] border-b border-cream-border bg-cream opacity-100 transition-[grid-template-rows,opacity] duration-200 ease-enter starting:grid-rows-[0fr] starting:opacity-0 motion-reduce:transition-opacity">
+      <div className="min-h-0 overflow-hidden">
       <div className="container-content flex items-center justify-between gap-4 py-2">
         <p className="min-w-0 text-body text-ink-900">
           <span className="font-semibold">{announcement.title}</span>
@@ -41,7 +42,7 @@ export function AnnouncementBanner({ announcement }: { announcement?: Announceme
           {announcement.href ? (
             <>
               {" "}
-              <Link href={announcement.href} className="link-underline font-semibold text-gold-700 after:bg-current">{announcement.linkLabel ?? "Read more"}</Link>
+              <Link href={announcement.href} className="link-underline font-semibold text-gold-700 after:bg-current">{announcement.linkLabel}</Link>
             </>
           ) : null}
         </p>
@@ -49,6 +50,7 @@ export function AnnouncementBanner({ announcement }: { announcement?: Announceme
           label="Dismiss announcement"
           onClick={() => dismiss(announcement.id)}
         />
+      </div>
       </div>
     </div>
   );

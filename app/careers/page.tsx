@@ -1,7 +1,6 @@
 import { teamPhoto } from "@/content/team";
-import { ArrowUpRight } from "lucide-react";
+import { statements } from "@/content/statements";
 import { ImageHero } from "@/components/site/ImageHero";
-import { Reveal } from "@/components/site/Reveal";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { CredentialMark } from "@/components/site/CredentialMark";
 import { CTABand } from "@/components/site/CTABand";
@@ -25,34 +24,34 @@ export default function CareersPage() {
     <>
       <ImageHero
         eyebrow="Careers"
-        title="Success Begins With the Right Team"
-        lead="JVM is an equal opportunity employer and a recognised veteran employer. If your work is a calling, you will find people here who feel the same."
+        title="Work That Matters to the People It Serves"
+        lead="JVM is an equal opportunity employer. If your work is a calling, you will find people here who feel the same."
         crumbs={[{ label: "Careers" }]}
         image={teamPhoto}
       />
 
       <Section>
-        <Reveal>
-        <ul className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+
+        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {audiences.map((a) => (
-            <li key={a.title} className="@container overflow-hidden rounded-container border border-ink-200 bg-white">
-              <Slot id={a.image} className="aspect-[3/2] w-full" sizes="(min-width: 1024px) 33vw, 100vw" />
-              <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
-                <h2 className="text-h3">{a.title}</h2>
+            <li key={a.title} >
+              <Slot id={a.image} className="aspect-[3/2] w-full rounded-container" sizes="(min-width: 1024px) 33vw, 100vw" />
+              <div className="mt-6">
+                <h2 title={a.title} className="text-h3">{a.title}</h2>
                 <p className="mt-3 text-body text-ink-700">{a.body}</p>
               </div>
             </li>
           ))}
         </ul>
-        </Reveal>
+
       </Section>
 
-      <Section surface="cream" tight>
+      <Section surface="cream">
         <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
-          <CredentialMark credential={whv} />
+          {whv.evidenceHref ? <CredentialMark credential={whv} /> : null}
           <div>
             <h2 className="text-h3">We Hire Veterans</h2>
-            <p className="mt-2 max-w-[65ch] text-body text-ink-700">Recognised by the Texas Workforce Commission for our commitment to hiring veterans. Veteran status is a strength here, not a line on a form.</p>
+            <p className="mt-2 max-w-[65ch] text-body text-ink-700">{whv.evidenceHref ? `Recognised by the ${whv.issuer} in ${whv.period}. ` : ""}Veteran status is a strength here, not a line on a form.</p>
           </div>
         </div>
       </Section>
@@ -60,15 +59,15 @@ export default function CareersPage() {
       <Section>
         <div className="mx-auto max-w-2xl text-center">
           <SectionHeader align="center" eyebrow="Open roles" title="View Current Openings" lead="Applications are handled on our careers portal, hosted by iSolved." />
-          <Button href={contact.careersPortal} external variant="primary" size="lg" icon={<ArrowUpRight className="size-5" />} iconTrailing className="max-w-full whitespace-normal text-center">View open roles on iSolved</Button>
+          <Button href={contact.careersPortal} external variant="primary">View open roles on iSolved</Button>
           <p className="mt-3 text-body-sm text-ink-500">Opens the JVM careers portal in a new tab.</p>
           <p className="mt-2 text-body text-ink-700">Openings are posted on our careers portal as they arise.</p>
         </div>
       </Section>
 
-      <Section surface="ink50" tight>
+      <Section surface="ink50">
         <p className="prose-measure text-body-sm text-ink-700">
-          {`Johnson Venture Management Solutions, Inc. is an Equal Opportunity Employer. All qualified applicants receive consideration for employment without regard to race, colour, religion, sex, sexual orientation, gender identity, national origin, disability or protected veteran status. Questions about a role or the application process can be sent to `}
+          {`${statements.companyName} is an Equal Opportunity Employer. All qualified applicants receive consideration for employment without regard to race, colour, religion, sex, sexual orientation, gender identity, national origin, disability or protected veteran status. Questions about a role or the application process can be sent to `}
           <a href={`mailto:${contact.emails.general}`} className="link-underline font-semibold text-gold-700 after:bg-current">{contact.emails.general}</a>.
         </p>
       </Section>

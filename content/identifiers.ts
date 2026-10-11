@@ -1,9 +1,12 @@
+import { evidencedCredentials } from "./credentials";
+
 export const identifiers = {
+  ownership: "Veteran owned, woman owned",
   uei: "CCLDP2LPGKN4",
   cage: "7XJ94",
   naicsPrimary: "541512",
   naicsSecondary: ["541511", "541513", "541519", "518210"],
-  setAsides: ["SBA 8(a)", "EDWOSB", "SDVOSB", "HUBZone"],
+  setAsides: evidencedCredentials.filter((c) => ["sba-8a", "edwosb", "sdvosb", "hubzone"].includes(c.slug)).map((c) => c.name),
   samStatus: "Active registration",
 } as const;
 

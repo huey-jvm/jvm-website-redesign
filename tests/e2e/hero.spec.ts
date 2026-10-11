@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import { test, expect } from "@playwright/test";
 import { pages } from "./pages";
 import { markForMeasure, measureContrast } from "./contrast";
@@ -17,7 +18,7 @@ test("control: the contrast measurement flags light text over a light backdrop",
   expect(Math.min(...lines.map((l) => l.ratio))).toBeLessThan(2);
 });
 
-test("every full-bleed hero keeps its text readable at 1280 and 375", async ({ page }) => {
+test("every photographic hero keeps its text readable at 1280 and 375", async ({ page }) => {
   test.setTimeout(180_000);
   const seen: string[] = [];
   for (const route of pages) {
@@ -27,12 +28,8 @@ test("every full-bleed hero keeps its text readable at 1280 and 375", async ({ p
       const count = await page.locator("[data-hero]").count();
       if (!count) continue;
       await markForMeasure(page, "[data-hero]", 0);
-      const measured = await measureContrast(page, test.info(), `hero${route.replaceAll("/", "_")}-${width}`);
-      if (width === 1280) expect(measured.length, `${route} at ${width}px has text over the hero image`).toBeGreaterThan(0);
-      if (!measured.length) {
-        console.log(`hero on ${route} at ${width}px: the text sits on its own solid panel, nothing to measure against the image`);
-        continue;
-      }
+      const measured = await measureContrast(page, test.info(), `hero${route.replaceAll("/", "_")}-${width}`, true);
+      expect(measured.length, `${route} at ${width}px has measured hero text`).toBeGreaterThan(0);
       const worst = measured.reduce((a, b) => (b.ratio < a.ratio ? b : a));
       console.log(`hero on ${route} at ${width}px: ${measured.length} text lines, lowest contrast ${worst.ratio.toFixed(2)} ("${worst.text}"), brightest backdrop under text ${(Math.max(...measured.map((m) => m.bgMax)) * 100).toFixed(1)} percent`);
       for (const m of measured) expect(m.ratio, `"${m.text}" on ${route} at ${width}px`).toBeGreaterThanOrEqual(m.large ? 3 : 4.5);
@@ -40,7 +37,7 @@ test("every full-bleed hero keeps its text readable at 1280 and 375", async ({ p
     }
   }
   console.log(`full-bleed heroes found on ${seen.length} pages: ${seen.join(", ")}`);
-  expect(seen).toEqual(expect.arrayContaining(["/", "/about", "/careers"]));
+  expect(seen).toEqual(expect.arrayContaining(["/", "/careers"]));
 });
 
 test("hero crops stay still on scroll and mobile photos have their own frame", async ({ browser }) => {
@@ -85,11 +82,9 @@ for (const width of [1280, 375]) {
   test(`the drawn contour background behind Contracting at a glance keeps text readable at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/", { waitUntil: "networkidle" });
+    test.skip(fs.existsSync("public/images/generated/as-04-gold-contours.png"), "Generated texture replaces drawn fallback");
     const count = await page.locator("[data-art]").count();
-    if (!count) {
-      console.log("contour art: a generated texture is in place, so the drawn fallback is not rendered");
-      return;
-    }
+    expect(count).toBeGreaterThan(0);
     await markForMeasure(page, "[data-art]", 0);
     const lines = await measureContrast(page, test.info(), `art-${width}`);
     expect(lines.length, "text sits directly on the drawn background").toBeGreaterThan(0);

@@ -1,3 +1,5 @@
+import { TitleFigures } from "@/components/ui/TitleFigures";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import type { ReactNode } from "react";
 import { Breadcrumb } from "./Breadcrumb";
 import { cn } from "@/lib/cn";
@@ -6,9 +8,9 @@ export function PageHero({ eyebrow, title, lead, crumbs, children, aside, surfac
   const text = (
     <>
       {crumbs ? <Breadcrumb items={crumbs} /> : null}
-      {eyebrow ? <p className="mb-3 text-eyebrow font-semibold uppercase text-gold-700">{eyebrow}</p> : null}
-      <h1 className="text-h1-sm md:text-h1">{title}</h1>
-      {lead ? <p className="mt-5 max-w-[60ch] text-lead-sm text-ink-700 md:text-lead">{lead}</p> : null}
+      {eyebrow ? <Eyebrow tone="light" className="mb-3">{eyebrow}</Eyebrow> : null}
+      <h1 className="text-h1-sm md:text-h1"><TitleFigures>{title}</TitleFigures></h1>
+      {lead ? <p className="mt-5 prose-measure text-lead-sm text-ink-700 md:text-lead">{lead}</p> : null}
       {children}
     </>
   );
