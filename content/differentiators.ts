@@ -20,6 +20,7 @@ export const valueProposition = {
 };
 
 export const theShift = {
+  figureLabel: "Nine loose crates gather into one tray as the pointer moves right: from staffing vendor to integrated operations partner.",
   intro: "JVM's path forward requires a deliberate pivot in how we position, package, and present our capabilities to the market. This is not a rebrand. It is a strategic elevation.",
   from: { title: "From Staffing Vendor", body: "Competing on labor categories, bill rates, and headcount. Easily commoditized, low margin, and replaceable by any competitor with a roster." },
   to: { title: "To Integrated Operations Partner", body: "Positioning JVM as an Integrated Healthcare Operations and Professional Services Company, leading with customized operational solutions, competing on measurable mission impact, and delivering outcomes that no staffing vendor can replicate." },
