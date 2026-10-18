@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
-import { Slot } from "@/components/site/Slot";
+import { Slot, presentAsset } from "@/components/site/Slot";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { FactBlock } from "@/components/site/FactBlock";
 import { TeamCard } from "@/components/site/TeamCard";
@@ -104,13 +104,14 @@ export default function ContractingPage() {
       </Section>
 
       <Section>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
         <Slot
           id="AS-11"
-          className="mb-10 aspect-[21/9] w-full"
-          sizes="(min-width: 1200px) 1200px, 100vw"
+          className="aspect-[3/2] w-full rounded-container lg:col-span-7 lg:aspect-auto lg:min-h-96"
+          sizes="(min-width: 1024px) 58vw, 100vw"
         />
 
-        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:gap-8">
+        <ul className={presentAsset("AS-11") ? "grid grid-cols-1 gap-4 md:grid-cols-3 lg:col-span-5 lg:grid-cols-1" : "grid grid-cols-1 gap-4 md:grid-cols-3 lg:col-span-12"}>
           {cards
             .filter((c) => !c.withheld)
             .map((c) => (
@@ -120,14 +121,14 @@ export default function ContractingPage() {
                   href={c.href}
                   className="group/card @container flex h-full flex-col rounded-container border border-ink-200 bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700"
                 >
-                  <div className="flex flex-1 flex-col p-4 @[20rem]:p-6 @[35rem]:p-8">
+                  <div className="flex flex-1 flex-col p-4 @[20rem]:px-6 @[20rem]:py-5">
                     <h2
                       title={c.title}
-                      className="truncate text-h4 @[20rem]:text-h3 @[35rem]:text-h2-sm group-hover/card:text-gold-700 group-focus-visible/card:text-gold-700"
+                      className="text-h4 transition-colors duration-150 ease-hover @[20rem]:text-h3 group-hover/card:text-gold-700 group-focus-visible/card:text-gold-700 group-focus-visible/card:transition-none"
                     >
                       {c.title}
                     </h2>
-                    <p className="mt-2 line-clamp-2 text-body-sm @[20rem]:text-body text-ink-700">
+                    <p className="mt-2 text-body-sm @[20rem]:text-body text-ink-700">
                       {c.body}
                     </p>
                     <span className="mt-auto inline-flex items-center gap-1 pt-4 text-body-sm font-semibold text-ink-900">
@@ -142,6 +143,7 @@ export default function ContractingPage() {
               </li>
             ))}
         </ul>
+        </div>
 
         {pastPerformance.length === 0 ? (
           <div className="mt-6">

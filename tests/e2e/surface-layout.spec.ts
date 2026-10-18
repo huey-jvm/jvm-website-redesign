@@ -44,7 +44,7 @@ test("dropdown selection follows the route rather than the first service", async
   await expect(nav.locator('[aria-current="page"]')).toHaveCount(1);
 });
 
-test("the cream proof strip follows a content-sized hero and outcomes share one uncropped row", async ({ page }) => {
+test("the proof strip follows a content-sized hero and outcomes stack as one uncropped index", async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
   await openSurface(page, "/");
   const hero = page.locator("[data-hero]");
@@ -53,8 +53,9 @@ test("the cream proof strip follows a content-sized hero and outcomes share one 
   expect(heroBox!.height).toBeLessThanOrEqual(1080 * 0.85);
   const cards = page.locator(".outcomes-row > li");
   await expect(cards).toHaveCount(5);
-  const boxes = await cards.evaluateAll(els => els.map(el => el.getBoundingClientRect().top));
-  expect(new Set(boxes.map(Math.round)).size).toBe(1);
+  const boxes = await cards.evaluateAll(els => els.map(el => { const r = el.getBoundingClientRect(); return { top: Math.round(r.top), left: Math.round(r.left) }; }));
+  expect(new Set(boxes.map(b => b.top)).size).toBe(5);
+  expect(new Set(boxes.map(b => b.left)).size).toBe(1);
   for (const img of await page.locator(".outcomes-row img").all()) {
     expect(await img.evaluate(el => getComputedStyle(el).objectFit)).toBe("contain");
   }

@@ -38,7 +38,7 @@ test("control: the source scan finds a clamp, a truncate and an ellipsis class",
   expect(sample.match(clipPattern)).toHaveLength(3);
 });
 
-test("card summary headings expose their complete title", async ({page}) => { await page.goto("/"); const titles=page.locator("a.group\\/card h3"); expect(await titles.count()).toBeGreaterThan(0); for(const title of await titles.all()) { expect(await title.getAttribute("title")).toBe(await title.textContent()); expect(await title.evaluate(el=>getComputedStyle(el).textOverflow)).toBe("ellipsis"); } });
+test("card summary headings show their complete title without truncation", async ({page}) => { await page.goto("/"); const titles=page.locator("a.group\\/card h3"); expect(await titles.count()).toBeGreaterThan(0); for(const title of await titles.all()) { expect(await title.getAttribute("title")).toBe(await title.textContent()); expect(await title.evaluate(el=>getComputedStyle(el).textOverflow)).not.toBe("ellipsis"); expect(await title.evaluate(el=>el.scrollWidth<=el.clientWidth+1)).toBe(true); } });
 
 test("control: the teaser check rejects a long, unfinished or dashed line", () => {
   expect(teaserProblems("x".repeat(130) + ".")).not.toEqual([]);

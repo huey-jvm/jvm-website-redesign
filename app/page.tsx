@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { ProofStrip } from "@/components/site/ProofStrip";
 import { ContourArt } from "@/components/site/ContourArt";
-import { OutcomeTile } from "@/components/site/OutcomeTile";
+import { OutcomeRow } from "@/components/site/OutcomeTile";
 import { cn } from "@/lib/cn";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { FactBlock } from "@/components/site/FactBlock";
@@ -50,50 +50,47 @@ export default function HomePage() {
       <ProofStrip />
 
       <Section surface="light" aria-labelledby="outcomes-title">
-        <SectionHeader eyebrow="Five outcomes" title="What Changes for Your Mission" />
-
-          <ul className="outcomes-row grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-5 xl:gap-8">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-4">
+            <div className="lg:sticky lg:top-36">
+              <SectionHeader id="outcomes-title" eyebrow="Five outcomes" title="What Changes for Your Mission" className="mb-0 md:mb-0" />
+            </div>
+          </div>
+          <ol className="outcomes-row border-t border-ink-200 lg:col-span-8">
             {outcomes.map((o, i) => (
-              <li key={o.id} className={cn("h-full xl:col-span-1", i < 3 ? "lg:col-span-2" : "lg:col-span-3")}>
-                <OutcomeTile outcome={o} href={`/why-jvm#${o.id}`} />
+              <li key={o.id} className="border-b border-ink-200">
+                <OutcomeRow outcome={o} index={i} href={`/why-jvm#${o.id}`} />
               </li>
             ))}
-          </ul>
-
-        <span id="outcomes-title" className="sr-only">Outcomes</span>
+          </ol>
+        </div>
       </Section>
 
       <Section surface="cream">
         <SectionHeader eyebrow="Services" title="One Accountable Partner Across Four Areas" lead={`${services[0].name} leads. ${formatList(services.slice(1).map((s) => s.name))} sit alongside it under the same accountability.`} />
-
-          <ul className="service-row grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5 xl:gap-8">
-            {services.map((s) => (
-              <li key={s.slug} className={cn("h-full", s.lead && "lg:col-span-2")}>
-                <ServiceCard service={s} image={s.cardPhoto} slot={s.cardImage} />
-              </li>
-            ))}
-          </ul>
-
+        <ul className="service-row grid grid-cols-1 gap-6 lg:grid-cols-12 lg:grid-rows-3">
+          {services.map((s) => (
+            <li key={s.slug} className={cn("h-full", s.lead ? "lg:col-span-6 lg:row-span-3" : "lg:col-span-6")}>
+              <ServiceCard service={s} image={s.cardPhoto} slot={s.cardImage} layout={s.lead ? "feature" : "row"} />
+            </li>
+          ))}
+        </ul>
       </Section>
 
-      <Section surface="light" >
-        <SectionHeader eyebrow="How we work" title="Four Differentiators That Do Not Commoditize" />
-
-          <ol className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {differentiators.map((d) => (
-              <li key={d.n} className="@container flex h-full flex-col rounded-container border border-ink-200 bg-white">
-                <div className="flex flex-1 flex-col p-4 @[20rem]:p-6 @[35rem]:p-8">
-                  <span className="font-sans text-h2 font-medium leading-none text-gold-700 tabular">{d.n}</span>
-                  <h3 title={d.title} className="mt-6 truncate text-h4 @[20rem]:text-h3 @[35rem]:text-h2-sm text-ink-950">{d.title}</h3>
-                  <p className="mt-3 line-clamp-2 text-body-sm @[20rem]:text-body text-ink-700">{d.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-
-        <div className="mt-10 flex justify-end">
-          <Button href="/why-jvm" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing>Read how we work</Button>
+      <Section surface="light">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <SectionHeader eyebrow="How we work" title="Four Differentiators That Do Not Commoditize" className="mb-0 md:mb-0" />
+          <Button href="/why-jvm" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing className="self-start md:self-auto">Read how we work</Button>
         </div>
+        <ol className="differentiators mt-10 grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:mt-12 lg:grid-cols-4">
+          {differentiators.map((d) => (
+            <li key={d.n} className="flex flex-col border-l border-ink-200 pl-6">
+              <span className="font-sans text-h1-sm font-medium leading-none text-gold-700 tabular">{String(d.n).padStart(2, "0")}</span>
+              <h3 className="mt-6 text-h3 text-ink-950">{d.title}</h3>
+              <p className="mt-3 text-body text-ink-700">{d.body}</p>
+            </li>
+          ))}
+        </ol>
       </Section>
 
       <Section surface="dark" backdrop="AS-04" backdropClassName="object-right opacity-60" art={<ContourArt />}>
@@ -133,15 +130,18 @@ export default function HomePage() {
       </Section>
 
       <Section surface="light">
-        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-12">
-          <div className="relative aspect-square w-full overflow-hidden rounded-container bg-ink-100 md:col-span-4">
-            <Image src={founder.image!} alt={`Portrait of ${founder.name}`} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover object-top" />
+        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-12 lg:gap-16">
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-container bg-ink-100 md:col-span-5">
+            <Image src={founder.image!} alt={`Portrait of ${founder.name}`} fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover object-top" />
           </div>
-          <div className="md:col-span-8">
+          <div className="md:col-span-7">
             <Eyebrow tone="light">Leadership</Eyebrow>
             <h2 className="mt-3 text-h2-sm md:text-h2">Led From Inside the Mission</h2>
-            <p className="mt-4 max-w-[65ch] text-body text-ink-700">{founder.name}, {founder.role}, {founder.summary} JVM is built on that understanding of how federal health missions actually run.</p>
-            <Button href="/about" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing className="mt-5">Read about JVM</Button>
+            <div className="mt-6 border-l-2 border-gold-500 pl-6">
+              <p className="max-w-[55ch] text-lead-sm text-ink-900 md:text-lead">{founder.name}, {founder.role}, {founder.summary}</p>
+              <p className="mt-4 max-w-[60ch] text-body text-ink-700">JVM is built on that understanding of how federal health missions actually run.</p>
+            </div>
+            <Button href="/about" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing className="mt-6">Read about JVM</Button>
           </div>
         </div>
       </Section>
