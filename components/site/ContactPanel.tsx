@@ -91,7 +91,7 @@ export function ContactPanel({
           onExited();
       }}
       className={cn(
-        "fixed z-50 flex flex-col bg-white shadow-float",
+        "fixed z-50 flex flex-col overflow-hidden bg-white shadow-float",
         "inset-x-0 bottom-0 max-h-[92dvh] rounded-t-container border-t border-ink-200",
         "md:inset-x-auto md:bottom-24 md:left-6 md:max-h-[min(44rem,calc(100dvh-8rem))] md:w-[25rem] md:rounded-container md:border",
         "origin-bottom-left motion-reduce:translate-y-0 motion-reduce:scale-100",

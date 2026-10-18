@@ -17,7 +17,8 @@ test("contact widget opens, routes, validates and closes with Escape", async ({
   );
   await expect(dialog.getByRole("alert").first()).toBeFocused();
   await dialog.getByText("I'm a contracting or program officer").click();
-  await expect(dialog.getByText(/goes to business development/i)).toBeVisible();
+  await expect(dialog.getByRole("radio", { name: "I'm a contracting or program officer" })).toBeChecked();
+  await expect(dialog.getByText(/pick a route/i)).toBeHidden();
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
 });

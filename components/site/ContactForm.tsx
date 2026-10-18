@@ -338,27 +338,7 @@ export function ContactForm({
             dark ? "text-ink-300" : "text-ink-500",
           )}
         >
-          {routeInfo ? (
-            <>
-              Goes to {routeInfo.reads},{" "}
-              <a
-                href={`mailto:${routeInfo.to}`}
-                className="link-underline after:bg-current"
-              >
-                {routeInfo.to}
-              </a>
-              . Or call{" "}
-              <a
-                href={contact.office.phoneHref}
-                className="link-underline after:bg-current"
-              >
-                {contact.office.phone}
-              </a>
-              .
-            </>
-          ) : (
-            "Pick a route and we will show you where it goes."
-          )}
+          {routeInfo ? null : "Pick a route and we will show you where it goes."}
         </p>
       </fieldset>
 
@@ -491,20 +471,20 @@ export function ContactForm({
         </Suspense>
       ) : null}
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex items-center justify-between gap-3">
         <Button
           type="submit"
           variant="primary"
           tone={tone}
           pending={status === "submitting"}
+          className="shrink-0 whitespace-nowrap"
         >
           Send message
         </Button>
         <p
           className={cn("text-caption", dark ? "text-ink-300" : "text-ink-500")}
         >
-          Read by {routeInfo?.reads ?? "the JVM team"}. Replies within{" "}
-          {contact.responseTime}.
+          Replies within {contact.responseTime}.
         </p>
       </div>
     </form>
