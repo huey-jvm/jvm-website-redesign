@@ -32,6 +32,7 @@ export function MobileMenu({
     onClose();
   }, [onClose]);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [chevronInstant, setChevronInstant] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -143,15 +144,17 @@ export function MobileMenu({
                     type="button"
                     className="flex min-h-11 w-full items-center justify-between rounded-control px-3 text-left text-body font-medium text-ink-950 hover:bg-cream focus-visible:bg-cream active:bg-cream"
                     aria-expanded={expanded === group.label}
-                    onClick={() =>
-                      setExpanded(expanded === group.label ? null : group.label)
-                    }
+                    onClick={(e) => {
+                      setChevronInstant(e.detail === 0);
+                      setExpanded(expanded === group.label ? null : group.label);
+                    }}
                   >
                     {group.label}
                     <ChevronDown
                       aria-hidden
                       className={cn(
                         "size-4 motion-reduce:transition-none",
+                        !chevronInstant && "transition-transform duration-150 ease-hover",
                         expanded === group.label && "rotate-180",
                       )}
                     />

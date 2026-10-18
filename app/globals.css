@@ -132,6 +132,10 @@
 
 @utility link-underline {
   position: relative;
+  transition: color 150ms ease;
+  &:focus-visible {
+    transition: none;
+  }
   &::after {
     content: "";
     position: absolute;
@@ -146,6 +150,9 @@
   &:focus-visible::after, &:active::after {
     opacity: 1;
   }
+  &:focus-visible::after {
+    transition: none;
+  }
   @media (hover: hover) {
     &:hover::after {
       opacity: 1;
@@ -155,4 +162,20 @@
 
 @utility tabular {
   font-variant-numeric: tabular-nums;
+}
+
+@layer components {
+  .hairline-stage {
+    --hairline-plate: var(--color-cream);
+    --hairline-hi: var(--color-gold-700);
+    --hairline-edge: var(--color-ink-500);
+    --hairline-stroke: 1.1;
+    --hairline-mid: var(--color-ink-400);
+    --hairline-lo: var(--color-ink-300);
+  }
+}
+
+.hairline-stage svg :where(path, polygon, ellipse, line, .dot) {
+  transition-duration: 150ms;
+  transition-timing-function: var(--ease-enter);
 }
