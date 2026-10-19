@@ -36,7 +36,7 @@ export function Placeholder({ id, what, who, children, className, inline, nested
       <p className="mt-1 text-body-sm text-ink-900">
         {label}. <span className="text-ink-500">Settled by {owner}.</span>
       </p>
-      {children ? <div className="mt-3 text-ink-900 [&_*]:text-ink-900!">{children}</div> : null}
+      {children ? <div className="mt-3 text-ink-900">{children}</div> : null}
     </div>
   );
 }

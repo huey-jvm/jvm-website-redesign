@@ -23,11 +23,11 @@ export function Section({ surface = "light", className, children, backdrop, back
   );
 }
 
-export function SectionHeader({ eyebrow, title, lead, tone = "light", align = "left", as: Tag = "h2", className }: { eyebrow?: string; title: string; lead?: string; tone?: "light" | "dark"; align?: "left" | "center"; as?: "h1" | "h2"; className?: string }) {
+export function SectionHeader({ id, eyebrow, title, lead, tone = "light", align = "left", as: Tag = "h2", className }: { id?: string; eyebrow?: string; title: string; lead?: string; tone?: "light" | "dark"; align?: "left" | "center"; as?: "h1" | "h2"; className?: string }) {
   return (
     <div className={cn("mb-8 md:mb-10", align === "center" && "mx-auto text-center", className)}>
       {eyebrow ? <Eyebrow tone={tone} className="mb-3">{eyebrow}</Eyebrow> : null}
-      <Tag className={cn(Tag === "h1" ? "text-h1-sm md:text-h1" : "text-h2-sm md:text-h2", tone === "dark" ? "text-cream" : "text-ink-950")}>{title}</Tag>
+      <Tag id={id} className={cn(Tag === "h1" ? "text-h1-sm md:text-h1" : "text-h2-sm md:text-h2", tone === "dark" ? "text-cream" : "text-ink-950")}>{title}</Tag>
       {lead ? <p className={cn("mt-4 text-lead-sm md:text-lead prose-measure", align === "center" && "mx-auto", tone === "dark" ? "text-ink-200" : "text-ink-700")}>{lead}</p> : null}
     </div>
   );

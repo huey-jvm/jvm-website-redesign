@@ -35,7 +35,7 @@ export const assets: Asset[] = [
   { id: "AS-07", path: `${dir}/as-07-health-it-banner.jpg`, alt: "", kind: "photo", where: ["/services/health-it"] },
   { id: "AS-08", path: `${dir}/as-08-logistics-banner.jpg`, alt: "", kind: "photo", where: ["/services/logistics-facilities"] },
   { id: "AS-09", path: `${dir}/as-09-management-banner.jpg`, alt: "", kind: "photo", where: ["/services/management-support"] },
-  { id: "AS-10", path: `${dir}/as-10-shift.png`, alt: "", kind: "texture", where: ["/why-jvm"] },
+  { id: "AS-10", path: `${dir}/as-10-shift.png`, alt: "", kind: "texture", where: [] },
   { id: "AS-11", path: `${dir}/as-11-contracting-banner.jpg`, alt: "", kind: "photo", where: ["/contracting"] },
   { id: "AS-12", path: `${dir}/as-12-capability.jpg`, alt: "A blank sheet of paper and a fountain pen on a dark desk", kind: "photo", where: ["/contracting/capability-statement"] },
   { id: "AS-13", path: `${dir}/as-05-cream-grain.png`, alt: "", kind: "texture", where: ["/about"] },

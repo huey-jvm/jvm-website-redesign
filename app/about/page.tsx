@@ -2,6 +2,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import Image from "@/components/ui/Image";
 import { PageHero } from "@/components/site/PageHero";
 import { Section, SectionHeader } from "@/components/site/Section";
+import { Backdrop } from "@/components/site/Slot";
 import { TeamCard } from "@/components/site/TeamCard";
 import { FactBlock } from "@/components/site/FactBlock";
 import { CTABand } from "@/components/site/CTABand";
@@ -56,13 +57,10 @@ export default function AboutPage() {
           ]}
         />
         <div className="min-w-0">
-          <Section
-            contained={false}
-            id="mission"
-            surface="cream"
-            backdrop="AS-13"
-          >
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <Section contained={false} id="mission" className="chapter-section">
+            <div data-backdrop="AS-13" className="relative isolate overflow-hidden rounded-container bg-cream p-4 md:p-6 lg:p-8">
+            <Backdrop id="AS-13" />
+            <div className="relative grid grid-cols-1 gap-6 md:grid-cols-2">
               <div className="@container rounded-container border border-cream-border bg-white">
                 <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
                   <Eyebrow tone="light">Mission</Eyebrow>
@@ -77,20 +75,22 @@ export default function AboutPage() {
               <div className="@container rounded-container border border-cream-border bg-white">
                 <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
                   <Eyebrow tone="light">Vision</Eyebrow>
-                  <h2 className="mt-3 text-h3 md:text-h2-sm">Our Vision</h2>
+                  <h2 className="mt-3 text-h4 @[20rem]:text-h3 @[35rem]:text-h2-sm">
+                    Our Vision
+                  </h2>
                   <p className="prose-measure mt-4 text-body text-ink-900">
                     {statements.vision}
                   </p>
                 </div>
               </div>
             </div>
+            </div>
           </Section>
 
           <Section
             contained={false}
             id="story"
-            surface="cream"
-            className="pt-0 md:pt-0 lg:pt-0"
+            className="chapter-section pt-0 md:pt-0 lg:pt-0"
           >
             <SectionHeader eyebrow="Culture" title="Our Story" />
             <QuoteCard className="max-w-3xl">{statements.story}</QuoteCard>
@@ -103,7 +103,7 @@ export default function AboutPage() {
             />
           </Section>
 
-          <Section contained={false} id="values">
+          <Section contained={false} id="values" className="chapter-section pt-0 md:pt-0 lg:pt-0">
             <SectionHeader
               eyebrow="Values"
               title="Living Our Core Values"
@@ -121,7 +121,7 @@ export default function AboutPage() {
                   className="@container rounded-container border border-ink-200 bg-white"
                 >
                   <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
-                    <h4 title={v.title} className="truncate text-h4">
+                    <h4 className="text-h4">
                       {v.title}
                     </h4>
                     <p className="mt-2 text-body-sm text-ink-700">{v.line}</p>
@@ -152,8 +152,7 @@ export default function AboutPage() {
           <Section
             contained={false}
             id="leadership"
-            surface="light"
-            className="pt-0 md:pt-0 lg:pt-0"
+            className="chapter-section pt-0 md:pt-0 lg:pt-0"
           >
             <SectionHeader
               eyebrow="Leadership"
@@ -182,7 +181,7 @@ export default function AboutPage() {
             </div>
           </Section>
 
-          <Section contained={false} id="company" surface="cream">
+          <Section contained={false} id="company" className="chapter-section pt-0 md:pt-0 lg:pt-0">
             <SectionHeader eyebrow="In brief" title="The Company" />
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <FactBlock

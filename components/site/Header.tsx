@@ -55,7 +55,7 @@ export function Header({ nav }: { nav: NavGroup[] }) {
 
 function DesktopNavigation({ nav }: { nav: NavGroup[] }) {
   const trigger =
-    "relative inline-flex h-11 items-center gap-1 rounded-control px-3 text-body font-medium text-ink-900 transition-colors duration-150 ease-hover focus-visible:transition-none hover:bg-ink-50 focus-visible:bg-ink-50 active:bg-ink-100 after:absolute after:inset-x-3 after:bottom-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-gold-500 after:transition-transform after:duration-150 after:ease-hover hover:after:scale-x-100 focus-visible:after:scale-x-100 focus-visible:after:transition-none active:after:scale-x-100 data-[current=true]:after:scale-x-100 motion-reduce:after:transition-none";
+    "relative inline-flex h-11 items-center gap-1 rounded-control px-3 text-body font-medium text-ink-900 transition-colors duration-150 ease-hover focus-visible:transition-none hover:bg-ink-50 focus-visible:bg-ink-50 active:bg-ink-100 after:absolute after:inset-x-3 after:bottom-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-gold-500 after:transition-transform after:duration-150 after:ease-hover hover:after:scale-x-100 focus-visible:after:scale-x-100 focus-visible:after:transition-none active:after:scale-x-100 data-[current=true]:after:scale-x-100 data-[current=true]:after:transition-none motion-reduce:after:transition-none";
   return (
     <ul className="flex items-center gap-1">
       {nav.map((group, i) =>

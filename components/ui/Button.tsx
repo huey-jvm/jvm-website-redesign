@@ -68,14 +68,14 @@ function Label({ variant, tone, children, icon, iconTrailing, pending }: CommonP
   const underline =
     variant === "tertiary"
       ? cn(
-          "link-underline group-hover/tertiary:after:opacity-100 group-focus-visible/tertiary:after:opacity-100 group-active/tertiary:after:opacity-100",
+          "link-underline group-hover/tertiary:after:opacity-100 group-focus-visible/tertiary:after:opacity-100 group-focus-visible/tertiary:after:transition-none group-active/tertiary:after:opacity-100",
           tone === "dark" ? "after:bg-gold-500" : "after:bg-gold-700",
         )
       : undefined;
   const arrowMove = variant === "tertiary" ? "transition-transform duration-150 ease-hover group-hover/tertiary:translate-x-1 group-focus-visible/tertiary:translate-x-1 group-focus-visible/tertiary:transition-none motion-reduce:group-hover/tertiary:translate-x-0 motion-reduce:group-focus-visible/tertiary:translate-x-0" : undefined;
   return (
     <>
-      {pending ? <Loader2 aria-hidden className="size-4 animate-spin motion-reduce:animate-none" /> : !iconTrailing && icon ? <span aria-hidden className="inline-flex">{icon}</span> : null}
+      {pending ? <Loader2 aria-hidden className="size-4 animate-spin motion-reduce:animate-pulse" /> : !iconTrailing && icon ? <span aria-hidden className="inline-flex">{icon}</span> : null}
       <span className={underline}>{children}</span>
       {!pending && iconTrailing && icon ? <span aria-hidden className={cn("inline-flex", arrowMove)}>{icon}</span> : null}
     </>

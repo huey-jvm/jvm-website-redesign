@@ -12,7 +12,8 @@ import {
 } from "@/content/differentiators";
 import { statements } from "@/content/statements";
 import { pageMetadata } from "@/lib/seo";
-import { Slot, presentAsset } from "@/components/site/Slot";
+import { HairlineFigure } from "@/components/site/HairlineFigure";
+import { ArrowRight } from "lucide-react";
 
 export const metadata = pageMetadata(
   "Why JVM",
@@ -28,7 +29,6 @@ const nav = [
 ];
 
 export default function WhyPage() {
-  const shiftArt = presentAsset("AS-10");
   return (
     <>
       <PageHero
@@ -51,32 +51,23 @@ export default function WhyPage() {
               <p className="prose-measure mt-4 text-body text-ink-700">
                 {theShift.intro}
               </p>
-              <div className="mt-6 rounded-container bg-cream p-6">
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <div className="rounded-control border border-cream-border bg-white p-6">
-                    <Eyebrow tone="muted">From</Eyebrow>
-                    <h3 className="mt-2 text-h4 text-ink-950">
-                      {theShift.from.title}
-                    </h3>
-                    <p className="mt-2 text-body-sm text-ink-700">
-                      {theShift.from.body}
-                    </p>
-                  </div>
-                  <div className="rounded-control border border-cream-border bg-white p-6">
-                    <Eyebrow tone="light">To</Eyebrow>
-                    <h3 className="mt-2 text-h4">{theShift.to.title}</h3>
-                    <p className="mt-2 text-body-sm text-ink-900">
-                      {theShift.to.body}
-                    </p>
-                  </div>
+              <div className="shift mt-8 grid grid-cols-1 items-stretch gap-4 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
+                <div className="shift-from rounded-container border border-ink-200 bg-ink-50 p-6">
+                  <Eyebrow tone="muted">From</Eyebrow>
+                  <h3 className="mt-2 text-h4 text-ink-700">{theShift.from.title}</h3>
+                  <p className="mt-2 text-body-sm text-ink-700">{theShift.from.body}</p>
                 </div>
-                {shiftArt ? (
-                  <Slot
-                    id={shiftArt.id}
-                    className="mt-6 hidden aspect-[2/1] w-full overflow-hidden rounded-control lg:block"
-                    sizes="(min-width: 1024px) 30vw, 100vw"
-                  />
-                ) : null}
+                <div aria-hidden className="shift-arrow flex items-center justify-center text-gold-700">
+                  <ArrowRight className="size-6 rotate-90 md:rotate-0" />
+                </div>
+                <div className="shift-to rounded-container border-2 border-gold-500 bg-cream p-6">
+                  <Eyebrow tone="light">To</Eyebrow>
+                  <h3 className="mt-2 text-h4">{theShift.to.title}</h3>
+                  <p className="mt-2 text-body-sm text-ink-900">{theShift.to.body}</p>
+                </div>
+              </div>
+              <div className="mt-6 hidden rounded-container bg-cream px-6 lg:block">
+                <HairlineFigure name="consolidate" label={theShift.figureLabel} media="(min-width: 1024px)" className="mx-auto max-w-md" />
               </div>
             </section>
 
@@ -88,18 +79,11 @@ export default function WhyPage() {
                 {valueProposition.intro}
               </p>
 
-              <ul className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+              <ul className="mt-8 grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-2">
                 {valueProposition.pillars.map((p) => (
-                  <li
-                    key={p.title}
-                    className="@container rounded-container border border-ink-200 bg-white"
-                  >
-                    <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
-                      <h3 title={p.title} className="truncate text-h3">
-                        {p.title}
-                      </h3>
-                      <p className="mt-2 text-body text-ink-700">{p.body}</p>
-                    </div>
+                  <li key={p.title} className="border-t-2 border-gold-500 pt-5">
+                    <h3 className="text-h3">{p.title}</h3>
+                    <p className="mt-2 text-body text-ink-700">{p.body}</p>
                   </li>
                 ))}
               </ul>
@@ -137,24 +121,14 @@ export default function WhyPage() {
                 {differentiatorsIntro}
               </p>
 
-              <ol className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+              <ol className="differentiators mt-8 grid grid-cols-1 gap-x-10 gap-y-10 md:grid-cols-2">
                 {differentiators.map((d) => (
-                  <li
-                    key={d.n}
-                    className="@container rounded-container border border-ink-200 bg-white"
-                  >
-                    <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
-                      <span className="font-sans text-h2 font-medium leading-none text-gold-700 tabular">
-                        {d.n}
-                      </span>
-                      <h3
-                        title={d.title}
-                        className="mt-3 truncate text-h4 @[20rem]:text-h3 @[35rem]:text-h2-sm"
-                      >
-                        {d.title}
-                      </h3>
-                      <p className="mt-2 text-body text-ink-700">{d.body}</p>
-                    </div>
+                  <li key={d.n} className="flex flex-col border-l border-ink-200 pl-6">
+                    <span className="font-sans text-h1-sm font-medium leading-none text-gold-700 tabular">
+                      {String(d.n).padStart(2, "0")}
+                    </span>
+                    <h3 className="mt-4 text-h3">{d.title}</h3>
+                    <p className="mt-2 text-body text-ink-700">{d.body}</p>
                   </li>
                 ))}
               </ol>

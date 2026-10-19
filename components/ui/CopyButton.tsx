@@ -6,6 +6,7 @@ import { cn } from "@/lib/cn";
 
 export function CopyButton({ value, label, tone = "light" }: { value: string; label: string; tone?: "light" | "dark" }) {
   const [copied, setCopied] = useState(false);
+  const [instant, setInstant] = useState(false);
   useEffect(() => {
     if (!copied) return;
     const t = setTimeout(() => setCopied(false), 1800);
@@ -16,7 +17,8 @@ export function CopyButton({ value, label, tone = "light" }: { value: string; la
     <span className="relative inline-flex">
       <button
         type="button"
-        onClick={async () => {
+        onClick={async (e) => {
+          setInstant(e.detail === 0);
           try {
             await navigator.clipboard.writeText(value);
             setCopied(true);
@@ -34,7 +36,10 @@ export function CopyButton({ value, label, tone = "light" }: { value: string; la
             : "text-ink-500 hover:bg-ink-100 focus-visible:bg-ink-100 hover:text-gold-700 focus-visible:text-gold-700 active:bg-ink-100 active:text-gold-700 focus-visible:outline-gold-700 focus-visible:transition-none",
         )}
       >
-        {copied ? <Check aria-hidden className="size-5" /> : <Copy aria-hidden className="size-5" />}
+        <span className="grid place-items-center *:col-start-1 *:row-start-1">
+          <Copy aria-hidden data-icon="copy" className={cn("size-5 motion-reduce:scale-100", !instant && "transition-[opacity,scale,filter] duration-150 ease-enter", copied ? "scale-[0.6] opacity-0 blur-[2px]" : "scale-100 opacity-100 blur-none")} />
+          <Check aria-hidden data-icon="check" className={cn("size-5 motion-reduce:scale-100", !instant && "transition-[opacity,scale,filter] duration-150 ease-enter", copied ? "scale-100 opacity-100 blur-none" : "scale-[0.6] opacity-0 blur-[2px]")} />
+        </span>
       </button>
       <span
         aria-hidden

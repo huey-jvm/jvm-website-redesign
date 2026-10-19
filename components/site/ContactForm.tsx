@@ -142,18 +142,18 @@ export function ContactForm({
           dark ? "border-ink-800 bg-ink-900" : "border-ink-200 bg-white",
         )}
       >
-        <CheckCircle2 aria-hidden className="size-8 text-success" />
+        <CheckCircle2 aria-hidden className="size-8 text-success transition-[opacity,scale] duration-250 ease-enter starting:scale-50 starting:opacity-0 motion-reduce:starting:scale-100" />
         <h3
           id={`${id}-done`}
           ref={doneRef}
           tabIndex={-1}
-          className={cn("mt-3 text-h3", dark ? "text-cream" : "text-ink-950")}
+          className={cn("mt-3 text-h3 transition-[opacity,translate] delay-75 duration-200 ease-enter starting:translate-y-1 starting:opacity-0 motion-reduce:starting:translate-y-0", dark ? "text-cream" : "text-ink-950")}
         >
           Message sent
         </h3>
         <p
           className={cn(
-            "mt-2 text-body",
+            "mt-2 text-body transition-[opacity,translate] delay-115 duration-200 ease-enter starting:translate-y-1 starting:opacity-0 motion-reduce:starting:translate-y-0",
             dark ? "text-ink-200" : "text-ink-700",
           )}
         >
@@ -338,27 +338,7 @@ export function ContactForm({
             dark ? "text-ink-300" : "text-ink-500",
           )}
         >
-          {routeInfo ? (
-            <>
-              Goes to {routeInfo.reads},{" "}
-              <a
-                href={`mailto:${routeInfo.to}`}
-                className="link-underline after:bg-current"
-              >
-                {routeInfo.to}
-              </a>
-              . Or call{" "}
-              <a
-                href={contact.office.phoneHref}
-                className="link-underline after:bg-current"
-              >
-                {contact.office.phone}
-              </a>
-              .
-            </>
-          ) : (
-            "Pick a route and we will show you where it goes."
-          )}
+          {routeInfo ? null : "Pick a route and we will show you where it goes."}
         </p>
       </fieldset>
 
@@ -491,20 +471,20 @@ export function ContactForm({
         </Suspense>
       ) : null}
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex items-center justify-between gap-3">
         <Button
           type="submit"
           variant="primary"
           tone={tone}
           pending={status === "submitting"}
+          className="shrink-0 whitespace-nowrap"
         >
           Send message
         </Button>
         <p
           className={cn("text-caption", dark ? "text-ink-300" : "text-ink-500")}
         >
-          Read by {routeInfo?.reads ?? "the JVM team"}. Replies within{" "}
-          {contact.responseTime}.
+          Replies within {contact.responseTime}.
         </p>
       </div>
     </form>
