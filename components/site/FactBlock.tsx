@@ -28,9 +28,9 @@ export function FactBlock({
   return (
     <div
       className={cn(
-        "@container rounded-container border",
+        "fact-sheet @container rounded-container border",
         tone === "dark"
-          ? "border-ink-800 bg-ink-900"
+          ? "surface-dark border-ink-800 bg-ink-900"
           : "border-ink-200 bg-white",
         className,
       )}
@@ -40,7 +40,7 @@ export function FactBlock({
           <Tag
             title={title}
             className={cn(
-              "mb-4 truncate text-h4",
+              "mb-4 text-h4",
               tone === "dark" ? "text-cream" : "text-ink-950",
             )}
           >

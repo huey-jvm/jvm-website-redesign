@@ -8,7 +8,7 @@ type Size = "sm" | "md" | "lg";
 type Tone = "light" | "dark";
 
 const base =
-  "inline-flex max-w-full items-center justify-center gap-2 rounded-control font-sans font-semibold select-none whitespace-normal text-center " +
+  "jvm-button inline-flex max-w-full items-center justify-center gap-2 rounded-control font-sans font-semibold select-none whitespace-normal text-center " +
   "transition-[color,background-color,border-color,scale] focus-visible:transition-none duration-150 ease-hover " +
   "focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98] motion-reduce:active:scale-100 " +
   "disabled:cursor-not-allowed disabled:active:scale-100 aria-busy:cursor-default aria-busy:active:scale-100";
@@ -22,9 +22,7 @@ const sizes: Record<Size, string> = {
 const variants: Record<Tone, Record<Variant, string>> = {
   light: {
     primary:
-      "bg-ink-950 text-white hover:shadow-[inset_0_-2px_0_0_var(--color-gold-500)] " +
-      "focus-visible:shadow-[inset_0_-2px_0_0_var(--color-gold-500)] " +
-      "active:shadow-[inset_0_-2px_0_0_var(--color-gold-500)] focus-visible:outline-gold-700 " +
+      "bg-ink-950 text-white hover:bg-ink-800 focus-visible:bg-ink-800 active:bg-ink-800 focus-visible:outline-gold-700 " +
       "disabled:bg-ink-100 disabled:text-ink-400 disabled:shadow-none",
     secondary:
       "border-[1.5px] border-ink-950 text-ink-950 bg-transparent hover:bg-cream " +
@@ -84,7 +82,7 @@ function Label({ variant, tone, children, icon, iconTrailing, pending }: CommonP
 
 export function Button(props: ButtonProps) {
   const { variant = "secondary", size = "md", tone = "light", pending = false, icon, iconTrailing, className, children } = props;
-  const classes = cn(base, sizes[size], variants[tone][variant], className);
+  const classes = cn(base, `jvm-button--${variant}`, sizes[size], variants[tone][variant], className);
 
   if ("href" in props && props.href !== undefined) {
     const { href, external, variant: _v, size: _s, tone: _t, pending: _p, icon: _i, iconTrailing: _it, className: _c, children: _ch, ...rest } = props;

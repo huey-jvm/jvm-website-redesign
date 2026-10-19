@@ -32,12 +32,12 @@ export default function CareersPage() {
 
       <Section>
 
-        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <ul>
           {audiences.map((a) => (
-            <li key={a.title} >
+            <li key={a.title} className="career-audience">
               <Slot id={a.image} className="aspect-[3/2] w-full rounded-container" sizes="(min-width: 1024px) 33vw, 100vw" />
-              <div className="mt-6">
-                <h2 title={a.title} className="text-h3">{a.title}</h2>
+              <div>
+                <h2 title={a.title} className="text-h2-sm md:text-h2">{a.title}</h2>
                 <p className="mt-3 text-body text-ink-700">{a.body}</p>
               </div>
             </li>

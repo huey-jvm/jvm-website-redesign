@@ -12,7 +12,7 @@ import {
 } from "@/content/differentiators";
 import { statements } from "@/content/statements";
 import { pageMetadata } from "@/lib/seo";
-import { HairlineFigure } from "@/components/site/HairlineFigure";
+import { OperationsExplorer } from "@/components/site/OperationsExplorer";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = pageMetadata(
@@ -37,7 +37,7 @@ export default function WhyPage() {
         lead={statements.tagline}
         crumbs={[{ label: "Why JVM" }]}
       />
-      <Section className="pt-0 md:pt-0 lg:pt-0">
+      <Section>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
           <InPageNav
             sections={[
@@ -66,9 +66,7 @@ export default function WhyPage() {
                   <p className="mt-2 text-body-sm text-ink-900">{theShift.to.body}</p>
                 </div>
               </div>
-              <div className="mt-6 hidden rounded-container bg-cream px-6 lg:block">
-                <HairlineFigure name="consolidate" label={theShift.figureLabel} media="(min-width: 1024px)" className="mx-auto max-w-md" />
-              </div>
+              <OperationsExplorer />
             </section>
 
             <section id="value" className="chapter-section scroll-mt-28">

@@ -8,7 +8,6 @@ import { OutcomeTile } from "@/components/site/OutcomeTile";
 import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { Button } from "@/components/ui/Button";
-import { Banner } from "@/components/site/Slot";
 import { services, getService } from "@/content/services";
 import { getOutcome } from "@/content/outcomes";
 import { pageMetadata } from "@/lib/seo";
@@ -40,21 +39,21 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <PageHero eyebrow="Services" title={service.name} lead={service.intro} crumbs={[{ label: "Services", href: "/services" }, { label: service.name }]}>
+      <PageHero eyebrow="Services" title={service.name} lead={service.intro} backdrop={service.bannerImage} crumbs={[{ label: "Services", href: "/services" }, { label: service.name }]}>
         {service.placeholders?.map((p) => <div key={p.id} className="mt-6 max-w-xl"><Placeholder id={p.id} what={p.what} who={p.who} /></div>)}
       </PageHero>
-      {service.bannerImage ? <Banner id={service.bannerImage} className="pb-12 lg:pb-16" /> : null}
 
-      <Section surface="light" className="pt-0 md:pt-0 lg:pt-0">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
+      <Section surface="light" className="service-body">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[12rem_minmax(0,1fr)] lg:gap-12">
           <InPageNav sections={navSections} />
-          <div className="min-w-0 space-y-14">
-            {service.sections.map((sec) => (
-              <section key={sec.id} id={sec.id} className="chapter-section scroll-mt-28">
+          <div className="min-w-0 space-y-8">
+            {service.sections.map((sec, index) => (
+              <section key={sec.id} id={sec.id} className="service-chapter scroll-mt-28">
+                <p className="mb-5 text-eyebrow text-gold-700">{String(index + 1).padStart(2, "0")} / {service.short}</p>
                 <h2 className="text-h2-sm md:text-h2">{sec.title}</h2>
                 <p className="prose-measure mt-4 text-body text-ink-700">{sec.body}</p>
                 {sec.delivers?.length ? (
-                  <ul className="mt-5 grid grid-cols-1 gap-x-8 gap-y-2 text-body text-ink-900 md:grid-cols-2">
+                  <ul className="service-capabilities mt-8 grid grid-cols-1 gap-3 text-body text-ink-900 md:grid-cols-2">
                     {sec.delivers.map((d) => (
                       <li key={d} className="flex items-start gap-2"><span aria-hidden className="mt-2.5 h-0.5 w-4 shrink-0 bg-gold-500" />{d}</li>
                     ))}
@@ -77,18 +76,17 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </section>
             ) : null}
 
-            <section id="outcomes" className="chapter-section scroll-mt-28">
-              <h2 className="text-h2-sm md:text-h2">Related Outcomes</h2>
 
-                <ul className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                  {related.map((o) => (
-                    <li key={o!.id} className="h-full"><OutcomeTile outcome={o!} href={`/why-jvm#${o!.id}`} /></li>
-                  ))}
-                </ul>
-
-            </section>
           </div>
         </div>
+      </Section>
+
+      <Section surface="dark" id="outcomes" className="service-outcomes scroll-mt-28">
+        <Eyebrow tone="dark">The difference we support</Eyebrow>
+        <h2 className="mt-4 text-h2-sm text-cream md:text-h2">Related Outcomes</h2>
+        <ul className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
+          {related.map((o) => <li key={o!.id}><OutcomeTile horizontal outcome={o!} href={`/why-jvm#${o!.id}`} /></li>)}
+        </ul>
       </Section>
 
       <CTABand route={service.slug === "healthcare-operations" ? "health-system" : "contracting"} />

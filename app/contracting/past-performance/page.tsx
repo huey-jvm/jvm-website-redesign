@@ -15,13 +15,13 @@ export default function PastPerformancePage() {
   return (
     <>
       <PageHero eyebrow="Contracting" title="Past Performance" lead="Every record names the agency, JVM’s role and the period of performance, so a buyer can verify it." crumbs={[{ label: "Contracting", href: "/contracting" }, { label: "Past Performance" }]} />
-      <Section className="pt-0 md:pt-0 lg:pt-0">
+      <Section>
         {pastPerformance.length === 0 ? (
           <Placeholder id="P7">
             <p className="text-body-sm text-ink-900">This page does not ship until JVM supplies publishable records. In production the contracting overview carries one line: past performance available on request from {contact.emails.bd}.</p>
           </Placeholder>
         ) : (
-          <div className="overflow-hidden rounded-container border border-ink-200">
+          <div className="overflow-x-auto rounded-container border border-ink-200">
             <table className="w-full text-body-sm">
               <thead className="bg-ink-50 text-left"><tr>
                 <th scope="col" className="px-4 py-3 text-eyebrow font-semibold uppercase text-ink-500">Contract</th>

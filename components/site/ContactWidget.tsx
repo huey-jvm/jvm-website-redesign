@@ -63,13 +63,12 @@ export function ContactWidget() {
         aria-expanded={open}
         aria-controls="contact-widget-panel"
         className={cn(
-          "widget-launcher group/launcher fixed z-50 flex items-center gap-3 border-2 border-transparent bg-ink-950 text-gold-500 shadow-float transition-[scale,opacity,color,background-color,border-color] duration-150 ease-enter",
+          "widget-launcher group/launcher fixed z-50 hidden items-center gap-3 border-2 border-transparent bg-ink-950 text-gold-500 shadow-float transition-[scale,opacity,color,background-color,border-color] duration-150 ease-enter",
           "hover:border-gold-500 hover:bg-gold-200 hover:text-ink-950 focus-visible:text-ink-950 focus-visible:border-gold-500 focus-visible:bg-gold-200 focus-visible:text-ink-950 focus-visible:transition-none active:bg-gold-500 active:text-ink-950",
           "focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98] motion-reduce:active:scale-100",
           "inset-x-0 bottom-0 h-14 justify-center rounded-none md:inset-x-auto md:bottom-6 md:left-6 md:size-14 md:px-0 md:rounded-pill",
-          open && "pointer-events-none opacity-0 md:pointer-events-auto md:opacity-100",
+          open && "pointer-events-none opacity-0",
           overDark ? "focus-visible:outline-gold-500" : "focus-visible:outline-gold-700",
-          open && "border-gold-500 bg-gold-200 text-ink-950",
         )}
       >
         <MessageSquareText aria-hidden className="size-6" />

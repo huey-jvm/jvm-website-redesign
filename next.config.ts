@@ -4,7 +4,7 @@ import { legacyRedirects } from "./content/redirects";
 const pagesBasePath = process.env.PAGES_BASE_PATH;
 
 const server: NextConfig = {
-  images: { formats: ["image/avif", "image/webp"] },
+  images: { formats: ["image/avif", "image/webp"], qualities: [75, 90] },
   async redirects() {
     return legacyRedirects.map((r) => ({ source: r.source, destination: r.destination, permanent: true }));
   },
@@ -34,6 +34,7 @@ const staticExport: NextConfig = {
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  devIndicators: false,
   ...(pagesBasePath ? staticExport : server),
 };
 

@@ -1,0 +1,85 @@
+{
+  "retrieved": "2026-10-19",
+  "assets": [
+    {
+      "name": "team-walking",
+      "page": "https://www.jvmsolutions.net/",
+      "source": "https://static.wixstatic.com/media/d549d6_a3a242a16e264311b2ab4653330e9dde~mv2.jpg",
+      "width": 4694,
+      "height": 1724,
+      "originalBytes": 2021561,
+      "webBytes": 367284,
+      "local": "/images/jvm/team-walking.webp"
+    },
+    {
+      "name": "team-shirts",
+      "page": "https://www.jvmsolutions.net/about-us",
+      "source": "https://static.wixstatic.com/media/d549d6_eae02a6bd1ed41f3aa5b9af2fa3c285d~mv2.jpg",
+      "width": 7008,
+      "height": 4672,
+      "originalBytes": 6428256,
+      "webBytes": 626660,
+      "local": "/images/jvm/team-shirts.webp"
+    },
+    {
+      "name": "founder-portrait",
+      "page": "https://www.jvmsolutions.net/about-us",
+      "source": "https://static.wixstatic.com/media/d549d6_e10de20beded4dfca4e3a42b5569cb2f~mv2.jpg",
+      "width": 2081,
+      "height": 3121,
+      "originalBytes": 2588938,
+      "webBytes": 298806,
+      "local": "/images/jvm/founder-portrait.webp"
+    },
+    {
+      "name": "professionals",
+      "page": "https://www.jvmsolutions.net/",
+      "source": "https://static.wixstatic.com/media/0d1f8f_b7d46ae92ece4fd5b31b12a3bb8fcc1a~mv2_d_6720_4480_s_4_2.jpg",
+      "width": 6720,
+      "height": 4480,
+      "originalBytes": 4227973,
+      "webBytes": 329414,
+      "local": "/images/jvm/professionals.webp"
+    },
+    {
+      "name": "healthcare",
+      "page": "https://www.jvmsolutions.net/",
+      "source": "https://static.wixstatic.com/media/0d1f8f_85cf74d8ce7a45e982b270c278909068~mv2.jpg",
+      "width": 640,
+      "height": 378,
+      "originalBytes": 55506,
+      "webBytes": 39146,
+      "local": "/images/jvm/healthcare.webp"
+    },
+    {
+      "name": "logistics",
+      "page": "https://www.jvmsolutions.net/",
+      "source": "https://static.wixstatic.com/media/0d1f8f_65e9bf4b428b48f8883a274d03c9bb1d~mv2.jpg",
+      "width": 640,
+      "height": 427,
+      "originalBytes": 102169,
+      "webBytes": 77686,
+      "local": "/images/jvm/logistics.webp"
+    },
+    {
+      "name": "management",
+      "page": "https://www.jvmsolutions.net/",
+      "source": "https://static.wixstatic.com/media/0d1f8f_cecffcbf9e894b5a8ca7fdfe214eb7ae~mv2_d_2500_1440_s_2.jpg",
+      "width": 2500,
+      "height": 1440,
+      "originalBytes": 477896,
+      "webBytes": 301760,
+      "local": "/images/jvm/management.webp"
+    },
+    {
+      "name": "technology",
+      "page": "https://www.jvmsolutions.net/",
+      "source": "https://static.wixstatic.com/media/0d1f8f_cbea19e16d0a492e8c7258e0a9cda524~mv2_d_1730_1300_s_2.jpeg",
+      "width": 1730,
+      "height": 1300,
+      "originalBytes": 197912,
+      "webBytes": 221784,
+      "local": "/images/jvm/technology.webp"
+    }
+  ]
+}

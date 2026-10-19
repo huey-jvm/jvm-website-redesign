@@ -58,9 +58,10 @@ export function CredentialMark({ credential, size = "md", className, fill = fals
   );
 
   const classes = cn("group/mark rounded-control transition-[scale] duration-150 ease-hover active:scale-[0.98] motion-reduce:active:scale-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700 in-[.surface-dark]:focus-visible:outline-gold-500", fill ? "flex w-full" : "inline-flex");
+  const label = hasImage ? `${credential.name}${external ? ", opens in a new tab" : ""}` : undefined;
   return external ? (
-    <a href={credential.evidenceHref} target="_blank" rel="noopener noreferrer" className={classes} aria-label={`${credential.name}, view the record (opens in a new tab)`}>{tile}</a>
+    <a href={credential.evidenceHref} target="_blank" rel="noopener noreferrer" className={classes} aria-label={label}>{tile}{hasImage ? null : <span className="sr-only"> (opens in a new tab)</span>}</a>
   ) : (
-    <Link href={credential.evidenceHref} className={classes} aria-label={`${credential.name}, ${credential.evidenceLabel ?? "view details"}`}>{tile}</Link>
+    <Link href={credential.evidenceHref} className={classes} aria-label={label}>{tile}</Link>
   );
 }

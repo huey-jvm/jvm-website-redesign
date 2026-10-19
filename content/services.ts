@@ -1,7 +1,7 @@
 export const leadEyebrow = "Our core";
 import { starsShown } from "./vehicles";
 import { identifiers } from "./identifiers";
-import { teamPhoto } from "./team";
+
 
 export type ServiceSection = {
   id: string;
@@ -29,7 +29,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "healthcare-operations",
-    cardPhoto: teamPhoto.src,
+    cardPhoto: "/images/services/healthcare.webp",
     bannerImage: "AS-06",
     name: "Healthcare Staffing and Operations",
     short: "Healthcare",

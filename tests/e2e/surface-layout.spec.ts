@@ -61,19 +61,16 @@ test("the proof strip follows a content-sized hero and outcomes stack as one unc
   }
 });
 
-test("the floating conversation control has hover and open states and toggles closed", async ({ page }) => {
+test("the header contact button opens the dialog and Escape closes it", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/", { waitUntil: "domcontentloaded" });
-  await page.locator(".outcomes-row").scrollIntoViewIfNeeded();
-  const launcher = page.locator(".widget-launcher");
-  await expect(launcher).toBeVisible();
-  const rest = await launcher.evaluate(el => getComputedStyle(el).backgroundColor);
-  await launcher.hover();
-  expect(await launcher.evaluate(el => getComputedStyle(el).backgroundColor)).not.toBe(rest);
-  await launcher.click();
-  await expect(launcher).toHaveAttribute("aria-expanded", "true");
-  await expect(launcher).toHaveText("Close conversation");
-  await launcher.click();
-  await expect(launcher).toHaveAttribute("aria-expanded", "false");
+  const opener = page.locator("header").getByRole("button", { name: "Contact us" });
+  const rest = await opener.evaluate(el => getComputedStyle(el).backgroundColor);
+  await opener.hover();
+  expect(await opener.evaluate(el => getComputedStyle(el).backgroundColor)).not.toBe(rest);
+  await opener.click();
+  await expect(page.getByRole("dialog", { name: "Start a conversation" })).toBeVisible();
+  await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog", { name: "Start a conversation" })).toBeHidden();
 });
 

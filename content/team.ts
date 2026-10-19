@@ -2,12 +2,12 @@ import { starsIII, starsShown } from "./vehicles";
 import { contact } from "./contact";
 
 export const teamPhoto = {
-  src: "/images/team/team-walking.jpg",
+  src: "/images/jvm/team-walking.webp",
   alt: "The JVM Solutions team walking together outside their office",
   position: "object-[70%_center]",
 };
 
-export const teamShirtsPhoto = { src: "/images/team/team-shirts.jpg", alt: "The JVM Solutions team together in company shirts" };
+export const teamShirtsPhoto = { src: "/images/jvm/team-shirts.webp", alt: "The JVM Solutions team together in company shirts" };
 
 export const team = [
   {
@@ -15,7 +15,7 @@ export const team = [
     name: "Margie Johnson",
     role: "CEO and President",
     note: "United States Air Force veteran",
-    image: "/images/team/founder-portrait.jpg",
+    image: "/images/jvm/founder-headshot.webp",
     summary: "is a United States Air Force veteran with 18 years inside the Department of Defense environment as a contracting officer, logistician, project manager and acquisition liaison.",
     bio: [
       "Ms. Johnson brings 18 years of experience focused exclusively within the Department of Defense environment, and in so doing has developed solid operational and functional expertise serving in various cleared positions as Contracting Officer, Logistician, Team Lead, Project Manager and Air Force Acquisition Liaison. Her professional emphasis has been on resource management and senior staff positions for the optimisation of Air Force enterprise information technology and logistics assets, in both government and private industry.",

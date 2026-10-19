@@ -64,7 +64,7 @@ export default function ContractingPage() {
         crumbs={[{ label: "Contracting" }]}
         surface="cream"
       />
-      <Section surface="cream" className="pt-0 md:pt-0 lg:pt-0">
+      <Section surface="cream"><div className="grid items-start gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
         <FactBlock
           title="Identifiers"
           headingLevel="h2"
@@ -101,6 +101,16 @@ export default function ContractingPage() {
               : []),
           ]}
         />
+        <aside className="border-t-2 border-gold-500 pt-6 lg:sticky lg:top-28">
+          <p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">Procurement resources</p>
+          <h2 className="mt-4 text-h3">Build your acquisition file</h2>
+          <p className="mt-3 text-body text-ink-700">Review our capabilities, verify our standing, and connect with business development.</p>
+          <ul className="mt-6 divide-y divide-cream-border">
+            {cards.filter((c) => !c.withheld).map((c) => <li key={c.href}><Link href={c.href} className="flex min-h-14 items-center justify-between gap-4 py-3 text-body-sm font-semibold hover:text-gold-700 focus-visible:text-gold-700">{c.title}<ArrowRight aria-hidden className="size-4 shrink-0" /></Link></li>)}
+          </ul>
+          <Button href={`mailto:${contact.emails.bd}`} variant="primary" className="mt-6">Contact business development</Button>
+        </aside>
+        </div>
       </Section>
 
       <Section>
@@ -117,7 +127,6 @@ export default function ContractingPage() {
             .map((c) => (
               <li key={c.href} className="h-full">
                 <Link
-                  aria-label={c.title}
                   href={c.href}
                   className="group/card @container flex h-full flex-col rounded-container border border-ink-200 bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700"
                 >

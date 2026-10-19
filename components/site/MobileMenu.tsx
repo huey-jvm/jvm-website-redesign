@@ -111,7 +111,7 @@ export function MobileMenu({
         )}
       >
         <div className="flex h-15 items-center justify-between border-b border-ink-200 px-4">
-          <span className="font-display text-h4 text-ink-950">Menu</span>
+          <span className="font-semibold text-h4 text-ink-950">Menu</span>
           <CloseButton
             label="Close menu"
             onClick={(e) => {

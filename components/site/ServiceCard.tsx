@@ -7,9 +7,38 @@ import type { Service } from "@/content/services";
 import { cn } from "@/lib/cn";
 import { Slot } from "./Slot";
 
-type Layout = "stack" | "horizontal" | "row" | "feature";
+type Layout = "stack" | "horizontal" | "row" | "feature" | "cinema";
 
 export function ServiceCard({ service, image, slot, className, horizontal = false, layout, headingLevel: Tag = "h3" }: { service: Service; image?: string; slot?: string; className?: string; horizontal?: boolean; layout?: Layout; headingLevel?: "h2" | "h3" }) {
+  if (layout === "cinema") {
+    return (
+      <Link
+        href={`/services/${service.slug}`}
+        className={cn(
+          "group/card @container surface-dark relative isolate block h-full overflow-hidden rounded-container border border-ink-800 bg-ink-900",
+          "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500",
+          className?.includes("aspect") ? "aspect-[4/3]" : "aspect-[4/3] lg:aspect-auto",
+          className,
+        )}
+      >
+        {image ? (
+          <Image src={image} alt="" fill sizes={service.lead ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 100vw"} className="-z-20 object-cover" />
+        ) : slot ? (
+          <div aria-hidden className="absolute inset-0 -z-20"><Slot id={slot} className="size-full" sizes="(min-width: 1024px) 50vw, 100vw" /></div>
+        ) : null}
+        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-ink-950 via-ink-950/60 to-ink-950/10" />
+        <div className="flex h-full flex-col justify-end p-5 @[28rem]:p-8">
+          <Eyebrow tone="dark">{service.lead ? leadEyebrow : "Service"}</Eyebrow>
+          <Tag title={service.name} className={cn("mt-2 text-cream transition-colors duration-150 ease-hover group-hover/card:text-gold-500 group-focus-visible/card:text-gold-500 group-focus-visible/card:transition-none", service.lead ? "text-h3 @[28rem]:text-h1" : "text-h4 @[20rem]:text-h3")}>{service.name}</Tag>
+          <p className={cn("mt-2 max-w-[48ch] text-body-sm text-ink-200", service.lead ? "@[28rem]:text-body" : "line-clamp-2")}>{service.teaser}</p>
+          <span className="mt-4 inline-flex items-center gap-1 text-body-sm font-semibold text-cream">
+            Explore {service.short}
+            <ArrowRight aria-hidden className="size-4 transition-transform duration-150 ease-hover group-hover/card:translate-x-1 group-focus-visible/card:translate-x-1 group-focus-visible/card:transition-none motion-reduce:group-hover/card:translate-x-0 motion-reduce:group-focus-visible/card:translate-x-0" />
+          </span>
+        </div>
+      </Link>
+    );
+  }
   const mode: Layout = layout ?? (horizontal ? "horizontal" : "stack");
   const frame = cn(
     "card-media relative w-full overflow-hidden bg-ink-100",
@@ -22,7 +51,6 @@ export function ServiceCard({ service, image, slot, className, horizontal = fals
   return (
     <Link
       href={`/services/${service.slug}`}
-      aria-label={service.name}
       className={cn(
         "group/card @container block h-full overflow-hidden rounded-container border border-ink-200 bg-white",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700",

@@ -25,8 +25,8 @@ export const contact = {
   },
   responseTime: "one business day",
   social: [
-    { name: "Facebook", href: "https://www.facebook.com/JVMSolutions", pendingCheck: true },
-    { name: "LinkedIn", href: "https://www.linkedin.com/company/jvmsolutions", pendingCheck: true },
+    { name: "Facebook", href: "https://www.facebook.com/JVMSolutions" },
+    { name: "LinkedIn", href: "https://www.linkedin.com/company/jvmsolutions" },
   ],
   careersPortal: "https://jvmsolutions.isolvedhire.com/jobs/",
   routes: {

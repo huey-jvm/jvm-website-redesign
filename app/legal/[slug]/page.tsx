@@ -31,7 +31,7 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
         <p className="mt-4 text-caption text-ink-500">Last updated {page.updated}</p>
         {page.draft ? <div className="mt-4 max-w-xl"><Placeholder id="P12" /></div> : null}
       </PageHero>
-      <Section className="pt-0 md:pt-0 lg:pt-0">
+      <Section>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
           <InPageNav sections={page.sections.map((s) => ({ id: s.id, label: s.title }))} />
           <div className="min-w-0 space-y-10">

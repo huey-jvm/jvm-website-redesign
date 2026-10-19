@@ -47,7 +47,7 @@ export default function StarsPage() {
         </div>
       </PageHero>
 
-      <Section className="pt-0 md:pt-0 lg:pt-0">
+      <Section>
         <div className="grid grid-cols-1 gap-10 pt-12 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
           <InPageNav sections={nav} />
           <div className="min-w-0 space-y-14">

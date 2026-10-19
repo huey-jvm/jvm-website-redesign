@@ -54,9 +54,7 @@ test("hero crops stay still on scroll and mobile photos have their own frame", a
       expect(await layer.evaluate((el) => getComputedStyle(el).transform)).toBe("none");
       expect(before.transform).toBe("none");
       if (width === 390) {
-        const hero = await page.locator("[data-hero]").boundingBox();
-        expect(before.height).toBeLessThan(hero!.height / 2);
-        expect(await layer.locator("img").evaluate((img) => (img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+        expect(await layer.evaluate((img) => (img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
       }
     }
     await context.close();

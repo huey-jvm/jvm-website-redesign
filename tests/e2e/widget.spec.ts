@@ -37,7 +37,7 @@ test("pending contact submission sends one request and keyboard dismissal restor
     await route.fulfill({ status: 200, json: { ok: true, simulated: true } });
   });
   await page.goto("/");
-  const launcher = page.locator(".widget-launcher");
+  const launcher = page.locator("header").getByRole("button", { name: "Contact us" });
   await launcher.focus();
   await page.keyboard.press("Enter");
   const dialog = page.getByRole("dialog", { name: "Start a conversation" });

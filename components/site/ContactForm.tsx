@@ -205,7 +205,7 @@ export function ContactForm({
       ref={formRef}
       onSubmit={onSubmit}
       noValidate
-      className="space-y-5"
+      className="contact-form space-y-6"
       aria-describedby={`${id}-reads`}
     >
       {Object.values(errors).some(Boolean) || status === "error" ? (
@@ -291,7 +291,7 @@ export function ContactForm({
               <label
                 key={key}
                 className={cn(
-                  "inline-flex min-h-11 cursor-pointer items-center rounded-pill border px-4 text-body-sm font-medium transition-[color,background-color,border-color,scale] duration-150 ease-hover active:scale-[0.98] motion-reduce:active:scale-100 has-focus-visible:transition-none has-focus-visible:outline-2 has-focus-visible:outline-offset-2",
+                  "inline-flex min-h-11 cursor-pointer items-center rounded-control border px-4 text-body-sm font-medium transition-[color,background-color,border-color,scale] duration-150 ease-hover active:scale-[0.98] motion-reduce:active:scale-100 has-focus-visible:transition-none has-focus-visible:outline-2 has-focus-visible:outline-offset-2",
                   dark
                     ? "has-focus-visible:outline-gold-500"
                     : "has-focus-visible:outline-gold-700",

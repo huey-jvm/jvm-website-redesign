@@ -34,18 +34,17 @@ export default function AboutPage() {
         crumbs={[{ label: "About" }]}
       />
 
-      <div className="container-content">
-        <div className="relative aspect-[3/2] w-full overflow-hidden">
-          <Image
-            src={teamShirtsPhoto.src}
-            alt={teamShirtsPhoto.alt}
-            fill
-            priority
-            sizes="(min-width: 1200px) 1200px, 100vw"
-            className="object-cover"
-          />
-        </div>
+      <div className="container-content relative mt-8 aspect-[3/2] overflow-hidden border-b-4 border-gold-500 md:aspect-[21/7]">
+        <Image
+          src={teamShirtsPhoto.src}
+          alt={teamShirtsPhoto.alt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[50%_70%]"
+        />
       </div>
+      <div className="h-12 md:h-16" aria-hidden />
       <div className="container-content grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-12">
         <InPageNav
           sections={[
@@ -97,7 +96,7 @@ export default function AboutPage() {
             <Placeholder
               id="P3"
               inline
-              what="Pending the CEO’s confirmation"
+              what="Pending the CEOâ€™s confirmation"
               who="the CEO"
               className="mt-4 inline-block"
             />

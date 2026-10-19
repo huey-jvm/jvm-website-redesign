@@ -14,9 +14,9 @@ export default function ContactPage() {
   return (
     <>
       <PageHero eyebrow="Contact" title="Let’s Move Your Mission Forward" lead="Talk with our team about your goals, your next program or your career. We’ll help you take the next step." crumbs={[{ label: "Contact" }]} />
-      <Section className="pt-0 md:pt-0 lg:pt-0">
+      <Section surface="cream" className="contact-workspace">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-7"><ContactForm /></div>
+          <div className="contact-form-sheet lg:col-span-7"><h2 className="mb-2 text-h2-sm">Start a conversation</h2><p className="mb-8 text-body-sm text-ink-700">Choose your enquiry type to connect with the right team.</p><ContactForm /></div>
           <aside className="space-y-6 lg:col-span-5">
             <div className="rounded-container border border-ink-200 bg-white p-6">
               <h2 className="text-h4">{contact.office.label}</h2>

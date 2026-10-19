@@ -30,7 +30,7 @@ export default function CapabilityPage() {
           )}
         </div>
       </PageHero>
-      <Section className="pt-0 md:pt-0 lg:pt-0">
+      <Section>
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
           <div className="space-y-8 lg:col-span-7">
             <div>

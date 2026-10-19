@@ -1,18 +1,17 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import Image from "@/components/ui/Image";
 import { formatList } from "@/lib/list";
-import { ImageHero } from "@/components/site/ImageHero";
+import { CinematicHero } from "@/components/site/CinematicHero";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { ProofStrip } from "@/components/site/ProofStrip";
-import { ContourArt } from "@/components/site/ContourArt";
+
 import { OutcomeRow } from "@/components/site/OutcomeTile";
 import { cn } from "@/lib/cn";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { FactBlock } from "@/components/site/FactBlock";
 import { CTABand } from "@/components/site/CTABand";
-import { OpenWidgetButton } from "@/components/site/OpenWidgetButton";
 import { Button } from "@/components/ui/Button";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { statements } from "@/content/statements";
@@ -35,30 +34,24 @@ export default function HomePage() {
   const stars = credentials.find((c) => c.slug === "stars-iii");
   return (
     <>
-      <ImageHero
-        size="display"
-        eyebrow={statements.category}
-        title={statements.tagline}
-        lead={statements.positioning}
-        image={teamPhoto}
-      >
+      <CinematicHero image={{ ...teamPhoto, src: "/images/jvm/team-hero.webp" }}>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <OpenWidgetButton tone="dark" size="lg" route="contracting" />
-          <Button href="/contracting/capability-statement" variant="secondary" tone="dark" size="lg">Read the capability statement</Button>
+          <Button href="/contracting" tone="dark" size="md" variant="primary">Verify our credentials</Button>
+          <Button href="/contracting/capability-statement" variant="secondary" tone="dark" size="md">Read the capability statement</Button>
         </div>
-      </ImageHero>
+      </CinematicHero>
       <ProofStrip />
 
-      <Section surface="light" aria-labelledby="outcomes-title">
+      <Section surface="cream" aria-labelledby="outcomes-title">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-36">
-              <SectionHeader id="outcomes-title" eyebrow="Five outcomes" title="What Changes for Your Mission" className="mb-0 md:mb-0" />
+              <SectionHeader id="outcomes-title" eyebrow="Five outcomes" title="What Changes for Your Mission" lead="JVM sells measurable outcomes, not labor categories. These five anchor every engagement." className="mb-0 md:mb-0" />
             </div>
           </div>
-          <ol className="outcomes-row border-t border-ink-200 lg:col-span-8">
+          <ol className="outcomes-row border-t-2 border-gold-500 lg:col-span-8">
             {outcomes.map((o, i) => (
-              <li key={o.id} className="border-b border-ink-200">
+              <li key={o.id} className="border-b border-cream-border">
                 <OutcomeRow outcome={o} index={i} href={`/why-jvm#${o.id}`} />
               </li>
             ))}
@@ -66,11 +59,11 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section surface="cream">
-        <SectionHeader eyebrow="Services" title="One Accountable Partner Across Four Areas" lead={`${services[0].name} leads. ${formatList(services.slice(1).map((s) => s.name))} sit alongside it under the same accountability.`} />
-        <ul className="service-row grid grid-cols-1 gap-6 lg:grid-cols-12 lg:grid-rows-3">
+      <Section surface="dark">
+        <SectionHeader tone="dark" eyebrow="Services" title="One Accountable Partner Across Four Areas" lead={`${services[0].name} leads. ${formatList(services.slice(1).map((s) => s.name))} sit alongside it under the same accountability.`} />
+        <ul className="service-row grid grid-cols-1 gap-4 lg:grid-cols-12 lg:grid-rows-3 lg:gap-6">
           {services.map((s) => (
-            <li key={s.slug} className={cn("h-full", s.lead ? "lg:col-span-6 lg:row-span-3" : "lg:col-span-6")}>
+            <li key={s.slug} className={cn("h-full", s.lead ? "lg:col-span-7 lg:row-span-3" : "lg:col-span-5")}>
               <ServiceCard service={s} image={s.cardPhoto} slot={s.cardImage} layout={s.lead ? "feature" : "row"} />
             </li>
           ))}
@@ -93,10 +86,10 @@ export default function HomePage() {
         </ol>
       </Section>
 
-      <Section surface="dark" backdrop="AS-04" backdropClassName="object-right opacity-60" art={<ContourArt />}>
+      <Section surface="dark">
         <div>
           <Eyebrow tone="dark">Contracting at a glance</Eyebrow>
-          <h2 className="mt-3 text-h2-sm text-cream md:text-h2">Verify Us in a Minute</h2>
+          <h2 className="mt-3 text-h1-sm text-cream md:text-h1">Verify Us in a Minute</h2>
           <p className="mt-3 max-w-[60ch] text-body text-ink-200">Everything a contracting officer checks, in one place. Each identifier can be copied, and the full record is on the contracting pages.</p>
         </div>
         <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-stretch lg:gap-8">
@@ -129,20 +122,28 @@ export default function HomePage() {
         {stars ? null : <Button href="/contracting" variant="secondary" tone="dark" className="mt-6">Go to contracting</Button>}
       </Section>
 
-      <Section surface="light">
-        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-12 lg:gap-16">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-container bg-ink-100 md:col-span-5">
-            <Image src={founder.image!} alt={`Portrait of ${founder.name}`} fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover object-top" />
-          </div>
-          <div className="md:col-span-7">
-            <Eyebrow tone="light">Leadership</Eyebrow>
-            <h2 className="mt-3 text-h2-sm md:text-h2">Led From Inside the Mission</h2>
-            <div className="mt-6 border-l-2 border-gold-500 pl-6">
-              <p className="max-w-[55ch] text-lead-sm text-ink-900 md:text-lead">{founder.name}, {founder.role}, {founder.summary}</p>
-              <p className="mt-4 max-w-[60ch] text-body text-ink-700">JVM is built on that understanding of how federal health missions actually run.</p>
+      <Section surface="cream" className="leadership-feature">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-20">
+          <div>
+            <Eyebrow tone="light">Leadership / Mission experience</Eyebrow>
+            <h2 className="mt-4 max-w-[18ch] text-h1-sm md:text-h1">Led From Inside the Mission</h2>
+            <p className="mt-6 max-w-[60ch] text-lead-sm text-ink-900">{founder.name}, {founder.role}, {founder.summary}</p>
+            <p className="mt-4 max-w-[60ch] text-body text-ink-700">JVM is built on that understanding of how federal health missions actually run.</p>
+            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-y border-ink-200 py-5 text-body-sm font-semibold text-ink-900">
+              <span>Air Force veteran</span>
+              <span>18 years in the DoD environment</span>
             </div>
-            <Button href="/about" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing className="mt-6">Read about JVM</Button>
+            <Button href="/about#leadership" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing className="mt-6">Meet our leadership</Button>
           </div>
+          <figure className="mx-auto w-full max-w-[22rem] border-t-4 border-gold-500 bg-ink-950 p-5">
+            <div className="relative aspect-square overflow-hidden bg-ink-100">
+              <Image src={founder.image!} alt={`Portrait of ${founder.name}`} fill quality={90} sizes="(min-width: 400px) 312px, 85vw" className="object-cover" />
+            </div>
+            <figcaption className="pt-5">
+              <p className="text-h3 text-cream">{founder.name}</p>
+              <p className="mt-1 text-body-sm text-gold-500">{founder.role}</p>
+            </figcaption>
+          </figure>
         </div>
       </Section>
 

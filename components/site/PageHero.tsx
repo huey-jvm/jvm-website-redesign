@@ -2,27 +2,23 @@ import { TitleFigures } from "@/components/ui/TitleFigures";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import type { ReactNode } from "react";
 import { Breadcrumb } from "./Breadcrumb";
-import { cn } from "@/lib/cn";
+import { Slot, presentAsset } from "./Slot";
 
-export function PageHero({ eyebrow, title, lead, crumbs, children, aside, surface = "light" }: { eyebrow?: string; title: string; lead?: string; crumbs?: { label: string; href?: string }[]; children?: ReactNode; aside?: ReactNode; surface?: "light" | "cream" }) {
-  const text = (
-    <>
-      {crumbs ? <Breadcrumb items={crumbs} /> : null}
-      {eyebrow ? <Eyebrow tone="light" className="mb-3">{eyebrow}</Eyebrow> : null}
-      <h1 className="text-h1-sm md:text-h1"><TitleFigures>{title}</TitleFigures></h1>
-      {lead ? <p className="mt-5 prose-measure text-lead-sm text-ink-700 md:text-lead">{lead}</p> : null}
-      {children}
-    </>
-  );
+export function PageHero({ eyebrow, title, lead, crumbs, children, aside, backdrop }: { eyebrow?: string; title: string; lead?: string; crumbs?: { label: string; href?: string }[]; children?: ReactNode; aside?: ReactNode; surface?: "light" | "cream"; backdrop?: string }) {
+  const photo = backdrop ? presentAsset(backdrop) : undefined;
   return (
-    <section className={cn("pb-10 pt-8 md:pb-14 md:pt-12", surface === "cream" ? "bg-cream" : "bg-white")}>
+    <section className="brief-hero bg-cream text-ink-900" data-hero="page">
       <div className="container-content">
-        {aside ? (
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
-            <div className="lg:col-span-7">{text}</div>
-            <div className="lg:col-span-5">{aside}</div>
+        {crumbs ? <Breadcrumb items={crumbs} /> : null}
+        <div className={aside || photo ? "grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center" : "brief-heading"}>
+          <div>
+            {eyebrow ? <Eyebrow className="mb-5">{eyebrow}</Eyebrow> : null}
+            <h1 className="text-cinema-sm md:text-display"><TitleFigures>{title}</TitleFigures></h1>
+            {lead ? <p className="mt-6 max-w-[62ch] text-lead-sm text-ink-700">{lead}</p> : null}
+            {children}
           </div>
-        ) : text}
+          {aside ? <div className="brief-aside">{aside}</div> : photo ? <Slot id={photo.id} priority className="aspect-[4/3] border-b-4 border-gold-500" sizes="(min-width: 1024px) 45vw, 100vw" /> : null}
+        </div>
       </div>
     </section>
   );

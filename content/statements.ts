@@ -5,6 +5,7 @@ export const statements = {
   tagline: "We don't just support healthcare, we help transform how it's delivered.",
   positioning:
     "Healthcare operations and professional services for DHA, VA and HHS. Mission-ready teams, better care and measurable outcomes from day one.",
+  audience: ["Defense Health Agency", "Veterans Affairs", "Health and Human Services"],
   mission:
     "Driven by excellence and integrity, we deliver exceptional, client-focused solutions shaped by our core values.",
   vision:

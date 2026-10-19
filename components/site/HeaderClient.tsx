@@ -172,10 +172,10 @@ export function HeaderClient({
             {desktop}
           </nav>
           <span className="hidden min-[22.5rem]:inline-flex lg:hidden">
-            <OpenWidgetButton size="sm" />
+            <OpenWidgetButton size="sm" label="Contact" />
           </span>
           <span className="hidden lg:inline-flex">
-            <OpenWidgetButton />
+            <OpenWidgetButton label="Contact us" />
           </span>
         </div>
         {menuMounted ? (

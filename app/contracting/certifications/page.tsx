@@ -12,7 +12,7 @@ export default function CertificationsPage() {
   return (
     <>
       <PageHero eyebrow="Contracting" title="Certifications and Set-Asides" lead="Each credential below names what it means, who issued it and where to verify it. A mark that links to nothing does not belong on this page." crumbs={[{ label: "Contracting", href: "/contracting" }, { label: "Certifications and Set-Asides" }]} />
-      <Section className="pt-0 md:pt-0 lg:pt-0">
+      <Section>
         <div className="mb-8 max-w-xl"><Placeholder id="P17" /></div>
         <ul className="@container rounded-container border border-ink-200 bg-white px-6">
           {credentials.map((c) => <CredentialRow key={c.slug} credential={c} />)}
