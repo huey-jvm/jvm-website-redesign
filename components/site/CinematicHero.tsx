@@ -17,7 +17,7 @@ export function CinematicHero({ image, children }: { image: HeroPhoto; children?
     <section className="mission-hero surface-dark bg-ink-950 text-ink-200" data-hero="photo">
       <div className="container-content mission-hero-grid">
         <div className="hero-copy py-12 lg:py-20">
-          <Eyebrow tone="dark" className="mb-8">{statements.category}</Eyebrow>
+          <Eyebrow tone="dark" className="mb-8 text-lg tracking-[0.16em]">{statements.shortName}</Eyebrow>
           <h1 className="mission-title text-cream">{statements.tagline}</h1>
           <p className="mt-7 max-w-[47ch] text-lead-sm text-ink-200">{statements.positioning}</p>
           {children}

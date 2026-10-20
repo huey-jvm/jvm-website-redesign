@@ -26,6 +26,7 @@ export const primaryNav: NavGroup[] = [
   {
     label: "Contracting",
     items: [
+      { label: "Capability Statements", href: "/contracting/capability-statement" },
       { label: "Contracting overview", href: "/contracting", description: "Identifiers, vehicles and how to reach us" },
       ...(starsShown ? [{ label: "GSA 8(a) STARS III", href: "/contracting/stars-iii", description: "Our prime contract vehicle" }] : []),
       { label: "Certifications and Set-Asides", href: "/contracting/certifications", description: certificationSummary },
@@ -50,6 +51,7 @@ export const footerColumns: { heading: string; items: NavItem[] }[] = [
   {
     heading: "Contracting",
     items: [
+      { label: "Capability Statements", href: "/contracting/capability-statement" },
       { label: "Contracting overview", href: "/contracting" },
       ...(starsShown ? [{ label: "GSA 8(a) STARS III", href: "/contracting/stars-iii" }] : []),
       { label: "Certifications and Set-Asides", href: "/contracting/certifications" },

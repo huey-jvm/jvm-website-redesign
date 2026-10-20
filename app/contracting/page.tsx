@@ -25,6 +25,7 @@ export const metadata = pageMetadata(
 );
 
 const cards = [
+  { href: "/contracting/capability-statement", title: "Capability Statements", body: "Download a statement for your service area." },
   {
     href: "/contracting/stars-iii",
     title: "GSA 8(a) STARS III",

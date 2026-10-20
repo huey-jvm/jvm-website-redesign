@@ -121,7 +121,7 @@ test("production hides preview markers and exposes downloadable capability state
   await expect(
     page
       .getByRole("link", {
-        name: "Download Healthcare capability statement",
+        name: "Download PDF: Healthcare capability statement",
         exact: true,
       })
       .first(),
