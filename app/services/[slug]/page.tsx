@@ -1,3 +1,4 @@
+import { CapabilityLibrary } from "@/components/site/CapabilityLibrary";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
@@ -33,6 +34,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const navSections = [
     ...service.sections.map((s) => ({ id: s.id, label: s.title })),
     ...(service.lead ? [{ id: "commercial", label: "Commercial health systems" }] : []),
+    { id: "documents", label: "Capability statements" },
     { id: "outcomes", label: "Related outcomes" },
   ];
   const related = service.relatedOutcomes.map(getOutcome).filter(Boolean);
@@ -80,6 +82,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       </Section>
+
+      <Section surface="cream" id="documents" className="scroll-mt-28"><CapabilityLibrary service={service.slug} /></Section>
 
       <Section surface="dark" id="outcomes" className="service-outcomes scroll-mt-28">
         <Eyebrow tone="dark">The difference we support</Eyebrow>

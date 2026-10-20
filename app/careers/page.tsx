@@ -1,3 +1,4 @@
+import { TeamGallery } from "@/components/site/TeamGallery";
 import { teamPhoto } from "@/content/team";
 import { statements } from "@/content/statements";
 import { ImageHero } from "@/components/site/ImageHero";
@@ -35,7 +36,7 @@ export default function CareersPage() {
         <ul>
           {audiences.map((a) => (
             <li key={a.title} className="career-audience">
-              <Slot id={a.image} className="aspect-[3/2] w-full rounded-container" sizes="(min-width: 1024px) 33vw, 100vw" />
+              <Slot id={a.image} imgClassName={a.image === "AS-15b" ? "object-top" : undefined} className="aspect-[3/2] w-full rounded-container" sizes="(min-width: 1024px) 33vw, 100vw" />
               <div>
                 <h2 title={a.title} className="text-h2-sm md:text-h2">{a.title}</h2>
                 <p className="mt-3 text-body text-ink-700">{a.body}</p>
@@ -46,6 +47,7 @@ export default function CareersPage() {
 
       </Section>
 
+      <Section surface="light"><TeamGallery /></Section>
       <Section surface="cream">
         <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
           {whv.evidenceHref ? <CredentialMark credential={whv} /> : null}

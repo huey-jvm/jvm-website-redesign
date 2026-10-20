@@ -17,7 +17,7 @@ test("every button variant changes its paint on hover with a mouse", async ({ pa
   const targets: [string, Locator][] = [
     ["light primary, header", page.locator("header").getByRole("button", { name: "Contact us" })],
     ["dark primary, hero", page.locator("[data-hero]").getByRole("link", { name: "Verify our credentials" })],
-    ["dark secondary, hero", page.locator("[data-hero]").getByRole("link", { name: "Read the capability statement" })],
+    ["dark secondary, hero", page.locator("[data-hero]").getByRole("link", { name: "View capability statements" })],
     ["tertiary, read how we work", page.getByRole("link", { name: "Read how we work" })],
   ];
   for (const [name, el] of targets) {
@@ -37,7 +37,7 @@ test("on a touch device hover does nothing and the pressed state shows instead",
   await page.goto("/", { waitUntil: "networkidle" });
   const canHover = await page.evaluate(() => matchMedia("(hover: hover)").matches);
   expect(canHover, "the emulated device cannot hover").toBe(false);
-  const button = page.locator("[data-hero]").getByRole("link", { name: "Read the capability statement" });
+  const button = page.locator("[data-hero]").getByRole("link", { name: "View capability statements" });
   await button.scrollIntoViewIfNeeded();
   const rest = await paint(button);
   const box = (await button.boundingBox())!;

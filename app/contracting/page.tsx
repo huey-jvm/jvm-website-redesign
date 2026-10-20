@@ -44,8 +44,8 @@ const cards = [
   },
   {
     href: "/contracting/capability-statement",
-    title: "Capability Statement",
-    body: "A one page summary for your file.",
+    title: "Capability Statements",
+    body: "Five service-specific PDFs for your team and procurement file.",
   },
 ];
 
@@ -223,7 +223,7 @@ export default function ContractingPage() {
         title="Start a Conversation With Business Development"
         route="contracting"
         secondaryHref="/contracting/capability-statement"
-        secondaryLabel="Read the capability statement"
+        secondaryLabel="View capability statements"
       />
     </>
   );

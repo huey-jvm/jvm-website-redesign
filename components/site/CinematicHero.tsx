@@ -22,9 +22,9 @@ export function CinematicHero({ image, children }: { image: HeroPhoto; children?
           <p className="mt-7 max-w-[47ch] text-lead-sm text-ink-200">{statements.positioning}</p>
           {children}
         </div>
-        <figure className="mission-photo">
-          <div className="relative min-h-72 flex-1 overflow-hidden">
-            <Image src={image.src} alt={image.alt} fill priority quality={90} sizes="(min-width: 1024px) 45vw, 100vw" className="hero-image object-cover object-[65%_center]" />
+        <figure className="mission-photo self-center w-full">
+          <div className="relative aspect-[4/3] overflow-hidden">
+            <Image src={image.src} alt={image.alt} fill priority quality={90} sizes="(min-width: 1024px) 45vw, 100vw" className="hero-image object-cover object-center" />
           </div>
           <figcaption className="flex items-center justify-between gap-4 bg-gold-500 px-5 py-4 text-caption font-semibold uppercase tracking-widest text-ink-950"><span>People at the heart of the mission</span><span aria-hidden>JVM / 01</span></figcaption>
         </figure>

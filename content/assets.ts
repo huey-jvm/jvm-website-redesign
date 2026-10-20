@@ -29,12 +29,12 @@ export const assets: Asset[] = [
   { id: "AS-09", path: "/images/services/management.webp", alt: "", kind: "photo", where: ["/services/management-support"] },
   { id: "AS-10", path: `${dir}/as-10-shift.png`, alt: "", kind: "texture", where: [] },
   { id: "AS-11", path: `${dir}/as-11-contracting-banner.jpg`, alt: "", kind: "photo", where: ["/contracting"] },
-  { id: "AS-12", path: `${dir}/as-12-capability.jpg`, alt: "A blank sheet of paper and a fountain pen on a dark desk", kind: "photo", where: ["/contracting/capability-statement"] },
+  { id: "AS-12", path: `${dir}/as-12-capability.jpg`, alt: "A blank sheet of paper and a fountain pen on a dark desk", kind: "photo", where: [] },
   { id: "AS-13", path: `${dir}/as-05-cream-grain.png`, alt: "", kind: "texture", where: ["/about"] },
   { id: "AS-14", path: `${dir}/as-14-quality-banner.jpg`, alt: "", kind: "photo", where: ["/about/quality-compliance"] },
   { id: "AS-15a", path: `${dir}/as-15a-veterans.jpg`, alt: "A folded uniform jacket without insignia beside a civilian blazer on a chair", kind: "photo", where: ["/careers"] },
-  { id: "AS-15b", path: "/images/services/healthcare.webp", alt: "Conceptual image of clinical professionals collaborating", kind: "photo", where: ["/careers"] },
-  { id: "AS-15c", path: "/images/jvm/professionals.webp", alt: "Two business professionals in a bright office", kind: "photo", where: ["/careers"] },
+  { id: "AS-15b", path: "/images/keith/clinical-team.webp", alt: "A group of professionals together in a clinical workplace", kind: "photo", where: ["/careers"] },
+  { id: "AS-15c", path: "/images/keith/workplace-team.webp", alt: "Five people together in a rehabilitation and exercise space", kind: "photo", where: ["/careers"] },
 ];
 
 assets.push(...outcomeIllustrations);

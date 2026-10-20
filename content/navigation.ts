@@ -30,7 +30,7 @@ export const primaryNav: NavGroup[] = [
       ...(starsShown ? [{ label: "GSA 8(a) STARS III", href: "/contracting/stars-iii", description: "Our prime contract vehicle" }] : []),
       { label: "Certifications and Set-Asides", href: "/contracting/certifications", description: certificationSummary },
       ...(pastPerformance.length ? [{ label: "Past Performance", href: "/contracting/past-performance", description: "Contracts and task orders" }] : []),
-      { label: "Capability Statement", href: "/contracting/capability-statement", description: "One page summary to download" },
+      { label: "Capability Statements", href: "/contracting/capability-statement", description: "Five service-specific PDFs to view or download" },
     ],
   },
   {
@@ -54,7 +54,7 @@ export const footerColumns: { heading: string; items: NavItem[] }[] = [
       { label: "Contracting overview", href: "/contracting" },
       ...(starsShown ? [{ label: "GSA 8(a) STARS III", href: "/contracting/stars-iii" }] : []),
       { label: "Certifications and Set-Asides", href: "/contracting/certifications" },
-      { label: "Capability Statement", href: "/contracting/capability-statement" },
+      { label: "Capability Statements", href: "/contracting/capability-statement" },
     ],
   },
   {

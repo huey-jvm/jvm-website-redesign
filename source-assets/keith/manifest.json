@@ -1,0 +1,34 @@
+{
+  "sourceFolder": "JVM x Keith",
+  "photos": {
+    "CEO-WITH-TEAM.jpg": "leadership-team",
+    "Image (10).jfif": "clinical-team",
+    "Image (9).jfif": "workplace-team",
+    "Image (12).jfif": "conference-booth",
+    "Image (5).jfif": "conference-team",
+    "Image (3).jfif": "team-visit"
+  },
+  "documents": [
+    {
+      "title": "Healthcare",
+      "file": "JVM Healthcare Capability Statement.pdf"
+    },
+    {
+      "title": "Health IT",
+      "file": "JVM IT Capability Statement.pdf"
+    },
+    {
+      "title": "Logistics",
+      "file": "JVM Logistics Capability Statement 3.pdf"
+    },
+    {
+      "title": "Facilities",
+      "file": "JVM Facilities Capability Statement 1.pdf"
+    },
+    {
+      "title": "Administrative",
+      "file": "JVM Administrative Capability Statement.pdf"
+    }
+  ],
+  "note": "Supplied PDFs copied unchanged. Photos optimized without enlargement. Event photographs do not imply endorsements."
+}

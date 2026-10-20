@@ -20,7 +20,7 @@ import { services } from "@/content/services";
 import { differentiators } from "@/content/differentiators";
 import { identifiers, naicsDescriptions } from "@/content/identifiers";
 import { starsIII, starsShown, starsConfirmed, starsOrdering } from "@/content/vehicles";
-import { team, teamPhoto } from "@/content/team";
+import { team, leadershipTeamPhoto } from "@/content/team";
 import { credentials } from "@/content/credentials";
 import { CredentialMark } from "@/components/site/CredentialMark";
 
@@ -34,10 +34,10 @@ export default function HomePage() {
   const stars = credentials.find((c) => c.slug === "stars-iii");
   return (
     <>
-      <CinematicHero image={{ ...teamPhoto, src: "/images/jvm/team-hero.webp" }}>
+      <CinematicHero image={leadershipTeamPhoto}>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Button href="/contracting" tone="dark" size="md" variant="primary">Verify our credentials</Button>
-          <Button href="/contracting/capability-statement" variant="secondary" tone="dark" size="md">Read the capability statement</Button>
+          <Button href="/contracting/capability-statement" variant="secondary" tone="dark" size="md">View capability statements</Button>
         </div>
       </CinematicHero>
       <ProofStrip />

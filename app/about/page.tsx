@@ -1,3 +1,4 @@
+import { TeamGallery } from "@/components/site/TeamGallery";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import Image from "@/components/ui/Image";
 import { PageHero } from "@/components/site/PageHero";
@@ -11,7 +12,7 @@ import { Placeholder } from "@/components/ui/Placeholder";
 import { statements } from "@/content/statements";
 import { values } from "@/content/values";
 import { InPageNav } from "@/components/site/InPageNav";
-import { team, teamShirtsPhoto } from "@/content/team";
+import { team, leadershipTeamPhoto } from "@/content/team";
 import { credentials } from "@/content/credentials";
 import { identifiers } from "@/content/identifiers";
 import { contact } from "@/content/contact";
@@ -34,16 +35,12 @@ export default function AboutPage() {
         crumbs={[{ label: "About" }]}
       />
 
-      <div className="container-content relative mt-8 aspect-[3/2] overflow-hidden border-b-4 border-gold-500 md:aspect-[21/7]">
-        <Image
-          src={teamShirtsPhoto.src}
-          alt={teamShirtsPhoto.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[50%_70%]"
-        />
-      </div>
+      <Section surface="cream" className="pt-8 md:pt-8 lg:pt-8">
+        <div className="grid items-center gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
+          <div className="relative aspect-[4/3] overflow-hidden border-b-4 border-gold-500"><Image src={leadershipTeamPhoto.src} alt={leadershipTeamPhoto.alt} fill priority quality={90} sizes="(min-width:1024px) 55vw,100vw" className="object-cover" /></div>
+          <div><Eyebrow>People behind the mission</Eyebrow><h2 className="mt-4 text-h2-sm md:text-h2">Experience You Can Put a Face To</h2><p className="mt-5 text-body text-ink-700">Our work brings people, technology and operational support together. Meet the team behind JVM’s commitment to healthcare and professional services.</p><a href="#leadership" className="mt-6 inline-flex min-h-11 items-center text-body-sm font-semibold text-gold-700 underline underline-offset-4">Meet our leadership</a></div>
+        </div>
+      </Section>
       <div className="h-12 md:h-16" aria-hidden />
       <div className="container-content grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-12">
         <InPageNav
@@ -227,6 +224,7 @@ export default function AboutPage() {
           </Section>
         </div>
       </div>
+      <Section surface="cream"><TeamGallery /></Section>
       <CTABand />
     </>
   );

@@ -100,7 +100,7 @@ test("hover affordances have a keyboard pair in the same class expression", () =
   expect([...new Set(failures)]).toEqual([]);
 });
 
-test("production hides preview markers and preserves a working fallback", async ({
+test("production hides preview markers and exposes downloadable capability statements", async ({
   page,
 }) => {
   let markerCount = 0;
@@ -121,11 +121,11 @@ test("production hides preview markers and preserves a working fallback", async 
   await expect(
     page
       .getByRole("link", {
-        name: "Request the capability statement",
+        name: "Download Healthcare capability statement",
         exact: true,
       })
       .first(),
-  ).toHaveAttribute("href", /^mailto:/);
+  ).toHaveAttribute("href", "/downloads/jvm-healthcare-capability-statement.pdf");
   await page.evaluate(() => {
     const el = document.createElement("div");
     el.setAttribute("aria-label", "Placeholder control");

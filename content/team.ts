@@ -1,6 +1,8 @@
 import { starsIII, starsShown } from "./vehicles";
 import { contact } from "./contact";
 
+export const leadershipTeamPhoto = { src: "/images/keith/leadership-team.webp", alt: "The JVM leadership team together outdoors", position: "object-center" };
+
 export const teamPhoto = {
   src: "/images/jvm/team-walking.webp",
   alt: "The JVM Solutions team walking together outside their office",

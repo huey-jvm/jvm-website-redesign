@@ -1,4 +1,4 @@
-import { Download } from "lucide-react";
+import { CapabilityLibrary } from "@/components/site/CapabilityLibrary";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
 import { FactBlock } from "@/components/site/FactBlock";
@@ -10,26 +10,19 @@ import { identifiers } from "@/content/identifiers";
 import { differentiators } from "@/content/differentiators";
 import { starsIII, starsShown } from "@/content/vehicles";
 import { services } from "@/content/services";
-import { capabilityPdf as pdfPath, statements } from "@/content/statements";
+import { statements } from "@/content/statements";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
-import { Slot, presentAsset } from "@/components/site/Slot";
 
-export const metadata = pageMetadata("Capability Statement", "A one page summary of JVM Solutions for your file: identifiers, core competencies, differentiators and contact.", "/contracting/capability-statement");
+
+export const metadata = pageMetadata("Capability Statement", "Download JVM capability statements for healthcare, IT, logistics, facilities and administrative services.", "/contracting/capability-statement");
 
 
 export default function CapabilityPage() {
   return (
     <>
-      <PageHero eyebrow="Contracting" title="Capability Statement" lead="The one page summary a contracting officer keeps on file. The same facts are on this page, so nothing here depends on the download." crumbs={[{ label: "Contracting", href: "/contracting" }, { label: "Capability Statement" }]} aside={presentAsset("AS-12") ? <Slot id="AS-12" className="aspect-[3/2] w-full rounded-container" sizes="(min-width: 1024px) 40vw, 100vw" /> : undefined}>
-        <div className="mt-6 flex flex-wrap items-center gap-4">
-          {pdfPath ? (
-            <Button href={pdfPath} variant="primary" icon={<Download className="size-4" />}>Download the PDF</Button>
-          ) : (
-            <Placeholder id="P14" className="max-w-xl"><Button href={`mailto:${contact.emails.bd}?subject=Capability%20statement`} variant="primary">Request the capability statement</Button></Placeholder>
-          )}
-        </div>
-      </PageHero>
+      <PageHero eyebrow="Contracting / Resource library" title="Capability Statements" lead="Five focused statements. Choose the capabilities your mission needs, then view or download the original JVM document." crumbs={[{ label: "Contracting", href: "/contracting" }, { label: "Capability Statements" }]} />
+      <Section surface="cream" id="documents"><CapabilityLibrary /></Section>
       <Section>
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
           <div className="space-y-8 lg:col-span-7">
