@@ -37,7 +37,7 @@ export default function HomePage() {
       <CinematicHero image={leadershipTeamPhoto}>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Button href="/contracting" tone="dark" size="md" variant="primary">Verify our credentials</Button>
-          <Button href="/contracting/capability-statement" variant="secondary" tone="dark" size="md">View capability statements</Button>
+          <Button href="/services" variant="secondary" tone="dark" size="md">Explore our services</Button>
         </div>
       </CinematicHero>
       <ProofStrip />

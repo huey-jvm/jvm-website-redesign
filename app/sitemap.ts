@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const paths = [
     "/", "/services", ...services.map((s) => `/services/${s.slug}`), "/why-jvm",
-    "/contracting", ...(starsShown ? ["/contracting/stars-iii"] : []), "/contracting/certifications", "/contracting/capability-statement",
+    "/contracting", ...(starsShown ? ["/contracting/stars-iii"] : []), "/contracting/certifications",
     ...(pastPerformance.length ? ["/contracting/past-performance"] : []),
     "/about", "/about/quality-compliance", "/careers", "/contact",
     "/legal/privacy", "/legal/terms", "/legal/accessibility", "/legal/sms-consent",

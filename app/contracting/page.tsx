@@ -42,11 +42,7 @@ const cards = [
     body: "Contracts, task orders and periods of performance.",
     withheld: pastPerformance.length === 0,
   },
-  {
-    href: "/contracting/capability-statement",
-    title: "Capability Statements",
-    body: "Five service-specific PDFs for your team and procurement file.",
-  },
+
 ];
 
 export default function ContractingPage() {
@@ -222,8 +218,8 @@ export default function ContractingPage() {
       <CTABand
         title="Start a Conversation With Business Development"
         route="contracting"
-        secondaryHref="/contracting/capability-statement"
-        secondaryLabel="View capability statements"
+        secondaryHref="/services"
+        secondaryLabel="Explore our services"
       />
     </>
   );

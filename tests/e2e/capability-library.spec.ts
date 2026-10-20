@@ -3,9 +3,9 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { capabilityDocuments } from "../../content/capabilities";
 
-test("capability library serves every original PDF and provides distinct view and save actions", async ({ page, request }) => {
-  await page.goto("/contracting/capability-statement");
+test("service pages serve every original PDF and provides distinct view and save actions", async ({ page, request }) => {
   for (const doc of capabilityDocuments) {
+    await page.goto(`/services/${doc.service}`);
     const view = page.getByRole("link", { name: `View PDF: ${doc.title} capability statement (opens in a new tab)`, exact: true });
     await expect(view).toHaveAttribute("href", doc.href);
     await expect(view).toHaveAttribute("target", "_blank");

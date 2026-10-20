@@ -117,7 +117,7 @@ test("production hides preview markers and exposes downloadable capability state
   );
   if (process.env.NEXT_PUBLIC_SHOW_PLACEHOLDERS === "true")
     expect(markerCount).toBeGreaterThan(0);
-  await page.goto("/contracting/capability-statement");
+  await page.goto("/services/healthcare-operations");
   await expect(
     page
       .getByRole("link", {

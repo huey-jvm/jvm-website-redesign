@@ -2,14 +2,14 @@ import Image from "@/components/ui/Image";
 import { ArrowUpRight, Download, FileText } from "lucide-react";
 import { capabilityDocuments } from "@/content/capabilities";
 
-export function CapabilityLibrary({ service }: { service?: string }) {
-  const documents = capabilityDocuments.filter((doc) => !service || doc.service === service);
+export function CapabilityLibrary({ service }: { service: string }) {
+  const documents = capabilityDocuments.filter((doc) => doc.service === service);
   return (
     <div className="capability-library">
       <div className="mb-7 flex items-start gap-3">
         <FileText aria-hidden className="mt-1 size-6 shrink-0 text-gold-700" />
         <div>
-          <h2 className="text-h2-sm text-ink-950">{service ? "Take the Capabilities With You" : "Find the Right Capability Statement"}</h2>
+          <h2 className="text-h2-sm text-ink-950">{documents.length === 1 ? "Capability Statement" : "Capability Statements"}</h2>
           <p className="mt-3 max-w-[65ch] text-body text-ink-700">View the statement in your browser or save a copy for your team.</p>
         </div>
       </div>
