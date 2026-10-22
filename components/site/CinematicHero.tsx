@@ -26,7 +26,7 @@ export function CinematicHero({ image, children }: { image: HeroPhoto; children?
             <h1 className="mission-title text-cream">People first.<br /><span className="mission-emphasis">Mission always.</span></h1>
             <p className="mt-6 max-w-[43ch] text-lead-sm text-ink-200">Healthcare teams, technology and operational expertise. Together for the people behind every mission.</p>
             {children}
-            <a href="#outcomes-title" className="mission-scroll"><span aria-hidden="true">↓</span> Discover the JVM difference</a>
+            <a href="#outcomes-title" className="mission-scroll">What makes us different</a>
           </div>
         </div>
       </div>

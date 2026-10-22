@@ -350,8 +350,7 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
 .mission-brand { display:inline-block; padding:.5rem .75rem; margin-bottom:1.75rem; background:#c9a460; color:#0b182b; font-size:.85rem; letter-spacing:.16em; }
 .mission-hero-editorial .mission-title { font-size:clamp(2.8rem,4.3vw,4.5rem); font-weight:850; line-height:1.02; letter-spacing:-.045em; text-transform:uppercase; }
 .mission-emphasis { color:#e8ce96; }
-.mission-scroll { display:inline-flex; align-items:center; gap:.75rem; margin-top:2.5rem; font-size:.8rem; color:#f5efe5; }
-.mission-scroll span { display:grid; place-items:center; width:1.4rem; height:2rem; border:1px solid #c9a460; border-radius:1rem; }
+.mission-scroll { display:inline-flex; align-items:center; gap:.75rem; margin-top:2.5rem; font-size:.95rem; font-weight:600; color:#f5efe5; text-decoration:underline; text-decoration-color:#c9a460; text-underline-offset:7px; }
 .mission-scroll:hover { color:#e8ce96; }
 .mission-hero-editorial .mission-facts { border-color:rgb(201 164 96 / .3); }
 @media(max-width:767px) {
