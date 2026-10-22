@@ -117,7 +117,7 @@ export function HeaderClient({
       {utility}
       <header
         className={cn(
-          "sticky top-0 z-40 border-b border-ink-200 bg-white",
+          "jvm-header sticky top-0 z-40 border-b border-ink-200 bg-white",
           scrolled && "shadow-header",
         )}
       >
@@ -172,10 +172,10 @@ export function HeaderClient({
             {desktop}
           </nav>
           <span className="hidden min-[22.5rem]:inline-flex lg:hidden">
-            <OpenWidgetButton size="sm" label="Contact" />
+            <OpenWidgetButton size="sm" label="Contact" className="jvm-header-contact" />
           </span>
           <span className="hidden lg:inline-flex">
-            <OpenWidgetButton label="Contact us" />
+            <OpenWidgetButton label="Contact us" className="jvm-header-contact" />
           </span>
         </div>
         {menuMounted ? (

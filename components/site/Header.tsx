@@ -30,7 +30,7 @@ export function Header({ nav }: { nav: NavGroup[] }) {
         </Link>
       }
       utility={
-        <div className="hidden border-b border-ink-200 bg-cream lg:block">
+        <div className="jvm-utility hidden border-b border-ink-200 bg-cream lg:block">
           <div className="container-content flex h-9 items-center justify-end gap-6 text-caption text-ink-700"><span className="mr-auto font-semibold uppercase tracking-widest">Veteran-led. Mission-focused.</span>
             <a
               href={contact.office.phoneHref}
