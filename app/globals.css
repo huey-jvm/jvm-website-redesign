@@ -342,10 +342,11 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
 /* Full-width photographic hero with a quiet, readable navy foreground. */
 .mission-hero-editorial { position:relative; overflow:hidden; background:#0b182b; }
 .mission-stage { position:relative; isolation:isolate; }
-.mission-backdrop { position:absolute; inset:0 0 0 43%; z-index:-2; }
-.mission-backdrop .hero-image { object-position:center; object-fit:contain; }
-.mission-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,#0b182b 0%,rgb(11 24 43 / .98) 34%,rgb(11 24 43 / .78) 43%,rgb(11 24 43 / .08) 52%,rgb(11 24 43 / .04) 100%),linear-gradient(0deg,#0b182b,transparent 25%); }
-.mission-hero-editorial .mission-hero-grid { display:flex; align-items:center; min-height:680px; padding-block:5rem; }
+.mission-backdrop { position:absolute; inset:0; z-index:-2; }
+.mission-backdrop .hero-image { object-position:center; object-fit:cover; }
+.mission-photo-mobile { display:none; }
+.mission-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgb(11 24 43 / .94) 0%,rgb(11 24 43 / .88) 32%,rgb(11 24 43 / .65) 43%,rgb(11 24 43 / .12) 53%,rgb(11 24 43 / .03) 100%),linear-gradient(0deg,#0b182b,transparent 25%); }
+.mission-hero-editorial .mission-hero-grid { display:flex; align-items:center; min-height:clamp(560px,40vw,800px); padding-block:4rem; }
 .mission-hero-editorial .hero-copy { max-width:43%; }
 .mission-brand { display:inline-block; padding:.5rem .75rem; margin-bottom:1.75rem; background:#c9a460; color:#0b182b; font-size:.85rem; letter-spacing:.16em; }
 .mission-hero-editorial .mission-title { font-size:clamp(2.8rem,4.3vw,4.5rem); font-weight:850; line-height:1.02; letter-spacing:-.045em; text-transform:uppercase; }
@@ -353,7 +354,9 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
 .mission-scroll { display:inline-flex; align-items:center; gap:.75rem; margin-top:2.5rem; font-size:.95rem; font-weight:600; color:#f5efe5; text-decoration:underline; text-decoration-color:#c9a460; text-underline-offset:7px; }
 .mission-scroll:hover { color:#e8ce96; }
 .mission-hero-editorial .mission-facts { border-color:rgb(201 164 96 / .3); }
-@media(max-width:767px) {
+@media(max-width:1023px) {
+ .mission-photo-desktop { display:none; }
+ .mission-photo-mobile { display:block; }
  .mission-hero-editorial .hero-copy { max-width:100%; }
  .mission-hero-editorial .mission-hero-grid { min-height:0; padding-top:3rem; padding-bottom:2.5rem; }
  .mission-backdrop { position:relative; inset:auto; height:auto; aspect-ratio:4/3; z-index:0; }
