@@ -344,8 +344,8 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
 .mission-stage { position:relative; isolation:isolate; }
 .mission-backdrop { position:absolute; inset:0; z-index:-2; }
 .mission-backdrop .hero-image { object-position:center; object-fit:cover; }
-.mission-original-photo { position:absolute; inset:0 0 0 40%; mask-image:linear-gradient(90deg,transparent 0%,rgb(0 0 0 / .15) 2%,rgb(0 0 0 / .5) 4%,rgb(0 0 0 / .85) 6%,#000 8%); }
-.mission-backdrop .mission-photo-desktop { filter:blur(4px); mask-image:linear-gradient(90deg,#000 0%,#000 44.8%,transparent 46%); }
+.mission-original-photo { position:absolute; inset:0 0 0 44.4%; mask-image:linear-gradient(90deg,transparent 0%,rgb(0 0 0 / .35) 2%,rgb(0 0 0 / .8) 4%,#000 5%); }
+.mission-backdrop .mission-photo-desktop { mask-image:none; }
 .mission-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgb(11 24 43 / .94) 0%,rgb(11 24 43 / .88) 32%,rgb(11 24 43 / .65) 43%,rgb(11 24 43 / .12) 53%,rgb(11 24 43 / .03) 100%),linear-gradient(0deg,#0b182b,transparent 25%); }
 .mission-hero-editorial .mission-hero-grid { display:flex; align-items:center; min-height:clamp(560px,40vw,800px); padding-block:4rem; }
 .mission-hero-editorial .hero-copy { max-width:43%; }
