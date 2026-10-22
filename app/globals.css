@@ -339,30 +339,30 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
   .mission-hero, main > section.surface-dark, footer.surface-dark, .brief-hero, .image-hero, .cta-band, .mission-photo figcaption { background-image:none; }
 }
 
-/* An expansive, people-led opening with a JVM gold signature. */
-.mission-hero-editorial { position:relative; overflow:hidden; }
-.mission-hero-editorial .mission-hero-grid { position:relative; min-height:640px; align-items:center; gap:0; }
-.mission-hero-editorial .hero-copy { position:relative; z-index:2; }
-.mission-hero-editorial .mission-title { font-size:clamp(3.25rem,5.6vw,6rem); font-weight:400; line-height:1.04; letter-spacing:-.055em; }
-.mission-emphasis { color:#e8ce96; font-family:Georgia,serif; font-style:italic; letter-spacing:-.055em; }
-.mission-hero-editorial .mission-photo { margin:0; box-shadow:none; position:relative; }
-.mission-hero-editorial .mission-photo::before { inset:-32px -60px 42px 20px; border:1px solid #c9ac70; border-radius:50% 50% 0 0; transform:rotate(9deg); }
-.mission-photo-frame { aspect-ratio:4/3; border-radius:12% 12% 0 0; }
-.mission-hero-editorial .mission-photo figcaption { background:transparent; color:#e8ce96; padding-inline:0; font-size:10px; }
-.mission-hero-editorial .mission-facts { position:relative; z-index:2; }
-@media(min-width:1024px) {
- .mission-hero-editorial .mission-hero-grid { grid-template-columns:1.15fr 1fr; gap:2rem; padding-block:2rem; }
- .mission-hero-editorial .mission-photo { width:calc(100% + 2rem); }
- .mission-photo-frame { aspect-ratio:4/3; }
- .mission-hero-editorial .mission-photo .hero-image { object-position:52% center; }
-}
-@media(max-width:1023px) {
- .mission-hero-editorial .mission-hero-grid { padding-bottom:2rem; }
- .mission-hero-editorial .mission-photo { max-width:640px; }
- .mission-hero-editorial .mission-title { font-size:clamp(3rem,8vw,5.5rem); }
+/* Full-width photographic hero with a quiet, readable navy foreground. */
+.mission-hero-editorial { position:relative; overflow:hidden; background:#0b182b; }
+.mission-stage { position:relative; isolation:isolate; }
+.mission-backdrop { position:absolute; inset:0 0 0 28%; z-index:-2; }
+.mission-backdrop .hero-image { object-position:center 38%; }
+.mission-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,#0b182b 0%,rgb(11 24 43 / .98) 22%,rgb(11 24 43 / .89) 40%,rgb(11 24 43 / .32) 67%,rgb(11 24 43 / .08) 100%),linear-gradient(0deg,#0b182b,transparent 25%); }
+.mission-hero-editorial .mission-hero-grid { display:flex; align-items:center; min-height:680px; padding-block:5rem; }
+.mission-hero-editorial .hero-copy { max-width:680px; }
+.mission-brand { display:inline-block; padding:.5rem .75rem; margin-bottom:1.75rem; background:#c9a460; color:#0b182b; font-size:.85rem; letter-spacing:.16em; }
+.mission-hero-editorial .mission-title { font-size:clamp(3rem,5.3vw,5.5rem); font-weight:850; line-height:1.02; letter-spacing:-.045em; text-transform:uppercase; }
+.mission-emphasis { color:#e8ce96; }
+.mission-scroll { display:inline-flex; align-items:center; gap:.75rem; margin-top:2.5rem; font-size:.8rem; color:#f5efe5; }
+.mission-scroll span { display:grid; place-items:center; width:1.4rem; height:2rem; border:1px solid #c9a460; border-radius:1rem; }
+.mission-scroll:hover { color:#e8ce96; }
+.mission-hero-editorial .mission-facts { border-color:rgb(201 164 96 / .3); }
+@media(max-width:767px) {
+ .mission-hero-editorial .mission-hero-grid { min-height:0; padding-top:3rem; padding-bottom:2.5rem; }
+ .mission-backdrop { position:relative; inset:auto; height:auto; aspect-ratio:4/3; z-index:0; }
+ .mission-shade { background:linear-gradient(0deg,#0b182b,transparent); top:0; bottom:auto; height:300px; display:none; }
+ .mission-hero-editorial .mission-title { font-size:clamp(2.65rem,10vw,4.5rem); }
+ .mission-brand { margin-bottom:1.25rem; }
+ .mission-scroll { margin-top:1.75rem; }
 }
 @media(prefers-reduced-motion:no-preference) {
  .mission-hero-editorial .hero-copy { animation:jvm-hero-enter .8s ease-out both; }
- .mission-hero-editorial .mission-photo { animation:jvm-hero-enter 1s .12s ease-out both; }
  @keyframes jvm-hero-enter { from { opacity:0; translate:0 16px; } to { opacity:1; translate:0 0; } }
 }
