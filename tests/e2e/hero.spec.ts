@@ -47,15 +47,15 @@ test("hero crops stay still on scroll and mobile photos have their own frame", a
     for (const width of [1280, 390]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto("/", { waitUntil: "networkidle" });
-      const layer = page.locator("[data-hero] .hero-image");
-      await expect(layer).toHaveCount(1);
-      const before = await layer.evaluate((el) => ({ transform: getComputedStyle(el).transform, height: el.getBoundingClientRect().height }));
+      const layers = page.locator("[data-hero] .hero-image");
+      expect(await layers.count()).toBeGreaterThan(0);
+      const transforms = () => layers.evaluateAll((els) => els.map((el) => getComputedStyle(el).transform));
+      expect(new Set(await transforms())).toEqual(new Set(["none"]));
       await page.evaluate(() => window.scrollTo(0, 400));
-      expect(await layer.evaluate((el) => getComputedStyle(el).transform)).toBe("none");
-      expect(before.transform).toBe("none");
-      if (width === 390) {
-        expect(await layer.evaluate((img) => (img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
-      }
+      expect(new Set(await transforms())).toEqual(new Set(["none"]));
+      const shown = await layers.evaluateAll((els) => els.filter((el) => el.getClientRects().length > 0).map((img) => ({ src: (img as HTMLImageElement).currentSrc, width: (img as HTMLImageElement).naturalWidth })));
+      expect(shown.length, `a hero photo is visible at ${width}px`).toBeGreaterThan(0);
+      for (const img of shown) expect(img.width, `${img.src} loads at ${width}px`).toBeGreaterThan(0);
     }
     await context.close();
   }

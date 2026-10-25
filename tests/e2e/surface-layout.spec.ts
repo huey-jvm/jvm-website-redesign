@@ -65,9 +65,10 @@ test("the header contact button opens the dialog and Escape closes it", async ({
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/", { waitUntil: "domcontentloaded" });
   const opener = page.locator("header").getByRole("button", { name: "Contact us" });
-  const rest = await opener.evaluate(el => getComputedStyle(el).backgroundColor);
+  const fill = (el: Element) => { const s = getComputedStyle(el); return `${s.backgroundColor} ${s.backgroundImage}`; };
+  const rest = await opener.evaluate(fill);
   await opener.hover();
-  expect(await opener.evaluate(el => getComputedStyle(el).backgroundColor)).not.toBe(rest);
+  expect(await opener.evaluate(fill)).not.toBe(rest);
   await opener.click();
   await expect(page.getByRole("dialog", { name: "Start a conversation" })).toBeVisible();
   await page.keyboard.press("Escape");

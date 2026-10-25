@@ -19,7 +19,7 @@ export function CinematicHero({ image, children }: { image: HeroPhoto; children?
         <div className="mission-backdrop">
           <Image src="/images/keith/leadership-team-extended.webp" alt="" aria-hidden="true" fill quality={90} sizes="100vw" className="hero-image mission-photo-desktop object-cover" />
           <div className="mission-original-photo">
-            <Image src="/images/keith/leadership-team-original.jpg" alt={image.alt} fill priority unoptimized sizes="(min-width:1024px) 57vw, 100vw" className="hero-image object-cover" />
+            <Image src="/images/keith/leadership-team-original.webp" alt={image.alt} fill priority quality={90} sizes="(min-width:1024px) 57vw, 100vw" className="hero-image object-cover" />
           </div>
         </div>
         <div className="mission-shade" aria-hidden="true" />

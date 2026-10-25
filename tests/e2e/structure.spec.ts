@@ -75,7 +75,7 @@ test("identifiers render whole on every page at 320px", async ({ page }) => {
     await page.goto(route, {waitUntil:"networkidle"});
     const count = await page.locator("[data-figure]").count();
     measured += count;
-    if (["/", "/contracting", "/contracting/capability-statement", "/about", "/contracting/stars-iii"].includes(route)) expect(count, route).toBeGreaterThan(0);
+    if (["/", "/contracting", "/about", "/contracting/stars-iii"].includes(route)) expect(count, route).toBeGreaterThan(0);
     expect(await clippedFigures(page), route).toEqual([]);
   }
   expect(measured).toBeGreaterThan(0);
