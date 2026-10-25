@@ -1,0 +1,892 @@
+{
+  "/images/brand/jvm-full.webp": {
+    "hash": "562853020129d216",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      720
+    ]
+  },
+  "/images/brand/jvm-logo-480.png": {
+    "hash": "73f0faae0713415c",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      480
+    ]
+  },
+  "/images/brand/jvm-logo.png": {
+    "hash": "06731b8244a57c02",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1600
+    ]
+  },
+  "/images/brand/jvm-mark.webp": {
+    "hash": "4518b3b800730365",
+    "widths": [
+      96,
+      192,
+      256,
+      384
+    ]
+  },
+  "/images/brand/jvm-official.png": {
+    "hash": "20ed292575128f53",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/generated/as-01-health-it-card.jpg": {
+    "hash": "fa5977c1206471d9",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/generated/as-02-logistics-card.jpg": {
+    "hash": "a7ced3aa241bfaa5",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/generated/as-03-management-card.jpg": {
+    "hash": "37b122e901b92275",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/generated/as-04-gold-contours.png": {
+    "hash": "593b56a5ca11bdf7",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/generated/as-05-cream-grain.png": {
+    "hash": "47c5535f86211914",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/generated/as-06-healthcare-banner.jpg": {
+    "hash": "a484f75cac047f63",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/generated/as-07-health-it-banner.jpg": {
+    "hash": "78bdec54fccf76ff",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/generated/as-08-logistics-banner.jpg": {
+    "hash": "cc61db4c9bbfffb2",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/generated/as-09-management-banner.jpg": {
+    "hash": "a730b21cf8131c88",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/generated/as-10-shift.png": {
+    "hash": "c4de25cf5aecb9ad",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1600
+    ]
+  },
+  "/images/generated/as-11-contracting-banner.jpg": {
+    "hash": "47d9511c56f97ada",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/generated/as-12-capability.jpg": {
+    "hash": "37f627c6d3a056a1",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/generated/as-14-quality-banner.jpg": {
+    "hash": "25de6324d73f2ed3",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/generated/as-15a-veterans.jpg": {
+    "hash": "3090d7dc09c13e42",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/generated/as-15b-healthcare.jpg": {
+    "hash": "013821ef00cc0d02",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/generated/as-15c-professionals.jpg": {
+    "hash": "143eb85f495d2f19",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/generated/il-01-access.png": {
+    "hash": "f198ca14f166373f",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/generated/il-02-whole-person.png": {
+    "hash": "a443d50dce45bf23",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/generated/il-03-operations.png": {
+    "hash": "8dcb5a42a1859333",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/generated/il-04-experience.png": {
+    "hash": "2315e833ac99ad42",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/generated/il-05-readiness.png": {
+    "hash": "407f0a8d6307828f",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/illustrations/il-01-access.png": {
+    "hash": "05cdcc589422c8a1",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      768
+    ]
+  },
+  "/images/illustrations/il-02-whole-person.png": {
+    "hash": "149b2f8670c735f7",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      768
+    ]
+  },
+  "/images/illustrations/il-03-operations.png": {
+    "hash": "257d8c965ab94f6a",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      768
+    ]
+  },
+  "/images/illustrations/il-04-experience.png": {
+    "hash": "b24b3f508de373aa",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      768
+    ]
+  },
+  "/images/illustrations/il-05-readiness.png": {
+    "hash": "5d17a0e080e265db",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      768
+    ]
+  },
+  "/images/jvm/founder-headshot.webp": {
+    "hash": "2c0e67a7e9e43200",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1450
+    ]
+  },
+  "/images/jvm/founder-portrait.webp": {
+    "hash": "7071ea1cd8e2efac",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1600
+    ]
+  },
+  "/images/jvm/healthcare.webp": {
+    "hash": "ba84e92b730d4544",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640
+    ]
+  },
+  "/images/jvm/logistics.webp": {
+    "hash": "361bc283ec54fa68",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640
+    ]
+  },
+  "/images/jvm/management.webp": {
+    "hash": "9d5f070cd21e4ffa",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/jvm/professionals.webp": {
+    "hash": "829dba8de2c75b7e",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/jvm/roy-white.png": {
+    "hash": "bf75b69593d2d2cf",
+    "widths": [
+      96,
+      192,
+      195
+    ]
+  },
+  "/images/jvm/team-hero.webp": {
+    "hash": "558ee6bfb75c6e43",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1600
+    ]
+  },
+  "/images/jvm/team-shirts.webp": {
+    "hash": "2726bc355dddc8db",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/jvm/team-walking.webp": {
+    "hash": "28f040859a28bd2b",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/jvm/technology.webp": {
+    "hash": "9d6970895365b076",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1730
+    ]
+  },
+  "/images/keith/administrative-statement.webp": {
+    "hash": "b62321a9feae7d77",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      420
+    ]
+  },
+  "/images/keith/clinical-team.webp": {
+    "hash": "42947c1d313e970d",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      978
+    ]
+  },
+  "/images/keith/conference-booth.webp": {
+    "hash": "186a7aaadde34e43",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      768
+    ]
+  },
+  "/images/keith/conference-team.webp": {
+    "hash": "0b78675554edcf65",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1024
+    ]
+  },
+  "/images/keith/facilities-statement.webp": {
+    "hash": "cd2cb9db4fefbf71",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      420
+    ]
+  },
+  "/images/keith/health-it-statement.webp": {
+    "hash": "3aa951b329f23610",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      420
+    ]
+  },
+  "/images/keith/healthcare-statement.webp": {
+    "hash": "4351784d5dfe3b79",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      420
+    ]
+  },
+  "/images/keith/leadership-team-extended.webp": {
+    "hash": "4f42fed9c11297d0",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/keith/leadership-team-original.jpg": {
+    "hash": "5b8a7bb2677475ba",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/keith/leadership-team-original.webp": {
+    "hash": "00ac924541eea038",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/keith/leadership-team.webp": {
+    "hash": "6fd2741c7eea2ec8",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  },
+  "/images/keith/logistics-statement.webp": {
+    "hash": "7f7348408fecf9d0",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      420
+    ]
+  },
+  "/images/keith/team-visit.webp": {
+    "hash": "baf3633bcf1e18a5",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1024
+    ]
+  },
+  "/images/keith/workplace-team.webp": {
+    "hash": "efbc33b3924dead5",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1024
+    ]
+  },
+  "/images/location/texas-office-map.png": {
+    "hash": "7b97d9b20b7f6351",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1459
+    ]
+  },
+  "/images/services/healthcare.webp": {
+    "hash": "d05da69c4b9eb016",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1536
+    ]
+  },
+  "/images/services/logistics.webp": {
+    "hash": "c5fa5cdb5611bab3",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1536
+    ]
+  },
+  "/images/services/management.webp": {
+    "hash": "a1b81f8205a8d8bd",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1536
+    ]
+  },
+  "/images/services/technology.webp": {
+    "hash": "83cc46163d88afd5",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1536
+    ]
+  },
+  "/images/team/founder-portrait.jpg": {
+    "hash": "d4f0aee5984ef531",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      630
+    ]
+  },
+  "/images/team/team-shirts.jpg": {
+    "hash": "87356f720be39c54",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1898
+    ]
+  },
+  "/images/team/team-walking.jpg": {
+    "hash": "05bcc116e77b1c0c",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1440,
+      1920
+    ]
+  }
+}

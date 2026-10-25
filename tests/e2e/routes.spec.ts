@@ -33,7 +33,8 @@ test("every internal link and anchor on every page resolves", async ({ page, req
   const found = new Map<string, Set<string>>();
   const contactLinks = new Set<string>();
   for (const path of pages) {
-    await page.goto(path, { waitUntil: "networkidle" });
+    await page.goto(path, { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("main")).toBeVisible();
     const hrefs = await page.locator("a[href]").evaluateAll((els) => els.map((a) => a.getAttribute("href") ?? ""));
     for (const href of hrefs) {
       if (href.startsWith("mailto:") || href.startsWith("tel:")) contactLinks.add(href);

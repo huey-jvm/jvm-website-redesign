@@ -80,10 +80,13 @@ test("sections and cards size to their content without viewport height floors", 
   await openSurface(page, "/");
   const hasFloor = await page.locator("main > section, .outcomes-row > li, .outcomes-row > li > a").evaluateAll(els => els.some(el => parseFloat(getComputedStyle(el).minHeight) > 0));
   expect(hasFloor).toBe(false);
-  const cta = page.locator("main > section").filter({ has: page.locator(".cta-content") });
+  const cta = page.locator(".cta-content");
   expect((await cta.boundingBox())!.height).toBeLessThan(500);
   await openSurface(page, "/services");
-  expect((await page.locator("main > section").first().boundingBox())!.height).toBeLessThan(500);
+  // The directory and CTA now share the hero's background. Check the heading,
+  // rather than imposing a height ceiling on the entire combined section.
+  expect(await page.locator("main > section").first().evaluate(el => getComputedStyle(el).minHeight)).toBe("0px");
+  expect((await page.locator(".brief-heading h1").first().boundingBox())!.height).toBeLessThan(200);
   await openSurface(page, "/legal/privacy");
   const chapters = page.locator(".chapter-section");
   expect(await chapters.count()).toBeGreaterThan(0);

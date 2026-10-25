@@ -28,7 +28,7 @@ for (const path of ["/", "/services"]) {
     let releaseImages!: () => void;
     const pendingImages = new Promise<void>((resolve) => { releaseImages = resolve; });
     let heldRequests = 0;
-    await page.route("**/_next/image?**", async (route) => {
+    await page.route("**/images/optimized/**", async (route) => {
       heldRequests += 1;
       await pendingImages;
       await route.abort();

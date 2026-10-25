@@ -19,6 +19,7 @@ const cormorant = localFont({
     { path: "./fonts/cormorant-sc-latin-700.woff2", weight: "700", style: "normal" },
   ],
   variable: "--font-cormorant",
+  preload: false,
   display: "swap",
   fallback: ["Georgia", "serif"],
 });
@@ -51,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${cormorant.variable} ${inter.variable} h-full`}>
       <body className="flex min-h-full flex-col">
         <SkipLink />
-        <AnnouncementBanner announcement={announcement} />
+        {announcement ? <AnnouncementBanner announcement={announcement} /> : null}
         <Header nav={primaryNav} />
         <main id="main" className="flex-1">{children}</main>
         <Footer />

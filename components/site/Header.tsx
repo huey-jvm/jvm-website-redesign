@@ -19,8 +19,8 @@ export function Header({ nav }: { nav: NavGroup[] }) {
           className="inline-flex shrink-0 items-center rounded-control focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700"
           aria-label="JVM Solutions, home"
         >
-          <span className="inline-flex lg:hidden"><BrandLogo priority variant="mark" sizes="136px" className="w-11" /></span>
-          <span className="hidden lg:inline-flex"><BrandLogo priority sizes="144px" className="w-30" /></span>
+          <span className="inline-flex lg:hidden"><BrandLogo variant="mark" sizes="44px" className="w-11" /></span>
+          <span className="hidden lg:inline-flex"><BrandLogo sizes="120px" className="w-30" /></span>
         </Link>
       }
       utility={

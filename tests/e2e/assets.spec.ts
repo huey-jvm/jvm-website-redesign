@@ -59,7 +59,7 @@ test("every registered slot whose file exists renders an img with its src and al
   for (const asset of found) {
     for (const route of asset.where) {
       await page.goto(route, { waitUntil: "networkidle" });
-      const imgs = await page.locator(`[data-slot="${asset.id}"] img`).evaluateAll((els) => els.map((e) => ({ src: decodeURIComponent((e as HTMLImageElement).getAttribute("src") ?? ""), alt: e.getAttribute("alt") })));
+      const imgs = await page.locator(`[data-slot="${asset.id}"] img`).evaluateAll((els) => els.map((e) => ({ src: e.getAttribute("data-image-src") ?? "", alt: e.getAttribute("alt") })));
       expect(imgs.length, `${asset.id} has an img on ${route}`).toBeGreaterThan(0);
       expect(imgs.some((i) => i.src.includes(asset.path)), `${asset.id} src on ${route} was ${imgs.map((i) => i.src).join(", ")}`).toBe(true);
       expect(imgs.every((i) => i.alt === asset.alt), `${asset.id} alt on ${route}`).toBe(true);

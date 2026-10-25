@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ArrowUpRight, BadgeCheck } from "lucide-react";
 import type { Credential } from "@/content/credentials";
 import { cn } from "@/lib/cn";
-import { withBasePath } from "@/lib/base-path";
 
 function imageExists(src?: string) {
   if (!src) return false;
@@ -30,7 +29,7 @@ export function CredentialMark({ credential, size = "md", className, fill = fals
         className,
       )}
     >
-      <Image src={withBasePath(credential.image)} alt={credential.name} width={credential.wide ? 160 : 96} height={size === "md" ? 56 : 32} className={cn("w-auto max-w-full object-contain", size === "md" ? "h-14" : "h-8")} unoptimized />
+      <Image src={credential.image} alt={credential.name} width={credential.wide ? 160 : 96} height={size === "md" ? 56 : 32} className={cn("w-auto max-w-full object-contain", size === "md" ? "h-14" : "h-8")} />
     </span>
   ) : (
     <span

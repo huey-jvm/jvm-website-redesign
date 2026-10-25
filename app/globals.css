@@ -299,10 +299,6 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
 @media (hover:hover) and (prefers-reduced-motion:no-preference) {
   a:hover > div > .card-media img { transform:scale(1.035); }
 }
-@keyframes jvm-arrive {
-  from { opacity:.6; translate:0 12px; }
-  to { opacity:1; translate:0 0; }
-}
 @keyframes jvm-section-arrive {
   from { translate:0 12px; }
   to { translate:0 0; }
@@ -312,10 +308,6 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
   to { scale:1 1; }
 }
 @media (prefers-reduced-motion:no-preference) {
-  .hero-copy > *, .brief-hero h1, .brief-hero h1 + p { animation:jvm-arrive 650ms var(--ease-enter) both; }
-  .hero-copy > :nth-child(2) { animation-delay:60ms; }
-  .hero-copy > :nth-child(3) { animation-delay:120ms; }
-  .hero-copy > :nth-child(4) { animation-delay:180ms; }
   .brief-hero::before { transform-origin:left; animation:jvm-rule 900ms var(--ease-enter) both; }
   @supports (animation-timeline:view()) {
     .section-heading { animation:jvm-section-arrive linear both; animation-timeline:view(); animation-range:entry 0% entry 90%; }
@@ -354,10 +346,6 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
  .mission-hero-editorial .mission-title { font-size:clamp(2.65rem,10vw,4.5rem); }
  .mission-brand { margin-bottom:1.25rem; }
  .mission-scroll { margin-top:1.75rem; }
-}
-@media(prefers-reduced-motion:no-preference) {
- .mission-hero-editorial .hero-copy { animation:jvm-hero-enter .8s ease-out both; }
- @keyframes jvm-hero-enter { from { opacity:0; translate:0 16px; } to { opacity:1; translate:0 0; } }
 }
 
 /* Warm metallic accents keep navigation distinct from the photographic hero. */

@@ -21,7 +21,7 @@ export function ImageHero({ eyebrow, title, lead, crumbs, children, image }: Pro
           {children}
         </div>
         <div className="relative min-h-80 border-b-4 border-gold-500 lg:my-10">
-          <Image src={image.src} alt={image.alt} fill priority sizes="(min-width: 1024px) 90vw, 900px" className={cn("hero-image object-cover", image.position)} />
+          <Image src={image.src} alt={image.alt} fill priority sizes="(min-width:1440px) 656px,(min-width:1024px) 50vw,100vw" className={cn("hero-image object-cover", image.position)} />
         </div>
       </div>
     </section>

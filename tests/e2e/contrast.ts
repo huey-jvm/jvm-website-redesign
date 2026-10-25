@@ -27,6 +27,13 @@ export async function measureContrast(page: Page, info: TestInfo, name: string, 
       const text = node.textContent?.trim();
       const el = node.parentElement;
       if (!text || !el) continue;
+      // Hidden copy tooltips still have text rectangles. Measure painted text only.
+      let hidden = false;
+      for (let a: HTMLElement | null = el; a; a = a.parentElement) {
+        const style = getComputedStyle(a);
+        if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) { hidden = true; break; }
+      }
+      if (hidden) continue;
       let onOwnSurface = false;
       for (let a: HTMLElement | null = el; a && a !== root; a = a.parentElement) {
         const bg = nums(getComputedStyle(a).backgroundColor);

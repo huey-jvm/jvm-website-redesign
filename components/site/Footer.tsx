@@ -17,7 +17,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-[7rem_minmax(0,1fr)_minmax(0,1.05fr)_minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-10">
           <div className="md:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-flex rounded-control focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500" aria-label="JVM Solutions, home">
-              <BrandLogo variant="mark" sizes="300px" className="w-20 md:w-24" />
+              <BrandLogo variant="mark" sizes="(min-width:768px) 96px,80px" className="w-20 md:w-24" />
             </Link>
           </div>
 
