@@ -29,8 +29,7 @@ export function ErrorState({ kind = "missing", retry }: { kind?: ErrorKind; retr
       <div className="error-state-art" aria-hidden><ContourArt /></div>
       <div className="error-state-content container-content">
         <div className="error-state-symbol" aria-hidden><Icon strokeWidth={1.25} /></div>
-        <p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">JVM Solutions</p>
-        <h1 id="error-title" className="mt-4 font-medium">{title}</h1>
+        <h1 id="error-title" className="font-medium">{title}</h1>
         <p className="mx-auto mt-5 max-w-[60rem] text-lead-sm text-ink-700">{description}</p>
         <div className="mt-8">
           {retry ? (
