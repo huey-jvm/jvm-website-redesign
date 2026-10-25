@@ -138,7 +138,7 @@ export default function HomePage() {
               <li className="rounded-pill border border-gold-500/45 bg-gold-200/40 px-4 py-2">U.S. Air Force veteran</li>
               <li className="rounded-pill border border-ink-300/60 bg-white/60 px-4 py-2">18 years of DoD experience</li>
             </ul>
-            <Button href="/about#leadership" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing className="mt-6">Meet our leadership</Button>
+            <Button href="/about#leadership" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing className="ml-3 mt-6">Meet our leadership</Button>
           </div>
           <figure className="mx-auto w-full max-w-[22rem] border-t-4 border-gold-500 bg-ink-950 p-5">
             <div className="relative aspect-square overflow-hidden bg-ink-100">

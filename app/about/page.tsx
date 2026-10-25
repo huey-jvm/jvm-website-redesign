@@ -52,32 +52,21 @@ export default function AboutPage() {
         />
         <div className="min-w-0">
           <Section contained={false} id="mission" className="chapter-section">
-            <div data-backdrop="AS-13" className="relative isolate overflow-hidden rounded-container bg-cream p-4 md:p-6 lg:p-8">
+            <SectionHeader eyebrow="Culture" title="Our Mission and Vision" />
+            <div data-backdrop="AS-13" className="purpose-grid relative isolate grid gap-5 md:grid-cols-[1fr_1.15fr]">
             <Backdrop id="AS-13" />
-            <div className="relative grid grid-cols-1 gap-6 md:grid-cols-2">
-              <div className="@container rounded-container border border-cream-border bg-white">
-                <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
-                  <Eyebrow tone="light">Mission</Eyebrow>
-                  <h2 className="mt-3 text-h4 @[20rem]:text-h3 @[35rem]:text-h2-sm">
-                    Our Mission
-                  </h2>
-                  <p className="prose-measure mt-4 text-body text-ink-900">
-                    {statements.mission}
-                  </p>
-                </div>
-              </div>
-              <div className="@container rounded-container border border-cream-border bg-white">
-                <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
-                  <Eyebrow tone="light">Vision</Eyebrow>
-                  <h2 className="mt-3 text-h4 @[20rem]:text-h3 @[35rem]:text-h2-sm">
-                    Our Vision
-                  </h2>
-                  <p className="prose-measure mt-4 text-body text-ink-900">
-                    {statements.vision}
-                  </p>
-                </div>
-              </div>
-            </div>
+              <article className="purpose-card">
+                <span className="purpose-number" aria-hidden>01</span>
+                <p className="purpose-label text-eyebrow font-semibold uppercase tracking-widest">What drives us</p>
+                <h3 className="mt-6 text-h3">Our Mission</h3>
+                <p className="purpose-statement mt-4">{statements.mission}</p>
+              </article>
+              <article className="purpose-card purpose-card--vision surface-dark">
+                <span className="purpose-number" aria-hidden>02</span>
+                <p className="purpose-label text-eyebrow font-semibold uppercase tracking-widest">Where we’re going</p>
+                <h3 className="mt-6 text-h3">Our Vision</h3>
+                <p className="purpose-statement mt-4">{statements.vision}</p>
+              </article>
             </div>
           </Section>
 
