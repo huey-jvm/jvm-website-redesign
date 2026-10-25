@@ -18,6 +18,8 @@ export const routes = {
   privacy: '/legal/privacy', terms: '/legal/terms', accessibility: '/legal/accessibility', 'sms-consent': '/legal/sms-consent',
 };
 const widths = [320, 375, 430, 640, 768, 1024, 1440, 1920];
+const requested = new Set(process.argv.slice(2));
+for (const name of requested) if (!(name in routes)) throw new Error(`Unknown page: ${name}`);
 const base = process.env.BASE_URL || 'http://localhost:3100';
 const browser = await chromium.launch(process.env.PW_CHROMIUM ? { executablePath: process.env.PW_CHROMIUM } : { channel: 'msedge' });
 const page = await browser.newPage({ reducedMotion: 'reduce' });
@@ -26,6 +28,7 @@ await mkdir('components/site/skeletons', { recursive: true });
 await mkdir('diagnostic-results/layouts', { recursive: true });
 try {
   for (const [name, route] of Object.entries(routes)) {
+    if (requested.size && !requested.has(name)) continue;
     const samples = [];
     for (const width of widths) {
       await page.setViewportSize({ width, height: 1000 });

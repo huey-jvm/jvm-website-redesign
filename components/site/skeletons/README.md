@@ -19,6 +19,9 @@ status announces loading; the decorative silhouettes contain no focusable contro
 3. Review the desktop/mobile screenshots and measurements under the ignored
    `diagnostic-results/layouts/` directory, then review the JSON diff.
 
+To update selected pages, pass their JSON names without extensions, for example
+`node scripts/capture-skeletons.mjs home healthcare-operations health-it`.
+
 Unavailable routes are skipped. Past performance currently has no published
 records and continues to show the custom missing-page state.
 

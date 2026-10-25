@@ -134,10 +134,10 @@ export default function HomePage() {
             <h2 className="mt-4 max-w-[18ch] text-h1-sm md:text-h1">Led From Inside the Mission</h2>
             <p className="mt-6 max-w-[60ch] text-lead-sm text-ink-900">{founder.name}, {founder.role}, {founder.summary}</p>
             <p className="mt-4 max-w-[60ch] text-body text-ink-700">JVM is built on that understanding of how federal health missions actually run.</p>
-            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-y border-ink-200 py-5 text-body-sm font-semibold text-ink-900">
-              <span>Air Force veteran</span>
-              <span>18 years in the DoD environment</span>
-            </div>
+            <ul aria-label="Leadership experience" className="mt-8 flex flex-wrap gap-3 text-body-sm font-medium text-ink-900">
+              <li className="rounded-pill border border-gold-500/45 bg-gold-200/40 px-4 py-2">U.S. Air Force veteran</li>
+              <li className="rounded-pill border border-ink-300/60 bg-white/60 px-4 py-2">18 years of DoD experience</li>
+            </ul>
             <Button href="/about#leadership" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing className="mt-6">Meet our leadership</Button>
           </div>
           <figure className="mx-auto w-full max-w-[22rem] border-t-4 border-gold-500 bg-ink-950 p-5">

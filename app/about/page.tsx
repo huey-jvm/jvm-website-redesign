@@ -42,7 +42,7 @@ export default function AboutPage() {
         </div>
       </Section>
       <div className="h-12 md:h-16" aria-hidden />
-      <div className="container-content grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-12">
+      <div className="document-layout container-content grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-12">
         <InPageNav
           sections={[
             { id: "mission", label: "Mission and vision" },

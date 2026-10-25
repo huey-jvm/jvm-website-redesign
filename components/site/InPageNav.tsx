@@ -10,6 +10,7 @@ export function InPageNav({ sections, label = "On this page" }: { sections: NavS
   const [active, setActive] = useState<string | undefined>();
 
   useEffect(() => {
+    if (sections.length <= 3) return;
     const els = sections.map((s) => document.getElementById(s.id)).filter((el): el is HTMLElement => Boolean(el));
     if (els.length === 0) return;
     const observer = new IntersectionObserver(
@@ -25,6 +26,8 @@ export function InPageNav({ sections, label = "On this page" }: { sections: NavS
     els.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, [sections]);
+
+  if (sections.length <= 3) return null;
 
   return (
     <nav aria-label={label} className="document-nav sticky top-15 z-30 -mx-4 bg-white px-4 py-2 lg:top-28 lg:mx-0 lg:self-start lg:bg-transparent lg:px-0 lg:py-0">

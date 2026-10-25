@@ -12,7 +12,7 @@ export function OutcomeRow({ outcome, index, href }: { outcome: Outcome; index: 
   return (
     <Link
       href={href}
-      className="outcome-row group/card grid grid-cols-[minmax(0,1fr)_6rem] items-center gap-4 py-8 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700 md:grid-cols-[4.5rem_minmax(0,1fr)_12rem] md:gap-8 md:py-10"
+      className="outcome-row group/card grid grid-cols-[minmax(0,1fr)_7rem] items-center gap-4 py-8 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700 md:grid-cols-[4.5rem_minmax(0,1fr)_14rem] md:gap-8 md:py-10"
     >
       <span aria-hidden className="hidden self-start font-sans text-h1 font-medium leading-none text-gold-700 tabular md:block">{String(index + 1).padStart(2, "0")}</span>
       <div className="min-w-0">
@@ -23,7 +23,7 @@ export function OutcomeRow({ outcome, index, href }: { outcome: Outcome; index: 
           <ArrowRight aria-hidden className={arrow} />
         </span>
       </div>
-      <div className="outcome-art overflow-hidden rounded-control border border-ink-200 bg-ink-50" style={art}>
+      <div className="outcome-art overflow-hidden" style={art}>
         <OutcomeArt outcomeId={outcome.id} />
       </div>
     </Link>
@@ -33,7 +33,7 @@ export function OutcomeRow({ outcome, index, href }: { outcome: Outcome; index: 
 export function OutcomeTile({ outcome, href, horizontal = false }: { outcome: Outcome; href?: string; horizontal?: boolean }) {
   const inner = (
     <>
-      <div className="outcome-art shrink-0 border-b border-ink-200 bg-ink-50" style={art}>
+      <div className="outcome-art shrink-0" style={art}>
         <OutcomeArt outcomeId={outcome.id} />
       </div>
       <div className="flex min-w-0 flex-1 flex-col p-4 @[20rem]:p-6 @[35rem]:p-8">

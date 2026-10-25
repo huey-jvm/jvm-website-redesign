@@ -8,12 +8,14 @@ import { CredentialMark } from "./CredentialMark";
 import { footerColumns, legalNav } from "@/content/navigation";
 import { contact } from "@/content/contact";
 import { statements } from "@/content/statements";
+import { FooterTransition } from "./FooterTransition";
 
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="surface-dark bg-ink-950 text-ink-200">
-      <div className="container-content py-12 md:py-16">
+    <footer className="site-footer surface-dark bg-ink-950 text-ink-200">
+      <FooterTransition />
+      <div className="container-content pb-12 pt-24 md:pb-16 md:pt-32">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr]">
           <div>
             <Link href="/" className="inline-flex rounded-control focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500" aria-label="JVM Solutions, home">

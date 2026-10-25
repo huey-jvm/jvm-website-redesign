@@ -15,6 +15,7 @@ const serviceDescriptions: Record<string, string> = {
 const serviceItems: NavItem[] = services.map((s) => ({ label: s.name, href: `/services/${s.slug}`, description: serviceDescriptions[s.slug], lead: s.lead }));
 
 export const primaryNav: NavGroup[] = [
+  { label: "Why JVM", href: "/why-jvm" },
   {
     label: "Services",
     items: [
@@ -22,7 +23,6 @@ export const primaryNav: NavGroup[] = [
       { label: "All services", href: "/services" },
     ],
   },
-  { label: "Why JVM", href: "/why-jvm" },
   {
     label: "Contracting",
     items: [

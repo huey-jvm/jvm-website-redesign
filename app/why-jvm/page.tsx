@@ -38,7 +38,7 @@ export default function WhyPage() {
         crumbs={[{ label: "Why JVM" }]}
       />
       <Section>
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
+        <div className="document-layout grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
           <InPageNav
             sections={[
               ...nav,

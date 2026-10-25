@@ -25,8 +25,8 @@ const variants: Record<Tone, Record<Variant, string>> = {
       "bg-ink-950 text-white hover:bg-ink-800 focus-visible:bg-ink-800 active:bg-ink-800 focus-visible:outline-gold-700 " +
       "disabled:bg-ink-100 disabled:text-ink-400 disabled:shadow-none",
     secondary:
-      "border-[1.5px] border-ink-950 text-ink-950 bg-transparent hover:bg-cream " +
-      "focus-visible:bg-cream active:bg-cream focus-visible:outline-gold-700 " +
+      "border-[1.5px] border-ink-950 text-ink-950 bg-transparent hover:border-gold-700 hover:bg-ink-50 " +
+      "focus-visible:border-gold-700 focus-visible:bg-ink-50 active:bg-ink-50 focus-visible:outline-gold-700 " +
       "disabled:border-transparent disabled:bg-ink-100 disabled:text-ink-400",
     tertiary:
       "text-ink-900 bg-transparent " +

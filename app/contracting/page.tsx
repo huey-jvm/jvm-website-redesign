@@ -1,10 +1,8 @@
 import { statements } from "@/content/statements";
-import { certificationSummary } from "@/content/credentials";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
-import { Slot, presentAsset } from "@/components/site/Slot";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { FactBlock } from "@/components/site/FactBlock";
 import { TeamCard } from "@/components/site/TeamCard";
@@ -25,22 +23,19 @@ export const metadata = pageMetadata(
 );
 
 const cards = [
-  { href: "/contracting/capability-statement", title: "Capability Statements", body: "Download a statement for your service area." },
+  { href: "/contracting/capability-statement", title: "Capability Statements" },
   {
     href: "/contracting/stars-iii",
     title: "GSA 8(a) STARS III",
-    body: "Our prime contract vehicle. Contract number, ordering period, scope and how to order.",
     withheld: !starsShown,
   },
   {
     href: "/contracting/certifications",
     title: "Certifications and Set-Asides",
-    body: certificationSummary,
   },
   {
     href: "/contracting/past-performance",
     title: "Past Performance",
-    body: "Contracts, task orders and periods of performance.",
     withheld: pastPerformance.length === 0,
   },
 
@@ -110,64 +105,6 @@ export default function ContractingPage() {
         </div>
       </Section>
 
-      <Section>
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
-        <Slot
-          id="AS-11"
-          className="aspect-[3/2] w-full rounded-container lg:col-span-7 lg:aspect-auto lg:min-h-96"
-          sizes="(min-width: 1024px) 58vw, 100vw"
-        />
-
-        <ul className={presentAsset("AS-11") ? "grid grid-cols-1 gap-4 md:grid-cols-3 lg:col-span-5 lg:grid-cols-1" : "grid grid-cols-1 gap-4 md:grid-cols-3 lg:col-span-12"}>
-          {cards
-            .filter((c) => !c.withheld)
-            .map((c) => (
-              <li key={c.href} className="h-full">
-                <Link
-                  href={c.href}
-                  className="group/card @container flex h-full flex-col rounded-container border border-ink-200 bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700"
-                >
-                  <div className="flex flex-1 flex-col p-4 @[20rem]:px-6 @[20rem]:py-5">
-                    <h2
-                      title={c.title}
-                      className="text-h4 transition-colors duration-150 ease-hover @[20rem]:text-h3 group-hover/card:text-gold-700 group-focus-visible/card:text-gold-700 group-focus-visible/card:transition-none"
-                    >
-                      {c.title}
-                    </h2>
-                    <p className="mt-2 text-body-sm @[20rem]:text-body text-ink-700">
-                      {c.body}
-                    </p>
-                    <span className="mt-auto inline-flex items-center gap-1 pt-4 text-body-sm font-semibold text-ink-900">
-                      Open{" "}
-                      <ArrowRight
-                        aria-hidden
-                        className="size-4 transition-transform duration-150 ease-hover group-hover/card:translate-x-1 group-focus-visible/card:translate-x-1 group-focus-visible/card:transition-none motion-reduce:group-hover/card:translate-x-0 motion-reduce:group-focus-visible/card:translate-x-0"
-                      />
-                    </span>
-                  </div>
-                </Link>
-              </li>
-            ))}
-        </ul>
-        </div>
-
-        {pastPerformance.length === 0 ? (
-          <div className="mt-6">
-            <p className="text-body text-ink-700">
-              Past performance details are available on request.
-            </p>
-            <Button
-              href={`mailto:${contact.emails.bd}?subject=Past%20performance`}
-              variant="secondary"
-              size="sm"
-              className="mt-3"
-            >
-              Request past performance
-            </Button>
-          </div>
-        ) : null}
-        <Placeholder id="P6" className="mt-6 max-w-xl" />
-      </Section>
 
       <Section surface="light" className="pt-0 md:pt-0 lg:pt-0">
         <SectionHeader

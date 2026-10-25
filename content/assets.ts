@@ -1,21 +1,20 @@
 import { outcomes } from "./outcomes";
-import { services } from "./services";
 
 export type AssetKind = "photo" | "texture" | "illustration";
 export type Asset = { id: string; path: string; alt: string; kind: AssetKind; where: string[] };
 
 const dir = "/images/generated";
 
-export const illustrationShape = { width: 1200, height: 750 } as const;
+export const illustrationShape = { width: 768, height: 512 } as const;
 
 export const outcomeIllustrationId = (outcomeId: string) => `IL-${String(outcomes.findIndex((o) => o.id === outcomeId) + 1).padStart(2, "0")}`;
 
 const outcomeIllustrations: Asset[] = outcomes.map((o) => ({
   id: outcomeIllustrationId(o.id),
-  path: `${dir}/${outcomeIllustrationId(o.id).toLowerCase()}-${o.id}.png`,
+  path: `/images/illustrations/${outcomeIllustrationId(o.id).toLowerCase()}-${o.id}.png`,
   alt: "",
   kind: "illustration",
-  where: ["/", ...services.filter((s) => s.relatedOutcomes.includes(o.id)).map((s) => `/services/${s.slug}`)],
+  where: ["/"],
 }));
 
 
@@ -28,7 +27,7 @@ export const assets: Asset[] = [
   { id: "AS-08", path: "/images/services/logistics.webp", alt: "", kind: "photo", where: ["/services/logistics-facilities"] },
   { id: "AS-09", path: "/images/services/management.webp", alt: "", kind: "photo", where: ["/services/management-support"] },
   { id: "AS-10", path: `${dir}/as-10-shift.png`, alt: "", kind: "texture", where: [] },
-  { id: "AS-11", path: `${dir}/as-11-contracting-banner.jpg`, alt: "", kind: "photo", where: ["/contracting"] },
+  { id: "AS-11", path: `${dir}/as-11-contracting-banner.jpg`, alt: "", kind: "photo", where: [] },
   { id: "AS-12", path: `${dir}/as-12-capability.jpg`, alt: "A blank sheet of paper and a fountain pen on a dark desk", kind: "photo", where: [] },
   { id: "AS-13", path: `${dir}/as-05-cream-grain.png`, alt: "", kind: "texture", where: ["/about"] },
   { id: "AS-14", path: `${dir}/as-14-quality-banner.jpg`, alt: "", kind: "photo", where: ["/about/quality-compliance"] },

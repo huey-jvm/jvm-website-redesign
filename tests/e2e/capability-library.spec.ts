@@ -3,10 +3,10 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { capabilityDocuments } from "../../content/capabilities";
 
-test("service pages provide a download for every original PDF", async ({ page, request }) => {
+test("service pages preview every original PDF without a download button", async ({ page, request }) => {
   for (const doc of capabilityDocuments) {
     await page.goto(`/services/${doc.service}`);
-    await expect(page.getByRole("link", { name: `Download PDF: ${doc.title} capability statement`, exact: true })).toHaveAttribute("download", "");
+    await expect(page.getByRole("link", { name: /^Download PDF:/ })).toHaveCount(0);
     const preview = page.getByRole("link", { name: `Preview PDF: ${doc.title} capability statement (opens in a new tab)`, exact: true });
     await expect(preview).toHaveAttribute("href", doc.href);
     await expect(preview).toHaveAttribute("target", "_blank");
@@ -23,20 +23,22 @@ test("each service offers exactly its relevant capability statements", async ({ 
     await page.goto(`/services/${service}`);
     const library = page.locator("#documents");
     const expected = capabilityDocuments.filter(doc => doc.service === service);
-    await expect(library.getByRole("link", { name: /^Download / })).toHaveCount(expected.length);
+    await expect(library.getByRole("link", { name: /^Preview PDF:/ })).toHaveCount(expected.length);
     for (const doc of expected) {
-      await expect(library.getByRole("link", { name: `Download PDF: ${doc.title} capability statement`, exact: true })).toHaveAttribute("href", doc.href);
+      await expect(library.getByRole("link", { name: `Preview PDF: ${doc.title} capability statement (opens in a new tab)`, exact: true })).toHaveAttribute("href", doc.href);
     }
   }
 });
 
-test("directory provides preview and download buttons without thumbnails", async ({ page }) => {
+test("directory provides a preview link with a redirect icon for each document", async ({ page }) => {
   await page.goto("/contracting/capability-statement");
   const library = page.locator(".capability-library");
   await expect(library.locator("img")).toHaveCount(0);
-  await expect(library.getByRole("link")).toHaveCount(capabilityDocuments.length * 2);
+  await expect(library.getByRole("link")).toHaveCount(capabilityDocuments.length);
+  await expect(library.locator(".lucide-arrow-up-right")).toHaveCount(capabilityDocuments.length);
+  await expect(library.locator(".lucide-eye, a[download]")).toHaveCount(0);
   for (const doc of capabilityDocuments) {
     await expect(library.getByRole("heading", { name: doc.title, exact: true })).toBeVisible();
-    await expect(library.getByRole("link", { name: `Download PDF: ${doc.title} capability statement`, exact: true })).toHaveAttribute("href", doc.href);
+    await expect(library.getByRole("link", { name: `Preview PDF: ${doc.title} capability statement (opens in a new tab)`, exact: true })).toHaveAttribute("href", doc.href);
   }
 });
