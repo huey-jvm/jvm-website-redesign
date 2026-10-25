@@ -6,7 +6,6 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactWidget } from "@/components/site/ContactWidget";
 import { SkipLink } from "@/components/site/SkipLink";
-import { AnnouncementBanner } from "@/components/site/AnnouncementBanner";
 import { announcement } from "@/content/announcements";
 import { primaryNav } from "@/content/navigation";
 import { statements } from "@/content/statements";
@@ -47,12 +46,13 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const Banner = announcement ? (await import("@/components/site/AnnouncementBanner")).AnnouncementBanner : null;
   return (
     <html lang="en" className={`${cormorant.variable} ${inter.variable} h-full`}>
       <body className="flex min-h-full flex-col">
         <SkipLink />
-        {announcement ? <AnnouncementBanner announcement={announcement} /> : null}
+        {Banner ? <Banner announcement={announcement} /> : null}
         <Header nav={primaryNav} />
         <main id="main" className="flex-1">{children}</main>
         <Footer />
