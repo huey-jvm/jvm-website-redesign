@@ -1,5 +1,5 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { Phone } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Landmark } from "lucide-react";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
@@ -9,11 +9,11 @@ import { TeamContact } from "@/components/site/TeamContact";
 import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { Button } from "@/components/ui/Button";
+import { CopyButton } from "@/components/ui/CopyButton";
 import { ExternalLink } from "@/components/ui/ExternalLink";
 import { starsIII, starsShown, starsConfirmed, starsOrdering } from "@/content/vehicles";
 import { identifiers, naicsDescriptions } from "@/content/identifiers";
 import { team } from "@/content/team";
-import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = starsShown ? pageMetadata("GSA 8(a) STARS III", `JVM Solutions is a prime on GSA 8(a) STARS III, contract ${starsIII.contractNumber}. Scope, NAICS codes, ordering period and how to order.`, "/contracting/stars-iii") : {};
@@ -32,18 +32,19 @@ export default function StarsPage() {
   const ceo = team[0];
   return (
     <>
-      <PageHero eyebrow="Contract vehicle" title="GSA 8(a) STARS III" lead="A Best in Class governmentwide acquisition contract for IT services. JVM Solutions is a prime." crumbs={[{ label: "Contracting", href: "/contracting" }, { label: "GSA 8(a) STARS III" }]} surface="cream">
-        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div className="rounded-container border border-ink-200 bg-white p-5">
-            <Eyebrow tone="muted">Contract number</Eyebrow>
-            <p data-figure className="mt-1 break-normal font-sans text-h3 font-medium text-ink-950 tabular">{starsIII.contractNumber}</p>
+      <PageHero className="stars-hero" eyebrow="Contract vehicle" title="GSA 8(a) STARS III" lead="A Best in Class governmentwide acquisition contract for IT services. JVM Solutions is a prime." crumbs={[{ label: "Contracting", href: "/contracting" }, { label: "GSA 8(a) STARS III" }]} surface="cream">
+        <div className="stars-contract-summary surface-dark mt-10 grid grid-cols-1 gap-6 rounded-container border-t-[3px] border-gold-500 bg-ink-950 p-5 text-cream md:mt-12 md:grid-cols-2 md:gap-8 md:p-8">
+          <div className="group/fact min-w-0">
+            <div className="flex items-center gap-3"><BadgeCheck aria-hidden className="size-5 shrink-0 text-gold-500" /><Eyebrow tone="dark">Contract number</Eyebrow></div>
+            <div className="mt-4 flex min-w-0 items-center justify-between gap-3"><p data-figure className="break-normal font-sans text-h3 font-medium text-cream tabular md:text-h2">{starsIII.contractNumber}</p><CopyButton value={starsIII.contractNumber} label="Contract number" tone="dark" /></div>
+            <p className="mt-2 text-body-sm text-ink-200">JVM Solutions · Prime contractor</p>
           </div>
-          <div className="rounded-container border border-ink-200 bg-white p-5">
-            <Eyebrow tone="muted">Ordering period</Eyebrow>
-            <p data-figure className="mt-1 font-sans text-h3 font-medium text-ink-950 tabular">{starsOrdering.current}</p>
-            {starsOrdering.history ? <p className="mt-1 text-body-sm text-ink-700 tabular">{starsOrdering.history}</p> : null}
+          <div className="min-w-0 border-t border-ink-700 pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-8">
+            <Eyebrow tone="dark">Ordering period</Eyebrow>
+            <p data-figure className="mt-4 font-sans text-h4 font-medium text-cream tabular md:text-h3">{starsOrdering.current}</p>
+            {starsOrdering.history ? <p className="mt-2 text-body-sm text-ink-200 tabular">{starsOrdering.history}</p> : null}
             {starsConfirmed ? null : <Placeholder id="P5" className="mt-3" />}
-            <p className="mt-2 text-body-sm text-ink-500">{starsIII.performanceTail}</p>
+            <p className="mt-3 max-w-[48ch] text-body-sm text-ink-200">{starsIII.performanceTail}</p>
           </div>
         </div>
       </PageHero>
@@ -103,7 +104,7 @@ export default function StarsPage() {
                 {starsIII.benefits.map((b) => <li key={b} className="flex items-start gap-2"><span aria-hidden className="mt-2.5 h-0.5 w-4 shrink-0 bg-gold-500" />{b}</li>)}
               </ul>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button href={starsIII.gsaUrl} external variant="secondary" className="max-w-full whitespace-normal text-center">Visit the GSA 8(a) STARS III program page</Button>
+                <Button href={starsIII.gsaUrl} external variant="primary" icon={<ArrowUpRight className="size-4 shrink-0" />} iconTrailing className="gsa-program-link max-w-full border border-gold-500/50 whitespace-normal text-center"><span className="inline-flex items-center gap-3"><Landmark aria-hidden className="size-5 shrink-0 text-gold-500" />Visit GSA’s STARS III program</span></Button>
               </div>
               <p className="mt-4 text-body-sm text-ink-700">For GSA’s own guidance, contact {starsIII.gsaContact.org} at <a href={`mailto:${starsIII.gsaContact.email}`} className="link-underline font-semibold text-gold-700 after:bg-current">{starsIII.gsaContact.email}</a> or <a href={starsIII.gsaContact.phoneHref} className="link-underline font-semibold text-gold-700 after:bg-current">{starsIII.gsaContact.phone}</a>.</p>
             </section>
@@ -111,19 +112,18 @@ export default function StarsPage() {
             <section id="contacts" className="chapter-section scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">JVM Contacts for STARS III</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">STARS III enquiries go to <a href={`mailto:${starsIII.jvmEmail}`} className="link-underline font-semibold text-gold-700 after:bg-current">{starsIII.jvmEmail}</a>.</p>
-              <div className="mt-6 grid grid-cols-1 items-start gap-5 xl:grid-cols-2">
-                <TeamContact name={pm.name} role={pm.role} email={pm.contactRoute} />
+              <div className="mt-6 grid grid-cols-1 gap-5 xl:grid-cols-2">
+                <TeamContact name={pm.name} role={pm.role} image={pm.image} email={pm.contactRoute} />
                 <TeamContact name={ceo.name} role={ceo.role} note={ceo.note} image={ceo.image} />
               </div>
-              <div className="stars-contact-resources mt-6 flex flex-col gap-4 border-t border-ink-200 pt-5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-                <a href={contact.office.phoneHref} className="inline-flex min-h-11 items-center gap-3 text-body-sm font-semibold text-ink-900 hover:text-gold-700 focus-visible:text-gold-700"><Phone aria-hidden className="size-4 shrink-0 text-gold-700" /><span><span className="block text-caption font-normal text-ink-500">Call JVM</span>{contact.office.phone}</span></a>
+              <div className="stars-contact-resources mt-4 flex justify-end">
                 <ExternalLink href={starsIII.gsaUrl} className="min-h-11 text-body-sm font-semibold text-gold-700">GSA program details</ExternalLink>
               </div>
             </section>
           </div>
         </div>
+        <CTABand embedded title="Have a STARS III Requirement?" route="contracting" />
       </Section>
-      <CTABand title="Have a STARS III Requirement?" route="contracting" />
     </>
   );
 }

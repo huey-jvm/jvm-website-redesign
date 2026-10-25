@@ -30,7 +30,7 @@ export const team = [
     name: "Roy White",
     role: starsShown ? "Chief Technology Officer and 8(a) STARS III Program Manager" : "Chief Technology Officer",
     note: undefined,
-    image: undefined,
+    image: "/images/jvm/roy-white.png",
     summary: undefined,
     bio: [],
     contactRoute: starsShown ? starsIII.jvmEmail : contact.emails.bd,

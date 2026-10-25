@@ -38,12 +38,13 @@ export default function QualityPage() {
         </section>
       </div>
     </Section>
-    <Section surface="cream" id="raising-a-concern" className="quality-concerns">
+    <CTABand title="Questions About Our Quality System?" route="other" intro={
+    <section id="raising-a-concern" className="quality-concerns" aria-label="Raising a concern">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-16">
         <SectionHeader eyebrow="Speak with us" title="Raising a Concern" className="mb-0 md:mb-0" />
         <p className="text-body text-ink-700">{quality.concern}</p>
       </div>
-      <div className="mt-10 grid grid-cols-1 items-start gap-6 lg:grid-cols-2 lg:gap-10">
+      <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-10">
         <section className="concern-contact min-w-0 rounded-container border border-cream-border bg-white p-5 md:p-8" aria-labelledby="jvm-concern-title">
           <p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">01 / Contact JVM first</p>
           <h3 id="jvm-concern-title" className="mt-4 text-h3">JVM Ethics and Compliance</h3>
@@ -63,7 +64,7 @@ export default function QualityPage() {
           </div>
         </section>
       </div>
-    </Section>
-    <CTABand title="Questions About Our Quality System?" route="other" />
+    </section>
+    } />
   </>;
 }

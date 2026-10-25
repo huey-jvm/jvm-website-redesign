@@ -211,7 +211,7 @@
   @media (prefers-reduced-motion:reduce) { .operations-choice svg { transition:none; transform:none !important; } }
   @media (prefers-reduced-motion:reduce) { .operations-choice { transition:none; } .operations-choice:hover,.operations-choice:focus-visible { transform:none; } .operations-detail-content { animation:none; } }
   .leadership-feature { background:radial-gradient(ellipse at 100% 0%,#d5e5df,transparent 65%),linear-gradient(120deg,#f5f3ed,#e9eff1); }
-  .service-body { background:radial-gradient(ellipse at 0% 0%,#d6e6e3,transparent 60%),linear-gradient(125deg,#edf3ef,#e8edf1); }
+  .service-body { background:linear-gradient(125deg,#fbfaf7,#f8faf9); }
   .service-chapter { padding:clamp(1.25rem,3vw,3rem); background:#f8faf8; border-top:3px solid var(--color-gold-500); box-shadow:0 12px 36px #163c4808; }
   .commercial-health-card { background:color-mix(in srgb,var(--color-cream) 45%,var(--color-white)); }
   .service-chapter > p:not(:first-child) { max-width:72ch; line-height:1.8; }
@@ -275,7 +275,7 @@ footer.surface-dark { background-image:var(--brand-gradient-dark); }
 .mission-photo { position:relative; box-shadow:0 22px 60px -24px rgb(0 0 0 / .45); }
 .mission-photo::before { content:""; position:absolute; inset:-6px 18px 18px -6px; border-top:1px solid #c9ac70; border-left:1px solid #c9ac70; pointer-events:none; }
 .mission-photo figcaption { background-image:var(--brand-gradient-gold); }
-.cta-band:not(.surface-dark) { background-image:radial-gradient(ellipse at 100% 100%, #dbc297 0%, transparent 65%), linear-gradient(120deg, #f4f1e9, #f0e5d0); }
+.cta-band:not(.surface-dark):not(.cta-band--embedded) { background-image:radial-gradient(ellipse at 100% 100%, #dbc297 0%, transparent 65%), linear-gradient(120deg, #f4f1e9, #f0e5d0); }
 .cta-band.surface-dark { background-image:var(--brand-gradient-dark); }
 .site-footer { background-image:var(--brand-gradient-dark); }
 header [data-menu-trigger]::after,
@@ -444,15 +444,6 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
   .skeleton-block,.skeleton-block-dark { fill:GrayText; }
 }
 
-/* The blend occupies existing padding, so section rhythm and anchor positions stay stable. */
-.site-footer { position:relative; isolation:isolate; }
-.section-blend { position:absolute; inset:calc(-1 * var(--blend-before)) 0 auto; height:var(--blend-depth); overflow:hidden; pointer-events:none; z-index:1; }
-.section-blend-source { position:absolute; inset:0; mask-image:linear-gradient(to bottom,#000 0%,rgb(0 0 0 / .97) 12%,rgb(0 0 0 / .85) 25%,rgb(0 0 0 / .5) 50%,rgb(0 0 0 / .15) 75%,rgb(0 0 0 / .03) 88%,transparent 100%); }
-.section-blend-source-tail { position:absolute; inset:0 0 auto; height:var(--blend-before); background-position:left bottom; }
-.section-blend-edge { position:absolute; inset:var(--blend-before) 0 auto; height:1px; background-position:left bottom; background-repeat:no-repeat; transform-origin:top; transform:scaleY(var(--blend-after-scale)); }
-.section-blend-destination-edge { position:absolute; inset:0 0 auto; height:1px; background-position:left top; background-repeat:no-repeat; transform-origin:top; transform:scaleY(var(--blend-scale)); }
-.section-blend-destination { position:absolute; inset:var(--blend-before) 0 auto; height:var(--blend-after); background-position:left top; background-repeat:no-repeat; }
-@media(forced-colors:active) { .section-blend { display:none; } }
 @media(min-width:1024px) {
   .document-layout:not(:has(> .document-nav)) { grid-template-columns:minmax(0,1fr); }
   .capability-hero .brief-heading > div { align-items:center; }
@@ -461,4 +452,6 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
 .contracting-hero .brief-heading,
 .about-hero .brief-heading,
 .quality-hero .brief-heading,
+.stars-hero .brief-heading,
+.services-hero .brief-heading,
 .certifications-hero .brief-heading { max-width:none; }

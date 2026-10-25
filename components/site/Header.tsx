@@ -1,7 +1,7 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ChevronDown } from "lucide-react";
 import { leadEyebrow } from "@/content/services";
-import Image from "@/components/ui/Image";
+import { BrandLogo } from "./BrandLogo";
 import Link from "next/link";
 import { Phone, Mail } from "lucide-react";
 import type { NavGroup } from "@/content/navigation";
@@ -19,14 +19,7 @@ export function Header({ nav }: { nav: NavGroup[] }) {
           className="inline-flex shrink-0 items-center rounded-control focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700"
           aria-label="JVM Solutions, home"
         >
-          <Image
-            src="/images/brand/jvm-logo-480.png"
-            alt="JVM Solutions"
-            width={480}
-            height={222}
-            priority
-            className="h-auto w-30"
-          />
+          <BrandLogo priority sizes="144px" className="w-30" />
         </Link>
       }
       utility={

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "@/components/ui/Image";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { ExternalLink } from "@/components/ui/ExternalLink";
@@ -20,6 +21,7 @@ export function CompanyOverview() {
     <div className="rounded-container bg-cream p-5 md:p-7">
       <div className="flex items-center gap-3"><MapPin aria-hidden className="size-5 text-gold-700" /><h3 className="text-h4">{contact.office.label}</h3></div>
       <address className="mt-5 text-body not-italic text-ink-700">{contact.office.lines.map(line => <span key={line} className="block">{line}</span>)}</address>
+      <div className="office-map-preview mt-5 overflow-hidden rounded-control border border-cream-border"><Image src="/images/location/texas-office-map.png" alt="Satellite map showing I-10 and surrounding streets in San Antonio" width={1459} height={847} sizes="(min-width:1024px) 380px,100vw" className="h-auto w-full" /></div>
       <ExternalLink href={contact.office.mapUrl} className="mt-3 min-h-11 text-body-sm font-semibold text-gold-700">View on map</ExternalLink>
       <div className="mt-3 divide-y divide-cream-border border-t border-cream-border">
         {[{ label: "Phone", value: contact.office.phone, href: contact.office.phoneHref, Icon: Phone }, { label: "Email", value: contact.emails.general, href: `mailto:${contact.emails.general}`, Icon: Mail }].map(({ label, value, href, Icon }) => <div key={label} className="group/fact flex min-w-0 items-center justify-between gap-2 py-3"><a href={href} className="flex min-h-11 min-w-0 items-center gap-3 text-body-sm font-semibold hover:text-gold-700 focus-visible:text-gold-700"><Icon aria-hidden className="size-4 shrink-0 text-gold-700" /><span className="min-w-0 break-words">{value}</span></a><CopyButton label={label} value={value} /></div>)}

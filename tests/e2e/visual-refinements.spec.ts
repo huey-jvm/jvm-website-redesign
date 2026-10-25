@@ -94,8 +94,8 @@ test("How to Buy uses its spare width for a useful contract summary", async ({ p
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/services/health-it", { waitUntil: "domcontentloaded" });
     await expect(page.locator("#stars-iii").getByRole("heading", { name: "Contract at a glance" })).toBeVisible();
-    await expect(page.locator("#stars-iii .fact-sheet")).toContainText("47QTCB22D0653");
-    const summary = await page.locator("#stars-iii .fact-sheet").boundingBox();
+    await expect(page.locator("#stars-iii .contract-at-glance")).toContainText("47QTCB22D0653");
+    const summary = await page.locator("#stars-iii .contract-at-glance").boundingBox();
     const copy = await page.locator("#stars-iii .prose-measure").boundingBox();
     expect(width >= 1024 ? summary!.x > copy!.x : summary!.y > copy!.y).toBe(true);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -120,7 +120,7 @@ test("contracting does not repeat a resource section or show an empty past-perfo
   await expect(page.locator('main [data-slot="AS-11"]')).toHaveCount(0);
   await expect(page.getByRole("link", { name: "Request past performance", exact: true })).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Build your acquisition file" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Reach Us Directly" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Reach Us Directly" })).toHaveCount(0);
 });
 
 for (const service of services) {
@@ -169,47 +169,33 @@ test("short pages omit the section navigator and reclaim its column", async ({ p
 
 for (const path of pages) {
   for (const width of [375, 1440]) {
-    test(`${path} blends only the footer join at ${width}px without client errors`, async ({ page }) => {
+    test(`${path} keeps a clean footer edge at ${width}px without client errors`, async ({ page }) => {
       const errors: string[] = [];
       page.on("pageerror", error => errors.push(error.message));
       await page.setViewportSize({ width, height: 900 });
       await page.goto(path, { waitUntil: "domcontentloaded" });
       await page.evaluate(() => document.fonts.ready);
-      await expect(page.locator(".section-blend").first()).toBeAttached();
-      // The footer is shared by every page and must blend too.
-      await expect(page.locator("footer > .section-blend")).toHaveCount(1);
-      await expect(page.locator("main .section-blend")).toHaveCount(0);
-      const masks = await page.locator(".section-blend").evaluateAll(els => els.map(el => {
-        const style = getComputedStyle(el), rect = el.getBoundingClientRect();
-        const host = el.parentElement!, hostStyle = getComputedStyle(host);
-        const first = [...host.children].find(child => !child.classList.contains("section-blend"))!;
-        const padding = parseFloat(hostStyle.paddingTop) || first.getBoundingClientRect().top - host.getBoundingClientRect().top + parseFloat(getComputedStyle(first).paddingTop);
-        return { height: rect.height, after: rect.bottom - host.getBoundingClientRect().top, available: padding, mask: getComputedStyle(el.querySelector(".section-blend-source")!).maskImage, hidden: el.getAttribute("aria-hidden"), interactive: style.pointerEvents };
-      }));
-      for (const mask of masks) {
-        expect(mask.height).toBeGreaterThan(0);
-        expect(mask.after).toBeLessThanOrEqual(mask.available - 16);
-        expect(mask.mask).toContain("linear-gradient");
-        expect(mask.hidden).toBe("true");
-        expect(mask.interactive).toBe("none");
-      }
+      await expect(page.locator("footer")).toBeVisible();
+      await expect(page.locator(".section-blend")).toHaveCount(0);
+      await expect(page.locator("footer")).toHaveCSS("mask-image", "none");
+      expect(await page.evaluate(() => Math.abs(document.body.getBoundingClientRect().bottom - document.querySelector("footer")!.getBoundingClientRect().bottom))).toBeLessThanOrEqual(1);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
       expect(errors).toEqual([]);
     });
   }
 }
 
-test("blends update after navigation, viewport changes, and browser back", async ({ page }) => {
+test("the clean footer edge remains after navigation, viewport changes, and browser back", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", error => errors.push(error.message));
   await page.goto("/", { waitUntil: "domcontentloaded" });
-  await expect(page.locator("footer > .section-blend")).toHaveCount(1);
+  await expect(page.locator("footer > .section-blend")).toHaveCount(0);
   await page.getByRole("link", { name: "Meet our leadership", exact: true }).click();
   await expect(page).toHaveURL(/\/about#leadership$/);
-  await expect(page.locator("footer > .section-blend")).toHaveCount(1);
+  await expect(page.locator("footer > .section-blend")).toHaveCount(0);
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goBack({ waitUntil: "domcontentloaded" });
-  await expect(page.locator("footer > .section-blend")).toHaveCount(1);
+  await expect(page.locator("footer > .section-blend")).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(errors).toEqual([]);
 });

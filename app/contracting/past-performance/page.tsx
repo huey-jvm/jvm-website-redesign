@@ -59,8 +59,8 @@ export default function PastPerformancePage() {
             </ul>
           </>
         ) : null}
+        <CTABand embedded route="contracting" />
       </Section>
-      <CTABand route="contracting" />
     </>
   );
 }

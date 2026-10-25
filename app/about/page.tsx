@@ -127,8 +127,7 @@ export default function AboutPage() {
           </Section>
         </div>
       </div>
-      <Section surface="cream"><TeamGallery /></Section>
-      <CTABand />
+      <CTABand intro={<TeamGallery />} />
     </>
   );
 }

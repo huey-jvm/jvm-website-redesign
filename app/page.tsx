@@ -150,9 +150,8 @@ export default function HomePage() {
             </figcaption>
           </figure>
         </div>
+        <CTABand embedded title="Ready to Talk About Your Mission?" />
       </Section>
-
-      <CTABand title="Ready to Talk About Your Mission?" />
     </>
   );
 }

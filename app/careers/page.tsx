@@ -3,10 +3,8 @@ import { teamPhoto } from "@/content/team";
 import { statements } from "@/content/statements";
 import { ImageHero } from "@/components/site/ImageHero";
 import { Section, SectionHeader } from "@/components/site/Section";
-import { CredentialMark } from "@/components/site/CredentialMark";
 import { CTABand } from "@/components/site/CTABand";
 import { Button } from "@/components/ui/Button";
-import { credentials } from "@/content/credentials";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
 import { Slot } from "@/components/site/Slot";
@@ -20,7 +18,6 @@ const audiences = [
 ];
 
 export default function CareersPage() {
-  const whv = credentials.find((c) => c.slug === "we-hire-vets")!;
   return (
     <>
       <ImageHero
@@ -48,32 +45,20 @@ export default function CareersPage() {
       </Section>
 
       <Section surface="light"><TeamGallery /></Section>
-      <Section surface="cream">
-        <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
-          {whv.evidenceHref ? <CredentialMark credential={whv} /> : null}
-          <div>
-            <h2 className="text-h3">We Hire Veterans</h2>
-            <p className="mt-2 max-w-[65ch] text-body text-ink-700">{whv.evidenceHref ? `Recognised by the ${whv.issuer} in ${whv.period}. ` : ""}Veteran status is a strength here, not a line on a form.</p>
-          </div>
-        </div>
-      </Section>
 
       <Section>
         <div className="mx-auto max-w-2xl text-center">
           <SectionHeader align="center" eyebrow="Open roles" title="View Current Openings" lead="Applications are handled on our careers portal, hosted by iSolved." />
           <Button href={contact.careersPortal} external variant="primary">View open roles on iSolved</Button>
-          <p className="mt-3 text-body-sm text-ink-500">Opens the JVM careers portal in a new tab.</p>
-          <p className="mt-2 text-body text-ink-700">Openings are posted on our careers portal as they arise.</p>
         </div>
       </Section>
 
-      <Section surface="ink50">
+      <CTABand title="Not Sure Which Role Fits?" body="Tell us about your background and we will point you to the right opening." route="careers" intro={
         <p className="prose-measure text-body-sm text-ink-700">
           {`${statements.companyName} is an Equal Opportunity Employer. All qualified applicants receive consideration for employment without regard to race, colour, religion, sex, sexual orientation, gender identity, national origin, disability or protected veteran status. Questions about a role or the application process can be sent to `}
           <a href={`mailto:${contact.emails.general}`} className="link-underline font-semibold text-gold-700 after:bg-current">{contact.emails.general}</a>.
         </p>
-      </Section>
-      <CTABand title="Not Sure Which Role Fits?" body="Tell us about your background and we will point you to the right opening." route="careers" />
+      } />
     </>
   );
 }

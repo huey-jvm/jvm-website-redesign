@@ -10,8 +10,7 @@ import { Placeholder } from "@/components/ui/Placeholder";
 import { Button } from "@/components/ui/Button";
 import { services, getService } from "@/content/services";
 import { pageMetadata } from "@/lib/seo";
-import { FactBlock } from "@/components/site/FactBlock";
-import { starsIII } from "@/content/vehicles";
+import { ContractSummary } from "@/components/site/ContractSummary";
 
 export const dynamicParams = false;
 
@@ -70,11 +69,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                       <div className="mt-5"><Button href="/contracting/stars-iii" variant="secondary" icon={<ArrowRight className="size-4" />} iconTrailing>Read about STARS III</Button></div>
                     ) : null}
                   </div>
-                  {sec.id === "stars-iii" ? <FactBlock title="Contract at a glance" facts={[
-                    { label: "Vehicle", value: starsIII.name },
-                    { label: "JVM role", value: "Prime contractor" },
-                    { label: "Contract number", value: starsIII.contractNumber, copy: true },
-                  ]} /> : null}
+                  {sec.id === "stars-iii" ? <ContractSummary /> : null}
                 </div>
               </section>
             ))}
@@ -96,9 +91,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <section id="documents" className="scroll-mt-28 pt-12 md:pt-16 lg:pt-24">
           <CapabilityLibrary service={service.slug} />
         </section>
+      <CTABand embedded route={service.slug === "healthcare-operations" ? "health-system" : "contracting"} />
       </Section>
 
-      <CTABand route={service.slug === "healthcare-operations" ? "health-system" : "contracting"} />
+
     </>
   );
 }

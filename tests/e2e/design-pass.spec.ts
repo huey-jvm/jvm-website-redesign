@@ -66,22 +66,24 @@ test("commercial note fits one desktop line and capability lead centers beside t
   }
 });
 
-test("contracting shares its hero surface through business development and retains all copy values", async ({ page }) => {
+test("contracting shares its hero surface with the call to action and retains all copy values", async ({ page }) => {
   await page.goto("/contracting", { waitUntil: "domcontentloaded" });
+  await page.waitForLoadState("load");
   const hero = page.locator(".contracting-hero");
   await expect(hero.getByRole("heading", { name: "Identifiers", exact: true })).toBeVisible();
-  await expect(hero.getByRole("heading", { name: "Reach Us Directly", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Reach Us Directly", exact: true })).toHaveCount(0);
+  await expect(hero.locator(".cta-band--embedded")).toBeVisible();
   await page.evaluate(() => Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText: async (value: string) => { document.documentElement.dataset.copyResult = value; } } }));
   for (const [label, value] of [
     ["Legal name", statements.companyName], ["UEI", identifiers.uei], ["CAGE", identifiers.cage],
     ["Primary NAICS", identifiers.naicsPrimary], ["Other NAICS", identifiers.naicsSecondary.join(", ")],
-    ["Set-asides", identifiers.setAsides.join(", ")], ["SAM", identifiers.samStatus], ["STARS III", starsIII.contractNumber],
+    ["Set-asides", identifiers.setAsides.join(", ")], ["STARS III", starsIII.contractNumber],
   ]) {
     const button = hero.getByRole("button", { name: `Copy ${label}`, exact: true });
     await button.focus(); await button.click();
-    await expect(hero.getByRole("button", { name: `${label} copied`, exact: true })).toBeVisible();
-    expect(await page.evaluate(() => document.documentElement.dataset.copyResult)).toBe(value);
+    await expect.poll(() => page.evaluate(() => document.documentElement.dataset.copyResult)).toBe(value);
   }
+  await expect(hero.getByRole("button", { name: "Copy SAM", exact: true })).toHaveCount(0);
 });
 
 test("certifications show one useful record action per credential", async ({ page }) => {
@@ -125,7 +127,8 @@ test("quality separates the standards from concern contacts and preserves source
 test("STARS III contact resources are actionable without the loose sentence or empty card", async ({ page }) => {
   await page.goto("/contracting/stars-iii", { waitUntil: "domcontentloaded" });
   const resources = page.locator(".stars-contact-resources");
-  await expect(resources.getByRole("link", { name: /Call JVM/ })).toHaveAttribute("href", "tel:+12105044707");
+  await expect(resources.getByRole("link", { name: /Call JVM/ })).toHaveCount(0);
+  await expect(resources).toHaveCSS("border-top-width", "0px");
   await expect(resources.getByRole("link", { name: /GSA program details/ })).toHaveAttribute("href", starsIII.gsaUrl);
   await expect(page.locator("#contacts .team-contact")).toHaveCount(2);
   expect(await page.locator("#contacts .team-contact").evaluateAll(els => els.every(el => el.getBoundingClientRect().height < 250))).toBe(true);

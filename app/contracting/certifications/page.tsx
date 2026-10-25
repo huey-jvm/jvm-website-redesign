@@ -17,8 +17,8 @@ export default function CertificationsPage() {
           {credentials.map((c) => <CredentialRow key={c.slug} credential={c} />)}
         </ul>
       </div>
+        <CTABand embedded route="contracting" />
       </PageHero>
-      <CTABand route="contracting" />
     </>
   );
 }

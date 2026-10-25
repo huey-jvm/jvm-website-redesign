@@ -27,7 +27,7 @@ export function organizationJsonLd() {
     name: statements.companyName,
     alternateName: statements.shortName,
     url: siteUrl,
-    logo: `${siteUrl}/images/brand/jvm-logo.png`,
+    logo: `${siteUrl}/images/brand/jvm-official.png`,
     email: contact.emails.general,
     telephone: contact.office.phoneHref.replace("tel:", ""),
     address: {

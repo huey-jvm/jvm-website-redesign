@@ -1,7 +1,6 @@
 import { formatList } from "@/lib/list";
 import Link from "next/link";
 import { PageHero } from "@/components/site/PageHero";
-import { Section } from "@/components/site/Section";
 import { ServiceDirectory } from "@/components/site/ServiceDirectory";
 import { CTABand } from "@/components/site/CTABand";
 import { services } from "@/content/services";
@@ -13,8 +12,8 @@ export const metadata = pageMetadata("Services", `${formatList(services.map(s =>
 export default function ServicesPage() {
   return (
     <>
-      <PageHero eyebrow={statements.category} title="Services" lead={`${services[0].name} is the core of the company. Three more areas sit beside it, each delivered under the same accountability.`} crumbs={[{ label: "Services" }]} />
-      <Section surface="cream">
+      <PageHero className="services-hero" eyebrow={statements.category} title="Services" lead={`${services[0].name} is the core of the company. Three more areas sit beside it, each delivered under the same accountability.`} crumbs={[{ label: "Services" }]}>
+      <div className="mt-12 md:mt-16">
 
           <ServiceDirectory />
 
@@ -22,8 +21,9 @@ export default function ServicesPage() {
           We bring the same model to commercial health systems.{" "}
           <Link href="/services/healthcare-operations#commercial" className="link-underline font-semibold text-gold-700 after:bg-current">Explore our approach</Link>.
         </p>
-      </Section>
-      <CTABand />
+        <CTABand embedded />
+      </div>
+      </PageHero>
     </>
   );
 }

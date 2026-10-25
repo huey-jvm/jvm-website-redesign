@@ -49,7 +49,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${inter.variable} h-full`}>
-      <body className="flex min-h-full flex-col pb-14 md:pb-0">
+      <body className="flex min-h-full flex-col">
         <SkipLink />
         <AnnouncementBanner announcement={announcement} />
         <Header nav={primaryNav} />

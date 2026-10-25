@@ -2,14 +2,10 @@ import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
-import { SectionHeader } from "@/components/site/Section";
 import { ContractingIdentifiers } from "@/components/site/ContractingIdentifiers";
-import { TeamCard } from "@/components/site/TeamCard";
 import { CTABand } from "@/components/site/CTABand";
-import { Placeholder } from "@/components/ui/Placeholder";
-import { starsIII, starsShown, pastPerformance } from "@/content/vehicles";
+import { starsShown, pastPerformance } from "@/content/vehicles";
 import { contact } from "@/content/contact";
-import { team } from "@/content/team";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -40,7 +36,6 @@ const cards = [
 ];
 
 export default function ContractingPage() {
-  const bd = team[0];
   return (
     <>
       <PageHero
@@ -49,8 +44,8 @@ export default function ContractingPage() {
         title="Everything a Contracting Officer Checks"
         lead={
           starsShown
-            ? "Identifiers, set-aside standing, our prime vehicle and a named route to business development. Each value below can be copied."
-            : "Identifiers, set-aside standing and a named route to business development. Each value below can be copied."
+            ? "Identifiers, set-aside standing, our prime vehicle and a named route to business development. Key identifiers can be copied."
+            : "Identifiers, set-aside standing and a named route to business development. Key identifiers can be copied."
         }
         crumbs={[{ label: "Contracting" }]}
         surface="cream"
@@ -68,62 +63,17 @@ export default function ContractingPage() {
           <Button href={`mailto:${contact.emails.bd}`} variant="primary" className="mt-6">Contact business development</Button>
         </aside>
         </div>
-      <section className="mt-16 md:mt-20" aria-labelledby="business-development-title">
-        <SectionHeader
-          eyebrow="Business development"
-          title="Reach Us Directly"
-          id="business-development-title"
-        />
-        <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-12">
-          <div className="md:col-span-4 lg:col-span-3">
-            <TeamCard
-              name={bd.name}
-              role={bd.role}
-              note={bd.note}
-              image={bd.image}
-              email={bd.contactRoute}
-            />
-          </div>
-          <div className="md:col-span-8 lg:col-span-9">
-            <p className="prose-measure mt-4 text-body text-ink-700">
-              Contracting and capture enquiries go to{" "}
-              <a
-                href={`mailto:${contact.emails.bd}`}
-                className="link-underline font-semibold text-gold-700 after:bg-current"
-              >
-                {contact.emails.bd}
-              </a>
-              .
-              {starsShown ? (
-                <>
-                  {" "}
-                  STARS III specific questions go to{" "}
-                  <a
-                    href={`mailto:${starsIII.jvmEmail}`}
-                    className="link-underline font-semibold text-gold-700 after:bg-current"
-                  >
-                    {starsIII.jvmEmail}
-                  </a>
-                  .
-                </>
-              ) : null}{" "}
-              You can expect a reply within {contact.responseTime}.
-            </p>
-            <div className="mt-4">
-              <Placeholder id="P10" nested />
-            </div>
-          </div>
-        </div>
-      </section>
-      </div>
-      </PageHero>
 
-      <CTABand
+      <CTABand embedded
         title="Start a Conversation With Business Development"
         route="contracting"
         secondaryHref="/services"
         secondaryLabel="Explore our services"
       />
+      </div>
+      </PageHero>
+
+
     </>
   );
 }

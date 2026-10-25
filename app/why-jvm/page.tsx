@@ -51,19 +51,18 @@ export default function WhyPage() {
               <p className="prose-measure mt-4 text-body text-ink-700">
                 {theShift.intro}
               </p>
-              <div className="shift mt-8 grid grid-cols-1 items-stretch gap-4 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
-                <div className="shift-from rounded-container border border-ink-200 bg-ink-50 p-6">
-                  <Eyebrow tone="muted">From</Eyebrow>
-                  <h3 className="mt-2 text-h4 text-ink-700">{theShift.from.title}</h3>
-                  <p className="mt-2 text-body-sm text-ink-700">{theShift.from.body}</p>
+              <div className="shift mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)] lg:gap-10">
+                <div className="shift-from flex flex-col items-start border-t border-ink-200 py-6">
+                  <Eyebrow tone="muted">The starting point</Eyebrow>
+                  <h3 className="mt-4 text-h3 text-ink-700">{theShift.from.title}</h3>
+                  <p className="mt-4 text-body-sm leading-relaxed text-ink-700">{theShift.from.body}</p>
+                  <span aria-hidden className="shift-arrow mt-6 grid size-11 place-items-center rounded-pill border border-gold-500/60 text-gold-700 lg:mt-auto lg:translate-y-2"><ArrowRight className="size-5 rotate-90 lg:rotate-0" /></span>
                 </div>
-                <div aria-hidden className="shift-arrow flex items-center justify-center text-gold-700">
-                  <ArrowRight className="size-6 rotate-90 md:rotate-0" />
-                </div>
-                <div className="shift-to rounded-container border-2 border-gold-500 bg-cream p-6">
-                  <Eyebrow tone="light">To</Eyebrow>
-                  <h3 className="mt-2 text-h4">{theShift.to.title}</h3>
-                  <p className="mt-2 text-body-sm text-ink-900">{theShift.to.body}</p>
+                <div className="shift-to rounded-container border-t-[3px] border-gold-500 bg-ink-950 p-6 text-cream md:p-8">
+                  <Eyebrow tone="dark">The JVM approach</Eyebrow>
+                  <h3 className="mt-4 max-w-[24ch] text-h2-sm text-cream">{theShift.to.title}</h3>
+                  <span aria-hidden className="mt-5 block h-0.5 w-12 bg-gold-500" />
+                  <p className="mt-5 text-body-sm leading-relaxed text-ink-200">{theShift.to.body}</p>
                 </div>
               </div>
               <OperationsExplorer />
@@ -133,11 +132,12 @@ export default function WhyPage() {
             </section>
           </div>
         </div>
-      </Section>
-      <CTABand
+      <CTABand embedded
         title="See It Applied to Your Facility"
         body="Tell us about the mission and we will show you where the outcomes land."
       />
+      </Section>
+
     </>
   );
 }

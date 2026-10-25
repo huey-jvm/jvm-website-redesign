@@ -1,5 +1,5 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import Image from "@/components/ui/Image";
+import { BrandLogo } from "./BrandLogo";
 import Link from "next/link";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 import { breakableEmail } from "@/lib/email-address";
@@ -8,20 +8,17 @@ import { CredentialMark } from "./CredentialMark";
 import { footerColumns, legalNav } from "@/content/navigation";
 import { contact } from "@/content/contact";
 import { statements } from "@/content/statements";
-import { FooterTransition } from "./FooterTransition";
 
 export function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="site-footer surface-dark bg-ink-950 text-ink-200">
-      <FooterTransition />
-      <div className="container-content pb-12 pt-24 md:pb-16 md:pt-32">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr]">
-          <div>
+      <div className="container-content py-12 md:py-16">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-[7rem_minmax(0,1fr)_minmax(0,1.05fr)_minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-10">
+          <div className="md:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-flex rounded-control focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500" aria-label="JVM Solutions, home">
-              <Image src="/images/brand/jvm-logo-480.png" alt="JVM Solutions" width={480} height={222} className="h-auto w-40" />
+              <BrandLogo variant="mark" sizes="300px" className="w-20 md:w-24" />
             </Link>
-            <p className="mt-4 max-w-[36ch] text-body-sm text-ink-300">{statements.category}.</p>
           </div>
 
           {footerColumns.map((col) => (
@@ -55,7 +52,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="footer-credentials mt-6 grid items-center gap-5 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr] lg:gap-10">
+        <div className="footer-credentials mt-8 grid items-center gap-5 lg:grid-cols-[7rem_minmax(0,1fr)_minmax(0,1.05fr)_minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-10">
           <ul aria-label="Certifications" className="footer-certifications grid grid-cols-2 items-stretch gap-3 sm:flex sm:flex-wrap sm:items-center lg:col-span-4">{proofStripSlugs.map((slug) => credentials.find((c) => c.slug === slug)!).map((c) => <li key={c.slug}><CredentialMark credential={c} size="sm" /></li>)}</ul>
           <ul className="flex flex-wrap items-center gap-2" aria-label="Social">
             {contact.social.map((s) => (
