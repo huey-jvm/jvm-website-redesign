@@ -1,5 +1,4 @@
 import { PageHero } from "@/components/site/PageHero";
-import { Section } from "@/components/site/Section";
 import { CredentialRow } from "@/components/site/CredentialRow";
 import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
@@ -11,13 +10,14 @@ export const metadata = pageMetadata("Certifications and Set-Asides", `View ${ce
 export default function CertificationsPage() {
   return (
     <>
-      <PageHero eyebrow="Contracting" title="Certifications and Set-Asides" lead="Each credential below names what it means, who issued it and where to verify it. A mark that links to nothing does not belong on this page." crumbs={[{ label: "Contracting", href: "/contracting" }, { label: "Certifications and Set-Asides" }]} />
-      <Section>
-        <div className="mb-8 max-w-xl"><Placeholder id="P17" /></div>
-        <ul className="@container rounded-container border border-ink-200 bg-white px-6">
+      <PageHero className="certifications-hero" eyebrow="Contracting" title="Certifications and Set-Asides" lead="Our small business certifications and contract vehicle, with supporting records for your acquisition file." crumbs={[{ label: "Contracting", href: "/contracting" }, { label: "Certifications and Set-Asides" }]}>
+      <div className="mt-12 md:mt-16">
+        <Placeholder id="P17" className="mb-8 max-w-xl" />
+        <ul className="certification-grid grid grid-cols-1 gap-5 md:grid-cols-2">
           {credentials.map((c) => <CredentialRow key={c.slug} credential={c} />)}
         </ul>
-      </Section>
+      </div>
+      </PageHero>
       <CTABand route="contracting" />
     </>
   );

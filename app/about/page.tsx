@@ -4,17 +4,15 @@ import Image from "@/components/ui/Image";
 import { PageHero } from "@/components/site/PageHero";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { Backdrop } from "@/components/site/Slot";
-import { TeamCard } from "@/components/site/TeamCard";
-import { FactBlock } from "@/components/site/FactBlock";
+import { AboutLeadership } from "@/components/site/AboutLeadership";
+import { AboutValues } from "@/components/site/AboutValues";
+import { CompanyOverview } from "@/components/site/CompanyOverview";
 import { CTABand } from "@/components/site/CTABand";
-import { QuoteCard } from "@/components/site/QuoteCard";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { statements } from "@/content/statements";
 import { values } from "@/content/values";
 import { InPageNav } from "@/components/site/InPageNav";
-import { team, leadershipTeamPhoto } from "@/content/team";
-import { credentials } from "@/content/credentials";
-import { identifiers } from "@/content/identifiers";
+import { leadershipTeamPhoto } from "@/content/team";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
 
@@ -25,22 +23,22 @@ export const metadata = pageMetadata(
 );
 
 export default function AboutPage() {
-  const founder = team[0];
   return (
     <>
       <PageHero
+        className="about-hero"
         eyebrow="About"
         title="About JVM Solutions"
         lead={`A veteran-led, ${contact.office.locality} based company that brings operational discipline to federal and commercial health missions.`}
         crumbs={[{ label: "About" }]}
-      />
-
-      <Section surface="cream" className="pt-8 md:pt-8 lg:pt-8">
-        <div className="grid items-center gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
+      >
+      <div className="mt-12 md:mt-16">
+        <div className="about-introduction grid items-center gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
           <div className="relative aspect-[4/3] overflow-hidden border-b-4 border-gold-500"><Image src={leadershipTeamPhoto.src} alt={leadershipTeamPhoto.alt} fill priority quality={90} sizes="(min-width:1024px) 55vw,100vw" className="object-cover" /></div>
           <div><Eyebrow>People behind the mission</Eyebrow><h2 className="mt-4 text-h2-sm md:text-h2">Experience You Can Put a Face To</h2><p className="mt-5 text-body text-ink-700">Our work brings people, technology and operational support together. Meet the team behind JVM’s commitment to healthcare and professional services.</p><a href="#leadership" className="mt-6 inline-flex min-h-11 items-center text-body-sm font-semibold text-gold-700 underline underline-offset-4">Meet our leadership</a></div>
         </div>
-      </Section>
+      </div>
+      </PageHero>
       <div className="h-12 md:h-16" aria-hidden />
       <div className="document-layout container-content grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-12">
         <InPageNav
@@ -89,7 +87,7 @@ export default function AboutPage() {
             className="chapter-section pt-0 md:pt-0 lg:pt-0"
           >
             <SectionHeader eyebrow="Culture" title="Our Story" />
-            <QuoteCard className="max-w-3xl">{statements.story}</QuoteCard>
+            <blockquote className="about-story relative max-w-3xl pl-8 text-lead font-medium leading-relaxed text-ink-900 md:pl-12 md:text-h2-sm"><span aria-hidden className="absolute -top-5 left-0 font-serif text-[5rem] leading-none text-gold-500">“</span><p>{statements.story}</p></blockquote>
             <Placeholder
               id="P3"
               inline
@@ -105,44 +103,7 @@ export default function AboutPage() {
               title="Living Our Core Values"
               lead={values.intro}
             />
-            <h3 className="text-h3">{values.rita.name}</h3>
-            <p className="prose-measure mt-2 text-body text-ink-700">
-              {values.rita.description}
-            </p>
-
-            <ul className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-              {values.rita.items.map((v) => (
-                <li
-                  key={v.title}
-                  className="@container rounded-container border border-ink-200 bg-white"
-                >
-                  <div className="p-4 @[20rem]:p-6 @[35rem]:p-8">
-                    <h4 className="text-h4">
-                      {v.title}
-                    </h4>
-                    <p className="mt-2 text-body-sm text-ink-700">{v.line}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-6 @container rounded-container bg-cream p-6 md:p-8">
-              <h3 className="text-h3">{values.roar.name}</h3>
-              <p className="mt-2 text-body text-ink-700">
-                {values.roar.description}
-              </p>
-              <dl className="mt-4 grid grid-cols-1 gap-x-8 gap-y-3 md:grid-cols-2">
-                {values.roar.items.map((v) => (
-                  <div
-                    key={v.title}
-                    className="grid grid-cols-1 gap-y-1 @[20rem]:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] @[20rem]:gap-x-3"
-                  >
-                    <dt className="font-semibold text-ink-950">{v.title}</dt>
-                    <dd className="text-body text-ink-700">{v.line}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
+            <AboutValues />
           </Section>
 
           <Section
@@ -154,70 +115,12 @@ export default function AboutPage() {
               eyebrow="Leadership"
               title="Driving Missions Forward"
             />
-            <div className="space-y-4">
-              {founder.bio.map((p) => (
-                <p
-                  key={p.slice(0, 24)}
-                  className="prose-measure text-body text-ink-700"
-                >
-                  {p}
-                </p>
-              ))}
-            </div>
-            <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {team.map((m) => (
-                <TeamCard
-                  key={m.slug}
-                  name={m.name}
-                  role={m.role}
-                  note={m.note}
-                  image={m.image}
-                />
-              ))}
-            </div>
+            <AboutLeadership />
           </Section>
 
           <Section contained={false} id="company" className="chapter-section pt-0 md:pt-0 lg:pt-0">
             <SectionHeader eyebrow="In brief" title="The Company" />
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              <FactBlock
-                title="Company"
-                facts={[
-                  { label: "Legal name", value: statements.companyName },
-                  {
-                    label: "Headquarters",
-                    value: `${contact.office.locality}, ${contact.office.regionName}`,
-                  },
-                  { label: "Ownership", value: identifiers.ownership },
-                  {
-                    label: "Set-asides",
-                    value: identifiers.setAsides.join(", "),
-                  },
-                  {
-                    label: "Quality",
-                    value: credentials.find((c) => c.slug === "iso-9001")!.name,
-                  },
-                ]}
-              />
-              <FactBlock
-                title="Office"
-                facts={[
-                  { label: "Address", value: contact.office.lines.join(", ") },
-                  {
-                    label: "Phone",
-                    value: contact.office.phone,
-                    copy: true,
-                    href: contact.office.phoneHref,
-                  },
-                  {
-                    label: "Email",
-                    value: contact.emails.general,
-                    copy: true,
-                    href: `mailto:${contact.emails.general}`,
-                  },
-                ]}
-              />
-            </div>
+            <CompanyOverview />
             <div className="mt-6 max-w-xl">
               <Placeholder id="P19" />
             </div>

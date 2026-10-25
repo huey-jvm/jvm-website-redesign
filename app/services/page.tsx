@@ -18,9 +18,9 @@ export default function ServicesPage() {
 
           <ServiceDirectory />
 
-        <p className="mt-10 max-w-[65ch] text-body text-ink-700">
-          Commercial health systems are served under the same model, in the vocabulary of their own operations. See{" "}
-          <Link href="/services/healthcare-operations#commercial" className="link-underline font-semibold text-gold-700 after:bg-current">how we work with commercial health systems</Link>.
+        <p className="commercial-services-note mt-10 text-body text-ink-700">
+          We bring the same model to commercial health systems.{" "}
+          <Link href="/services/healthcare-operations#commercial" className="link-underline font-semibold text-gold-700 after:bg-current">Explore our approach</Link>.
         </p>
       </Section>
       <CTABand />

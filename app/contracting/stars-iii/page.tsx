@@ -1,10 +1,11 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Phone } from "lucide-react";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
 import { InPageNav } from "@/components/site/InPageNav";
 import { FactBlock } from "@/components/site/FactBlock";
-import { TeamCard } from "@/components/site/TeamCard";
+import { TeamContact } from "@/components/site/TeamContact";
 import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { Button } from "@/components/ui/Button";
@@ -110,11 +111,14 @@ export default function StarsPage() {
             <section id="contacts" className="chapter-section scroll-mt-28">
               <h2 className="text-h2-sm md:text-h2">JVM Contacts for STARS III</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">STARS III enquiries go to <a href={`mailto:${starsIII.jvmEmail}`} className="link-underline font-semibold text-gold-700 after:bg-current">{starsIII.jvmEmail}</a>.</p>
-              <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                <TeamCard name={pm.name} role={pm.role} email={pm.contactRoute} />
-                <TeamCard name={ceo.name} role={ceo.role} note={ceo.note} image={ceo.image} />
+              <div className="mt-6 grid grid-cols-1 items-start gap-5 xl:grid-cols-2">
+                <TeamContact name={pm.name} role={pm.role} email={pm.contactRoute} />
+                <TeamContact name={ceo.name} role={ceo.role} note={ceo.note} image={ceo.image} />
               </div>
-              <p className="mt-4 text-body-sm text-ink-500">Main line <a href={contact.office.phoneHref} className="link-underline after:bg-current">{contact.office.phone}</a>. GSA program information at <ExternalLink href={starsIII.gsaUrl} className="text-gold-700">GSA’s STARS III program page</ExternalLink>.</p>
+              <div className="stars-contact-resources mt-6 flex flex-col gap-4 border-t border-ink-200 pt-5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+                <a href={contact.office.phoneHref} className="inline-flex min-h-11 items-center gap-3 text-body-sm font-semibold text-ink-900 hover:text-gold-700 focus-visible:text-gold-700"><Phone aria-hidden className="size-4 shrink-0 text-gold-700" /><span><span className="block text-caption font-normal text-ink-500">Call JVM</span>{contact.office.phone}</span></a>
+                <ExternalLink href={starsIII.gsaUrl} className="min-h-11 text-body-sm font-semibold text-gold-700">GSA program details</ExternalLink>
+              </div>
             </section>
           </div>
         </div>

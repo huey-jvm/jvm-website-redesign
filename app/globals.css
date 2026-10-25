@@ -224,8 +224,7 @@
   .fact-sheet dd { border-bottom:1px solid var(--color-ink-200); padding-block:.4rem; }
   .fact-sheet.surface-dark dd { border-color:var(--color-ink-800); }
   .service-directory { border-top:1px solid var(--color-cream-border); }
-  .service-entry { display:grid; gap:1.5rem; padding-block:2rem; border-bottom:1px solid var(--color-cream-border); transition:background-color 150ms; }
-  .service-entry:hover { background:var(--color-ink-50); }
+  .service-entry { display:grid; gap:1.5rem; padding-block:2rem; border-bottom:1px solid var(--color-cream-border); }
   .service-number { color:var(--color-gold-700); font-size:.875rem; }
   .service-entry-arrow { display:none; }
   .contact-workspace { background:var(--color-cream); }
@@ -287,19 +286,18 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
 .jvm-button--primary { box-shadow:0 3px 0 rgb(16 38 50 / .12); }
 .surface-dark .jvm-button--primary { background-image:var(--brand-gradient-gold); }
 .surface-dark .jvm-button--primary:hover { background-image:linear-gradient(115deg,#f2e5cc,#ddc18b); }
-.service-entry { transition:background-color 200ms, box-shadow 200ms; }
-.service-entry-arrow { transition:transform 200ms; }
-.service-entry-image img,
+.service-entry-copy h2, .service-entry-arrow { transition:color 150ms; }
+.service-entry-action { text-decoration:underline; text-decoration-color:transparent; text-underline-offset:.25em; transition:text-decoration-color 150ms; }
+.service-entry:is(:hover,:focus-visible) :is(.service-entry-copy h2,.service-entry-arrow) { color:var(--color-gold-700); }
+.service-entry:is(:hover,:focus-visible) .service-entry-action { text-decoration-color:currentColor; }
+.service-entry:focus-visible :is(h2,.service-entry-arrow,.service-entry-action) { transition:none; }
 .card-media img { transition:transform 550ms cubic-bezier(.2,.8,.2,1); }
 .contact-form input:not([type=radio]),
 .contact-form textarea { transition:border-color 180ms, box-shadow 180ms, background-color 180ms; }
 .contact-form input:focus-visible,
 .contact-form textarea:focus-visible { box-shadow:0 0 0 4px rgb(201 172 112 / .18); }
 @media (hover:hover) and (prefers-reduced-motion:no-preference) {
-  .service-entry:hover .service-entry-image img,
   a:hover > div > .card-media img { transform:scale(1.035); }
-  .service-entry:hover .service-entry-arrow { transform:translate(3px,-3px); }
-  .service-entry:hover { box-shadow:inset 3px 0 var(--color-gold-500); }
 }
 @keyframes jvm-arrive {
   from { opacity:.6; translate:0 12px; }
@@ -457,4 +455,10 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
 @media(forced-colors:active) { .section-blend { display:none; } }
 @media(min-width:1024px) {
   .document-layout:not(:has(> .document-nav)) { grid-template-columns:minmax(0,1fr); }
+  .capability-hero .brief-heading > div { align-items:center; }
+  .capability-hero .brief-heading > div > p { margin-top:0; }
 }
+.contracting-hero .brief-heading,
+.about-hero .brief-heading,
+.quality-hero .brief-heading,
+.certifications-hero .brief-heading { max-width:none; }

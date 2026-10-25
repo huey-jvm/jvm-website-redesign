@@ -3,11 +3,12 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import type { ReactNode } from "react";
 import { Breadcrumb } from "./Breadcrumb";
 import { Slot, presentAsset } from "./Slot";
+import { cn } from "@/lib/cn";
 
-export function PageHero({ eyebrow, title, lead, crumbs, children, aside, backdrop }: { eyebrow?: string; title: string; lead?: string; crumbs?: { label: string; href?: string }[]; children?: ReactNode; aside?: ReactNode; surface?: "light" | "cream"; backdrop?: string }) {
+export function PageHero({ eyebrow, title, lead, crumbs, children, aside, backdrop, className }: { eyebrow?: string; title: string; lead?: string; crumbs?: { label: string; href?: string }[]; children?: ReactNode; aside?: ReactNode; surface?: "light" | "cream"; backdrop?: string; className?: string }) {
   const photo = backdrop ? presentAsset(backdrop) : undefined;
   return (
-    <section className="brief-hero bg-cream text-ink-900" data-hero="page">
+    <section className={cn("brief-hero bg-cream text-ink-900", className)} data-hero="page">
       <div className="container-content">
         {crumbs ? <Breadcrumb items={crumbs} /> : null}
         <div className={aside || photo ? "grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center" : "brief-heading"}>

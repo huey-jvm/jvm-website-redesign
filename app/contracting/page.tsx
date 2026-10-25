@@ -1,14 +1,12 @@
-import { statements } from "@/content/statements";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
-import { Section, SectionHeader } from "@/components/site/Section";
-import { FactBlock } from "@/components/site/FactBlock";
+import { SectionHeader } from "@/components/site/Section";
+import { ContractingIdentifiers } from "@/components/site/ContractingIdentifiers";
 import { TeamCard } from "@/components/site/TeamCard";
 import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
-import { identifiers, naicsDescriptions } from "@/content/identifiers";
 import { starsIII, starsShown, pastPerformance } from "@/content/vehicles";
 import { contact } from "@/content/contact";
 import { team } from "@/content/team";
@@ -46,6 +44,7 @@ export default function ContractingPage() {
   return (
     <>
       <PageHero
+        className="contracting-hero"
         eyebrow="Contracting"
         title="Everything a Contracting Officer Checks"
         lead={
@@ -55,44 +54,10 @@ export default function ContractingPage() {
         }
         crumbs={[{ label: "Contracting" }]}
         surface="cream"
-      />
-      <Section surface="cream"><div className="grid items-start gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-        <FactBlock
-          title="Identifiers"
-          headingLevel="h2"
-          facts={[
-            { label: "Legal name", value: statements.companyName, copy: true },
-            { label: "UEI", value: identifiers.uei, copy: true },
-            { label: "CAGE", value: identifiers.cage, copy: true },
-            {
-              label: "Primary NAICS",
-              value: identifiers.naicsPrimary,
-              copy: true,
-              note: naicsDescriptions[identifiers.naicsPrimary],
-            },
-            {
-              label: "Other NAICS",
-              value: identifiers.naicsSecondary.join(", "),
-              copy: true,
-            },
-            {
-              label: "Set-asides",
-              value: identifiers.setAsides.join(", "),
-              copy: true,
-            },
-            { label: "SAM", value: identifiers.samStatus, copy: true },
-            ...(starsShown
-              ? [
-                  {
-                    label: "STARS III",
-                    value: starsIII.contractNumber,
-                    copy: true,
-                    note: "8(a) prime",
-                  },
-                ]
-              : []),
-          ]}
-        />
+      >
+      <div className="contracting-content mt-12 md:mt-16">
+      <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        <ContractingIdentifiers />
         <aside className="border-t-2 border-gold-500 pt-6 lg:sticky lg:top-28">
           <p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">Procurement resources</p>
           <h2 className="mt-4 text-h3">Build your acquisition file</h2>
@@ -103,13 +68,11 @@ export default function ContractingPage() {
           <Button href={`mailto:${contact.emails.bd}`} variant="primary" className="mt-6">Contact business development</Button>
         </aside>
         </div>
-      </Section>
-
-
-      <Section surface="light" className="pt-0 md:pt-0 lg:pt-0">
+      <section className="mt-16 md:mt-20" aria-labelledby="business-development-title">
         <SectionHeader
           eyebrow="Business development"
           title="Reach Us Directly"
+          id="business-development-title"
         />
         <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-12">
           <div className="md:col-span-4 lg:col-span-3">
@@ -151,7 +114,9 @@ export default function ContractingPage() {
             </div>
           </div>
         </div>
-      </Section>
+      </section>
+      </div>
+      </PageHero>
 
       <CTABand
         title="Start a Conversation With Business Development"
