@@ -11,8 +11,7 @@ pnpm install
 pnpm dev
 ```
 
-Open http://localhost:3000. In development the placeholder blocks are visible (dashed gold boxes carrying a
-register id such as `P5`), the contact form logs instead of sending, and nothing needs an API key.
+Open http://localhost:3000. The contact form logs instead of sending, and nothing needs an API key.
 
 ## Check it
 
@@ -58,8 +57,8 @@ Illustrations share one shape. Landscape 8:5, 1200 by 750 pixels, a PNG with a t
 ## Content that is still pending
 
 Every gap is a `<Placeholder id="Pn">` and the ids match the register in `../docs/01-PRD.md` section 12.
-Placeholders show in development and on any build with `NEXT_PUBLIC_SHOW_PLACEHOLDERS=true` (set that on the
-Vercel Preview environment). A production build hides them and renders the fallback, or nothing. The past
+The boxes are hidden everywhere unless a build sets `NEXT_PUBLIC_SHOW_PLACEHOLDERS=true`; the pending items are
+tracked in a PDF kept outside the site instead. A hidden placeholder renders its fallback, or nothing. The past
 performance page withholds itself in production until `content/vehicles.ts` has publishable records.
 
 ## The credential images
@@ -70,8 +69,7 @@ Until the files are there, each credential renders as a text tile, so nothing is
 
 ## Preview on GitHub Pages
 
-Every push to `main` runs `.github/workflows/pages.yml`, which publishes a static preview with placeholders visible and
-search indexing off. Pages cannot run a server, so that build drops the contact API (the form says it cannot send and offers
+Every push to `main` runs `.github/workflows/pages.yml`, which publishes a static preview with search indexing off. Pages cannot run a server, so that build drops the contact API (the form says it cannot send and offers
 the direct email), the old Wix redirects and the security headers. Set the repository Pages source to GitHub Actions once.
 To rehearse it locally: move `app/api` aside, run `PAGES_BASE_PATH=/jvm-website-redesign pnpm build`, then
 `node scripts/pages-postbuild.mjs out`, and put `app/api` back.
@@ -80,8 +78,7 @@ To rehearse it locally: move `app/api` aside, run `PAGES_BASE_PATH=/jvm-website-
 
 1. Create a Vercel project from this repository. Framework preset Next.js, root directory left at the repository root.
 2. Environment variables, from `.env.example`. Production: `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`,
-   `CONTACT_FROM`, and the two Turnstile keys if used. Preview: add `NEXT_PUBLIC_SHOW_PLACEHOLDERS=true`
-   and `NEXT_PUBLIC_NOINDEX=true`.
+   `CONTACT_FROM`, and the two Turnstile keys if used. Preview: add `NEXT_PUBLIC_NOINDEX=true`.
 3. In Resend, verify the `jvmsolutions.net` domain so mail from `no-reply@jvmsolutions.net` is accepted.
 4. Point the domain at Vercel. The redirects from every old Wix path are in `content/redirects.ts`.
 

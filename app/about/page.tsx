@@ -93,7 +93,7 @@ export default function AboutPage() {
             <Placeholder
               id="P3"
               inline
-              what="Pending the CEOâ€™s confirmation"
+              what="Pending the CEO’s confirmation"
               who="the CEO"
               className="mt-4 inline-block"
             />

@@ -32,7 +32,6 @@ jobs:
         run: pnpm build
         env:
           PAGES_BASE_PATH: /${{ github.event.repository.name }}
-          NEXT_PUBLIC_SHOW_PLACEHOLDERS: "true"
           NEXT_PUBLIC_NOINDEX: "true"
       - name: Give route data the file names the browser requests
         run: node scripts/pages-postbuild.mjs out
