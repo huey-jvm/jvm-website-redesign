@@ -1,4 +1,4 @@
-import { Compass, Home, RotateCw, Unplug, WifiOff } from "lucide-react";
+import { FileQuestionMark, Home, RotateCw, Unplug, WifiOff } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ContourArt } from "./ContourArt";
 
@@ -8,7 +8,7 @@ const messages = {
   missing: {
     title: "Let’s get you back on track",
     description: "This page may have moved, or the link may no longer be available.",
-    icon: Compass,
+    icon: FileQuestionMark,
   },
   unavailable: {
     title: "A brief interruption",
@@ -31,7 +31,7 @@ export function ErrorState({ kind = "missing", retry }: { kind?: ErrorKind; retr
         <div className="error-state-symbol" aria-hidden><Icon strokeWidth={1.25} /></div>
         <p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">JVM Solutions</p>
         <h1 id="error-title" className="mt-4 font-medium">{title}</h1>
-        <p className="mx-auto mt-5 max-w-[43ch] text-lead-sm text-ink-700">{description}</p>
+        <p className="mx-auto mt-5 max-w-[60rem] text-lead-sm text-ink-700">{description}</p>
         <div className="mt-8">
           {retry ? (
             <Button variant="primary" onClick={retry} icon={<RotateCw className="size-4" />}>Try again</Button>
