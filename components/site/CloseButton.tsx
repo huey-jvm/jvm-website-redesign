@@ -17,7 +17,7 @@ export function CloseButton({ tone = "light", className, label = "Close", ...res
       )}
       {...rest}
     >
-      <X aria-hidden className="size-5 transition-transform duration-150 ease-hover group-hover/close:rotate-90 group-focus-visible/close:rotate-90 group-focus-visible/close:transition-none motion-reduce:group-hover/close:rotate-0 motion-reduce:group-focus-visible/close:rotate-0" />
+      <X aria-hidden className="size-5" />
     </button>
   );
 }
