@@ -50,20 +50,23 @@ export function Footer() {
               <dt className="text-ink-300">Verify</dt>
               <dd><a href={`mailto:${contact.emails.credentialing}?subject=Employment%20Verification`} className="link-underline inline-flex min-h-11 items-center text-ink-200 after:bg-cream hover:text-cream focus-visible:text-cream">{breakableEmail(contact.emails.credentialing)}</a><span className="block text-caption text-ink-300">Employment verification</span></dd>
             </dl>
-            <ul className="mt-5 flex flex-wrap items-center gap-2" aria-label="Social">
-              {contact.social.map((s) => (
-                <li key={s.name}>
-                  <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`${s.name} (opens in a new tab)`} className="inline-flex size-11 items-center justify-center rounded-control text-ink-300 hover:text-cream focus-visible:text-cream focus-visible:outline-gold-500">
-                    <SocialIcon name={s.name} />
-                  </a>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
 
-        <ul aria-label="Certifications" className="mt-8 flex flex-wrap items-center gap-3 border-t border-ink-800 pt-8">{proofStripSlugs.map((slug) => credentials.find((c) => c.slug === slug)!).map((c) => <li key={c.slug}><CredentialMark credential={c} size="sm" /></li>)}</ul>
-        <div className="mt-8 flex flex-col gap-4 border-t border-ink-800 pt-6 text-caption text-ink-300 md:flex-row md:items-center md:justify-between">
+        <div className="footer-credentials mt-6 grid items-center gap-5 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr] lg:gap-10">
+          <ul aria-label="Certifications" className="footer-certifications grid grid-cols-2 items-stretch gap-3 sm:flex sm:flex-wrap sm:items-center lg:col-span-4">{proofStripSlugs.map((slug) => credentials.find((c) => c.slug === slug)!).map((c) => <li key={c.slug}><CredentialMark credential={c} size="sm" /></li>)}</ul>
+          <ul className="flex flex-wrap items-center gap-2" aria-label="Social">
+            {contact.social.map((s) => (
+              <li key={s.name}>
+                <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`${s.name} (opens in a new tab)`} className="inline-flex size-11 items-center justify-center rounded-control text-ink-300 hover:text-cream focus-visible:text-cream focus-visible:outline-gold-500">
+                  <SocialIcon name={s.name} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-8 flex flex-col gap-4 text-caption text-ink-300 md:flex-row md:items-center md:justify-between">
           <ul className="flex flex-wrap gap-x-5 gap-y-2">
             {legalNav.map((l) => (
               <li key={l.href}><Link href={l.href} className="link-underline inline-flex min-h-11 items-center after:bg-cream hover:text-cream focus-visible:text-cream">{l.label}</Link></li>

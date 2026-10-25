@@ -3,7 +3,7 @@ import Image from "@/components/ui/Image";
 import { formatList } from "@/lib/list";
 import { CinematicHero } from "@/components/site/CinematicHero";
 import type { Metadata } from "next";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BadgeCheck } from "lucide-react";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { ProofStrip } from "@/components/site/ProofStrip";
 
@@ -22,7 +22,6 @@ import { identifiers, naicsDescriptions } from "@/content/identifiers";
 import { starsIII, starsShown, starsConfirmed, starsOrdering } from "@/content/vehicles";
 import { team, leadershipTeamPhoto } from "@/content/team";
 import { credentials } from "@/content/credentials";
-import { CredentialMark } from "@/components/site/CredentialMark";
 
 export const metadata: Metadata = {
   description: statements.positioning,
@@ -110,11 +109,17 @@ export default function HomePage() {
             ]}
           />
           {stars ? (
-            <div className="flex flex-col rounded-container border border-ink-800 bg-ink-900 p-5 md:p-6 lg:col-span-5">
-              <Eyebrow tone="dark">Prime vehicle</Eyebrow>
-              <div className="mt-4"><CredentialMark credential={stars} /></div>
-              <p className="mt-4 text-body text-ink-200">JVM is a {starsIII.role.toLowerCase()} on {starsIII.name}, {starsIII.summary}.</p>
-              <Button href="/contracting" variant="secondary" tone="dark" className="mt-6 self-start lg:mt-auto">Go to contracting</Button>
+            <div className="prime-vehicle flex flex-col rounded-container p-6 md:p-8 lg:col-span-5">
+              <div className="flex items-center justify-between gap-4">
+                <Eyebrow tone="dark">Prime vehicle</Eyebrow>
+                <BadgeCheck aria-hidden className="size-9 shrink-0 text-gold-500" strokeWidth={1.25} />
+              </div>
+              <div className="py-8 lg:py-10">
+                <p className="mb-3 text-body-sm font-medium text-gold-200">JVM is a prime contractor</p>
+                <h3 className="text-h1-sm font-medium tracking-tight text-cream md:text-h1">GSA 8(a)<br />STARS III</h3>
+                <p className="mt-5 max-w-[36ch] text-body text-ink-200">A Best in Class governmentwide acquisition contract for IT services.</p>
+              </div>
+              <Button href={stars.evidenceHref ?? "/contracting"} variant="secondary" tone="dark" icon={<ArrowRight className="size-4" />} iconTrailing className="mt-auto self-start">Explore STARS III</Button>
             </div>
           ) : null}
         </div>
