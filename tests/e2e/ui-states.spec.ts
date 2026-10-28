@@ -23,16 +23,15 @@ test("missing pages offer a working way home at every viewport", async ({ page }
   expect(results.violations).toEqual([]);
   await page.getByRole("link", { name: "Back to home", exact: true }).click();
   await expect(page).toHaveURL(/\/$/);
-  await expect(page.locator("h1")).toContainText("People first.");
+  await expect(page.locator("h1")).toContainText("Your Mission");
 });
 
-test("contracting feature and footer remain usable from phone to desktop", async ({ page }) => {
+test("quality link and footer remain usable from phone to desktop", async ({ page }) => {
   for (const width of widths) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/", { waitUntil: "domcontentloaded" });
     await page.evaluate(() => document.fonts.ready);
-    await expect(page.locator(".prime-vehicle h3")).toContainText("STARS III");
-    await expect(page.locator(".prime-vehicle a")).toHaveAttribute("href", "/contracting/stars-iii");
+    await expect(page.locator("main").getByRole("link", {name:"Quality and Compliance",exact:true})).toHaveAttribute("href", "/about/quality-compliance");
     const credentials = page.locator('footer ul[aria-label="Certifications"]');
     await expect(credentials.locator("a")).toHaveCount(4);
     const social = page.locator('footer ul[aria-label="Social"]');

@@ -1,4 +1,3 @@
-import fs from "node:fs";
 import { test, expect } from "@playwright/test";
 import { pages } from "./pages";
 import { markForMeasure, measureContrast } from "./contrast";
@@ -77,19 +76,10 @@ test("control: gold text on a gold backdrop fails the contrast measurement", asy
 });
 
 for (const width of [1280, 375]) {
-  test(`the drawn contour background behind Contracting at a glance keeps text readable at ${width}px`, async ({ page }) => {
+  test(`homepage quality link is available without procurement-led hero content at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto("/", { waitUntil: "networkidle" });
-    test.skip(fs.existsSync("public/images/generated/as-04-gold-contours.png"), "Generated texture replaces drawn fallback");
-    const count = await page.locator("[data-art]").count();
-    expect(count).toBeGreaterThan(0);
-    await markForMeasure(page, "[data-art]", 0);
-    const lines = await measureContrast(page, test.info(), `art-${width}`);
-    expect(lines.length, "text sits directly on the drawn background").toBeGreaterThan(0);
-    const worst = lines.reduce((a, b) => (b.ratio < a.ratio ? b : a));
-    const brightest = Math.max(...lines.map((l) => l.bgMax));
-    console.log(`contour art at ${width}px: ${lines.length} text lines, lowest contrast ${worst.ratio.toFixed(2)} ("${worst.text}"), brightest backdrop under text ${(brightest * 100).toFixed(2)} percent`);
-    for (const l of lines) expect(l.ratio, `"${l.text}" at ${width}px`).toBeGreaterThanOrEqual(l.large ? 3 : 4.5);
-    expect(brightest, "gold text needs the backdrop under 4.4 percent luminance").toBeLessThan(0.044);
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    await expect(page.locator("main").getByRole("link", {name:"Quality and Compliance",exact:true})).toBeVisible();
+    await expect(page.locator("[data-hero]")).not.toContainText("STARS III");
   });
 }

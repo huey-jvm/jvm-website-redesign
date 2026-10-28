@@ -1,6 +1,6 @@
 import { outcomes } from "./outcomes";
 
-export type AssetKind = "photo" | "texture" | "illustration";
+export type AssetKind = "photo" | "texture" | "illustration" | "diagram";
 export type Asset = { id: string; path: string; alt: string; kind: AssetKind; where: string[] };
 
 const dir = "/images/generated";
@@ -19,20 +19,21 @@ const outcomeIllustrations: Asset[] = outcomes.map((o) => ({
 
 
 export const assets: Asset[] = [
-  { id: "AS-01", path: "/images/services/technology.webp", alt: "Conceptual image of a clinician and analyst reviewing health technology", kind: "photo", where: ["/", "/services"] },
-  { id: "AS-02", path: "/images/services/logistics.webp", alt: "Conceptual image of logistics professionals checking warehouse inventory", kind: "photo", where: ["/", "/services"] },
-  { id: "AS-03", path: "/images/services/management.webp", alt: "Conceptual image of operations managers planning a project", kind: "photo", where: ["/", "/services"] },
-  { id: "AS-06", path: "/images/services/healthcare.webp", alt: "", kind: "photo", where: ["/services/healthcare-operations"] },
-  { id: "AS-07", path: "/images/services/technology.webp", alt: "", kind: "photo", where: ["/services/health-it"] },
-  { id: "AS-08", path: "/images/services/logistics.webp", alt: "", kind: "photo", where: ["/services/logistics-facilities"] },
-  { id: "AS-09", path: "/images/services/management.webp", alt: "", kind: "photo", where: ["/services/management-support"] },
+  { id: "AS-16", path: "/images/revision/facilities.svg", alt: "Diagram connecting facilities operations, maintenance and follow-through", kind: "diagram", where: ["/services/facilities-management"] },
+  { id: "AS-01", path: "/images/revision/technology.svg", alt: "Diagram connecting systems, support and security", kind: "diagram", where: ["/", "/services"] },
+  { id: "AS-02", path: "/images/revision/logistics.svg", alt: "Diagram connecting planning, inventory and delivery", kind: "diagram", where: ["/", "/services"] },
+  { id: "AS-03", path: "/images/revision/conference-team.webp", alt: "JVM representatives at a small business conference", kind: "photo", where: [] },
+  { id: "AS-06", path: "/images/revision/workplace-team.webp", alt: "", kind: "photo", where: ["/services/healthcare-operations"] },
+  { id: "AS-07", path: "/images/revision/technology.svg", alt: "", kind: "diagram", where: ["/services/health-it"] },
+  { id: "AS-08", path: "/images/revision/logistics.svg", alt: "", kind: "diagram", where: ["/services/logistics"] },
+  { id: "AS-09", path: "/images/revision/conference-team.webp", alt: "", kind: "photo", where: ["/services/management-support"] },
   { id: "AS-10", path: `${dir}/as-10-shift.png`, alt: "", kind: "texture", where: [] },
   { id: "AS-11", path: `${dir}/as-11-contracting-banner.jpg`, alt: "", kind: "photo", where: [] },
   { id: "AS-12", path: `${dir}/as-12-capability.jpg`, alt: "A blank sheet of paper and a fountain pen on a dark desk", kind: "photo", where: [] },
   { id: "AS-13", path: `${dir}/as-05-cream-grain.png`, alt: "", kind: "texture", where: ["/about"] },
-  { id: "AS-14", path: `${dir}/as-14-quality-banner.jpg`, alt: "", kind: "photo", where: ["/about/quality-compliance"] },
-  { id: "AS-15a", path: `${dir}/as-15a-veterans.jpg`, alt: "A folded uniform jacket without insignia beside a civilian blazer on a chair", kind: "photo", where: ["/careers"] },
-  { id: "AS-15b", path: "/images/keith/clinical-team.webp", alt: "A group of professionals together in a clinical workplace", kind: "photo", where: ["/careers"] },
+  { id: "AS-14", path: `/images/revision/quality-team-enhanced.png`, alt: "", kind: "photo", where: ["/about/quality-compliance"] },
+  { id: "AS-15a", path: `/images/revision/team-visit.webp`, alt: "JVM colleagues during a workplace visit", kind: "photo", where: ["/careers"] },
+  { id: "AS-15b", path: "/images/revision/clinical-team-enhanced.png", alt: "A group of professionals together in a clinical workplace", kind: "photo", where: ["/careers"] },
   { id: "AS-15c", path: "/images/keith/workplace-team.webp", alt: "Five people together in a rehabilitation and exercise space", kind: "photo", where: ["/careers"] },
 ];
 

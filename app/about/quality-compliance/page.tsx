@@ -31,7 +31,7 @@ export default function QualityPage() {
         </section>
         <section className="grid gap-5 border-t border-ink-200 pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-16" aria-labelledby="quality-joint-title">
           <div>
-          <div className="mb-5 flex items-center gap-3"><HeartHandshake aria-hidden className="size-6 text-gold-700" /><p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">Healthcare staffing</p></div>
+          <div className="mb-5 flex items-center gap-3"><HeartHandshake aria-hidden className="size-6 text-gold-700" /><p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">Healthcare delivery</p></div>
           <h3 id="quality-joint-title" className="text-h3">Joint Commission Standards</h3>
           </div>
           <div><p className="text-body text-ink-700">{quality.jointCommission.paragraph}</p><Placeholder id="P8" className="mt-4" /></div>

@@ -850,7 +850,7 @@ function mount({ stage, svg, read }, value) {
 
 hairline({
   name: "consolidate",
-  means: "Loose crates gather into one tray as the pointer moves right: from staffing vendor to integrated partner.",
+  means: "Loose crates gather into one tray as the pointer moves right: from fragmented support to integrated partner.",
   rules: [1, 3, 5, 6, 8],
   range: [0.8, 1, 1.2],
   tour: [[110, 160], [200, 160], [300, 160], null],

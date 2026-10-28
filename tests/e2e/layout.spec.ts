@@ -1,34 +1,21 @@
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect , type Page } from "@playwright/test";
 import { proofStripSlugs } from "../../content/credentials";
 import { outcomes } from "../../content/outcomes";
 
-async function rows(page: Page, selector: string) {
-  const tops = await page.locator(selector).evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().top + window.scrollY)));
-  return [...new Set(tops)];
-}
-
-test("the credentials strip has a heading and lays its marks out evenly", async ({ page }) => {
-  const marks = "[aria-labelledby='credentials-title'] li";
-  await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto("/", { waitUntil: "networkidle" });
-  await expect(page.getByRole("heading", { level: 2, name: "Certifications and Contract Vehicles" })).toBeVisible();
-  expect(await page.locator(marks).count(), "the strip lists every mark").toBe(proofStripSlugs.length);
-  expect(await rows(page, marks), "one row on a wide screen, no orphan").toHaveLength(1);
-  await page.setViewportSize({ width: 768, height: 900 });
-  const medium = await rows(page, marks);
-  expect(medium.length, "evidenced marks fit evenly on a tablet").toBe(1);
-  await page.setViewportSize({ width: 375, height: 800 });
-  expect((await rows(page, marks)).length, "control: the row counter sees several rows on a phone").toBeGreaterThan(1);
+test("homepage integrates quality into the operational-excellence content", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("[aria-labelledby='credentials-title']")).toHaveCount(0);
+  await expect(page.locator(".differentiators").getByRole("link", { name: "Quality and Compliance" })).toHaveAttribute("href", "/about/quality-compliance");
 });
 
 test("the footer repeats every evidenced credential mark", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
   expect(await page.locator("footer [aria-label='Certifications'] li").count()).toBe(proofStripSlugs.length);
   expect(await page.locator("footer").getByRole("link", {name: /SBA 8\(a\) Certified/}).count()).toBe(1);
-  expect(await page.locator("[data-hero] + section[aria-labelledby='credentials-title']").count(), "the cream proof strip follows the hero").toBe(1);
+  expect(await page.locator("[data-hero] + section[aria-labelledby='outcomes-title']").count(), "outcomes follow the hero").toBe(1);
 });
 
-const outcomeCards = (page: Page) => page.locator("section").filter({ has: page.getByRole("heading", { name: "What Changes for Your Mission" }) }).locator(":is(ul, ol) > li");
+const outcomeCards = (page: Page) => page.locator("section").filter({ has: page.getByRole("heading", { name: "Helping Your Mission Move Forward" }) }).locator(":is(ul, ol) > li");
 
 test("every outcome card shows an illustration, its title and its deck sentence", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
@@ -59,14 +46,12 @@ test("the outcome index stacks one row per outcome at every width, sharing a lef
 test("the differentiator cards stretch equally and contain their deck sentences", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/", { waitUntil: "networkidle" });
-  const section = page.locator("section").filter({ has: page.getByRole("heading", { name: "Four Differentiators That Do Not Commoditize" }) });
+  const section = page.locator("section").filter({ has: page.getByRole("heading", { name: "How We Support Your Mission" }) });
   const heights = () => section.evaluate((s) => ({ section: Math.round(s.getBoundingClientRect().height), cards: Array.from(s.querySelectorAll("ol > li")).map((l) => Math.round(l.getBoundingClientRect().height)) }));
   const measured = await heights();
   console.log(`differentiators at 1280px: section ${measured.section} px, cards ${measured.cards.join(", ")} px`);
   expect(measured.cards, "four cards").toHaveLength(4);
   expect(new Set(measured.cards).size, "the four cards are the same height").toBe(1);
-  const credentials = await page.locator("[aria-labelledby='credentials-title']").evaluate((s) => Math.round(s.getBoundingClientRect().height));
-  expect(credentials, "control: a short section is reported as short").toBeLessThan(640);
   const text = await section.locator("ol > li").allInnerTexts();
   const { differentiators } = await import("../../content/differentiators");
   differentiators.forEach((d, i) => { expect(text[i]).toContain(d.title); expect(text[i]).toContain(d.body); });

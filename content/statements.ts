@@ -2,9 +2,9 @@ export const statements = {
   companyName: "Johnson Venture Management Solutions, Inc.",
   shortName: "JVM Solutions",
   category: "Integrated Healthcare Operations and Professional Services",
-  tagline: "We don't just support healthcare, we help transform how it's delivered.",
+  tagline: "Veteran Led, Mission Focused",
   positioning:
-    "Healthcare operations and professional services for DHA, VA and HHS. Mission-ready teams, better care and measurable outcomes from day one.",
+    "Healthcare operations, IT, logistics and facilities management. JVM brings people, systems and day-to-day delivery together to help your mission move forward.",
   audience: ["Defense Health Agency", "Veterans Affairs", "Health and Human Services"],
   mission:
     "Driven by excellence and integrity, we deliver exceptional, client-focused solutions shaped by our core values.",

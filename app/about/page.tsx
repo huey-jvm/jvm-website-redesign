@@ -40,17 +40,28 @@ export default function AboutPage() {
       </div>
       </PageHero>
       <div className="h-12 md:h-16" aria-hidden />
-      <div className="document-layout container-content grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-12">
+      <div className="document-layout container-content grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-12 lg:[&>.document-nav]:mb-16">
         <InPageNav
           sections={[
+            { id: "leadership", label: "Leadership and team" },
             { id: "mission", label: "Mission and vision" },
             { id: "story", label: "Story" },
             { id: "values", label: "Values" },
-            { id: "leadership", label: "Leadership" },
             { id: "company", label: "Company" },
           ]}
         />
         <div className="min-w-0">
+          <Section
+            contained={false}
+            id="leadership"
+            className="chapter-section pt-0 md:pt-0 lg:pt-0"
+          >
+            <SectionHeader
+              eyebrow="Leadership"
+              title="Driving Missions Forward"
+            />
+            <AboutLeadership />
+          </Section>
           <Section contained={false} id="mission" className="chapter-section">
             <SectionHeader eyebrow="Culture" title="Our Mission and Vision" />
             <div data-backdrop="AS-13" className="purpose-grid relative isolate grid gap-5 md:grid-cols-[1fr_1.15fr]">
@@ -95,17 +106,7 @@ export default function AboutPage() {
             <AboutValues />
           </Section>
 
-          <Section
-            contained={false}
-            id="leadership"
-            className="chapter-section pt-0 md:pt-0 lg:pt-0"
-          >
-            <SectionHeader
-              eyebrow="Leadership"
-              title="Driving Missions Forward"
-            />
-            <AboutLeadership />
-          </Section>
+
 
           <Section contained={false} id="company" className="chapter-section pt-0 md:pt-0 lg:pt-0">
             <SectionHeader eyebrow="In brief" title="The Company" />

@@ -27,8 +27,8 @@ for (const width of [375, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     const requested: string[] = [];
     page.on("request", request => { if (request.resourceType() === "image") requested.push(request.url()); });
-    await page.goto("/services/health-it", { waitUntil: "load" });
-    const photo = page.locator('img[data-image-src="/images/services/technology.webp"]').first();
+    await page.goto("/services", { waitUntil: "load" });
+    const photo = page.locator('img[data-image-src="/images/revision/clinical-team-enhanced.png"]').first();
     await expect(photo).toBeVisible();
     expect(await photo.evaluate(async image => { await (image as HTMLImageElement).decode(); return (image as HTMLImageElement).currentSrc; })).toContain("/images/optimized/");
     expect(requested.some(url => url.includes("/_next/image") || url.endsWith("jvm-official.png"))).toBe(false);

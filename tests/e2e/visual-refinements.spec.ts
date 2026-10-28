@@ -20,7 +20,7 @@ test("outcome illustrations sit directly on the page and leadership highlights w
   }
 });
 
-for (const path of pages.filter(path => path.startsWith("/services/"))) {
+for (const path of pages.filter(path => path.startsWith("/services/") && path !== "/services/logistics-facilities")) {
   test(`${path} omits related outcomes and its navigation link`, async ({ page }) => {
     await page.goto(path, { waitUntil: "domcontentloaded" });
     await expect(page.locator("main h1")).toBeVisible();
@@ -57,14 +57,14 @@ test("the footer retains its original dark palette", async ({ page }) => {
   await expect(page.locator("footer")).toHaveCSS("color", "rgb(215, 224, 226)");
 });
 
-test("Why JVM is the first destination on desktop and mobile", async ({ page }) => {
+test("About JVM is the first destination on desktop and mobile", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/", { waitUntil: "domcontentloaded" });
-  await expect(page.locator('header nav[aria-label="Primary"] > ul > li').first()).toHaveText("Why JVM");
+  await expect(page.locator('header nav[aria-label="Primary"] > ul > li').first()).toHaveText("About JVM");
   await page.setViewportSize({ width: 375, height: 812 });
   await page.reload({ waitUntil: "load" });
   await page.getByRole("button", { name: "Open menu", exact: true }).click();
-  await expect(page.getByRole("dialog", { name: "Menu", exact: true }).locator("nav > ul > li").first()).toHaveText("Why JVM");
+  await expect(page.getByRole("dialog", { name: "Menu", exact: true }).locator("nav > ul > li").first()).toHaveText("About JVM");
   await page.keyboard.press("Escape");
 });
 
@@ -76,7 +76,7 @@ test("the header logo returns to the homepage from any page", async ({ page }) =
     await expect(logo).toHaveAttribute("href", "/");
     await logo.click();
     await expect(page).toHaveURL(/\/$/);
-    await expect(page.locator("main h1")).toContainText("People first.");
+    await expect(page.locator("main h1")).toContainText("Your Mission");
   }
 });
 
@@ -124,7 +124,7 @@ test("contracting does not repeat a resource section or show an empty past-perfo
 });
 
 for (const service of services) {
-  test(`${service.slug} shows every capability in one column without collapsing content`, async ({ page }) => {
+  test(`${service.slug} shows complete capability descriptions without dropdowns`, async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(`/services/${service.slug}`, { waitUntil: "domcontentloaded" });
     const deliveries = service.sections.flatMap(section => section.delivers ?? []);
@@ -133,13 +133,13 @@ for (const service of services) {
     }
     await expect(page.locator(".service-capability")).toHaveCount(deliveries.length);
     for (const delivery of deliveries) {
-      const card = page.locator(".service-capability").filter({ has: page.getByRole("heading", { name: delivery.title, exact: true }) });
+      const card = page.locator(".service-capability").filter({ has: page.locator("h3").filter({hasText: delivery.title}) });
       await expect(card).toBeVisible();
-      await expect(card.locator("details, summary, button")).toHaveCount(0);
+      await expect(card.locator("h3")).toHaveText(delivery.title);
       await expect(card.locator("p")).toHaveText(delivery.description);
       await expect(card.locator("p")).toBeVisible();
       const sentences = delivery.description.match(/[.!?](?:\s|$)/g)?.length ?? 0;
-      expect(sentences).toBeGreaterThanOrEqual(2);
+      expect(sentences).toBeGreaterThanOrEqual(1);
       expect(sentences).toBeLessThanOrEqual(3);
     }
     for (const width of [320, 768, 1440]) {

@@ -1,5 +1,5 @@
 export const values = {
-  intro: "JVM's culture is not aspirational. It is operational. Our values are not posted on a wall. They are lived in every client interaction, every staffing decision, and every mission we support.",
+  intro: "Our values guide how we work with clients and one another: listen with respect, communicate honestly, follow through on commitments and take responsibility for delivery.",
   rita: {
     name: "R.I.T.A.",
     description: "Our foundational values define how JVM shows up for clients, patients, and one another. These are the non-negotiables that govern every decision we make and every relationship we build.",

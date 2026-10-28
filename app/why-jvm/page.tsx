@@ -17,7 +17,7 @@ import { ArrowRight } from "lucide-react";
 
 export const metadata = pageMetadata(
   "Why JVM",
-  "From staffing vendor to integrated operations partner. The value proposition, five outcomes and four differentiators behind every JVM engagement.",
+  "From fragmented support to integrated operations partner. The value proposition, five outcomes and four differentiators behind every JVM engagement.",
   "/why-jvm",
 );
 

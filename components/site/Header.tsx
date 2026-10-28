@@ -25,7 +25,7 @@ export function Header({ nav }: { nav: NavGroup[] }) {
       }
       utility={
         <div className="jvm-utility hidden border-b border-ink-200 bg-cream lg:block">
-          <div className="container-content flex h-9 items-center justify-end gap-6 text-caption text-ink-700"><span className="mr-auto font-semibold uppercase tracking-widest">Veteran-led. Mission-focused.</span>
+          <div className="container-content flex h-9 items-center justify-end gap-6 text-caption text-ink-700"><span className="mr-auto font-semibold uppercase tracking-widest">Veteran Led, Mission Focused</span>
             <a
               href={contact.office.phoneHref}
               className="inline-flex min-h-11 items-center gap-2 hover:text-ink-950 focus-visible:text-ink-950"

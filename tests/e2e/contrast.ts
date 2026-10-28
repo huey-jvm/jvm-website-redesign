@@ -31,7 +31,7 @@ export async function measureContrast(page: Page, info: TestInfo, name: string, 
       let hidden = false;
       for (let a: HTMLElement | null = el; a; a = a.parentElement) {
         const style = getComputedStyle(a);
-        if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) { hidden = true; break; }
+        if (a.getAttribute("aria-hidden") === "true" || style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) { hidden = true; break; }
       }
       if (hidden) continue;
       let onOwnSurface = false;

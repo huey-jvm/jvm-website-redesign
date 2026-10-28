@@ -47,14 +47,17 @@ test("service hover stays on the typography without a tinted panel, stripe or im
   await expect(row.locator("h2")).toHaveCSS("transition-duration", "0s");
 });
 
-test("commercial note fits one desktop line and capability lead centers beside the title", async ({ page }) => {
+test("commercial note aligns beside resource buttons and capability lead centers beside the title", async ({ page }) => {
   for (const width of [1024, 1440, 1920]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/services", { waitUntil: "domcontentloaded" });
     await page.evaluate(() => document.fonts.ready);
     const note = page.locator(".commercial-services-note");
     await note.scrollIntoViewIfNeeded();
-    expect(await note.evaluate(el => { const r = document.createRange(); r.selectNodeContents(el); return new Set([...r.getClientRects()].filter(b => b.height > 0).map(b => Math.round(b.y))).size; })).toBe(1);
+    const noteBox = await note.boundingBox();
+    const buttonsBox = await page.locator(".services-resources > div").boundingBox();
+    expect(noteBox!.x).toBeGreaterThan(buttonsBox!.x + buttonsBox!.width);
+    expect(Math.abs((noteBox!.y + noteBox!.height / 2) - (buttonsBox!.y + buttonsBox!.height / 2))).toBeLessThan(2);
     await page.goto("/contracting/capability-statement", { waitUntil: "domcontentloaded" });
     const title = page.locator("main h1");
     await expect(title).toBeVisible();
@@ -108,8 +111,7 @@ test("About keeps its content while removing the story card and empty leadership
   await expect(page.locator("#story figure")).toHaveCount(0);
   for (const value of [...values.rita.items, ...values.roar.items]) await expect(page.locator(".about-values")).toContainText(value.line);
   for (const paragraph of team[0].bio) await expect(page.locator(".about-leadership")).toContainText(paragraph);
-  await expect(page.locator(".about-leadership").getByRole("heading", { name: "Roy White", exact: true })).toBeVisible();
-  expect((await page.locator(".about-leadership > div").last().boundingBox())!.height).toBeLessThan(160);
+  await expect(page.locator(".about-leadership").getByRole("heading", { name: "Roy White", exact: true })).toHaveCount(0);
   await expect(page.locator(".company-overview")).toContainText(statements.companyName);
 });
 

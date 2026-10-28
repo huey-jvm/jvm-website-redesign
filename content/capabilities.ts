@@ -3,7 +3,7 @@ export const capabilityDocuments = [
     "id": "healthcare",
     "title": "Healthcare",
     "service": "healthcare-operations",
-    "description": "Clinical staffing, ancillary services, telehealth and program management.",
+    "description": "Clinical services, ancillary services, telehealth and program management.",
     "href": "/downloads/jvm-healthcare-capability-statement.pdf",
     "preview": "/images/keith/healthcare-statement.webp",
     "pages": 2,
@@ -22,7 +22,7 @@ export const capabilityDocuments = [
   {
     "id": "logistics",
     "title": "Logistics",
-    "service": "logistics-facilities",
+    "service": "logistics",
     "description": "Asset management, supply chain support and quality control.",
     "href": "/downloads/jvm-logistics-capability-statement.pdf",
     "preview": "/images/keith/logistics-statement.webp",
@@ -32,7 +32,7 @@ export const capabilityDocuments = [
   {
     "id": "facilities",
     "title": "Facilities",
-    "service": "logistics-facilities",
+    "service": "facilities-management",
     "description": "Cleaning, maintenance and facilities operations support.",
     "href": "/downloads/jvm-facilities-capability-statement.pdf",
     "preview": "/images/keith/facilities-statement.webp",

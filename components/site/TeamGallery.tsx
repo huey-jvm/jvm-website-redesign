@@ -19,7 +19,7 @@ export function TeamGallery() {
           <figure key={photo.src} className="border-b border-ink-200 pb-5">
             <a href={withBasePath(`/images/keith/${photo.src}.webp`)} target="_blank" rel="noopener noreferrer" className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-700">
               <div className="relative aspect-[4/3] overflow-hidden bg-ink-100">
-                <Image src={`/images/keith/${photo.src}.webp`} alt={photo.alt} fill style={{ objectPosition: photo.src === "clinical-team" ? "center top" : "center" }} sizes="(min-width: 768px) 30vw, 100vw" className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.03] group-focus-visible:scale-[1.03] motion-reduce:transform-none" />
+                <Image src={photo.src === "clinical-team" ? "/images/revision/clinical-team-enhanced.png" : `/images/keith/${photo.src}.webp`} alt={photo.alt} fill style={{ objectPosition: photo.src === "clinical-team" ? "center top" : "center" }} sizes="(min-width: 768px) 30vw, 100vw" className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.03] group-focus-visible:scale-[1.03] motion-reduce:transform-none" />
               </div>
               <span className="sr-only">View full photograph (opens in a new tab)</span>
             </a>

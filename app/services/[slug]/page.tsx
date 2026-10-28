@@ -1,4 +1,5 @@
 import { CapabilityLibrary } from "@/components/site/CapabilityLibrary";
+import { NextServicePage } from "@/components/site/NextServicePage";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
@@ -8,14 +9,14 @@ import { InPageNav } from "@/components/site/InPageNav";
 import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { Button } from "@/components/ui/Button";
-import { services, getService } from "@/content/services";
+import { allServices, getService } from "@/content/services";
 import { pageMetadata } from "@/lib/seo";
 import { ContractSummary } from "@/components/site/ContractSummary";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return services.map((s) => ({ slug: s.slug }));
+  return allServices.map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -30,6 +31,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const service = getService(slug);
   if (!service) notFound();
 
+  if (slug === "logistics-facilities") return <><PageHero title="Logistics and Facilities" lead="Explore our dedicated services for resources and the places your mission happens." crumbs={[{label:"Services",href:"/services"},{label:"Logistics and Facilities"}]} /><Section><div className="mt-8 flex flex-wrap gap-4"><Button href="/services/logistics">Explore Logistics</Button><Button href="/services/facilities-management" variant="secondary">Explore Facilities Management</Button></div><CTABand embedded /></Section></>;
   const navSections = [
     ...service.sections.map((s) => ({ id: s.id, label: s.title })),
     ...(service.lead ? [{ id: "commercial", label: "Commercial health systems" }] : []),
@@ -79,9 +81,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 <Eyebrow tone="light">For commercial health systems</Eyebrow>
                 <h2 className="mt-3 text-h2-sm md:text-h2">The Same Model, in Your Terms</h2>
                 <p className="prose-measure mt-4 text-body text-ink-700">
-                  Health systems outside government face the same pressures: access, throughput, staffing continuity and compliance. We bring the same credentialed professionals, the same program and case management discipline, scoped to your network, your payer mix and your patient population.
+                  Health systems outside government face the same pressures: access, throughput, continuity of care and compliance. We bring the same credentialed professionals, the same program and case management discipline, scoped to your network, your payer mix and your patient population.
                 </p>
-                <Button href="/contact" variant="tertiary" className="max-w-full whitespace-normal text-left mt-5" icon={<ArrowRight className="size-4" />} iconTrailing>Talk to us about your system</Button>
+                <Button href="/contact" variant="tertiary" className="max-w-full whitespace-normal text-left mt-5 !px-0" icon={<ArrowRight className="size-4" />} iconTrailing>Talk to us about your system</Button>
               </section>
             ) : null}
 
@@ -92,6 +94,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <CapabilityLibrary service={service.slug} />
         </section>
       <CTABand embedded route={service.slug === "healthcare-operations" ? "health-system" : "contracting"} />
+      <NextServicePage current={`/services/${service.slug}`} />
       </Section>
 
 

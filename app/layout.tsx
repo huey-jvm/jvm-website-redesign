@@ -54,7 +54,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <SkipLink />
         {Banner ? <Banner announcement={announcement} /> : null}
         <Header nav={primaryNav} />
-        <main id="main" className="flex-1">{children}</main>
+        <main id="main" className="relative flex-1">{children}</main>
         <Footer />
         <ContactWidget />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }} />

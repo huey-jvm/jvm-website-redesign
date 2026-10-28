@@ -32,7 +32,7 @@ test("from the keyboard a menu toggles with Enter, closes with Escape and when f
   await expect(services).toHaveAttribute("aria-expanded", "false");
   await page.keyboard.press("Enter");
   await expect(services).toHaveAttribute("aria-expanded", "true");
-  for (let i = 0; i < 6; i++) await page.keyboard.press("Tab");
+  for (let i = 0, count = await page.locator(`#${panelId} a`).count(); i <= count; i++) await page.keyboard.press("Tab");
   await expect(services, "tabbing past the last item closes the menu").toHaveAttribute("aria-expanded", "false");
   await page.mouse.move(0, 0);
   await services.click();

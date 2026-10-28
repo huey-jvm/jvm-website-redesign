@@ -3,7 +3,7 @@ export const differentiatorsIntro =
 
 export const differentiators = [
   { n: 1, title: "Mission Understanding", body: "JVM's leadership and workforce understand the unique demands of military, federal, and community health missions. We don't need a learning curve. We arrive ready to contribute." },
-  { n: 2, title: "Integrated Expertise", body: "From clinical staffing and behavioral health to health IT, administrative operations, and program management, JVM delivers across the full operational spectrum under a single, accountable partner." },
+  { n: 2, title: "Integrated Expertise", body: "From clinical services and behavioral health to health IT, administrative operations, and program management, JVM delivers across the full operational spectrum under a single, accountable partner." },
   { n: 3, title: "Operational Excellence", body: "We bring structured methodologies, performance metrics, and continuous improvement frameworks that drive sustained, measurable results, not just short-term performance spikes." },
   { n: 4, title: "Trusted Partnership", body: "JVM earns trust through transparency, accountability, and consistent follow-through. Our clients don't manage us. They rely on us as an extension of their own leadership team." },
 ];
@@ -20,8 +20,8 @@ export const valueProposition = {
 };
 
 export const theShift = {
-  figureLabel: "Nine loose crates gather into one tray as the pointer moves right: from staffing vendor to integrated operations partner.",
-  intro: "JVM's path forward requires a deliberate pivot in how we position, package, and present our capabilities to the market. This is not a rebrand. It is a strategic elevation.",
-  from: { title: "From Staffing Vendor", body: "Competing on labor categories, bill rates, and headcount. Easily commoditized, low margin, and replaceable by any competitor with a roster." },
-  to: { title: "To Integrated Operations Partner", body: "Positioning JVM as an Integrated Healthcare Operations and Professional Services Company, leading with customized operational solutions, competing on measurable mission impact, and delivering outcomes that no staffing vendor can replicate." },
+  figureLabel: "Nine loose crates gather into one tray as the pointer moves right: from fragmented support to integrated operations partner.",
+  intro: "When people, processes and systems work in isolation, gaps become harder to resolve. JVM brings those responsibilities together around your operation.",
+  from: { title: "From Fragmented Support", body: "Separate teams, disconnected handoffs and unclear ownership make day-to-day delivery harder to coordinate." },
+  to: { title: "To Integrated Operations Partner", body: "Bring healthcare, technology, logistics and facilities support into a coordinated approach, with clear responsibilities and follow-through." },
 };

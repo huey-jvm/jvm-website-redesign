@@ -26,26 +26,26 @@ export type Service = {
   relatedOutcomes: string[];
 };
 
-export const services: Service[] = [
+const originalServices: Service[] = [
   {
     slug: "healthcare-operations",
-    cardPhoto: "/images/services/healthcare.webp",
+    cardPhoto: "/images/revision/clinical-team-enhanced.png",
     bannerImage: "AS-06",
-    name: "Healthcare Staffing and Operations",
+    name: "Healthcare Operations",
     short: "Healthcare",
     lead: true,
     teaser: "Clinical and operational professionals, delivered as one accountable partner.",
     summary:
       "Clinical and operational professionals, occupational health, program and case management, credentialing and telehealth, delivered as one accountable partner.",
     intro:
-      "Healthcare staffing and operations is the core of JVM. We supply credentialed clinical and operational professionals and the management layer around them, so a facility gains capacity, compliance and continuity in one engagement rather than a roster of names.",
+      "JVM brings clinical expertise, care coordination and program management together around your operation. We help teams address gaps in access, continuity and day-to-day delivery.",
     sections: [
       {
         id: "professional-services",
         title: "Professional Services",
         body: "Our experienced Registered Nurses, medical support staff and ancillary professionals support federal, state and commercial organisations that need trusted healthcare expertise. Our mission is to make sure every patient, whether in a government program or a commercial network, can rely on highly skilled and qualified healthcare providers. By partnering with agencies nationwide, we help deliver essential care to underserved communities, veterans, service members, their families, and others who depend on dependable, compassionate, high quality healthcare services.",
         delivers: [
-          { title: "Registered Nurses and clinical staff", description: "We match clinical roles to the qualifications, schedules and care setting each program requires. Placement planning considers credential readiness and continuity of coverage alongside the immediate staffing need." },
+          { title: "Registered Nurses and clinical staff", description: "We match clinical roles to the qualifications, schedules and care setting each program requires. Placement planning considers credential readiness and continuity of coverage alongside the immediate care-delivery need." },
           { title: "Medical support staff", description: "Medical support professionals help keep the work around patient care organised, from appointment coordination to day-to-day administrative tasks. We scope each role around the facility’s workflows so clinical teams have dependable operational support." },
           { title: "Ancillary professionals", description: "We help organisations identify the allied health and other supporting professionals their care model needs. Role requirements, qualifications and responsibilities are defined with the customer before placement." },
           { title: "Nationwide placement for federal and commercial programs", description: "We support placement needs across federal, state and commercial healthcare programs. Planning accounts for the location, assignment requirements and onboarding steps that determine when a professional can begin work." },
@@ -112,15 +112,15 @@ export const services: Service[] = [
     slug: "health-it",
     cardImage: "AS-01",
     bannerImage: "AS-07",
-    name: "Health IT and Technology Services",
-    short: "Health IT",
+    name: "IT and Technology",
+    short: "IT",
     lead: false,
-    teaser: "Software, systems and cybersecurity, delivered as part of the healthcare operation.",
+    teaser: "Software, systems and cybersecurity shaped around the way your teams work.",
     summary: starsShown
       ? "Software development, systems design and integration, service desk, information assurance and cybersecurity, delivered through our GSA 8(a) STARS III prime contract."
       : "Software development, systems design and integration, service desk, information assurance and cybersecurity, delivered as part of the healthcare operation.",
     intro:
-      `Health IT is the technology dimension of the healthcare operation, not a separate practice. JVM delivers IT services and IT services-based solutions${starsShown ? " through GSA 8(a) STARS III" : ""}, from software development and systems design to service desk, information assurance and cybersecurity, so the systems a facility depends on perform as reliably as the people who use them.`,
+      `JVM connects technology with the people and operations it supports. We deliver IT services and solutions${starsShown ? " through GSA 8(a) STARS III" : ""}, from software development and systems design to service desk, information assurance and cybersecurity, so teams can use the systems and information their work depends on.`,
     sections: [
       {
         id: "capabilities",
@@ -211,4 +211,27 @@ export const services: Service[] = [
   },
 ];
 
-export const getService = (slug: string) => services.find((s) => s.slug === slug);
+const combined = originalServices[2];
+const logistics: Service = {
+  ...combined, slug: "logistics", name: "Logistics", short: "Logistics",
+  teaser: "Supply chains, inventory and transportation coordinated around your mission.",
+  summary: "Supply chain, inventory and transportation support for mission-critical operations.",
+  intro: "Keep resources moving from procurement to delivery. JVM connects supply-chain planning, inventory and transportation around the requirements of your operation.",
+  sections: combined.sections.map(section => ({ ...section, body: "We coordinate the flow of resources, information and responsibilities across your supply chain.", delivers: section.delivers?.filter(item => item.title !== "Facilities management") })),
+  placeholders: undefined,
+};
+const facilities: Service = {
+  ...combined, slug: "facilities-management", name: "Facilities Management", short: "Facilities", cardImage: "AS-16", bannerImage: "AS-16",
+  teaser: "Maintenance coordination and operational support for the places your mission happens.",
+  summary: "Facilities operations, maintenance coordination and day-to-day support.",
+  intro: "Keep the places your teams rely on working. JVM coordinates facilities support around clear schedules, responsibilities and follow-through.",
+  sections: [{ id: "what-we-deliver", title: "What We Deliver", body: "Facilities support starts with understanding the site, its users and the work it needs to sustain.", delivers: [
+    { title: "Facilities operations", description: "Coordinate day-to-day support around site requirements and the people who use the space." },
+    { title: "Maintenance coordination", description: "Organise service schedules, responsibilities and follow-up for the maintenance activities in scope." },
+    { title: "Issue reporting and follow-through", description: "Define how issues are reported, assigned and tracked through resolution with the customer." },
+  ] }], placeholders: undefined,
+};
+export const services: Service[] = [originalServices[0], originalServices[1], logistics, facilities];
+export const supportingServices: Service[] = [originalServices[3]];
+export const allServices: Service[] = [...services, ...supportingServices, combined];
+export const getService = (slug: string) => allServices.find(s => s.slug === slug);

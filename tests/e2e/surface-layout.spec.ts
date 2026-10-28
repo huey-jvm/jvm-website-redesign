@@ -31,9 +31,9 @@ test("dropdown selection follows the route rather than the first service", async
   await page.setViewportSize({ width: 1920, height: 1080 });
   await openSurface(page, "/");
   const nav = page.locator('header nav[aria-label="Primary"]:visible');
-  await expect(nav.getByRole("link", { name: "Why JVM" })).toHaveAttribute("data-current", "false");
+  await expect(nav.getByRole("link", { name: "About JVM" })).toHaveAttribute("data-current", "false");
   await nav.getByRole("button", { name: "Services" }).click();
-  const first = nav.getByRole("link", { name: /Healthcare Staffing and Operations/ });
+  const first = nav.getByRole("link", { name: /Healthcare Operations/ });
   await expect(first).toBeVisible();
   await expect(nav.locator('[aria-current="page"]')).toHaveCount(0);
   await expect(first).toContainText("Our core");
@@ -44,11 +44,11 @@ test("dropdown selection follows the route rather than the first service", async
   await expect(nav.locator('[aria-current="page"]')).toHaveCount(1);
 });
 
-test("the proof strip follows a content-sized hero and outcomes stack as one uncropped index", async ({ page }) => {
+test("outcomes follow a content-sized hero and outcomes stack as one uncropped index", async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
   await openSurface(page, "/");
   const hero = page.locator("[data-hero]");
-  await expect(page.locator("[data-hero] + section").getByRole("heading", { name: "Certifications and Contract Vehicles" })).toBeVisible();
+  await expect(page.locator("[data-hero] + section").getByRole("heading", { name: "Helping Your Mission Move Forward" })).toBeVisible();
   const heroBox = await hero.boundingBox();
   expect(heroBox!.height).toBeLessThanOrEqual(1080 * 0.85);
   const cards = page.locator(".outcomes-row > li");

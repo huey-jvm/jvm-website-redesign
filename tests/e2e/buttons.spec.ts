@@ -16,7 +16,7 @@ test("every button variant changes its paint on hover with a mouse", async ({ pa
   await page.goto("/", { waitUntil: "networkidle" });
   const targets: [string, Locator][] = [
     ["light primary, header", page.locator("header").getByRole("button", { name: "Contact us" })],
-    ["dark primary, hero", page.locator("[data-hero]").getByRole("link", { name: "Verify our credentials" })],
+    ["dark primary, hero", page.locator("[data-hero]").getByRole("link", { name: "Explore Our Services" })],
     ["dark secondary, hero", page.locator("[data-hero]").getByRole("link", { name: "Explore our services" })],
     ["tertiary, read how we work", page.getByRole("link", { name: "Read how we work" })],
   ];

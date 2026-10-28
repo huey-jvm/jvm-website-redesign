@@ -1,27 +1,23 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import Link from "next/link";
 import Image from "@/components/ui/Image";
 import { formatList } from "@/lib/list";
 import { CinematicHero } from "@/components/site/CinematicHero";
 import type { Metadata } from "next";
-import { ArrowRight, BadgeCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Section, SectionHeader } from "@/components/site/Section";
-import { ProofStrip } from "@/components/site/ProofStrip";
+import { AudienceLinks } from "@/components/site/AudienceLinks";
 
 import { OutcomeRow } from "@/components/site/OutcomeTile";
 import { cn } from "@/lib/cn";
 import { ServiceCard } from "@/components/site/ServiceCard";
-import { FactBlock } from "@/components/site/FactBlock";
 import { CTABand } from "@/components/site/CTABand";
 import { Button } from "@/components/ui/Button";
-import { Placeholder } from "@/components/ui/Placeholder";
 import { statements } from "@/content/statements";
 import { outcomes } from "@/content/outcomes";
 import { services } from "@/content/services";
 import { differentiators } from "@/content/differentiators";
-import { identifiers, naicsDescriptions } from "@/content/identifiers";
-import { starsIII, starsShown, starsConfirmed, starsOrdering } from "@/content/vehicles";
 import { team, leadershipTeamPhoto } from "@/content/team";
-import { credentials } from "@/content/credentials";
 
 export const metadata: Metadata = {
   description: statements.positioning,
@@ -30,22 +26,20 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const founder = team[0];
-  const stars = credentials.find((c) => c.slug === "stars-iii");
   return (
     <>
       <CinematicHero image={leadershipTeamPhoto}>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <Button href="/contracting" tone="dark" size="md" variant="primary">Verify our credentials</Button>
-          <Button href="/services" variant="secondary" tone="dark" size="md">Explore our services</Button>
+          <Button href="/services" tone="dark" size="md" variant="primary">Explore Our Services</Button>
+          <Button href="/about" variant="secondary" tone="dark" size="md">Meet JVM</Button>
         </div>
       </CinematicHero>
-      <ProofStrip />
 
       <Section surface="cream" aria-labelledby="outcomes-title">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-36">
-              <SectionHeader id="outcomes-title" eyebrow="Five outcomes" title="What Changes for Your Mission" lead="JVM sells measurable outcomes, not labor categories. These five anchor every engagement." className="mb-0 md:mb-0" />
+              <SectionHeader id="outcomes-title" eyebrow="Five outcomes" title="Helping Your Mission Move Forward" lead="From access to care to operational readiness, explore the outcomes that guide our work." className="mb-0 md:mb-0" />
             </div>
           </div>
           <ol className="outcomes-row border-t-2 border-gold-500 lg:col-span-8">
@@ -71,7 +65,7 @@ export default function HomePage() {
 
       <Section surface="light">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <SectionHeader eyebrow="How we work" title="Four Differentiators That Do Not Commoditize" className="mb-0 md:mb-0" />
+          <SectionHeader eyebrow="How we work" title="How We Support Your Mission" className="mb-0 md:mb-0" />
           <Button href="/why-jvm" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing className="self-start md:self-auto">Read how we work</Button>
         </div>
         <ol className="differentiators mt-10 grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:mt-12 lg:grid-cols-4">
@@ -80,53 +74,14 @@ export default function HomePage() {
               <span className="font-sans text-h1-sm font-medium leading-none text-gold-700 tabular">{String(d.n).padStart(2, "0")}</span>
               <h3 className="mt-6 text-h3 text-ink-950">{d.title}</h3>
               <p className="mt-3 text-body text-ink-700">{d.body}</p>
+              {d.n === 3 && <Link href="/about/quality-compliance" className="mt-4 inline-flex min-h-11 items-center text-body-sm font-semibold underline decoration-gold-500 underline-offset-4">Quality and Compliance</Link>}
             </li>
           ))}
         </ol>
       </Section>
 
-      <Section surface="dark">
-        <div>
-          <Eyebrow tone="dark">Contracting at a glance</Eyebrow>
-          <h2 className="mt-3 text-h1-sm text-cream md:text-h1">Verify Us in a Minute</h2>
-          <p className="mt-3 max-w-[60ch] text-body text-ink-200">Everything a contracting officer checks, in one place. Each identifier can be copied, and the full record is on the contracting pages.</p>
-        </div>
-        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-stretch lg:gap-8">
-          <FactBlock
-            tone="dark"
-            className={cn("h-full", stars ? "lg:col-span-7" : "lg:col-span-12")}
-            facts={[
-              { label: "UEI", value: identifiers.uei, copy: true },
-              { label: "CAGE", value: identifiers.cage, copy: true },
-              { label: "Primary NAICS", value: identifiers.naicsPrimary, copy: true, note: naicsDescriptions[identifiers.naicsPrimary] },
-              { label: "Set-asides", value: identifiers.setAsides.join(", ") },
-              ...(starsShown
-                ? [
-                    { label: "STARS III", value: starsIII.contractNumber, copy: true, note: "8(a) prime" },
-                    { label: "Ordering period", value: starsOrdering.current },
-                  ]
-                : []),
-            ]}
-          />
-          {stars ? (
-            <div className="prime-vehicle flex flex-col rounded-container p-6 md:p-8 lg:col-span-5">
-              <div className="flex items-center justify-between gap-4">
-                <Eyebrow tone="dark">Prime vehicle</Eyebrow>
-                <BadgeCheck aria-hidden className="size-9 shrink-0 text-gold-500" strokeWidth={1.25} />
-              </div>
-              <div className="py-8 lg:py-10">
-                <p className="mb-3 text-body-sm font-medium text-gold-200">JVM is a prime contractor</p>
-                <h3 className="text-h1-sm font-medium tracking-tight text-cream md:text-h1">GSA 8(a)<br />STARS III</h3>
-                <p className="mt-5 max-w-[36ch] text-body text-ink-200">A Best in Class governmentwide acquisition contract for IT services.</p>
-              </div>
-              <Button href={stars.evidenceHref ?? "/contracting"} variant="secondary" tone="dark" icon={<ArrowRight className="size-4" />} iconTrailing className="mt-auto self-start">Explore STARS III</Button>
-            </div>
-          ) : null}
-        </div>
-        {starsShown && !starsConfirmed ? <Placeholder id="P5" className="mt-4 max-w-xl" /> : null}
-        {stars ? null : <Button href="/contracting" variant="secondary" tone="dark" className="mt-6">Go to contracting</Button>}
-      </Section>
 
+      <Section surface="cream"><AudienceLinks /></Section>
       <Section surface="cream" className="leadership-feature">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-20">
           <div>

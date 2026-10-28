@@ -9,7 +9,7 @@ import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
 import { Slot } from "@/components/site/Slot";
 
-export const metadata = pageMetadata("Careers", "Join a veteran-led healthcare operations company. We hire veterans, healthcare professionals and experienced professionals who want their work to matter.", "/careers");
+export const metadata = pageMetadata("Join Our Team", "Join a veteran-led healthcare operations company. We hire veterans, healthcare professionals and experienced professionals who want their work to matter.", "/careers");
 
 const audiences = [
   { title: "Veterans", image: "AS-15a", body: "JVM appreciates the personal sacrifices of our veterans in serving our country. We recognise and value the leadership, character and discipline you bring, and we help you find where the skills you have acquired fit best in a civilian career." },
@@ -21,10 +21,10 @@ export default function CareersPage() {
   return (
     <>
       <ImageHero
-        eyebrow="Careers"
+        eyebrow="Join Our Team"
         title="Work That Matters to the People It Serves"
         lead="JVM is an equal opportunity employer. If your work is a calling, you will find people here who feel the same."
-        crumbs={[{ label: "Careers" }]}
+        crumbs={[{ label: "Join Our Team" }]}
         image={teamPhoto}
       />
 
