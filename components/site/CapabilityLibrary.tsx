@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { capabilityDocuments } from "@/content/capabilities";
 import { Button } from "@/components/ui/Button";
+import { withBasePath } from "@/lib/base-path";
 
 export function CapabilityLibrary({ service }: { service?: string }) {
   const documents = capabilityDocuments.filter(doc => !service || doc.service === service);
@@ -12,7 +13,7 @@ export function CapabilityLibrary({ service }: { service?: string }) {
           <li key={doc.id} className="flex flex-col items-start justify-between gap-4 border-b border-cream-border py-6 sm:flex-row sm:items-center">
             <h3 className="text-h3 text-ink-950">{doc.title}</h3>
             <div className="flex flex-wrap gap-3">
-              <Button href={doc.href} target="_blank" rel="noopener noreferrer" variant="secondary" icon={<ArrowUpRight className="size-4" />} iconTrailing aria-label={`Preview PDF: ${doc.title} capability statement (opens in a new tab)`}>Preview PDF</Button>
+              <Button href={withBasePath(doc.href)} external variant="secondary" icon={<ArrowUpRight className="size-4" />} iconTrailing aria-label={`Preview PDF: ${doc.title} capability statement (opens in a new tab)`}>Preview PDF</Button>
             </div>
           </li>
         ))}
