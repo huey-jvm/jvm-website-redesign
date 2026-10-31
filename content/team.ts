@@ -24,10 +24,10 @@ export const team = [
     ],
     contactRoute: contact.emails.bd,
   },
-  // First names supplied by the user; full public names and roles remain pending.
+  // Names and titles supplied in email screenshots; Jennifer's title remains pending.
   ...[
-    { slug: "deja", name: "Deja", image: "/images/revision/deja.webp" },
-    { slug: "jennifer", name: "Jennifer", image: "/images/revision/jennifer.webp" },
-    { slug: "les", name: "Les", image: "/images/revision/les.webp" },
-  ].map(person => ({ ...person, role: "", note: undefined, summary: undefined, bio: [] as string[], contactRoute: contact.emails.general })),
+    { slug: "deja", name: "Deja Dillon", role: "Proposal Analyst", image: "/images/revision/deja.webp" },
+    { slug: "jennifer", name: "Jennifer Hidalgo", role: "", image: "/images/revision/jennifer.webp" },
+    { slug: "les", name: "Leslie P. Shropshire II", role: "President & CEO, Strategic Accounting Solutions", image: "/images/revision/les.webp" },
+  ].map(person => ({ ...person, note: undefined, summary: undefined, bio: [] as string[], contactRoute: contact.emails.general })),
 ];
