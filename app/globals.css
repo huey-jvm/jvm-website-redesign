@@ -572,35 +572,20 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
   }
 }
 
-/* Photographs have distinct silhouettes without altering the original image. */
-.photo-feature {
+/* Keep photographs rectangular and free of decorative shadows. */
+.photo-feature, .photo-service, .photo-portrait {
   isolation:isolate;
   overflow:hidden;
-  border-radius:clamp(2rem,5vw,5rem) .6rem clamp(2rem,5vw,5rem) .6rem;
-  border:1px solid #c9ac7070;
-  box-shadow:6px 7px 0 #c9ac70, 0 18px 35px -24px #0b182b80;
+  border-radius:0;
+  border:0;
+  box-shadow:none;
 }
-.photo-service {
-  isolation:isolate;
-  overflow:hidden;
-  border-radius:2rem .35rem 2rem .35rem;
-  border-bottom:3px solid #c9ac70;
-  box-shadow:0 10px 24px -18px #0b182b80;
+.service-directory > li:nth-child(even) .photo-service,
+.service-photo-card, .service-photo-card .card-media {
+  border-radius:0;
+  box-shadow:none;
 }
-.service-directory > li:nth-child(even) .photo-service { border-radius:.35rem 2rem .35rem 2rem; }
-.photo-portrait {
-  isolation:isolate;
-  overflow:hidden;
-  border-radius:45% 45% .65rem .65rem / 30% 30% .65rem .65rem;
-  border-bottom:4px solid #c9ac70;
-  box-shadow:0 12px 28px -20px #0b182b90;
-}
-.service-photo-card { border-radius:2rem .4rem .4rem .4rem; }
-.service-photo-card .card-media { border-radius:0; box-shadow:none; }
-@media(max-width:767px) {
-  .photo-feature { box-shadow:4px 5px 0 #c9ac70; }
-}
-
+.mission-photo { box-shadow:none; }
 /* Phone ergonomics: readable cards, reachable controls and compact navigation. */
 @media(max-width:767px) {
   .footer-navigation > nav:nth-of-type(3) { grid-column:1 / -1; }
