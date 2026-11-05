@@ -13,7 +13,7 @@ export default function CertificationsPage() {
       <PageHero className="certifications-hero" eyebrow="Contracting" title="Certifications and Set-Asides" lead="Our small business certifications and contract vehicle, with supporting records for your acquisition file." crumbs={[{ label: "Contracting", href: "/contracting" }, { label: "Certifications and Set-Asides" }]}>
       <div className="mt-12 md:mt-16">
         <Placeholder id="P17" className="mb-8 max-w-xl" />
-        <ul className="certification-grid grid grid-cols-1 gap-5 md:grid-cols-2">
+        <ul className="certification-grid grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
           {credentials.map((c) => <CredentialRow key={c.slug} credential={c} />)}
         </ul>
       </div>

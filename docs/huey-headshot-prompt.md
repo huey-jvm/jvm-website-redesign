@@ -1,0 +1,19 @@
+# Huey headshot
+
+Generated with the built-in image generation tool, using the user-supplied Huey photograph and the two existing team portraits as background/style references. Saved asset: `public/images/revision/huey-headshot.png`.
+
+## Final prompt
+
+Use case: identity-preserve. Create one photoreal professional team portrait of Huey, the man in reference image 1. References 2 and 3 are ONLY for matching outdoor location/background and photographic style; do not copy their faces. Preserve Huey's recognizable facial identity, age, skin tone, hair style, facial proportions, eyes, natural subtle smile and light facial hair. Replace indoor selfie setting and casual shirt with a fitted dark navy suit jacket and clean white open-collar dress shirt. Professional eye-level camera, natural proportions, flattering soft daylight, realistic skin texture, no glamour retouching. Background matches the other team portraits: softly blurred beige stone building, outdoor walkway and green foliage, warm natural daylight, shallow depth of field. Portrait 3:4 framing from head to upper thighs, centered with comfortable headroom, shoulders relaxed, hands loosely clasped naturally at waist. One person only. High resolution, no text, no logos, no border, no graphic frame. Do not alter identity or make him look older.
+
+User correction: Deja uses the portrait file historically named `jennifer-hd.png`; Jennifer uses the file historically named `deja-hd.png`. Their names and roles remain attached to their own roster entries. Jasmine and Karen use full-size 3:4 placeholders until their photographs are supplied.
+
+## Revised portrait — November 6
+
+Current asset: `public/images/revision/huey-headshot-v2.png`. Generated with the built-in image generation tool using the original selfie as identity reference and the first generated portrait as wardrobe/background reference. Original generated version retained.
+
+Final prompt:
+
+Use case: identity-preserve. Refine the professional portrait in reference 2 using the original real selfie in reference 1 as the primary facial identity and facial-proportion reference. Produce one realistic professional portrait of exactly this man. Match his original face closely: actual eye shape and spacing, relaxed eyelids, nose, mouth, cheeks, jaw width, forehead, skin tone, subtle facial hair, age and slight natural smile. Do not beautify, slim, elongate, mature or change his face. Retain the slight relaxed head tilt seen in the real selfie rather than making his head rigidly upright. Tidy his existing side-part haircut slightly: cleaner side edges and fewer flyaways, retaining natural texture and recognizable hair shape; no dramatic haircut. Change pose to arms comfortably crossed in front of his torso, with anatomically correct hands and fingers and natural shoulders. Keep realistic head-to-body proportions, no oversized torso or undersized head; use a closer head-to-mid-torso portrait composition with crossed forearms visible, like a natural professional portrait rather than a full-body fashion photograph. Keep the navy jacket and white open-collar shirt from reference 2, as well as its softly blurred outdoor beige stone architecture and green foliage background. Refined restrained color grade: natural healthy skin, neutral white shirt, deep navy fabric, soft warm highlights, gentle contrast, controlled greens, no orange cast, no excessive smoothing or HDR. Eye-level portrait lens perspective, soft daylight, sharp eyes, photographic skin texture. Portrait 3:4 aspect, comfortable headroom. No text, no logos, no borders. Identity fidelity to reference 1 is the highest priority.
+
+Roster correction: Karen removed. Leslie P. Shropshire II restored as Director of Accounting using his supplied portrait. Huey Ceniza / Accounts Payable; Jennifer Hidalgo / Project Manager; Jasmin Johnson / HR Manager. Jasmin has the remaining full-size portrait placeholder.

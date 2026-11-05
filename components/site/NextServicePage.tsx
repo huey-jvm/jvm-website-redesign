@@ -8,8 +8,8 @@ const sequence = [
   { href: "/services/health-it", label: "Health IT" },
   { href: "/services/logistics", label: "Logistics" },
   { href: "/services/facilities-management", label: "Facilities Management" },
-  { href: "/contracting/capability-statement", label: "Capability Statements" },
   { href: "/services/management-support", label: "Administrative Support" },
+  { href: "/contracting/capability-statement", label: "Capability Statements" },
 ];
 
 export function NextServicePage({ current }: { current: string }) {

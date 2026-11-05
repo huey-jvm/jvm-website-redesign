@@ -5,7 +5,7 @@ test("next-page navigation appears at the page edge after scrolling and follows 
   await page.goto("/services");
   for (const destination of [
     "/services/healthcare-operations", "/services/health-it", "/services/logistics",
-    "/services/facilities-management", "/contracting/capability-statement", "/services/management-support",
+    "/services/facilities-management", "/services/management-support", "/contracting/capability-statement",
   ]) {
     const nav = page.getByRole("navigation", { name: "Next service page" });
     await page.evaluate(() => scrollTo(0, 0));

@@ -11,7 +11,7 @@ export const contact = {
     ...office,
     lines: [office.street, `${office.locality}, ${office.region} ${office.postalCode}`],
     ...mainLine,
-    mapEmbedUrl: `https://maps.google.com/maps?q=${encodeURIComponent(officeMapQuery)}&output=embed`,
+    mapEmbedUrl: `https://maps.google.com/maps?q=${encodeURIComponent(officeMapQuery)}&z=16&output=embed`,
     mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(officeMapQuery)}`,
   },
   compliance: {

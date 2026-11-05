@@ -25,7 +25,7 @@ export default function CareersPage() {
         title="Work That Matters to the People It Serves"
         lead="JVM is an equal opportunity employer. If your work is a calling, you will find people here who feel the same."
         crumbs={[{ label: "Join Our Team" }]}
-        image={teamPhoto}
+        image={teamPhoto} panorama
       >
         <div className="mt-6"><Button href={contact.careersPortal} external variant="primary">View open roles on iSolved</Button></div>
       </ImageHero>
@@ -46,16 +46,16 @@ export default function CareersPage() {
 
       </Section>
 
-      <Section surface="light"><TeamGallery /></Section>
+      <Section surface="light" className="content-sized"><TeamGallery /></Section>
 
-      <Section>
+      <Section className="content-sized">
         <div className="mx-auto max-w-2xl text-center">
           <SectionHeader align="center" eyebrow="Open roles" title="View Current Openings" lead="Applications are handled on our careers portal, hosted by iSolved." />
           <Button href={contact.careersPortal} external variant="primary">View open roles on iSolved</Button>
         </div>
       </Section>
 
-      <CTABand title="Not Sure Which Role Fits?" body="Tell us about your background and we will point you to the right opening." route="careers" intro={
+      <CTABand compact title="Not Sure Which Role Fits?" body="Tell us about your background and we will point you to the right opening." route="careers" intro={
         <p className="prose-measure text-body-sm text-ink-700">
           {`${statements.companyName} is an Equal Opportunity Employer. All qualified applicants receive consideration for employment without regard to race, colour, religion, sex, sexual orientation, gender identity, national origin, disability or protected veteran status. Questions about a role or the application process can be sent to `}
           <a href={`mailto:${contact.emails.general}`} className="link-underline font-semibold text-gold-700 after:bg-current">{contact.emails.general}</a>.

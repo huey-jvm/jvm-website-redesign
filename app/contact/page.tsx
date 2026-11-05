@@ -1,5 +1,6 @@
 import { breakableEmail } from "@/lib/email-address";
 import { PageHero } from "@/components/site/PageHero";
+import { OfficeMap } from "@/components/site/OfficeMap";
 import { Section } from "@/components/site/Section";
 import { ContactForm } from "@/components/site/ContactForm";
 import { Placeholder } from "@/components/ui/Placeholder";
@@ -45,7 +46,7 @@ export default function ContactPage() {
             </div>
 
 
-            <iframe title={`Map to ${contact.office.label}`} src={contact.office.mapEmbedUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="aspect-[3/2] w-full border-0" />
+            <OfficeMap src={contact.office.mapEmbedUrl} />
           </aside>
         </div>
       </Section>

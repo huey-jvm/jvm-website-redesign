@@ -18,8 +18,8 @@ export const primaryNav: NavGroup[] = [
   { label: "About JVM", href: "/about" },
   { label: "Services", items: [
     { label: "All Services", href: "/services" }, ...serviceItems,
-    { label: "Capability Statements", href: "/contracting/capability-statement" },
     { label: "Administrative Support", href: "/services/management-support" },
+    { label: "Capability Statements", href: "/contracting/capability-statement" },
   ] },
   { label: "Contract Vehicles", href: "/contracting" },
   { label: "Partner With Us", items: [{ label: "Join Our Team", href: "/careers" }, { label: "Become a Partner", href: "/work-with-us#partners" }] },

@@ -6,13 +6,13 @@ import { PageHero } from "./PageHero";
 import { cn } from "@/lib/cn";
 
 export type HeroPhoto = { src: string; alt: string; position?: string };
-type Props = { eyebrow?: string; title: string; lead?: string; crumbs?: { label: string; href?: string }[]; children?: ReactNode; image?: HeroPhoto; size?: "page" | "display" };
+type Props = { eyebrow?: string; title: string; lead?: string; crumbs?: { label: string; href?: string }[]; children?: ReactNode; image?: HeroPhoto; size?: "page" | "display"; panorama?: boolean };
 
-export function ImageHero({ eyebrow, title, lead, crumbs, children, image }: Props) {
+export function ImageHero({ eyebrow, title, lead, crumbs, children, image, panorama = false }: Props) {
   if (!image) return <PageHero eyebrow={eyebrow} title={title} lead={lead} crumbs={crumbs}>{children}</PageHero>;
   return (
-    <section className="image-hero bg-cream" data-hero="photo">
-      <div className="container-content grid lg:grid-cols-2">
+    <section className={cn("image-hero bg-cream", panorama && "panorama-hero")} data-hero="photo">
+      <div className={cn("container-content grid", !panorama && "lg:grid-cols-2")}>
         <div className="hero-copy py-10 lg:py-16 lg:pr-14">
           {crumbs ? <Breadcrumb items={crumbs} /> : null}
           {eyebrow ? <Eyebrow className="mb-5">{eyebrow}</Eyebrow> : null}
@@ -21,7 +21,7 @@ export function ImageHero({ eyebrow, title, lead, crumbs, children, image }: Pro
           {children}
         </div>
         <div className="photo-feature relative min-h-80 lg:my-10">
-          <Image src={image.src} alt={image.alt} fill priority sizes="(min-width:1440px) 656px,(min-width:1024px) 50vw,100vw" className={cn("hero-image object-cover", image.position)} />
+          <Image src={image.src} alt={image.alt} fill priority quality={90} sizes={panorama ? "(min-width:1440px) 1312px,100vw" : "(min-width:1440px) 656px,(min-width:1024px) 50vw,100vw"} className={cn("hero-image object-cover", image.position)} />
         </div>
       </div>
     </section>

@@ -4,9 +4,9 @@ export const leadershipTeamPhoto = { src: "/images/revision/team-shirts.webp", a
 export const missionHeroPhoto = { ...leadershipTeamPhoto, src: "/images/revision/mission-team-original-hd.jpg" };
 
 export const teamPhoto = {
-  src: "/images/revision/team-walking.webp",
+  src: "/images/revision/team-walking-original-hd.jpg",
   alt: "The JVM Solutions team walking together outdoors",
-  position: "object-[70%_center]",
+  position: "object-center",
 };
 
 export const teamShirtsPhoto = { src: "/images/jvm/team-shirts.webp", alt: "The JVM Solutions team together in company shirts" };
@@ -25,12 +25,12 @@ export const team = [
     ],
     contactRoute: contact.emails.bd,
   },
-  // Names and titles supplied in email screenshots; Jennifer's title remains pending.
+  // Public names, titles and portrait assignments confirmed by the client.
   ...[
-    { slug: "deja", name: "Deja Dillon", role: "Proposal Analyst", image: "/images/revision/deja-hd.png" },
-    { slug: "jennifer", name: "Jennifer Hidalgo", role: "", image: "/images/revision/jennifer-hd.png" },
-    { slug: "huey", name: "Huey", role: "", image: "" },
-    { slug: "jasmine", name: "Jasmine", role: "", image: "" },
-    { slug: "karen", name: "Karen", role: "", image: "" },
+    { slug: "deja", name: "Deja Dillon", role: "Proposal Analyst", image: "/images/revision/jennifer-hd.png" },
+    { slug: "jennifer", name: "Jennifer Hidalgo", role: "Project Manager", image: "/images/revision/deja-hd.png" },
+    { slug: "huey", name: "Huey Ceniza", role: "Accounts Payable", image: "/images/revision/huey-headshot-v2.png" },
+    { slug: "jasmin", name: "Jasmin Johnson", role: "HR Manager", image: "" },
+    { slug: "leslie", name: "Leslie P. Shropshire II", role: "Director of Accounting", image: "/images/revision/les.webp" },
   ].map(person => ({ ...person, note: undefined, summary: undefined, bio: [] as string[], contactRoute: contact.emails.general })),
 ];

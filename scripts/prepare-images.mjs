@@ -34,7 +34,7 @@ for (const file of await filesUnder(root)) {
   if (!metadata.width || metadata.pages > 1) continue;
   const src = '/images/' + path.relative(root, file).split(path.sep).join('/');
   const hash = createHash('sha256').update('responsive-webp-v1').update(source).digest('hex').slice(0, 16);
-  const isMissionHero = src.endsWith('/mission-team-original-hd.jpg');
+  const isMissionHero = (src.endsWith('/mission-team-original-hd.jpg') || src.endsWith('/team-walking-original-hd.jpg'));
   const candidates = isMissionHero ? [...widths, 2560, 3200, 3840] : widths;
   const sizes = [...new Set([...candidates.filter(w => w < metadata.width), Math.min(metadata.width, isMissionHero ? 3840 : 1920)])];
   manifest[src] = { hash, widths: sizes };
