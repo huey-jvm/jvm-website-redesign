@@ -37,7 +37,7 @@ test("supplied portraits and leadership order without invented roles",async({pag
   for(const name of ['Deja Dillon','Jennifer Hidalgo','Huey Ceniza','Jasmin Johnson','Leslie P. Shropshire II']) await expect(page.getByRole('heading',{name,exact:true})).toBeVisible();
   await expect(page.getByText('Proposal Analyst', {exact:true})).toBeVisible();
   await expect(page.locator('main')).not.toContainText('Karen');
-  for(const role of ['Accounts Payable','Project Manager','HR Manager','Director of Accounting']) await expect(page.getByText(role,{exact:true})).toBeVisible();
+  for(const role of ['Accounts Payable','Project Manager','HR Specialist','Director of Accounting']) await expect(page.getByText(role,{exact:true})).toBeVisible();
   expect(await page.locator('#leadership').evaluate(el=>Boolean(el.compareDocumentPosition(document.querySelector('#mission')!) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
   await expect(page.locator('img[data-image-src="/images/revision/deja-hd.png"]')).toBeVisible();
 });

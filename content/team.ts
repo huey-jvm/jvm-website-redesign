@@ -30,7 +30,7 @@ export const team = [
     { slug: "deja", name: "Deja Dillon", role: "Proposal Analyst", image: "/images/revision/jennifer-hd.png" },
     { slug: "jennifer", name: "Jennifer Hidalgo", role: "Project Manager", image: "/images/revision/deja-hd.png" },
     { slug: "huey", name: "Huey Ceniza", role: "Accounts Payable", image: "/images/revision/huey-headshot-v2.png" },
-    { slug: "jasmin", name: "Jasmin Johnson", role: "HR Manager", image: "" },
+    { slug: "jasmin", name: "Jasmin Johnson", role: "HR Specialist", image: "/images/revision/jasmin-johnson.png" },
     { slug: "leslie", name: "Leslie P. Shropshire II", role: "Director of Accounting", image: "/images/revision/les.webp" },
   ].map(person => ({ ...person, note: undefined, summary: undefined, bio: [] as string[], contactRoute: contact.emails.general })),
 ];
