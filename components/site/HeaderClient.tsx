@@ -171,7 +171,7 @@ export function HeaderClient({
           >
             {desktop}
           </nav>
-          <span className="hidden min-[22.5rem]:inline-flex lg:hidden">
+          <span className="inline-flex lg:hidden">
             <OpenWidgetButton size="sm" label="Contact" className="jvm-header-contact" />
           </span>
           <span className="hidden lg:inline-flex">

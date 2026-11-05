@@ -9,11 +9,24 @@ export function ScrollEndNavigation({ current, children }: { current: string; ch
   useEffect(() => {
     const element = trigger.current;
     if (!element) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      setVisibleFor(entry.boundingClientRect.top <= window.innerHeight && window.scrollY > 0 ? current : null);
-    });
-    observer.observe(element);
-    return () => observer.disconnect();
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      setVisibleFor(element.getBoundingClientRect().top <= window.innerHeight && window.scrollY > 0 ? current : null);
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    // Scroll events also catch jumps that skip over the one-pixel trigger.
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    const observer = new ResizeObserver(schedule);
+    observer.observe(document.getElementById("main")!);
+    update();
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      observer.disconnect();
+    };
   }, [current]);
   return <>
     <span ref={trigger} aria-hidden="true" className="mt-10 block h-px md:mt-12" />

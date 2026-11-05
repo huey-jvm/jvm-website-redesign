@@ -14,8 +14,8 @@ export function Footer() {
   return (
     <footer className="site-footer surface-dark bg-ink-950 text-ink-200">
       <div className="container-content py-12 md:py-16">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-[7rem_minmax(0,1fr)_minmax(0,1.05fr)_minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-10">
-          <div className="md:col-span-2 lg:col-span-1">
+        <div className="footer-navigation grid grid-cols-2 gap-x-5 gap-y-8 lg:grid-cols-[7rem_minmax(0,1fr)_minmax(0,1.05fr)_minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-10">
+          <div className="col-span-2 lg:col-span-1">
             <Link href="/" className="inline-flex rounded-control focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500" aria-label="JVM Solutions, home">
               <BrandLogo variant="mark" sizes="(min-width:768px) 96px,80px" className="w-20 md:w-24" />
             </Link>
@@ -34,7 +34,7 @@ export function Footer() {
             </nav>
           ))}
 
-          <div className="@container">
+          <div className="footer-office @container col-span-2 lg:col-span-1">
             <Eyebrow as="h2" tone="dark">Office</Eyebrow>
             <dl className="mt-4 grid grid-cols-1 items-baseline @[13rem]:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-x-3 gap-y-2 text-body-sm">
               <dt className="text-ink-300">Address</dt>

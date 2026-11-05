@@ -45,7 +45,7 @@ export default function ContactPage() {
             </div>
 
 
-            <iframe title={`Map to ${contact.office.label}`} src={`https://maps.google.com/maps?q=${encodeURIComponent(contact.office.lines.join(", "))}&output=embed`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="aspect-[3/2] w-full border-0" />
+            <iframe title={`Map to ${contact.office.label}`} src={contact.office.mapEmbedUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="aspect-[3/2] w-full border-0" />
           </aside>
         </div>
       </Section>

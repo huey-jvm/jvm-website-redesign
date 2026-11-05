@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "@/components/ui/Image";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { ExternalLink } from "@/components/ui/ExternalLink";
@@ -7,6 +6,7 @@ import { contact } from "@/content/contact";
 import { statements } from "@/content/statements";
 import { identifiers } from "@/content/identifiers";
 import { credentials } from "@/content/credentials";
+import { OfficeMap } from "./OfficeMap";
 
 export function CompanyOverview() {
   return <div className="company-overview">
@@ -19,7 +19,7 @@ export function CompanyOverview() {
       <div className="mt-5"><p className="text-caption text-ink-500">Set-asides</p><ul className="mt-3 flex flex-wrap gap-2">{identifiers.setAsides.map(value => <li key={value} className="rounded-pill border border-gold-500/40 bg-gold-200/20 px-3 py-1.5 text-body-sm font-medium">{value}</li>)}</ul></div>
     </div>
     <div className="company-office mt-8 grid overflow-hidden rounded-container md:grid-cols-[1.1fr_1fr]">
-      <div className="office-map-preview relative min-h-60"><Image src="/images/location/texas-office-map.png" alt="Satellite map showing I-10 and surrounding streets in San Antonio" fill sizes="(min-width:1280px) 520px,(min-width:768px) 45vw,100vw" className="object-cover" /></div>
+      <OfficeMap src={contact.office.mapEmbedUrl} />
       <div className="min-w-0 p-6 md:p-8">
       <div className="flex items-center gap-3"><MapPin aria-hidden className="size-5 text-gold-700" /><h3 className="text-h4">{contact.office.label}</h3></div>
       <address className="mt-5 text-body not-italic text-ink-700">{contact.office.lines.map(line => <span key={line} className="block">{line}</span>)}</address>

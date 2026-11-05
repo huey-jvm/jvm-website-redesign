@@ -14,10 +14,10 @@ export type Credential = {
   wide?: boolean;
 };
 
-const gsaRecordHref = "https://www.gsaelibrary.gsa.gov/ElibMain/contractorInfo.do?contractNumber=47QTCB22D0653&contractorName=JOHNSON+VENTURE+MANAGEMENT+SOLUTIONS%2C+INC.&executeQuery=YES";
+const gsaRecordHref = "https://search.certifications.sba.gov/";
 
 const allCredentials: Credential[] = [
-  { slug: "sba-8a", name: "SBA 8(a) Certified", meaning: "Eligible for sole source and competitive 8(a) set-aside awards.", issuer: "U.S. Small Business Administration", evidenceHref: gsaRecordHref, image: "/assets/03-credentials/sba-8a.png" },
+  { slug: "sba-8a", name: "SBA 8(a) Certified", meaning: "JVM’s SBA 8(a) program status.", issuer: "U.S. Small Business Administration", evidenceHref: gsaRecordHref, image: "/assets/03-credentials/sba-8a.png" },
   { slug: "edwosb", name: "EDWOSB", meaning: "Economically Disadvantaged Woman-Owned Small Business.", issuer: "U.S. Small Business Administration", evidenceHref: gsaRecordHref, image: "/assets/03-credentials/edwosb.png", wide: true },
   { slug: "sdvosb", name: "SDVOSB", meaning: "Service-Disabled Veteran-Owned Small Business.", issuer: "U.S. Small Business Administration", evidenceHref: gsaRecordHref, image: "/assets/03-credentials/sdvosb.jpg" },
   { slug: "hubzone", name: "HUBZone Certified", meaning: "Historically Underutilized Business Zone certification.", issuer: "U.S. Small Business Administration", image: "/assets/03-credentials/hubzone.jpg" },

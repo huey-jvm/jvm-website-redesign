@@ -6,7 +6,7 @@ export type NavGroup = { label: string; href?: string; items?: NavItem[] };
 
 const serviceDescriptions: Record<string, string> = {
   "healthcare-operations": "Clinical and operational professionals, program and case management, credentialing",
-  "health-it": "Software, systems integration, service desk and cybersecurity",
+  "health-it": "Clinical IT Services, Clinical Engineering, Infrastructure & Operations and Data Analytics",
   "logistics": "Supply chain, inventory and transportation",
   "facilities-management": "Facilities operations and maintenance coordination",
   "management-support": "Operations and administrative support",
@@ -22,7 +22,7 @@ export const primaryNav: NavGroup[] = [
     { label: "Administrative Support", href: "/services/management-support" },
   ] },
   { label: "Contract Vehicles", href: "/contracting" },
-  { label: "Work With Us", href: "/work-with-us" },
+  { label: "Partner With Us", items: [{ label: "Join Our Team", href: "/careers" }, { label: "Become a Partner", href: "/work-with-us#partners" }] },
   { label: "Quality", href: "/about/quality-compliance" },
 ];
 
@@ -47,7 +47,7 @@ export const footerColumns: { heading: string; items: NavItem[] }[] = [
       { label: "About JVM", href: "/about" },
       { label: "Quality and Compliance", href: "/about/quality-compliance" },
       { label: "Join Our Team", href: "/careers" },
-      { label: "Work With Us", href: "/work-with-us" },
+      { label: "Partner With Us", href: "/work-with-us" },
       { label: "Contact", href: "/contact" },
     ],
   },

@@ -10,14 +10,14 @@ import { credentials } from "@/content/credentials";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata("Quality and Compliance", "ISO 9001:2015 quality management, our position against the Joint Commission Health Care Staffing Services standards, and how to raise a concern.", "/about/quality-compliance");
+export const metadata = pageMetadata("Quality and Compliance", "Our approach to quality in healthcare professional services, CMMC self-assessment and how to raise a concern.", "/about/quality-compliance");
 
 export default function QualityPage() {
   const iso = credentials.find(c => c.slug === "iso-9001")!;
   const commission = quality.jointCommission.complaintRoute;
   return <>
     <PageHero className="quality-hero" eyebrow="About" title="Quality and Compliance" lead="JVM Solutions is committed to a higher standard of service and to the delivery of safe, quality patient care." crumbs={[{ label: "About", href: "/about" }, { label: "Quality and Compliance" }]}>
-      <div className="mt-10 md:mt-14"><Slot id="AS-14" priority className="aspect-[4/3] overflow-hidden border-b-[3px] border-gold-500 md:aspect-[3/1]" sizes="(min-width:1440px) 1312px,100vw" /></div>
+      <div className="mt-10 md:mt-14"><Slot id="AS-14" priority className="photo-feature aspect-[4/3] md:aspect-[3/1]" sizes="(min-width:1440px) 1312px,100vw" /></div>
     </PageHero>
     <Section className="quality-standards">
       <SectionHeader eyebrow="Our standards" title="Quality in Every Engagement" />
@@ -27,7 +27,7 @@ export default function QualityPage() {
           <div className="mb-5 flex items-center gap-3"><ClipboardCheck aria-hidden className="size-6 text-gold-700" /><p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">Quality management</p></div>
           <h3 id="quality-iso-title" className="text-h3">{iso.name}</h3>
           </div>
-          <div><p className="text-body text-ink-700">{quality.isoBody}</p><Placeholder id="P15" className="mt-4" /></div>
+          <div />
         </section>
         <section className="grid gap-5 border-t border-ink-200 pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-16" aria-labelledby="quality-joint-title">
           <div>
@@ -35,6 +35,10 @@ export default function QualityPage() {
           <h3 id="quality-joint-title" className="text-h3">Joint Commission Standards</h3>
           </div>
           <div><p className="text-body text-ink-700">{quality.jointCommission.paragraph}</p><Placeholder id="P8" className="mt-4" /></div>
+        </section>
+        <section className="grid gap-5 border-t border-ink-200 pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-16" aria-labelledby="quality-cmmc-title">
+          <h3 id="quality-cmmc-title" className="text-h3">CMMC Self Assessment</h3>
+          <p className="text-body text-ink-700">Self-assessment</p>
         </section>
       </div>
     </Section>

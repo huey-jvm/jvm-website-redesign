@@ -16,7 +16,7 @@ export function Section({ surface = "light", className, children, backdrop, back
   const bg = backdrop ? presentAsset(backdrop) : undefined;
   const layered = Boolean(bg || art);
   return (
-    <section className={cn(surfaces[surface], "py-12 md:py-16 lg:py-24", layered && "relative isolate", className)} data-backdrop={bg?.id} data-art={!bg && art ? "" : undefined} {...rest}>
+    <section className={cn(surfaces[surface], "viewport-section py-12 md:py-16 lg:py-24", layered && "relative isolate", className)} data-backdrop={bg?.id} data-art={!bg && art ? "" : undefined} {...rest}>
       {bg ? <Backdrop id={bg.id} imgClassName={backdropClassName} /> : art ? <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden contrast-more:hidden">{art}</div> : null}
       <div className={cn(contained && "container-content", layered && "relative")}>{children}</div>
     </section>

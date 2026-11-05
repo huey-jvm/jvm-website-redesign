@@ -3,6 +3,7 @@ import type { ImgHTMLAttributes } from "react";
 import { preload } from "react-dom";
 import imageLoader from "@/lib/image-loader";
 import manifest from "@/lib/image-manifest.json";
+import { PhotoLoading } from "./PhotoLoading";
 
 type ImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "width" | "height"> & {
   src: string; width?: number; height?: number; fill?: boolean;
@@ -20,7 +21,9 @@ export default function Image({ src, fill, priority, preload: shouldPreload, qua
   const source = imageLoader({ src, width: widths?.at(-1) ?? rest.width ?? 1920, quality });
   const highPriority = priority || shouldPreload;
   if (highPriority) preload(source, { as: "image", imageSrcSet: srcSet, imageSizes: resolvedSizes, fetchPriority: "high" });
-  return <img {...rest} src={source} srcSet={srcSet} sizes={resolvedSizes} data-image-src={src} alt={alt}
+  const element = <img {...rest} src={source} srcSet={srcSet} sizes={resolvedSizes} data-image-src={src} alt={alt}
     loading={loading ?? (highPriority ? "eager" : "lazy")} decoding="async" fetchPriority={highPriority ? "high" : fetchPriority}
     style={fill ? { position: "absolute", inset: 0, width: "100%", height: "100%", ...style } : style} />;
+  return fill && /^\/images\/(revision|jvm)\//.test(src)
+    ? <PhotoLoading key={src}>{element}</PhotoLoading> : element;
 }

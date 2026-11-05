@@ -39,6 +39,8 @@ export function ContractingIdentifiers() {
         <RecordField label="Set-asides" value={identifiers.setAsides.join(", ")}>
           <ul className="flex flex-wrap gap-2">{identifiers.setAsides.map(value => <li key={value} className="rounded-pill border border-gold-500/40 bg-gold-200/25 px-3 py-1 text-body-sm font-medium">{value}</li>)}</ul>
         </RecordField>
+        <RecordField label="SBA 8(a)" value="SBA 8(a) program status" copy={false} />
+        <RecordField label="GSA MAS" value="Pending" copy={false} />
         <RecordField label="SAM" value={identifiers.samStatus} copy={false}>
           <span className="inline-flex items-center gap-2 text-body-sm font-medium"><span aria-hidden className="size-1.5 rounded-pill bg-gold-700" />{identifiers.samStatus}</span>
         </RecordField>

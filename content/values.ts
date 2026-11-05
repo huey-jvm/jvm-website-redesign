@@ -2,7 +2,7 @@ export const values = {
   intro: "Our values guide how we work with clients and one another: listen with respect, communicate honestly, follow through on commitments and take responsibility for delivery.",
   rita: {
     name: "R.I.T.A.",
-    description: "Our foundational values define how JVM shows up for clients, patients, and one another. These are the non-negotiables that govern every decision we make and every relationship we build.",
+    description: "Respect, integrity, trust and accountability shape our relationships with clients, patients and one another.",
     items: [
       { title: "Respect", line: "We treat everyone with respect and value the diverse backgrounds and experiences of others." },
       { title: "Integrity", line: "We conduct every relationship and interaction with the highest degree of integrity." },
@@ -12,12 +12,12 @@ export const values = {
   },
   roar: {
     name: "ROAR",
-    description: "JVM professionals are expected to go beyond compliance and ROAR through every challenge.",
+    description: "Resilience, ownership, adaptability and results guide how we respond to challenges and support the mission.",
     items: [
       { title: "Resilience", line: "Adapting and persisting under pressure." },
       { title: "Ownership", line: "Taking full accountability for outcomes." },
       { title: "Adaptability", line: "Pivoting when the mission demands it." },
-      { title: "Results", line: "Delivering measurable impact, every time." },
+      { title: "Results", line: "Focusing our work on meaningful outcomes." },
     ],
   },
 };

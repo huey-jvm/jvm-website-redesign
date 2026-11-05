@@ -17,7 +17,7 @@ import { statements } from "@/content/statements";
 import { outcomes } from "@/content/outcomes";
 import { services } from "@/content/services";
 import { differentiators } from "@/content/differentiators";
-import { team, leadershipTeamPhoto } from "@/content/team";
+import { team, missionHeroPhoto } from "@/content/team";
 
 export const metadata: Metadata = {
   description: statements.positioning,
@@ -28,7 +28,7 @@ export default function HomePage() {
   const founder = team[0];
   return (
     <>
-      <CinematicHero image={leadershipTeamPhoto}>
+      <CinematicHero image={missionHeroPhoto}>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Button href="/services" tone="dark" size="md" variant="primary">Explore Our Services</Button>
           <Button href="/about" variant="secondary" tone="dark" size="md">Meet JVM</Button>
@@ -81,7 +81,7 @@ export default function HomePage() {
       </Section>
 
 
-      <Section surface="cream"><AudienceLinks /></Section>
+      <Section surface="dark" className="partnership-section"><AudienceLinks /></Section>
       <Section surface="cream" className="leadership-feature">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-20">
           <div>

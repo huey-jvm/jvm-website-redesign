@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 const sequence = [
   { href: "/services", label: "All Services" },
   { href: "/services/healthcare-operations", label: "Healthcare Operations" },
-  { href: "/services/health-it", label: "IT and Technology" },
+  { href: "/services/health-it", label: "Health IT" },
   { href: "/services/logistics", label: "Logistics" },
   { href: "/services/facilities-management", label: "Facilities Management" },
   { href: "/contracting/capability-statement", label: "Capability Statements" },

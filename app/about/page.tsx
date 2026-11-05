@@ -29,12 +29,11 @@ export default function AboutPage() {
         className="about-hero"
         eyebrow="About"
         title="About JVM Solutions"
-        lead={`A veteran-led, ${contact.office.locality} based company that brings operational discipline to federal and commercial health missions.`}
         crumbs={[{ label: "About" }]}
       >
       <div className="mt-12 md:mt-16">
         <div className="about-introduction grid items-center gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
-          <div className="relative aspect-[4/3] overflow-hidden border-b-4 border-gold-500"><Image src={leadershipTeamPhoto.src} alt={leadershipTeamPhoto.alt} fill priority quality={90} sizes="(min-width:1024px) 55vw,100vw" className="object-cover" /></div>
+          <div className="photo-feature relative aspect-[4/3]"><Image src={leadershipTeamPhoto.src} alt={leadershipTeamPhoto.alt} fill priority quality={90} sizes="(min-width:1024px) 55vw,100vw" className="object-cover" /></div>
           <div><Eyebrow>People behind the mission</Eyebrow><h2 className="mt-4 text-h2-sm md:text-h2">Experience You Can Put a Face To</h2><p className="mt-5 text-body text-ink-700">Our work brings people, technology and operational support together. Meet the team behind JVM’s commitment to healthcare and professional services.</p><a href="#leadership" className="mt-6 inline-flex min-h-11 items-center text-body-sm font-semibold text-gold-700 underline underline-offset-4">Meet our leadership</a></div>
         </div>
       </div>

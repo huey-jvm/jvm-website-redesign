@@ -120,13 +120,16 @@ export function MobileMenu({
             }}
           />
         </div>
-        <nav aria-label="Primary" className="flex-1 overflow-y-auto px-2 py-3">
+        <nav aria-label="Primary" className="min-h-0 flex-1 overflow-y-auto px-2 py-3" onClick={(event) => {
+          if (event.target instanceof Element && event.target.closest("a[href]")) close();
+        }}>
           <ul>
             {nav.map((group) =>
               group.href ? (
                 <li key={group.label}>
                   <Link
                     href={group.href}
+                    scroll={group.href.includes("#")}
                     aria-current={
                       isCurrent(pathname, group.href) ? "page" : undefined
                     }
@@ -167,6 +170,7 @@ export function MobileMenu({
                       <li key={item.href}>
                         <Link
                           href={item.href}
+                          scroll={item.href.includes("#")}
                           aria-current={
                             pathname === item.href ? "page" : undefined
                           }

@@ -26,14 +26,16 @@ export default function CareersPage() {
         lead="JVM is an equal opportunity employer. If your work is a calling, you will find people here who feel the same."
         crumbs={[{ label: "Join Our Team" }]}
         image={teamPhoto}
-      />
+      >
+        <div className="mt-6"><Button href={contact.careersPortal} external variant="primary">View open roles on iSolved</Button></div>
+      </ImageHero>
 
       <Section>
 
         <ul>
           {audiences.map((a) => (
             <li key={a.title} className="career-audience">
-              <Slot id={a.image} imgClassName={a.image === "AS-15b" ? "object-top" : undefined} className="aspect-[3/2] w-full rounded-container" sizes="(min-width: 1024px) 33vw, 100vw" />
+              <Slot id={a.image} imgClassName={a.image === "AS-15b" ? "object-top" : undefined} className="photo-service aspect-[3/2] w-full" sizes="(min-width: 1024px) 33vw, 100vw" />
               <div>
                 <h2 title={a.title} className="text-h2-sm md:text-h2">{a.title}</h2>
                 <p className="mt-3 text-body text-ink-700">{a.body}</p>

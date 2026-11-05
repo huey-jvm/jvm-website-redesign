@@ -1,6 +1,7 @@
 import { contact } from "./contact";
 
 export const leadershipTeamPhoto = { src: "/images/revision/team-shirts.webp", alt: "JVM colleagues together in branded team shirts", position: "object-center" };
+export const missionHeroPhoto = { ...leadershipTeamPhoto, src: "/images/revision/mission-team-original-hd.jpg" };
 
 export const teamPhoto = {
   src: "/images/revision/team-walking.webp",
@@ -26,8 +27,10 @@ export const team = [
   },
   // Names and titles supplied in email screenshots; Jennifer's title remains pending.
   ...[
-    { slug: "deja", name: "Deja Dillon", role: "Proposal Analyst", image: "/images/revision/deja.webp" },
-    { slug: "jennifer", name: "Jennifer Hidalgo", role: "", image: "/images/revision/jennifer.webp" },
-    { slug: "les", name: "Leslie P. Shropshire II", role: "President & CEO, Strategic Accounting Solutions", image: "/images/revision/les.webp" },
+    { slug: "deja", name: "Deja Dillon", role: "Proposal Analyst", image: "/images/revision/deja-hd.png" },
+    { slug: "jennifer", name: "Jennifer Hidalgo", role: "", image: "/images/revision/jennifer-hd.png" },
+    { slug: "huey", name: "Huey", role: "", image: "" },
+    { slug: "jasmine", name: "Jasmine", role: "", image: "" },
+    { slug: "karen", name: "Karen", role: "", image: "" },
   ].map(person => ({ ...person, note: undefined, summary: undefined, bio: [] as string[], contactRoute: contact.emails.general })),
 ];

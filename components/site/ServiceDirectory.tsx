@@ -8,8 +8,10 @@ export function ServiceDirectory() {
     {services.map((service, index) => <li key={service.slug}>
       <Link href={`/services/${service.slug}`} className="service-entry group">
         <span className="service-number tabular" aria-hidden>{String(index + 1).padStart(2, "0")}</span>
-        <div className="service-entry-image relative aspect-[3/2] overflow-hidden bg-ink-100">
-          {service.cardPhoto ? <Image src={service.cardPhoto} alt="" fill sizes="(min-width: 1024px) 260px, 100vw" className="object-cover" /> : service.cardImage ? <Slot id={service.cardImage} className="h-full w-full" sizes="(min-width: 1024px) 260px, 100vw" /> : null}
+        <div className="service-entry-visual min-w-0">
+        <div className="photo-service service-entry-image relative aspect-[4/3] overflow-hidden bg-ink-100">
+          {service.cardPhoto ? <Image src={service.cardPhoto} alt="" fill sizes="(min-width: 1024px) 260px, 100vw" className="object-cover object-top" /> : service.cardImage ? <Slot id={service.cardImage} className="h-full w-full" sizes="(min-width: 1024px) 260px, 100vw" /> : null}
+        </div>
         </div>
         <div className="service-entry-copy">
           <p className="mb-3 text-eyebrow font-semibold uppercase tracking-widest text-gold-700">{service.lead ? "Our core capability" : "Integrated expertise"}</p>

@@ -2,10 +2,12 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { SiteAnalytics } from "@/components/site/Analytics";
 import "./globals.css";
+import "skullet/styles.css";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactWidget } from "@/components/site/ContactWidget";
 import { SkipLink } from "@/components/site/SkipLink";
+import { PageNavigationScroll } from "@/components/site/PageNavigationScroll";
 import { announcement } from "@/content/announcements";
 import { primaryNav } from "@/content/navigation";
 import { statements } from "@/content/statements";
@@ -52,6 +54,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en" className={`${cormorant.variable} ${inter.variable} h-full`}>
       <body className="flex min-h-full flex-col">
         <SkipLink />
+        <PageNavigationScroll />
         {Banner ? <Banner announcement={announcement} /> : null}
         <Header nav={primaryNav} />
         <main id="main" className="relative flex-1">{children}</main>

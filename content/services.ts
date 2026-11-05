@@ -1,6 +1,4 @@
 export const leadEyebrow = "Our core";
-import { starsShown } from "./vehicles";
-import { identifiers } from "./identifiers";
 
 
 export type ServiceSection = {
@@ -112,37 +110,23 @@ const originalServices: Service[] = [
     slug: "health-it",
     cardImage: "AS-01",
     bannerImage: "AS-07",
-    name: "IT and Technology",
-    short: "IT",
+    name: "Health IT",
+    short: "Health IT",
     lead: false,
-    teaser: "Software, systems and cybersecurity shaped around the way your teams work.",
-    summary: starsShown
-      ? "Software development, systems design and integration, service desk, information assurance and cybersecurity, delivered through our GSA 8(a) STARS III prime contract."
-      : "Software development, systems design and integration, service desk, information assurance and cybersecurity, delivered as part of the healthcare operation.",
-    intro:
-      `JVM connects technology with the people and operations it supports. We deliver IT services and solutions${starsShown ? " through GSA 8(a) STARS III" : ""}, from software development and systems design to service desk, information assurance and cybersecurity, so teams can use the systems and information their work depends on.`,
-    sections: [
-      {
-        id: "capabilities",
-        title: "What We Deliver",
-        body: `Our offering${starsShown ? " under STARS III" : ""} ranges from simple to complex IT services, centred on NAICS ${identifiers.naicsPrimary} and including related IT services codes. Every engagement is scoped to the mission it supports and delivered under the same accountability as our healthcare work.`,
-        delivers: [
-          { title: "Software development", description: "We scope software work around the users, workflows and operational problems the system needs to support. Requirements, delivery milestones and testing expectations are agreed with the customer so each release can be assessed against a clear purpose." },
-          { title: "Systems design and integration", description: "We help plan how applications, infrastructure and data need to work together. Integration work considers existing systems, interfaces and operational dependencies so changes fit the environment they will run in." },
-          { title: "IT operations and maintenance", description: "We support the ongoing work that keeps systems usable, including maintenance coordination, issue resolution and operational documentation. Responsibilities and service expectations are defined around the customer’s environment and mission priorities." },
-          { title: "IT help desk and service desk support", description: "We help users report issues, obtain assistance and understand the status of their requests. Clear triage and escalation paths connect routine support with the teams responsible for more complex problems." },
-          { title: "Information assurance and cybersecurity", description: "We support the security activities, documentation and operational practices specified for the engagement. The work is aligned with the customer’s environment, applicable requirements and existing security responsibilities." },
-          { title: "Data tools and enabling platforms, including applied artificial intelligence", description: "We assess where data tools and enabling platforms can address a defined operational need. For applied AI work, the scope should establish the intended use, data access, evaluation criteria and human review required before adoption." },
-        ],
-      },
-      ...(starsShown
-        ? [{
-            id: "stars-iii",
-            title: "How to Buy",
-            body: "Federal agencies reach JVM through GSA 8(a) STARS III, a Best in Class governmentwide acquisition contract with streamlined ordering, directed awards up to the 8(a) competitive threshold, and 8(a) socioeconomic credit transferable to the agency.",
-          }]
-        : []),
-    ],
+    teaser: "Clinical technology, engineering, infrastructure and analytics that support healthcare delivery.",
+    summary: "Clinical IT Services, Clinical Engineering, Infrastructure & Operations and Data Analytics.",
+    intro: "JVM connects clinical technology with the people and operations it supports. Our Health IT services bring together clinical systems, engineering, infrastructure and analytics to support healthcare delivery.",
+    sections: [{
+      id: "capabilities",
+      title: "What We Deliver",
+      body: "Our Health IT services span four areas, with each engagement scoped to the needs of the healthcare environment.",
+      delivers: [
+        { title: "Clinical IT Services", description: "Technology support shaped around clinical users, systems and workflows." },
+        { title: "Clinical Engineering", description: "Engineering support for the technology and equipment used in clinical environments." },
+        { title: "Infrastructure & Operations", description: "Support for the infrastructure and day-to-day technology operations that healthcare teams depend on." },
+        { title: "Data Analytics", description: "Helping teams use data to understand operations and inform decisions." },
+      ],
+    }],
     placeholders: [
       { id: "P13", what: "Page copy written by JVM to the brief in docs/briefs/health-it.md", who: "JVM, writes to a brief" },
       { id: "P7", what: "Health IT past performance, task orders and outcomes", who: "JVM, B4" },

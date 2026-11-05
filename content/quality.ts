@@ -1,8 +1,8 @@
 export const quality = {
-  "isoBody": "JVM holds ISO 9001:2015 certification for its quality management system.",
+  "isoBody": "ISO 9001:2015",
   "jointCommission": {
     "position": "works-to",
-    "paragraph": "JVM works to the Joint Commission’s Standards for Health Care Staffing Services. The Joint Commission is an independent, non-profit organisation that accredits and certifies health care organisations across the country. Its standards address organisational quality of care and the safety of the environment in which care is provided. Working to those standards shapes how we screen, credential, place and support every healthcare professional.",
+    "paragraph": "JVM’s approach to healthcare professional services is guided by Joint Commission standards for quality and patient safety. These principles inform how we credential and support healthcare professionals.",
     "complaintRoute": {
       "label": "The Joint Commission",
       "office": "Office of Quality and Patient Safety",

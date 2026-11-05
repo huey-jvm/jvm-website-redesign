@@ -41,7 +41,7 @@ export function ServiceCard({ service, image, slot, className, horizontal = fals
   }
   const mode: Layout = layout ?? (horizontal ? "horizontal" : "stack");
   const frame = cn(
-    "card-media relative w-full overflow-hidden bg-ink-100",
+    "photo-service card-media relative w-full overflow-hidden bg-ink-100",
     mode === "horizontal" && "aspect-[3/2] @[35rem]:aspect-auto @[35rem]:w-5/12 @[35rem]:shrink-0",
     mode === "row" && "aspect-[3/2] @[22rem]:aspect-auto @[22rem]:w-1/3 @[22rem]:shrink-0",
     mode === "feature" && "aspect-[3/2] lg:aspect-auto lg:min-h-64 lg:flex-1",
@@ -52,7 +52,7 @@ export function ServiceCard({ service, image, slot, className, horizontal = fals
     <Link
       href={`/services/${service.slug}`}
       className={cn(
-        "group/card @container block h-full overflow-hidden rounded-container border border-ink-200 bg-white",
+        "service-photo-card group/card @container block h-full overflow-hidden rounded-container border border-ink-200 bg-white",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700",
         className,
       )}

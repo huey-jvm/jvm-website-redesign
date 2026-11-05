@@ -6,7 +6,7 @@ test("service explorer changes its explanation and destination with keyboard inp
   const detail = page.getByRole("region", { name: "Selected service contribution" });
   await expect(group.getByRole("button", { name: "Healthcare", exact: true })).toHaveAttribute("aria-pressed", "true");
   for (const [name, slug, heading] of [
-    ["IT", "health-it", "Systems that support the people"],
+    ["Health IT", "health-it", "Systems that support the people"],
     ["Logistics", "logistics", "Resources in the right place"],
     ["Facilities", "facilities-management", "Places ready for the mission"],
   ]) {

@@ -11,10 +11,11 @@ test("revision navigation and mobile audience paths", async ({ page }) => {
   await expect(page.locator('footer')).toContainText("7550 W I-10");
   await page.setViewportSize({width:375,height:812});
   await page.getByRole('button',{name:'Open menu',exact:true}).click();
-  await page.getByRole('dialog',{name:'Menu',exact:true}).getByRole('link',{name:'Work With Us',exact:true}).click();
+  await page.getByRole('dialog',{name:'Menu',exact:true}).getByRole('button',{name:'Partner With Us',exact:true}).click();
+  await page.getByRole('dialog',{name:'Menu',exact:true}).getByRole('link',{name:'Become a Partner',exact:true}).click();
   await expect(page).toHaveURL(/work-with-us/);
   await expect(page.locator('main').getByRole('link',{name:'Join Our Team',exact:true})).toHaveAttribute('href','/careers');
-  await expect(page.locator('main').getByRole('link',{name:'Email Business Development'})).toHaveAttribute('href',/^mailto:BD@jvmsolutions.net/);
+  await expect(page.locator('main').getByRole('link',{name:'Email Deja about a partnership'})).toHaveAttribute('href',/^mailto:info@jvmsolutions.net/);
 });
 
 test("service pages show content without redundant service navigation", async ({page})=>{
@@ -33,11 +34,11 @@ test("service pages show content without redundant service navigation", async ({
 test("supplied portraits and leadership order without invented roles",async({page})=>{
   await page.goto('/about',{waitUntil:'domcontentloaded'});
   await expect(page.locator('main')).not.toContainText('Roy White');
-  for(const name of ['Deja Dillon','Jennifer Hidalgo','Leslie P. Shropshire II']) await expect(page.getByRole('heading',{name,exact:true})).toBeVisible();
+  for(const name of ['Deja Dillon','Jennifer Hidalgo','Huey','Jasmine','Karen']) await expect(page.getByRole('heading',{name,exact:true})).toBeVisible();
   await expect(page.getByText('Proposal Analyst', {exact:true})).toBeVisible();
-  await expect(page.getByText('President & CEO, Strategic Accounting Solutions', {exact:true})).toBeVisible();
+  await expect(page.locator('main')).not.toContainText('Leslie P. Shropshire II');
   expect(await page.locator('#leadership').evaluate(el=>Boolean(el.compareDocumentPosition(document.querySelector('#mission')!) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
-  await expect(page.locator('img[data-image-src="/images/revision/deja.webp"]')).toBeVisible();
+  await expect(page.locator('img[data-image-src="/images/revision/deja-hd.png"]')).toBeVisible();
 });
 
 for(const width of [375,1440])test(`revision visual and image checks ${width}`,async({page})=>{

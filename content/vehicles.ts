@@ -15,7 +15,7 @@ export type Listing = "pending" | "yes" | "no";
 
 export const starsIII = {
   slug: "stars-iii",
-  listed: "pending" as Listing,
+  listed: "no" as Listing,
   name: "GSA 8(a) STARS III",
   role: "Prime",
   contractNumber: "47QTCB22D0653",

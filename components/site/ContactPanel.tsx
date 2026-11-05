@@ -110,7 +110,7 @@ export function ContactPanel({
             : "pointer-events-none invisible opacity-0 max-md:translate-y-full md:-translate-y-[48%] md:scale-95 max-md:motion-reduce:translate-y-0",
         )}
       >
-        <div className="surface-dark relative flex items-start justify-between gap-4 bg-ink-950 px-6 pb-6 pt-5 md:px-8 md:pt-7">
+        <div className="contact-panel-heading surface-dark relative flex shrink-0 items-start justify-between gap-4 bg-ink-950 px-6 pb-6 pt-5 md:px-8 md:pt-7">
           <div aria-hidden className="absolute inset-x-0 bottom-0 h-px bg-gold-500" />
           <div>
             <p className="font-sans text-eyebrow font-semibold uppercase text-gold-500">Talk to JVM</p>
@@ -119,7 +119,7 @@ export function ContactPanel({
           </div>
           <CloseButton tone="dark" label="Close" onClick={(e) => close(e.detail === 0)} className="-mr-2 -mt-1 shrink-0" />
         </div>
-        <div className="overflow-y-auto px-6 py-6 md:px-8 md:py-7">
+        <div className="contact-panel-body min-h-0 overflow-y-auto overscroll-contain px-6 py-6 md:px-8 md:py-7">
           <Suspense fallback={<p role="status" className="text-body-sm text-ink-500">Loading the contact form…</p>}>
             <ContactForm key={route ?? "none"} initialRoute={route} compact autoFocus />
           </Suspense>

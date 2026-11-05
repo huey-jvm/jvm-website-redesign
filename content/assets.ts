@@ -1,7 +1,7 @@
 import { outcomes } from "./outcomes";
 
 export type AssetKind = "photo" | "texture" | "illustration" | "diagram";
-export type Asset = { id: string; path: string; alt: string; kind: AssetKind; where: string[] };
+export type Asset = { id: string; path: string; alt: string; kind: AssetKind; where: string[]; caption?: string };
 
 const dir = "/images/generated";
 
@@ -19,13 +19,14 @@ const outcomeIllustrations: Asset[] = outcomes.map((o) => ({
 
 
 export const assets: Asset[] = [
-  { id: "AS-16", path: "/images/revision/facilities.svg", alt: "Diagram connecting facilities operations, maintenance and follow-through", kind: "diagram", where: ["/services/facilities-management"] },
-  { id: "AS-01", path: "/images/revision/technology.svg", alt: "Diagram connecting systems, support and security", kind: "diagram", where: ["/", "/services"] },
-  { id: "AS-02", path: "/images/revision/logistics.svg", alt: "Diagram connecting planning, inventory and delivery", kind: "diagram", where: ["/", "/services"] },
+  // Existing client photos temporarily illustrate these areas until dedicated work photos arrive.
+  { id: "AS-16", path: "/images/revision/facility-exterior.jpg", alt: "A building entrance and covered driveway from the supplied photo collection", caption: "A location from our photo archive", kind: "photo", where: ["/services/facilities-management"] },
+  { id: "AS-01", path: "/images/revision/quality-team-enhanced.png", alt: "Three people beside a medical modeling display", caption: "A moment from a team visit", kind: "photo", where: ["/", "/services"] },
+  { id: "AS-02", path: "/images/revision/team-visit.webp", alt: "JVM colleagues together during a visit", caption: "Our people, out in the field", kind: "photo", where: ["/", "/services"] },
   { id: "AS-03", path: "/images/revision/conference-team.webp", alt: "JVM representatives at a small business conference", kind: "photo", where: [] },
   { id: "AS-06", path: "/images/revision/workplace-team.webp", alt: "", kind: "photo", where: ["/services/healthcare-operations"] },
-  { id: "AS-07", path: "/images/revision/technology.svg", alt: "", kind: "diagram", where: ["/services/health-it"] },
-  { id: "AS-08", path: "/images/revision/logistics.svg", alt: "", kind: "diagram", where: ["/services/logistics"] },
+  { id: "AS-07", path: "/images/revision/quality-team-enhanced.png", alt: "Three people beside a medical modeling display", caption: "A moment from a team visit", kind: "photo", where: ["/services/health-it"] },
+  { id: "AS-08", path: "/images/revision/team-visit.webp", alt: "JVM colleagues together during a visit", caption: "Our people, out in the field", kind: "photo", where: ["/services/logistics"] },
   { id: "AS-09", path: "/images/revision/conference-team.webp", alt: "", kind: "photo", where: ["/services/management-support"] },
   { id: "AS-10", path: `${dir}/as-10-shift.png`, alt: "", kind: "texture", where: [] },
   { id: "AS-11", path: `${dir}/as-11-contracting-banner.jpg`, alt: "", kind: "photo", where: [] },

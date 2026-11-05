@@ -2,6 +2,7 @@ export const routeKeys = ["contracting", "health-system", "careers", "other"] as
 export type RouteKey = (typeof routeKeys)[number];
 
 const mainLine = { phone: "210-504-4707", phoneHref: "tel:+12105044707" };
+const officeMapQuery = "7550 Interstate 10 West, San Antonio, TX 78229";
 const office = { street: "7550 W I-10, Suite 800", locality: "San Antonio", region: "TX", regionName: "Texas", postalCode: "78229" };
 
 export const contact = {
@@ -10,7 +11,8 @@ export const contact = {
     ...office,
     lines: [office.street, `${office.locality}, ${office.region} ${office.postalCode}`],
     ...mainLine,
-    mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([office.street, office.locality, office.region, office.postalCode].join(" "))}`,
+    mapEmbedUrl: `https://maps.google.com/maps?q=${encodeURIComponent(officeMapQuery)}&output=embed`,
+    mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(officeMapQuery)}`,
   },
   compliance: {
     label: "Ethics and Compliance Department",

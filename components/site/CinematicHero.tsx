@@ -1,3 +1,4 @@
+import { ChevronRight } from "lucide-react";
 import Image from "@/components/ui/Image";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { statements } from "@/content/statements";
@@ -8,7 +9,7 @@ import type { ReactNode } from "react";
 export function CinematicHero({ image, children }: { image: HeroPhoto; children?: ReactNode }) {
   const facts = [
     { label: "The missions we serve", value: formatList([...statements.audience]) },
-    { label: "Our expertise", value: "Healthcare, IT, logistics and facilities management" },
+    { label: "Our expertise", value: "Healthcare, Health IT, logistics and facilities management" },
     { label: "Our approach", value: "People, systems and delivery working together" },
   ];
   return (
@@ -24,7 +25,7 @@ export function CinematicHero({ image, children }: { image: HeroPhoto; children?
             <h1 className="mission-title text-cream">Your Mission<br /><span className="mission-emphasis">Partner.</span></h1>
             <p className="mt-6 max-w-[43ch] text-lead-sm text-ink-200">{statements.positioning}</p>
             {children}
-            <a href="#outcomes-title" className="mission-scroll">What makes us different</a>
+            <a href="#outcomes-title" className="mission-scroll"><span>See what makes JVM different</span><ChevronRight aria-hidden="true" className="size-4 shrink-0" /></a>
           </div>
         </div>
       </div>

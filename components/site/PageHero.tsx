@@ -18,7 +18,7 @@ export function PageHero({ eyebrow, title, lead, crumbs, children, aside, backdr
             {lead ? <p className="mt-6 max-w-[62ch] text-lead-sm text-ink-700">{lead}</p> : null}
             {children}
           </div>
-          {aside ? <div className="brief-aside">{aside}</div> : photo ? <Slot id={photo.id} priority className="aspect-[4/3] border-b-4 border-gold-500" sizes="(min-width: 1024px) 45vw, 100vw" /> : null}
+          {aside ? <div className="brief-aside">{aside}</div> : photo ? <div className="min-w-0"><Slot id={photo.id} priority className="photo-feature aspect-[4/3]" sizes="(min-width: 1024px) 45vw, 100vw" /></div> : null}
         </div>
       </div>
     </section>
