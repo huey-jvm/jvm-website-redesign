@@ -6,6 +6,7 @@ import { credentials, certificationSummary } from "@/content/credentials";
 import { pageMetadata } from "@/lib/seo";
 import Image from "@/components/ui/Image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
 export const metadata = pageMetadata("Certifications and Set-Asides", `View ${certificationSummary} and their supporting records.`, "/contracting/certifications");
 
@@ -20,15 +21,21 @@ export default function CertificationsPage() {
         <ul className="certification-grid grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
           {businessCredentials.map((c) => <CredentialRow key={c.slug} credential={c} />)}
         </ul>
-        <section aria-labelledby="vip-recognition-title" className="mt-12 grid items-center gap-8 border-t border-gold-500 pt-8 sm:grid-cols-[180px_minmax(0,1fr)] md:mt-16 md:gap-12">
-          <Image src="/assets/03-credentials/vip-graduate-hd.webp" alt="National Center Veteran Institute for Procurement Graduate" width={1522} height={1033} className="h-auto w-[180px] object-contain" />
+        <div className="recognition-band mt-12 border-y border-gold-500/50 md:mt-16">
+        <section aria-labelledby="vip-recognition-title" className="vip-recognition">
+          <Image src="/assets/03-credentials/vip-graduate-hd.webp" alt="National Center Veteran Institute for Procurement Graduate" width={1522} height={1033} className="vip-recognition-mark" />
           <div>
             <p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">Procurement recognition</p>
             <h2 id="vip-recognition-title" className="mt-3 text-h3">{vip.name}</h2>
             <p className="mt-4 max-w-2xl text-body text-ink-700">{vip.meaning}</p>
           </div>
         </section>
-        <p className="mt-10 text-body text-ink-700">For our ISO 9001:2015 certification, visit <Link href="/about/quality-compliance" className="font-semibold text-gold-700 underline underline-offset-4">Quality and Compliance</Link>.</p>
+        <section className="recognition-quality" aria-labelledby="quality-certification-title">
+          <p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">Quality certification</p>
+          <h2 id="quality-certification-title" className="mt-3 text-h3">ISO 9001:2015</h2>
+          <Link href="/about/quality-compliance" className="mt-3 inline-flex min-h-11 items-center gap-3 text-body-sm font-semibold text-gold-700 underline underline-offset-4">Quality and Compliance<ArrowUpRight aria-hidden className="size-4 shrink-0" /></Link>
+        </section>
+        </div>
       </div>
         <CTABand embedded route="contracting" />
       </PageHero>
