@@ -344,7 +344,7 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
 .mission-stage { position:relative; }
 .mission-backdrop { position:absolute; inset:0; z-index:-2; }
 .mission-backdrop .hero-image { object-fit:cover; object-position:center 60%; }
-.mission-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgb(11 24 43 / .9),rgb(11 24 43 / .72) 30%,rgb(11 24 43 / .22) 47%,transparent 65%),linear-gradient(0deg,rgb(11 24 43 / .92),rgb(11 24 43 / .45) 12%,transparent 32%); }
+.mission-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgb(11 24 43 / .9),rgb(11 24 43 / .82) 38%,rgb(11 24 43 / .22) 55%,transparent 65%),linear-gradient(0deg,rgb(11 24 43 / .95),rgb(11 24 43 / .82) 16%,transparent 32%); }
 .mission-hero-editorial .mission-hero-grid { display:flex; align-items:center; min-height:clamp(560px,40vw,740px); padding-block:4rem; }
 .mission-hero-editorial .hero-copy { max-width:43%; }
 .mission-brand { display:inline-block; width:max-content; white-space:nowrap; padding:.5rem .75rem; margin-bottom:1.75rem; background:#c9a460; color:#0b182b; font-size:clamp(.65rem,2.5vw,.85rem); letter-spacing:.16em; }

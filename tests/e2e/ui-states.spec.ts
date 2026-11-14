@@ -33,7 +33,7 @@ test("quality link and footer remain usable from phone to desktop", async ({ pag
     await page.evaluate(() => document.fonts.ready);
     await expect(page.locator("main").getByRole("link", {name:"Quality and Compliance",exact:true})).toHaveAttribute("href", "/about/quality-compliance");
     const credentials = page.locator('footer ul[aria-label="Certifications"]');
-    await expect(credentials.locator("a")).toHaveCount(4);
+    await expect(credentials.locator("a")).toHaveCount(3);
     const social = page.locator('footer ul[aria-label="Social"]');
     if (width >= 1024) {
       const a = await credentials.boundingBox(), b = await social.boundingBox();

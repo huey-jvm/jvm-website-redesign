@@ -26,7 +26,7 @@ export async function measureContrast(page: Page, info: TestInfo, name: string, 
       const node = walker.currentNode as Text;
       const text = node.textContent?.trim();
       const el = node.parentElement;
-      if (!text || !el) continue;
+      if (!text || !el || el.closest(".sr-only")) continue;
       // Hidden copy tooltips still have text rectangles. Measure painted text only.
       let hidden = false;
       for (let a: HTMLElement | null = el; a; a = a.parentElement) {
@@ -60,7 +60,12 @@ export async function measureContrast(page: Page, info: TestInfo, name: string, 
     });
   }, selector);
   const hide = await page.addStyleTag({ content: `${selector} *, ${selector} *::before, ${selector} *::after { color: transparent !important; } ${selector} svg { visibility: hidden !important; } [data-chrome] { visibility: hidden !important; }` });
-  const png = await section.screenshot({ scale: "css", animations: "disabled" });
+  // Element screenshots can pad the offscreen part of a viewport-height hero
+  // white. Capture its document-space clip so those pixels are actually painted.
+  const clip = await section.boundingBox();
+  if (!clip) throw new Error("Contrast target is not visible");
+  const scroll = await page.evaluate(() => ({ x: scrollX, y: scrollY }));
+  const png = await page.screenshot({ fullPage: true, clip: { ...clip, x: clip.x + scroll.x, y: clip.y + scroll.y }, scale: "css", animations: "disabled" });
   await info.attach(`${name}.png`, { body: png, contentType: "image/png" });
   await hide.evaluate((s) => (s as HTMLElement).remove());
   return page.evaluate(async ({ b64, lines }) => {

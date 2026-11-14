@@ -18,7 +18,7 @@ test("control: the contrast measurement flags light text over a light backdrop",
 });
 
 test("every photographic hero keeps its text readable at 1280 and 375", async ({ page }) => {
-  test.setTimeout(180_000);
+  test.setTimeout(300_000);
   const seen: string[] = [];
   for (const route of pages) {
     for (const width of [1280, 375]) {

@@ -2,13 +2,29 @@ import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { identifiers } from "../../content/identifiers";
 import { statements } from "../../content/statements";
-import { starsIII } from "../../content/vehicles";
+import { starsIII, starsShown } from "../../content/vehicles";
+import { purpose } from "../../content/purpose";
 import { evidencedCredentials } from "../../content/credentials";
 import { quality } from "../../content/quality";
 import { values } from "../../content/values";
 import { team } from "../../content/team";
 
-const routes = ["/services", "/contracting", "/contracting/capability-statement", "/contracting/certifications", "/contracting/stars-iii", "/about", "/about/quality-compliance"];
+const routes = ["/services", "/contracting", "/contracting/capability-statement", "/contracting/certifications", ...(starsShown ? ["/contracting/stars-iii"] : []), "/about", "/about/quality-compliance", "/about/community-impact"];
+
+test("locked office map retains keyboard-operable view selection and an external map link", async ({ page }) => {
+  await page.goto("/contact", { waitUntil: "domcontentloaded" });
+  const map = page.locator(".office-map-preview iframe");
+  await expect(map).toHaveAttribute("inert", "");
+  await expect(map).toHaveAttribute("aria-hidden", "true");
+  const satellite = page.getByRole("button", { name: "Satellite", exact: true });
+  await satellite.focus();
+  await page.keyboard.press("Enter");
+  await expect(satellite).toHaveAttribute("aria-pressed", "true");
+  await expect(map).toHaveAttribute("src", /&t=k$/);
+  await page.getByRole("button", { name: "Map", exact: true }).click();
+  await expect(map).toHaveAttribute("src", /&t=m$/);
+  await expect(page.getByRole("link", { name: /Open in maps/ })).toHaveAttribute("href", /google.com\/maps\/search/);
+});
 
 for (const route of routes) {
   test(`${route} stays usable from narrow phones to wide screens`, async ({ page }) => {
@@ -80,7 +96,7 @@ test("contracting shares its hero surface with the call to action and retains al
   for (const [label, value] of [
     ["Legal name", statements.companyName], ["UEI", identifiers.uei], ["CAGE", identifiers.cage],
     ["Primary NAICS", identifiers.naicsPrimary], ["Other NAICS", identifiers.naicsSecondary.join(", ")],
-    ["Set-asides", identifiers.setAsides.join(", ")], ["STARS III", starsIII.contractNumber],
+    ["Set-asides", identifiers.setAsides.join(", ")], ...(starsShown ? [["STARS III", starsIII.contractNumber]] : []),
   ]) {
     const button = hero.getByRole("button", { name: `Copy ${label}`, exact: true });
     await button.focus(); await button.click();
@@ -102,13 +118,14 @@ test("certifications show one useful record action per credential", async ({ pag
   }
 });
 
-test("About keeps its content while removing the story card and empty leadership tile", async ({ page }) => {
+test("About presents the approved founder message, values and leadership", async ({ page }) => {
   await page.goto("/about", { waitUntil: "domcontentloaded" });
   await expect(page.locator(".about-hero .about-introduction")).toBeVisible();
   const quote = page.locator("#story blockquote");
-  await expect(quote).toContainText(statements.story);
+  await expect(quote).toContainText(purpose.quote);
   await expect(quote).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
-  await expect(page.locator("#story figure")).toHaveCount(0);
+  await expect(page.locator("#story figcaption")).toContainText(purpose.author);
+  for (const paragraph of purpose.paragraphs) await expect(page.locator("#story")).toContainText(paragraph);
   for (const value of [...values.rita.items, ...values.roar.items]) await expect(page.locator(".about-values")).toContainText(value.line);
   for (const paragraph of team[0].bio) await expect(page.locator(".about-leadership")).toContainText(paragraph);
   await expect(page.locator(".about-leadership").getByRole("heading", { name: "Roy White", exact: true })).toHaveCount(0);
@@ -127,6 +144,7 @@ test("quality separates the standards from concern contacts and preserves source
 });
 
 test("STARS III contact resources are actionable without the loose sentence or empty card", async ({ page }) => {
+  test.skip(!starsShown, "The client has withheld this contract vehicle.");
   await page.goto("/contracting/stars-iii", { waitUntil: "domcontentloaded" });
   const resources = page.locator(".stars-contact-resources");
   await expect(resources.getByRole("link", { name: /Call JVM/ })).toHaveCount(0);

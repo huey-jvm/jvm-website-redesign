@@ -5,7 +5,7 @@
       "url": [
         "http://localhost:3200/",
         "http://localhost:3200/services/healthcare-operations",
-        "http://localhost:3200/contracting/stars-iii",
+        "http://localhost:3200/contracting",
         "http://localhost:3200/careers"
       ],
       "numberOfRuns": 2

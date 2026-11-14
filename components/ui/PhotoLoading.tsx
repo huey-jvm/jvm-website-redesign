@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { SkeletonBox } from "skullet/react";
+import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
+
+const SkeletonBox = lazy(() => import("skullet/react").then(module => ({ default: module.SkeletonBox })));
 
 // Preserve the server-rendered image and its dimensions. Fast/cached images
 // never show an overlay; surrounding content remains available immediately.
@@ -37,7 +38,7 @@ export function PhotoLoading({ children }: { children: ReactNode }) {
   return <span ref={root} style={{ display: "contents" }}>
     {children}
     {visible && <span className="photo-loading" data-ready={ready} aria-hidden="true">
-      <SkeletonBox width="100%" height="100%" radius={0} />
+      <Suspense fallback={null}><SkeletonBox width="100%" height="100%" radius={0} /></Suspense>
     </span>}
   </span>;
 }

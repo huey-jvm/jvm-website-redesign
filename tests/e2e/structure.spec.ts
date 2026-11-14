@@ -108,7 +108,8 @@ test("STARS III follows one switch: zero mentions when starsIII.listed is no, pr
   if (starsOff) {
     expect(hits, "no response mentions STARS").toEqual([]);
     expect(starsChunks, "no client chunk mentions STARS").toBe(0);
-    expect(route.status(), "the STARS III route is gone").toBe(404);
+    expect(route.status(), "the withheld STARS III route redirects to contracting").toBe(308);
+    expect(route.headers().location).toBe("/contracting");
   } else {
     expect(total, "control: the same sweep finds STARS while the switch is on").toBeGreaterThan(0);
     expect(route.status()).toBe(200);

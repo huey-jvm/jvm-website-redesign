@@ -1,16 +1,18 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { PageSkeleton } from "@/components/site/PageSkeleton";
-import healthcare from "@/components/site/skeletons/healthcare-operations.json";
-import technology from "@/components/site/skeletons/health-it.json";
-import logistics from "@/components/site/skeletons/logistics-facilities.json";
-import management from "@/components/site/skeletons/management-support.json";
+import { Suspense } from "react";
+import { lazySkeleton } from "@/components/site/lazy-skeleton";
 
-const layouts = { "healthcare-operations": healthcare, "health-it": technology, "logistics-facilities": logistics, "management-support": management };
+const layouts = {
+  "healthcare-operations": lazySkeleton(() => import("@/components/site/skeletons/healthcare-operations.json"), "healthcare-operations"),
+  "health-it": lazySkeleton(() => import("@/components/site/skeletons/health-it.json"), "health-it"),
+  "logistics-facilities": lazySkeleton(() => import("@/components/site/skeletons/logistics-facilities.json"), "logistics-facilities"),
+  "management-support": lazySkeleton(() => import("@/components/site/skeletons/management-support.json"), "management-support"),
+};
 
 export default function Loading() {
   const { slug } = useParams<{ slug: string }>();
-  const samples = layouts[slug as keyof typeof layouts] ?? healthcare;
-  return <PageSkeleton samples={samples} name={slug} />;
+  const Skeleton = layouts[slug as keyof typeof layouts] ?? layouts["healthcare-operations"];
+  return <Suspense fallback={<div className="route-loading bg-cream" role="status" aria-label="Loading page" aria-busy="true" />}><Skeleton /></Suspense>;
 }

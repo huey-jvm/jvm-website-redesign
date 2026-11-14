@@ -35,13 +35,13 @@ walk(out);
 const basePath = process.env.PAGES_BASE_PATH ?? "";
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jvmsolutions.net").replace(/\/$/, "");
 const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
-for (const { source, destination } of [...redirects, {
+for (const { source, destination } of [...redirects, ...(!starsShown ? [{ source: "/contracting/stars-iii", destination: "/contracting" }] : []), {
   source: "/gsa-8a-stars-iii", destination: starsShown ? "/contracting/stars-iii" : "/contracting",
 }]) {
   const targetFile = path.join(out, source.slice(1), "index.html");
   const destinationFile = path.join(out, destination.slice(1), "index.html");
   if (!fs.existsSync(destinationFile)) throw new Error(`Missing redirect destination: ${destination}`);
-  if (fs.existsSync(targetFile)) throw new Error(`Redirect would overwrite an existing page: ${source}`);
+  if (fs.existsSync(targetFile) && !(!starsShown && source === "/contracting/stars-iii")) throw new Error(`Redirect would overwrite an existing page: ${source}`);
   const target = `${basePath}${destination}/`;
   const canonical = `${siteUrl}${destination}/`;
   fs.mkdirSync(path.dirname(targetFile), { recursive: true });
