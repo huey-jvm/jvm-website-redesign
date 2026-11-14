@@ -12,7 +12,7 @@ import {
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import type { NavGroup } from "@/content/navigation";
-import { OpenWidgetButton } from "./OpenWidgetButton";
+import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 const loadMenu = () =>
   import("./MobileMenu").then((m) => ({ default: m.MobileMenu }));
@@ -172,10 +172,10 @@ export function HeaderClient({
             {desktop}
           </nav>
           <span className="inline-flex lg:hidden">
-            <OpenWidgetButton size="sm" label="Contact" className="jvm-header-contact" />
+            <Button href="/contact" size="sm" className="jvm-header-contact">Contact</Button>
           </span>
           <span className="hidden lg:inline-flex">
-            <OpenWidgetButton label="Contact us" className="jvm-header-contact" />
+            <Button href="/contact" className="jvm-header-contact">Contact us</Button>
           </span>
         </div>
         {menuMounted ? (

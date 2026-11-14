@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { starsShown } from "../../content/vehicles";
 import { pages } from "./pages";
 import { services } from "../../content/services";
 import { legalPages } from "../../content/legal";
@@ -76,7 +77,7 @@ test("the header logo returns to the homepage from any page", async ({ page }) =
     await expect(logo).toHaveAttribute("href", "/");
     await logo.click();
     await expect(page).toHaveURL(/\/$/);
-    await expect(page.locator("main h1")).toContainText("Your Mission");
+    await expect(page.locator("main h1")).toContainText("Built to Serve.");
   }
 });
 
@@ -90,6 +91,7 @@ test("nested service cards have a solid surface and a distinct outline", async (
 });
 
 test("How to Buy uses its spare width for a useful contract summary", async ({ page }) => {
+  test.skip(!starsShown, "The client has withheld this contract vehicle.");
   for (const width of [375, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/services/health-it", { waitUntil: "domcontentloaded" });

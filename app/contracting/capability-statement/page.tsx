@@ -8,7 +8,7 @@ export default function CapabilityPage() {
   return (
     <>
       <PageHero className="capability-hero" eyebrow="Contracting" title="Capability Statements" lead="A concise overview of our services, expertise and qualifications." crumbs={[{ label: "Contracting", href: "/contracting" }, { label: "Capability Statements" }]}>
-        <div className="mt-12 md:mt-16"><CapabilityLibrary /></div>
+        <div className="mt-12 md:mt-16"><CapabilityLibrary heading={false} /></div>
         <CTABand embedded route="contracting" />
         <NextServicePage current="/contracting/capability-statement" />
       </PageHero>

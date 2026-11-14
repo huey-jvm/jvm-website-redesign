@@ -1,6 +1,6 @@
 import { FileQuestionMark, Home, RotateCw, Unplug, WifiOff } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { ContourArt } from "./ContourArt";
+
 
 export type ErrorKind = "missing" | "unavailable" | "offline";
 
@@ -26,9 +26,8 @@ export function ErrorState({ kind = "missing", retry }: { kind?: ErrorKind; retr
   const { title, description, icon: Icon } = messages[kind];
   return (
     <section className="error-state" aria-labelledby="error-title">
-      <div className="error-state-art" aria-hidden><ContourArt /></div>
       <div className="error-state-content container-content">
-        <div className="error-state-symbol" aria-hidden><Icon strokeWidth={1.25} /></div>
+        <div className="error-state-symbol" aria-hidden><Icon /></div>
         <h1 id="error-title" className="font-medium">{title}</h1>
         <p className="mx-auto mt-5 max-w-[60rem] text-lead-sm text-ink-700">{description}</p>
         <div className="mt-8">

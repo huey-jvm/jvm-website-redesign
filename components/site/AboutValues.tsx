@@ -6,7 +6,7 @@ export function AboutValues() {
       <div><h3 className="text-h2 text-gold-700">{values.rita.name}</h3><p className="mt-3 text-body-sm text-ink-700">{values.rita.description}</p></div>
       <ul className="grid gap-x-8 sm:grid-cols-2">
         {values.rita.items.map(value => <li key={value.title} className="flex items-start gap-4 border-t border-ink-200 py-6">
-          <span aria-hidden className="grid size-11 shrink-0 place-items-center rounded-pill border border-gold-500/50 bg-gold-200/20 text-h4 font-medium text-gold-700">{value.title[0]}</span>
+          <span aria-hidden className="grid size-11 shrink-0 place-items-center text-h4 font-medium text-gold-700">{value.title[0]}</span>
           <div><h4 className="text-h4">{value.title}</h4><p className="mt-2 text-body-sm text-ink-700">{value.line}</p></div>
         </li>)}
       </ul>

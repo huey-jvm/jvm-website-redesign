@@ -1,9 +1,7 @@
 import { TeamGallery } from "@/components/site/TeamGallery";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import Image from "@/components/ui/Image";
 import { PageHero } from "@/components/site/PageHero";
 import { Section, SectionHeader } from "@/components/site/Section";
-import { Backdrop } from "@/components/site/Slot";
 import { AboutLeadership } from "@/components/site/AboutLeadership";
 import { AboutValues } from "@/components/site/AboutValues";
 import { CompanyOverview } from "@/components/site/CompanyOverview";
@@ -35,9 +33,9 @@ export default function AboutPage() {
         crumbs={[{ label: "About" }]}
       >
       <div className="mt-12 md:mt-16">
-        <div className="about-introduction grid items-center gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
-          <div className="photo-feature relative aspect-[4/3]"><Image src={leadershipTeamPhoto.src} alt={leadershipTeamPhoto.alt} fill priority quality={90} sizes="(min-width:1024px) 55vw,100vw" className="object-cover" /></div>
-          <div><Eyebrow>People behind the mission</Eyebrow><h2 className="mt-4 text-h2-sm md:text-h2">Experience You Can Put a Face To</h2><p className="mt-5 text-body text-ink-700">Our work brings people, technology and operational support together. Meet the team behind JVM’s commitment to healthcare and professional services.</p><a href="#leadership" className="mt-6 inline-flex min-h-11 items-center text-body-sm font-semibold text-gold-700 underline underline-offset-4">Meet our leadership</a></div>
+        <div className="about-introduction inner-hero-grid grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+          <div className="inner-hero-photo photo-feature relative aspect-[4/3]"><Image src={leadershipTeamPhoto.src} alt={leadershipTeamPhoto.alt} fill priority quality={90} sizes="(min-width:1024px) 50vw,100vw" className="object-cover" /></div>
+          <div className="inner-hero-copy"><h2 className="editorial-title text-h2-sm md:text-h2">Experience You Can Put a Face To</h2><p className="mt-5 text-lead-sm text-ink-700">Our work brings people, technology and operational support together. Meet the team behind JVM’s commitment to healthcare and professional services.</p><a href="#leadership" className="mt-6 inline-flex min-h-11 items-center text-body-sm font-semibold text-gold-700 underline underline-offset-4">Meet our leadership</a></div>
         </div>
       </div>
       </PageHero>
@@ -59,25 +57,19 @@ export default function AboutPage() {
             className="chapter-section pt-0 md:pt-0 lg:pt-0"
           >
             <SectionHeader
-              eyebrow="Leadership"
-              title="Driving Missions Forward"
+              title="Leadership and Team"
             />
             <AboutLeadership />
           </Section>
           <Section contained={false} id="mission" className="chapter-section">
-            <SectionHeader eyebrow="Culture" title="Our Mission and Vision" />
-            <div data-backdrop="AS-13" className="purpose-grid relative isolate grid gap-5 md:grid-cols-[1fr_1.15fr]">
-            <Backdrop id="AS-13" />
+            <SectionHeader title="Our Mission and Vision" />
+            <div className="purpose-grid relative isolate grid gap-5 md:grid-cols-[1fr_1.15fr]">
               <article className="purpose-card">
-                <span className="purpose-number" aria-hidden>01</span>
-                <p className="purpose-label text-eyebrow font-semibold uppercase tracking-widest">What drives us</p>
-                <h3 className="mt-6 text-h3">Our Mission</h3>
+                <h3 className="text-h3">Our Mission</h3>
                 <p className="purpose-statement mt-4">{statements.mission}</p>
               </article>
               <article className="purpose-card purpose-card--vision surface-dark">
-                <span className="purpose-number" aria-hidden>02</span>
-                <p className="purpose-label text-eyebrow font-semibold uppercase tracking-widest">Where we’re going</p>
-                <h3 className="mt-6 text-h3">A Vision for Lasting Impact</h3>
+                <h3 className="text-h3">A Vision for Lasting Impact</h3>
                 <p className="purpose-statement mt-4">{statements.vision}</p>
               </article>
             </div>
@@ -98,7 +90,6 @@ export default function AboutPage() {
 
           <Section contained={false} id="values" className="chapter-section pt-0 md:pt-0 lg:pt-0">
             <SectionHeader
-              eyebrow="Values"
               title="Living Our Core Values"
               lead={values.intro}
             />
@@ -108,7 +99,7 @@ export default function AboutPage() {
 
 
           <Section contained={false} id="company" className="chapter-section pt-0 md:pt-0 lg:pt-0">
-            <SectionHeader eyebrow="In brief" title="The Company" />
+            <SectionHeader title="Company Details" />
             <CompanyOverview />
             <div className="mt-6 max-w-xl">
               <Placeholder id="P19" />

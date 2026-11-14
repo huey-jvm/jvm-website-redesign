@@ -25,6 +25,13 @@ const cormorant = localFont({
   fallback: ["Georgia", "serif"],
 });
 
+const garamond = localFont({
+  src: [{ path: "./fonts/eb-garamond-latin-variable.woff2", weight: "400 800", style: "normal" }],
+  variable: "--font-garamond",
+  display: "swap",
+  fallback: ["Georgia", "serif"],
+});
+
 const inter = localFont({
   src: [{ path: "./fonts/inter-latin-variable.woff2", weight: "400 600", style: "normal" }],
   variable: "--font-inter",
@@ -51,7 +58,7 @@ export const viewport: Viewport = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const Banner = announcement ? (await import("@/components/site/AnnouncementBanner")).AnnouncementBanner : null;
   return (
-    <html lang="en" className={`${cormorant.variable} ${inter.variable} h-full`}>
+    <html lang="en" className={`${cormorant.variable} ${inter.variable} ${garamond.variable} h-full`}>
       <body className="flex min-h-full flex-col">
         <SkipLink />
         <PageNavigationScroll />

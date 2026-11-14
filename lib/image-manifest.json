@@ -954,6 +954,19 @@
       900
     ]
   },
+  "/images/revision/mission-team-mobile.webp": {
+    "hash": "6d21584f2e67cc5e",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      1080
+    ]
+  },
   "/images/revision/mission-team-original-hd.jpg": {
     "hash": "14bc9d66fabf1bf8",
     "widths": [
@@ -1029,6 +1042,19 @@
       750,
       828,
       1024
+    ]
+  },
+  "/images/revision/team-walking-mobile.webp": {
+    "hash": "b4e5f4548c16884f",
+    "widths": [
+      96,
+      192,
+      256,
+      384,
+      640,
+      750,
+      828,
+      970
     ]
   },
   "/images/revision/team-walking-original-hd.jpg": {

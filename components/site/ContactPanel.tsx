@@ -26,13 +26,14 @@ export function ContactPanel({
   releaseRef: RefObject<(() => void) | undefined>;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!open) return;
     const panel = panelRef.current;
     if (!panel) return;
     const release = isolateModal(
       panel,
-      launcherRef.current ? [launcherRef.current] : [],
+      [launcherRef.current, backdropRef.current].filter((el): el is HTMLButtonElement | HTMLDivElement => el !== null),
     );
     releaseRef.current = release;
     const first = panel?.querySelector<HTMLElement>("button");
@@ -75,9 +76,17 @@ export function ContactPanel({
     };
   }, [open, close, launcherRef, releaseRef]);
 
+  useEffect(() => {
+    if (open) return;
+    const timeout = window.setTimeout(onExited, instant ? 0 : 180);
+    return () => window.clearTimeout(timeout);
+  }, [open, instant, onExited]);
+
   return (
     <>
       <div
+        ref={backdropRef}
+        data-contact-backdrop
         aria-hidden
         onClick={() => close(false)}
         className={cn(
@@ -113,8 +122,7 @@ export function ContactPanel({
         <div className="contact-panel-heading surface-dark relative flex shrink-0 items-start justify-between gap-4 bg-ink-950 px-6 pb-6 pt-5 md:px-8 md:pt-7">
           <div aria-hidden className="absolute inset-x-0 bottom-0 h-px bg-gold-500" />
           <div>
-            <p className="font-sans text-eyebrow font-semibold uppercase text-gold-500">Talk to JVM</p>
-            <h3 className="mt-2 text-h2-sm text-cream md:text-h2">Start a conversation</h3>
+            <h3 className="text-h2-sm text-cream md:text-h2">Start a conversation</h3>
             <p className="mt-2 max-w-[38ch] text-body-sm text-ink-200">Tell us who you are and what you need. A real person reads every message and replies within {contact.responseTime}.</p>
           </div>
           <CloseButton tone="dark" label="Close" onClick={(e) => close(e.detail === 0)} className="-mr-2 -mt-1 shrink-0" />

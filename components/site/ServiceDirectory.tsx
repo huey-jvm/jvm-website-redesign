@@ -14,10 +14,10 @@ export function ServiceDirectory() {
         </div>
         </div>
         <div className="service-entry-copy">
-          <p className="mb-3 text-eyebrow font-semibold uppercase tracking-widest text-gold-700">{service.lead ? "Our core capability" : "Integrated expertise"}</p>
+          {service.lead ? <p className="mb-3 text-eyebrow font-semibold uppercase tracking-widest text-gold-700">Our core capability</p> : null}
           <h2 className="text-h3 md:text-h2-sm">{service.name}</h2>
           <p className="mt-3 max-w-[54ch] text-body text-ink-700">{service.teaser}</p>
-          <span className="service-entry-action mt-5 inline-flex items-center gap-3 text-body-sm font-semibold">Explore {service.short}<ArrowUpRight aria-hidden className="size-4" /></span>
+          <span className="service-entry-action mt-5 inline-flex items-center gap-3 text-body-sm font-semibold">Explore {service.short}<ArrowUpRight aria-hidden className="size-4 lg:hidden" /></span>
         </div>
         <ArrowUpRight aria-hidden className="service-entry-arrow size-7" />
       </Link>

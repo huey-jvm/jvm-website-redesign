@@ -13,7 +13,7 @@ test("page navigation starts at the title while anchors still reach their sectio
   expect((await title.boundingBox())!.y).toBeGreaterThan(72);
   await page.getByRole("link", { name: "Meet our leadership", exact: true }).click();
   await expect(page).toHaveURL(/#leadership$/);
-  await expect(page.getByRole("heading", { name: "Driving Missions Forward" })).toBeInViewport();
+  await expect(page.getByRole("heading", { name: "Leadership and Team" })).toBeInViewport();
   await page.screenshot({ path: "test-results/navigation-anchor.png" });
   await page.locator("header").getByRole("link", { name: "JVM Solutions, home", exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThanOrEqual(101);

@@ -79,7 +79,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             {service.lead ? (
               <section id="commercial" className="commercial-health-card chapter-section scroll-mt-28 rounded-container p-6 md:p-8">
                 <Eyebrow tone="light">For commercial health systems</Eyebrow>
-                <h2 className="mt-3 text-h2-sm md:text-h2">The Same Model, in Your Terms</h2>
+                <h2 className="mt-3 text-h2-sm md:text-h2">Healthcare Support for Commercial Health Systems</h2>
                 <p className="prose-measure mt-4 text-body text-ink-700">
                   Health systems outside government face the same pressures: access, throughput, continuity of care and compliance. We bring the same credentialed professionals, the same program and case management discipline, scoped to your network, your payer mix and your patient population.
                 </p>

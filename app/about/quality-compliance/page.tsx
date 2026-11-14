@@ -5,10 +5,10 @@ import { Section, SectionHeader } from "@/components/site/Section";
 import { CTABand } from "@/components/site/CTABand";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { CopyButton } from "@/components/ui/CopyButton";
-import { Slot } from "@/components/site/Slot";
 import { credentials } from "@/content/credentials";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
+import Image from "@/components/ui/Image";
 
 export const metadata = pageMetadata("Quality and Compliance", "Our approach to quality in healthcare professional services, CMMC self-assessment and how to raise a concern.", "/about/quality-compliance");
 
@@ -16,9 +16,7 @@ export default function QualityPage() {
   const iso = credentials.find(c => c.slug === "iso-9001")!;
   const commission = quality.jointCommission.complaintRoute;
   return <>
-    <PageHero className="quality-hero" eyebrow="About" title="Quality and Compliance" lead="JVM Solutions is committed to a higher standard of service and to the delivery of safe, quality patient care." crumbs={[{ label: "About", href: "/about" }, { label: "Quality and Compliance" }]}>
-      <div className="mt-10 md:mt-14"><Slot id="AS-14" priority className="photo-feature aspect-[4/3] md:aspect-[3/1]" sizes="(min-width:1440px) 1312px,100vw" /></div>
-    </PageHero>
+    <PageHero className="quality-hero" backdrop="AS-14" eyebrow="About" title="Quality and Compliance" lead="JVM Solutions is committed to a higher standard of service and to the delivery of safe, quality patient care." crumbs={[{ label: "About", href: "/about" }, { label: "Quality and Compliance" }]} />
     <Section className="quality-standards">
       <SectionHeader eyebrow="Our standards" title="Quality in Every Engagement" />
       <div className="space-y-8">
@@ -27,7 +25,10 @@ export default function QualityPage() {
           <div className="mb-5 flex items-center gap-3"><ClipboardCheck aria-hidden className="size-6 text-gold-700" /><p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">Quality management</p></div>
           <h3 id="quality-iso-title" className="text-h3">{iso.name}</h3>
           </div>
-          <div />
+          <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-10">
+            <Image src="/assets/03-credentials/nsai-iso-9001.png" alt="Quality ISO 9001:2015 — NSAI Certified" width={200} height={285} className="h-auto w-[180px] shrink-0" />
+            <p className="max-w-sm text-body text-ink-700">Our quality management system is certified to ISO 9001:2015 by NSAI.</p>
+          </div>
         </section>
         <section className="grid gap-5 border-t border-ink-200 pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-16" aria-labelledby="quality-joint-title">
           <div>

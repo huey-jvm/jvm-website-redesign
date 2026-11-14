@@ -27,9 +27,9 @@ export default function CareersPage() {
         title="Work That Matters to the People It Serves"
         lead="JVM is an equal opportunity employer. If your work is a calling, you will find people here who feel the same."
         crumbs={[{ label: "Join Our Team" }]}
-        image={teamPhoto} panorama
+        image={teamPhoto} fullBleed
       >
-        <div className="mt-6"><Button href={contact.careersPortal} external variant="primary">View open roles on iSolved</Button></div>
+        <div className="mt-6"><Button href={contact.careersPortal} external variant="primary" tone="dark">View open roles on iSolved</Button></div>
       </ImageHero>
 
       <Section className="content-sized" surface="cream" id="beyond-the-mission">
@@ -59,7 +59,7 @@ export default function CareersPage() {
 
       <Section className="content-sized">
         <div className="mx-auto max-w-2xl text-center">
-          <SectionHeader align="center" eyebrow="Open roles" title="View Current Openings" lead="Applications are handled on our careers portal, hosted by iSolved." />
+          <SectionHeader align="center" title="View Current Openings" lead="Applications are handled on our careers portal, hosted by iSolved." />
           <Button href={contact.careersPortal} external variant="primary">View open roles on iSolved</Button>
         </div>
       </Section>

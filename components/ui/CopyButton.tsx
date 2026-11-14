@@ -6,6 +6,7 @@ import { cn } from "@/lib/cn";
 
 export function CopyButton({ value, label, tone = "light" }: { value: string; label: string; tone?: "light" | "dark" }) {
   const [copied, setCopied] = useState(false);
+  const [failed, setFailed] = useState(false);
   const [instant, setInstant] = useState(false);
   useEffect(() => {
     if (!copied) return;
@@ -19,11 +20,13 @@ export function CopyButton({ value, label, tone = "light" }: { value: string; la
         type="button"
         onClick={async (e) => {
           setInstant(e.detail === 0);
+          setFailed(false);
           try {
             await navigator.clipboard.writeText(value);
             setCopied(true);
           } catch {
             setCopied(false);
+            setFailed(true);
           }
         }}
         aria-label={copied ? `${label} copied` : `Copy ${label}`}
@@ -44,14 +47,14 @@ export function CopyButton({ value, label, tone = "light" }: { value: string; la
       <span
         aria-hidden
         className={cn(
-          "pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-control border border-ink-200 bg-white px-2.5 py-1 text-body-sm text-ink-900 shadow-float",
+          "pointer-events-none absolute bottom-full right-0 mb-2 w-max max-w-44 whitespace-normal rounded-control border border-ink-200 bg-white px-2.5 py-1 text-body-sm text-ink-900 shadow-float",
           "opacity-0 transition-opacity duration-100 ease-enter peer-hover:duration-125 peer-focus-visible:duration-125 peer-hover:delay-100 peer-focus-visible:delay-0 peer-hover:opacity-100 peer-focus-visible:opacity-100 peer-focus-visible:transition-none",
-          copied && "opacity-100",
+          (copied || failed) && "opacity-100",
         )}
       >
-        {copied ? "Copied" : "Copy"}
+        {failed ? "Select and copy the text" : copied ? "Copied" : "Copy"}
       </span>
-      <span role="status" className="sr-only">{copied ? `${label} copied` : ""}</span>
+      <span role="status" className="sr-only">{failed ? `Could not copy ${label}. Select and copy the displayed text.` : copied ? `${label} copied` : ""}</span>
     </span>
   );
 }

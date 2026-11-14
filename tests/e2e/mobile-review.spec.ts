@@ -4,7 +4,7 @@ for (const viewport of [{width:320,height:568},{width:390,height:844},{width:844
   test(`mobile menu and contact flow at ${viewport.width}x${viewport.height}`, async ({page}) => {
     await page.setViewportSize(viewport);
     await page.goto("/");
-    await page.locator("header").getByRole("button",{name:"Contact",exact:true}).click();
+    await page.getByRole("button",{name:"Start a conversation",exact:true}).click();
     const dialog=page.getByRole("dialog",{name:"Start a conversation"});
     await expect(dialog).toBeVisible();
     const close=dialog.getByRole("button",{name:"Close",exact:true});

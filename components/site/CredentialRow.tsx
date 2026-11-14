@@ -12,9 +12,8 @@ export function CredentialRow({ credential }: { credential: Credential }) {
   const vehicle = credential.slug === "stars-iii";
   return (
     <li className={`credential-detail${vehicle ? " credential-detail--vehicle surface-dark" : ""}`}>
-      <BadgeCheck aria-hidden className="credential-watermark" strokeWidth={0.65} />
       <div className="credential-heading flex items-center gap-3">
-        <span className="credential-seal grid size-11 shrink-0 place-items-center"><BadgeCheck aria-hidden className="size-6" strokeWidth={1.5} /></span>
+        <BadgeCheck aria-hidden className="size-6 shrink-0 text-gold-700" />
         <span className="credential-category text-eyebrow font-semibold uppercase tracking-widest">{vehicle ? "Contract vehicle" : "Small business certification"}</span>
       </div>
       <div className="credential-copy min-w-0 flex-1">

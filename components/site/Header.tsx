@@ -96,7 +96,7 @@ function DesktopNavigation({ nav }: { nav: NavGroup[] }) {
                         href={item.href}
                         data-nav-href={item.href}
                         className={
-                          "flex min-h-11 flex-col justify-center gap-1 rounded-control border px-4 py-3 hover:bg-cream focus-visible:bg-cream active:bg-gold-200 focus-visible:outline-2 focus-visible:outline-gold-700 data-[current=true]:border-gold-700 data-[current=true]:bg-cream " +
+                          "flex min-h-11 flex-col justify-center gap-1 rounded-none border px-4 py-3 hover:bg-cream focus-visible:bg-cream active:bg-gold-200 focus-visible:outline-2 focus-visible:outline-gold-700 data-[current=true]:border-gold-700 data-[current=true]:bg-cream " +
                           (item.lead
                             ? "border-ink-200 bg-ink-50"
                             : "border-transparent")

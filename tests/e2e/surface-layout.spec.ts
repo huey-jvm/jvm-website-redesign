@@ -3,6 +3,7 @@ import { test, expect, type Page } from "@playwright/test";
 async function openSurface(page: Page, path: string) {
   await page.goto(path, { waitUntil: "domcontentloaded" });
   await expect(page.locator("main")).toBeVisible();
+  await expect(page.locator("main h1")).toBeVisible();
   await page.evaluate(() => document.fonts.ready);
 }
 
@@ -44,13 +45,13 @@ test("dropdown selection follows the route rather than the first service", async
   await expect(nav.locator('[aria-current="page"]')).toHaveCount(1);
 });
 
-test("outcomes follow a content-sized hero and outcomes stack as one uncropped index", async ({ page }) => {
+test("outcomes follow the full-height hero and stack as one uncropped index", async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
   await openSurface(page, "/");
   const hero = page.locator("[data-hero]");
-  await expect(page.locator("[data-hero] + section").getByRole("heading", { name: "Helping Your Mission Move Forward" })).toBeVisible();
+  await expect(page.locator("[data-hero] + section").getByRole("heading", { name: "From Access to Care to Operational Readiness" })).toBeVisible();
   const heroBox = await hero.boundingBox();
-  expect(heroBox!.height).toBeLessThanOrEqual(1080 * 0.85);
+  expect(heroBox!.height).toBeGreaterThanOrEqual(1080);
   const cards = page.locator(".outcomes-row > li");
   await expect(cards).toHaveCount(5);
   const boxes = await cards.evaluateAll(els => els.map(el => { const r = el.getBoundingClientRect(); return { top: Math.round(r.top), left: Math.round(r.left) }; }));
@@ -61,34 +62,37 @@ test("outcomes follow a content-sized hero and outcomes stack as one uncropped i
   }
 });
 
-test("the header contact button opens the dialog and Escape closes it", async ({ page }) => {
-  await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto("/", { waitUntil: "domcontentloaded" });
-  const opener = page.locator("header").getByRole("button", { name: "Contact us" });
-  const fill = (el: Element) => { const s = getComputedStyle(el); return `${s.backgroundColor} ${s.backgroundImage}`; };
-  const rest = await opener.evaluate(fill);
-  await opener.hover();
-  expect(await opener.evaluate(fill)).not.toBe(rest);
-  await opener.click();
-  await expect(page.getByRole("dialog", { name: "Start a conversation" })).toBeVisible();
-  await page.keyboard.press("Escape");
-  await expect(page.getByRole("dialog", { name: "Start a conversation" })).toBeHidden();
-});
+for (const width of [375, 1280]) {
+  test(`header contact navigates to the contact page at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    const link = page.locator("header").getByRole("link", { name: width < 1024 ? "Contact" : "Contact us", exact: true });
+    await expect(link).toHaveAttribute("href", "/contact");
+    await link.click();
+    await expect(page).toHaveURL(/\/contact$/);
+    await expect(page.getByRole("heading", { name: "Contact JVM Solutions" })).toBeVisible();
+    await expect(page.getByRole("dialog", { name: "Start a conversation" })).toHaveCount(0);
+  });
+}
 
-test("sections and cards size to their content without viewport height floors", async ({ page }) => {
+test("desktop chapters fill a viewport while compact sections and cards fit their content", async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
   await openSurface(page, "/");
-  const hasFloor = await page.locator("main > section, .outcomes-row > li, .outcomes-row > li > a").evaluateAll(els => els.some(el => parseFloat(getComputedStyle(el).minHeight) > 0));
-  expect(hasFloor).toBe(false);
+  expect(await page.locator("main > section:not(.content-sized)").evaluateAll(els => els.every(el => parseFloat(getComputedStyle(el).minHeight) >= innerHeight))).toBe(true);
+  expect(await page.locator(".outcomes-row > li, .outcomes-row > li > a").evaluateAll(els => els.every(el => parseFloat(getComputedStyle(el).minHeight) === 0))).toBe(true);
   const cta = page.locator(".cta-content");
-  expect((await cta.boundingBox())!.height).toBeLessThan(500);
+  await expect(cta).toBeVisible();
+  expect((await cta.boundingBox())!.height).toBeLessThan(1080);
   await openSurface(page, "/services");
   // The directory and CTA now share the hero's background. Check the heading,
   // rather than imposing a height ceiling on the entire combined section.
-  expect(await page.locator("main > section").first().evaluate(el => getComputedStyle(el).minHeight)).toBe("0px");
+  expect(await page.locator("main > section").first().evaluate(el => parseFloat(getComputedStyle(el).minHeight))).toBeGreaterThanOrEqual(1080);
   expect((await page.locator(".brief-heading h1").first().boundingBox())!.height).toBeLessThan(200);
   await openSurface(page, "/legal/privacy");
   const chapters = page.locator(".chapter-section");
   expect(await chapters.count()).toBeGreaterThan(0);
   expect(await chapters.evaluateAll(els => els.every(el => getComputedStyle(el).minHeight === "0px"))).toBe(true);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openSurface(page, "/services");
+  expect(await page.locator("main > section").first().evaluate(el => getComputedStyle(el).minHeight)).toBe("0px");
 });

@@ -1,12 +1,11 @@
 "use client";
 
-import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { MessageSquareText } from "lucide-react";
 const loadForm = () => import("./ContactForm").then((m) => ({ default: m.ContactForm }));
-const loadPanel = () => import("./ContactPanel").then(m => ({default:m.ContactPanel}));
-const ContactPanel = lazy(loadPanel);
-import { WIDGET_OPEN_EVENT, type WidgetRoute } from "./widgetBus";
+import { ContactPanel } from "./ContactPanel";
+import { WIDGET_OPEN_EVENT, takeWidgetOpenRequest, type WidgetRoute } from "./widgetBus";
 import { cn } from "@/lib/cn";
 
 const SESSION_KEY = "jvm:widget:dismissed";
@@ -38,17 +37,20 @@ export function ContactWidget() {
 
 
   useEffect(() => {
-    const onOpen = (e: Event) => {
-      void loadForm(); void loadPanel();
-      const detail = (e as CustomEvent<{ route?: WidgetRoute; instant?: boolean }>).detail;
-      openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const onOpen = () => {
+      const detail = takeWidgetOpenRequest();
+      if (!detail) return;
+      void loadForm().catch(() => {});
+      openerRef.current = detail.opener;
       setRoute(detail?.route);
       setInstant(Boolean(detail?.instant));
       setMounted(true);
       setOpen(true);
     };
     window.addEventListener(WIDGET_OPEN_EVENT, onOpen);
-    return () => window.removeEventListener(WIDGET_OPEN_EVENT, onOpen);
+    let subscribed = true;
+    queueMicrotask(() => { if (subscribed) onOpen(); });
+    return () => { subscribed = false; window.removeEventListener(WIDGET_OPEN_EVENT, onOpen); };
   }, []);
 
 
@@ -57,7 +59,7 @@ export function ContactWidget() {
       <button
         ref={launcherRef}
         type="button"
-        onPointerEnter={() => { void loadForm(); void loadPanel(); }} onFocus={() => { void loadForm(); }}
+        onPointerEnter={() => { void loadForm().catch(() => {}); }} onFocus={() => { void loadForm().catch(() => {}); }}
         onClick={(e) => { if (open) close(e.detail === 0); else { openerRef.current = launcherRef.current; setRoute(undefined); setInstant(e.detail === 0); setMounted(true); setOpen(true); } }}
         aria-haspopup="dialog"
         aria-expanded={open}
@@ -75,7 +77,7 @@ export function ContactWidget() {
         <span className="text-body font-semibold text-white group-hover/launcher:text-ink-950 group-focus-visible/launcher:text-ink-950 group-active/launcher:text-ink-950 group-aria-expanded/launcher:text-ink-950 md:pointer-events-none md:absolute md:left-full md:top-1/2 md:ml-3 md:-translate-y-1/2 md:whitespace-nowrap md:rounded-pill md:border md:border-ink-800 md:bg-ink-950 md:px-4 md:py-2 md:shadow-float md:group-hover/launcher:text-white md:group-focus-visible/launcher:text-white md:group-active/launcher:text-white md:group-aria-expanded/launcher:text-white md:opacity-0 md:group-hover/launcher:opacity-100 md:group-focus-visible/launcher:opacity-100 md:transition-opacity md:duration-150 md:ease-hover md:group-focus-visible/launcher:transition-none">{open ? "Close conversation" : "Start a conversation"}</span>
       </button>
 
-      {mounted ? <Suspense fallback={null}><ContactPanel open={open} route={route} instant={instant} close={close} onExited={() => setMounted(false)} launcherRef={launcherRef} releaseRef={releaseRef} /></Suspense> : null}
+      {mounted ? <ContactPanel open={open} route={route} instant={instant} close={close} onExited={() => setMounted(false)} launcherRef={launcherRef} releaseRef={releaseRef} /> : null}
     </>
   );
 }

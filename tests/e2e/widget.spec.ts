@@ -37,7 +37,7 @@ test("pending contact submission sends one request and keyboard dismissal restor
     await route.fulfill({ status: 200, json: { ok: true, simulated: true } });
   });
   await page.goto("/");
-  const launcher = page.locator("header").getByRole("button", { name: "Contact us" });
+  const launcher = page.getByRole("button", { name: "Start a conversation", exact: true });
   await launcher.focus();
   await page.keyboard.press("Enter");
   const dialog = page.getByRole("dialog", { name: "Start a conversation" });
@@ -114,3 +114,59 @@ for (const success of [true, false])
       ).toHaveAttribute("href", `mailto:${contact.routes.other.to}`);
     }
   });
+
+
+for (const width of [375, 1440]) {
+  test(`contact shell opens while form code is held and remains dismissible at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/", { waitUntil: "networkidle" });
+    let release!: () => void;
+    const held = new Promise<void>(resolve => { release = resolve; });
+    await page.route("**/_next/static/**/*.js", async route => {
+      await held;
+      await route.continue();
+    });
+    try {
+      const opener = page.getByRole("button", { name: "Start a conversation", exact: true });
+      await opener.click();
+      const dialog = page.getByRole("dialog", { name: "Start a conversation" });
+      await expect(dialog).toBeVisible();
+      await expect(dialog.getByRole("status")).toHaveText("Loading the contact form…");
+      await expect(dialog.getByRole("button", { name: "Close", exact: true })).toBeFocused();
+      await page.keyboard.press("Escape");
+      await expect(dialog).toHaveCount(0);
+      await expect(opener).toBeFocused();
+      await expect(page.locator("main")).not.toHaveAttribute("inert", "");
+      release();
+      await page.unrouteAll({ behavior: "wait" });
+      await opener.click();
+      await expect(dialog.getByRole("button", { name: "Send message" })).toBeVisible();
+      // Backdrop must remain interactive while the rest of the document is inert.
+      await page.locator("[data-contact-backdrop]").click({ position: { x: 5, y: 5 } });
+      await expect(dialog).toHaveCount(0);
+      await expect(opener).toBeFocused();
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await opener.click();
+      await dialog.getByRole("button", { name: "Close", exact: true }).click();
+      await expect(dialog).toHaveCount(0);
+      await expect(page.locator("main")).not.toHaveAttribute("inert", "");
+    } finally {
+      release();
+      await page.unrouteAll({ behavior: "wait" });
+    }
+  });
+}
+
+
+test("copy failure explains the manual fallback without claiming success", async ({ page }) => {
+  await page.goto("/contracting", { waitUntil: "networkidle" });
+  await page.evaluate(() => Object.defineProperty(navigator, "clipboard", {
+    configurable: true,
+    value: { writeText: async () => { throw new Error("Permission denied"); } },
+  }));
+  const button = page.getByRole("button", { name: "Copy UEI", exact: true });
+  await button.focus();
+  await button.click();
+  await expect(page.getByRole("status").filter({ hasText: "Could not copy UEI" })).toContainText("Select and copy the displayed text.");
+  await expect(button).toHaveAccessibleName("Copy UEI");
+});

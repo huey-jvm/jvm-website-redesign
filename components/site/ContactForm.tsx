@@ -220,7 +220,7 @@ export function ContactForm({
       onSubmit={onSubmit}
       noValidate
       className="contact-form space-y-6"
-      aria-describedby={`${id}-reads`}
+      aria-describedby={routeInfo ? `${id}-reads` : undefined}
     >
       {Object.values(errors).some(Boolean) || status === "error" ? (
         <div
@@ -290,14 +290,14 @@ export function ContactForm({
           ) : null}
         </div>
       ) : null}
-      <fieldset aria-describedby={`${id}-reads`}>
+      <fieldset aria-describedby={routeInfo ? `${id}-reads` : undefined}>
         <legend className={labelBase}>
           Who are you?{" "}
           <span className={dark ? "text-ink-300" : "text-ink-500"}>
             (required)
           </span>
         </legend>
-        <div className="flex flex-wrap gap-2">
+        <div className={cn("grid gap-2", compact ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2")}>
           {routeKeys.map((key) => {
             const r = contact.routes[key];
             const selected = route === key;
@@ -305,7 +305,7 @@ export function ContactForm({
               <label
                 key={key}
                 className={cn(
-                  "inline-flex min-h-11 cursor-pointer items-center rounded-control border px-4 text-body-sm font-medium transition-[color,background-color,border-color,scale] duration-150 ease-hover active:scale-[0.98] motion-reduce:active:scale-100 has-focus-visible:transition-none has-focus-visible:outline-2 has-focus-visible:outline-offset-2",
+                  "flex min-h-12 cursor-pointer items-center gap-3 rounded-control border px-3 py-3 text-body-sm font-medium transition-colors duration-150 ease-hover has-focus-visible:transition-none has-focus-visible:outline-2 has-focus-visible:outline-offset-2",
                   dark
                     ? "has-focus-visible:outline-gold-500"
                     : "has-focus-visible:outline-gold-700",
@@ -334,6 +334,9 @@ export function ContactForm({
                   className="sr-only"
                   autoFocus={autoFocus && key === routeKeys[0]}
                 />
+                <span aria-hidden="true" className="flex size-4 shrink-0 items-center justify-center rounded-full border border-current">
+                  {selected ? <span className="size-2 rounded-full bg-current" /> : null}
+                </span>
                 {r.label}
               </label>
             );
@@ -345,15 +348,15 @@ export function ContactForm({
             {errors.route}
           </p>
         ) : null}
-        <p
+        {routeInfo ? <p
           id={`${id}-reads`}
           className={cn(
             "mt-2 min-h-5 text-body-sm",
             dark ? "text-ink-300" : "text-ink-500",
           )}
         >
-          {routeInfo ? null : "Pick a route and we will show you where it goes."}
-        </p>
+          Your message goes to {routeInfo.reads}.
+        </p> : null}
       </fieldset>
 
       <div
@@ -452,7 +455,8 @@ export function ContactForm({
           aria-describedby={errors.message ? `${id}-msg-err` : undefined}
           className={cn(
             inputBase,
-            "resize-y",
+            "resize-none overflow-y-auto",
+            compact ? "h-32 max-h-32" : "h-40 max-h-40",
             errors.message && "border-error",
           )}
         />
@@ -485,7 +489,7 @@ export function ContactForm({
         </Suspense>
       ) : null}
 
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
         <Button
           type="submit"
           variant="primary"

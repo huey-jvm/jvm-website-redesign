@@ -47,7 +47,7 @@ export default function WhyPage() {
           />
           <div className="min-w-0 space-y-16">
             <section id="shift" className="chapter-section scroll-mt-28">
-              <h2 className="text-h2-sm md:text-h2">The Shift</h2>
+              <h2 className="text-h2-sm md:text-h2">Coordinating Healthcare Operations</h2>
               <p className="prose-measure mt-4 text-body text-ink-700">
                 {theShift.intro}
               </p>

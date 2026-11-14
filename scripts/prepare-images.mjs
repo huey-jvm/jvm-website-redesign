@@ -10,6 +10,18 @@ const output = path.join(root, 'optimized');
 const widths = [96, 192, 256, 384, 640, 750, 828, 1080, 1200, 1440, 1920];
 const qualities = [75, 90];
 await fs.mkdir(output, { recursive: true });
+// Portrait variants avoid downloading a wide desktop photograph just to crop
+// most of it away in a full-height phone hero. Preserve the approved focal points.
+for (const [name, focalX] of [['mission-team', 0.6], ['team-walking', 0.5]]) {
+  const input = path.join(root, `revision/${name}-original-hd.jpg`);
+  const metadata = await sharp(input).metadata();
+  const cropWidth = Math.round(metadata.height * 9 / 16);
+  await sharp(input)
+    .extract({ left: Math.round((metadata.width - cropWidth) * focalX), top: 0, width: cropWidth, height: metadata.height })
+    .resize({ width: 1080, withoutEnlargement: true })
+    .webp({ quality: 90, effort: 4 })
+    .toFile(path.join(root, `revision/${name}-mobile.webp`));
+}
 for (const [name, bounds] of Object.entries({
   full: { left: 298, top: 505, width: 3003, height: 1391 },
   mark: { left: 298, top: 731, width: 1167, height: 1165 },

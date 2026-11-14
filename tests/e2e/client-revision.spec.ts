@@ -6,7 +6,7 @@ test("revision navigation and mobile audience paths", async ({ page }) => {
   const nav=page.locator('header nav[aria-label="Primary"]');
   await expect(nav.locator(':scope > ul > li')).toHaveCount(5);
   await expect(nav.locator(':scope > ul > li').first()).toHaveText("About JVM");
-  await expect(page.locator('main h1')).toContainText("Your Mission");
+  await expect(page.locator('main h1')).toContainText("Built to Serve.");
   await expect(page.locator('[data-hero]')).not.toContainText("STARS III");
   await expect(page.locator('footer')).toContainText("7550 W I-10");
   await page.setViewportSize({width:375,height:812});

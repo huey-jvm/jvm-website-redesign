@@ -15,7 +15,7 @@ test("the footer repeats every evidenced credential mark", async ({ page }) => {
   expect(await page.locator("[data-hero] + section[aria-labelledby='outcomes-title']").count(), "outcomes follow the hero").toBe(1);
 });
 
-const outcomeCards = (page: Page) => page.locator("section").filter({ has: page.getByRole("heading", { name: "Helping Your Mission Move Forward" }) }).locator(":is(ul, ol) > li");
+const outcomeCards = (page: Page) => page.locator("section").filter({ has: page.getByRole("heading", { name: "From Access to Care to Operational Readiness" }) }).locator(":is(ul, ol) > li");
 
 test("every outcome card shows an illustration, its title and its deck sentence", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });

@@ -28,7 +28,7 @@ export function ServiceCard({ service, image, slot, className, horizontal = fals
         ) : null}
         <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-ink-950 via-ink-950/60 to-ink-950/10" />
         <div className="flex h-full flex-col justify-end p-5 @[28rem]:p-8">
-          <Eyebrow tone="dark">{service.lead ? leadEyebrow : "Service"}</Eyebrow>
+          {service.lead ? <Eyebrow tone="dark">{leadEyebrow}</Eyebrow> : null}
           <Tag title={service.name} className={cn("mt-2 text-cream transition-colors duration-150 ease-hover group-hover/card:text-gold-500 group-focus-visible/card:text-gold-500 group-focus-visible/card:transition-none", service.lead ? "text-h3 @[28rem]:text-h1" : "text-h4 @[20rem]:text-h3")}>{service.name}</Tag>
           <p className={cn("mt-2 max-w-[48ch] text-body-sm text-ink-200", service.lead ? "@[28rem]:text-body" : "line-clamp-2")}>{service.teaser}</p>
           <span className="mt-4 inline-flex items-center gap-1 text-body-sm font-semibold text-cream">
@@ -66,7 +66,7 @@ export function ServiceCard({ service, image, slot, className, horizontal = fals
         <Slot id={slot} className={frame} sizes={sizes} />
       ) : null}
       <div className={cn("flex min-w-0 flex-col p-4 @[20rem]:p-6", mode === "feature" ? "@[35rem]:p-8" : mode === "row" ? "flex-1 @[28rem]:px-6 @[28rem]:py-5" : "flex-1 @[35rem]:p-8")}>
-        <Eyebrow tone="light">{service.lead ? leadEyebrow : "Service"}</Eyebrow>
+        {service.lead ? <Eyebrow tone="light">{leadEyebrow}</Eyebrow> : null}
         <Tag title={service.name} className={cn("mt-2 text-h4 text-ink-950 transition-colors duration-150 ease-hover group-hover/card:text-gold-700 group-focus-visible/card:text-gold-700 group-focus-visible/card:transition-none", mode === "row" ? "@[28rem]:text-h3" : "@[20rem]:text-h3 @[35rem]:text-h2-sm")}>{service.name}</Tag>
         <p className="mt-2 text-body-sm text-ink-700 @[20rem]:text-body">{service.teaser}</p>
         <span className="mt-auto inline-flex items-center gap-1 pt-4 text-body-sm font-semibold text-ink-900">

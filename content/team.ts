@@ -1,10 +1,11 @@
 import { contact } from "./contact";
 
 export const leadershipTeamPhoto = { src: "/images/revision/team-shirts.webp", alt: "JVM colleagues together in branded team shirts", position: "object-center" };
-export const missionHeroPhoto = { ...leadershipTeamPhoto, src: "/images/revision/mission-team-original-hd.jpg" };
+export const missionHeroPhoto = { ...leadershipTeamPhoto, src: "/images/revision/mission-team-original-hd.jpg", mobileSrc: "/images/revision/mission-team-mobile.webp" };
 
 export const teamPhoto = {
   src: "/images/revision/team-walking-original-hd.jpg",
+  mobileSrc: "/images/revision/team-walking-mobile.webp",
   alt: "The JVM Solutions team walking together outdoors",
   position: "object-center",
 };

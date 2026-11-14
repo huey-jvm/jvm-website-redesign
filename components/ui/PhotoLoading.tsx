@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { SkeletonBox } from "skullet/react";
+import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
+
+const SkeletonBox = lazy(() => import("skullet/react").then(module => ({ default: module.SkeletonBox })));
 
 // Preserve the server-rendered image and its dimensions. Fast/cached images
 // never show an overlay; surrounding content remains available immediately.
@@ -15,8 +16,7 @@ export function PhotoLoading({ children }: { children: ReactNode }) {
     if (!image) return;
     let disposed = false;
     let settled = false;
-    const finish = async () => {
-      try { if (image.naturalWidth) await image.decode(); } catch { /* Do not leave failed images behind a permanent loader. */ }
+    const finish = () => {
       settled = true;
       if (!disposed) setReady(true);
     };
@@ -25,7 +25,7 @@ export function PhotoLoading({ children }: { children: ReactNode }) {
     }, 150);
     image.addEventListener("load", finish);
     image.addEventListener("error", finish);
-    if (image.complete) void finish();
+    if (image.complete) finish();
     return () => {
       disposed = true;
       clearTimeout(timer);
@@ -35,9 +35,11 @@ export function PhotoLoading({ children }: { children: ReactNode }) {
   }, []);
 
   return <span ref={root} style={{ display: "contents" }}>
-    {children}
+    {/* Paint the placeholder underneath the image. A ready image can appear
+        immediately, without waiting for hydration or a React state update. */}
     {visible && <span className="photo-loading" data-ready={ready} aria-hidden="true">
-      <SkeletonBox width="100%" height="100%" radius={0} />
+      <Suspense fallback={null}><SkeletonBox width="100%" height="100%" radius={0} /></Suspense>
     </span>}
+    {children}
   </span>;
 }

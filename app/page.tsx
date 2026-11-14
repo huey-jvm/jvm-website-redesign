@@ -31,7 +31,7 @@ export default function HomePage() {
       <CinematicHero image={missionHeroPhoto}>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Button href="/services" tone="dark" size="md" variant="primary">Explore Our Services</Button>
-          <Button href="/about" variant="secondary" tone="dark" size="md">Meet JVM</Button>
+          <Button href="/about" variant="tertiary" tone="dark" size="md">Meet JVM</Button>
         </div>
       </CinematicHero>
 
@@ -39,7 +39,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-36">
-              <SectionHeader id="outcomes-title" eyebrow="Five outcomes" title="Helping Your Mission Move Forward" lead="From access to care to operational readiness, explore the outcomes that guide our work." className="mb-0 md:mb-0" />
+              <SectionHeader id="outcomes-title" title="From Access to Care to Operational Readiness" lead="Explore the five outcomes that guide our work." className="mb-0 md:mb-0" />
             </div>
           </div>
           <ol className="outcomes-row border-t-2 border-gold-500 lg:col-span-8">
@@ -65,7 +65,7 @@ export default function HomePage() {
 
       <Section surface="light">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <SectionHeader eyebrow="How we work" title="How We Support Your Mission" className="mb-0 md:mb-0" />
+          <SectionHeader title="How We Support Your Mission" className="mb-0 md:mb-0" />
           <Button href="/why-jvm" variant="tertiary" icon={<ArrowRight className="size-4" />} iconTrailing className="self-start md:self-auto">Read how we work</Button>
         </div>
         <ol className="differentiators mt-10 grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:mt-12 lg:grid-cols-4">
@@ -86,7 +86,7 @@ export default function HomePage() {
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-20">
           <div>
             <Eyebrow tone="light">Leadership / Mission experience</Eyebrow>
-            <h2 className="mt-4 max-w-[18ch] text-h1-sm md:text-h1">Led From Inside the Mission</h2>
+            <h2 className="editorial-title mt-4 max-w-[18ch] text-h1-sm md:text-h1">Led From Inside the Mission</h2>
             <p className="mt-6 max-w-[60ch] text-lead-sm text-ink-900">{founder.name}, {founder.role}, {founder.summary}</p>
             <p className="mt-4 max-w-[60ch] text-body text-ink-700">JVM is built on that understanding of how federal health missions actually run.</p>
             <ul aria-label="Leadership experience" className="mt-8 flex flex-wrap gap-3 text-body-sm font-medium text-ink-900">

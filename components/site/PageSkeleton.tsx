@@ -1,4 +1,4 @@
-type Sample = {
+export type Sample = {
   width: number;
   height: number;
   regions: number[][];
