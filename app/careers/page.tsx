@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/Button";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
 import { Slot } from "@/components/site/Slot";
+import { purpose } from "@/content/purpose";
+import { FounderQuote } from "@/components/site/FounderQuote";
 
 export const metadata = pageMetadata("Join Our Team", "Join a veteran-led healthcare operations company. We hire veterans, healthcare professionals and experienced professionals who want their work to matter.", "/careers");
 
@@ -29,6 +31,13 @@ export default function CareersPage() {
       >
         <div className="mt-6"><Button href={contact.careersPortal} external variant="primary">View open roles on iSolved</Button></div>
       </ImageHero>
+
+      <Section className="content-sized" surface="cream" id="beyond-the-mission">
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.6fr] lg:gap-14">
+          <div><h2 className="text-h2-sm md:text-h2">{purpose.careers.title}</h2><p className="mt-5 max-w-[48ch] text-body text-ink-700">{purpose.careers.belief}</p></div>
+          <FounderQuote quote={purpose.careers.quote} />
+        </div>
+      </Section>
 
       <Section>
 

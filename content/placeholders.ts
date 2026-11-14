@@ -1,7 +1,7 @@
 export const placeholderRegister: Record<string, { what: string; who: string }> = {
   P1: { what: "Closed 10 October 2026. Four service names in a fixed order, slugs unchanged, D7", who: "closed" },
   P2: { what: "Closed 10 October 2026. Values confirmed as R.I.T.A. with ROAR, D9", who: "closed" },
-  P3: { what: "The deck vision as the vision and the faith led line as the company story, pending the CEO’s confirmation", who: "the CEO, D10" },
+  P3: { what: "Closed 10 November 2026. Margie supplied the founder’s purpose message, Careers quote, community commitment and revised faith-led vision", who: "closed" },
   P4: { what: "Whether the Broadway mailing address and either fax number are still in use. No fax is shown until one is confirmed", who: "JVM, records check, B1" },
   P5: { what: "Whether JVM is on the current STARS III Industry Partner list. No option dates are shown until it is confirmed", who: "JVM, Industry Partner list check, B2" },
   P6: { what: "The confirmed subcontract vehicles, each with JVM’s role and period of performance. None is named until the list arrives", who: "JVM, B3" },

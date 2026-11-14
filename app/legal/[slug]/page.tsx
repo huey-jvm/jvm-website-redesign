@@ -27,11 +27,11 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
   if (!page) notFound();
   return (
     <>
-      <PageHero eyebrow="Legal" title={page.title} lead={page.description} crumbs={[{ label: page.title }]}>
+      <PageHero className="content-sized" eyebrow="Legal" title={page.title} lead={page.description} crumbs={[{ label: page.title }]}>
         <p className="mt-4 text-caption text-ink-500">Last updated {page.updated}</p>
         {page.draft ? <div className="mt-4 max-w-xl"><Placeholder id="P12" /></div> : null}
       </PageHero>
-      <Section>
+      <Section className="content-sized legal-content">
         <div className="document-layout grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
           <InPageNav sections={page.sections.map((s) => ({ id: s.id, label: s.title }))} />
           <div className="min-w-0 space-y-10">

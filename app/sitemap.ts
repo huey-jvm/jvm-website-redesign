@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/", "/services", ...allServices.map((s) => `/services/${s.slug}`), "/why-jvm",
     "/contracting", ...(starsShown ? ["/contracting/stars-iii"] : []), "/contracting/certifications", "/contracting/capability-statement",
     ...(pastPerformance.length ? ["/contracting/past-performance"] : []),
-    "/about", "/about/quality-compliance", "/careers", "/work-with-us", "/contact",
+    "/about", "/about/quality-compliance", "/about/community-impact", "/careers", "/work-with-us", "/contact",
     "/legal/privacy", "/legal/terms", "/legal/accessibility", "/legal/sms-consent",
   ];
   return paths.map((p) => ({ url: `${siteUrl}${p}`, lastModified: now, changeFrequency: p === "/" ? "weekly" : "monthly", priority: p === "/" ? 1 : 0.7 }));

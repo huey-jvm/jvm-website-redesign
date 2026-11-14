@@ -15,6 +15,9 @@ import { InPageNav } from "@/components/site/InPageNav";
 import { leadershipTeamPhoto } from "@/content/team";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
+import { purpose } from "@/content/purpose";
+import { FounderQuote } from "@/components/site/FounderQuote";
+import { Button } from "@/components/ui/Button";
 
 export const metadata = pageMetadata(
   "About JVM",
@@ -44,7 +47,7 @@ export default function AboutPage() {
           sections={[
             { id: "leadership", label: "Leadership and team" },
             { id: "mission", label: "Mission and vision" },
-            { id: "story", label: "Story" },
+            { id: "story", label: "Purpose and impact" },
             { id: "values", label: "Values" },
             { id: "company", label: "Company" },
           ]}
@@ -74,7 +77,7 @@ export default function AboutPage() {
               <article className="purpose-card purpose-card--vision surface-dark">
                 <span className="purpose-number" aria-hidden>02</span>
                 <p className="purpose-label text-eyebrow font-semibold uppercase tracking-widest">Where we’re going</p>
-                <h3 className="mt-6 text-h3">Our Vision</h3>
+                <h3 className="mt-6 text-h3">A Vision for Lasting Impact</h3>
                 <p className="purpose-statement mt-4">{statements.vision}</p>
               </article>
             </div>
@@ -83,17 +86,14 @@ export default function AboutPage() {
           <Section
             contained={false}
             id="story"
-            className="chapter-section pt-0 md:pt-0 lg:pt-0"
+            className="chapter-section content-sized pt-0 md:pt-0 lg:pt-0"
           >
-            <SectionHeader eyebrow="Culture" title="Our Story" />
-            <blockquote className="about-story relative max-w-3xl pl-8 text-lead font-medium leading-relaxed text-ink-900 md:pl-12 md:text-h2-sm"><span aria-hidden className="absolute -top-5 left-0 font-serif text-[5rem] leading-none text-gold-500">“</span><p>{statements.story}</p></blockquote>
-            <Placeholder
-              id="P3"
-              inline
-              what="Pending the CEO’s confirmation"
-              who="the CEO"
-              className="mt-4 inline-block"
-            />
+            <SectionHeader eyebrow="A message from our founder" title={purpose.title} />
+            <FounderQuote quote={purpose.quote} />
+            <div className="mt-8 max-w-[72ch] space-y-5 text-body leading-relaxed text-ink-700">
+              {purpose.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+            </div>
+            <div className="mt-8"><Button href="/about/community-impact" variant="secondary">Our commitment to community</Button></div>
           </Section>
 
           <Section contained={false} id="values" className="chapter-section pt-0 md:pt-0 lg:pt-0">

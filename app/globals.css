@@ -546,6 +546,11 @@ header [data-nav-href]::after { background-image:var(--brand-gradient-rule); }
   min-height:0;
   padding-block:3rem;
 }
+.legal-content .chapter-section {
+  min-height:0;
+  display:block;
+  padding-block:1.5rem 0;
+}
 .image-hero.panorama-hero > .container-content > .photo-feature {
   min-height:0;
   aspect-ratio:4694 / 1724;

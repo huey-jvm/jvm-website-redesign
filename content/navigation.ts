@@ -45,6 +45,7 @@ export const footerColumns: { heading: string; items: NavItem[] }[] = [
     items: [
       { label: "Why JVM", href: "/why-jvm" },
       { label: "About JVM", href: "/about" },
+      { label: "Community Impact", href: "/about/community-impact" },
       { label: "Quality and Compliance", href: "/about/quality-compliance" },
       { label: "Join Our Team", href: "/careers" },
       { label: "Partner With Us", href: "/work-with-us" },

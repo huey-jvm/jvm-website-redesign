@@ -14,7 +14,7 @@ export const metadata = pageMetadata("Contact", "Reach JVM Solutions. Choose who
 export default function ContactPage() {
   return (
     <>
-      <PageHero eyebrow="Contact" title="Let’s Move Your Mission Forward" lead="Talk with our team about your goals, your next program or your career. We’ll help you take the next step." crumbs={[{ label: "Contact" }]} />
+      <PageHero className="content-sized" eyebrow="Contact" title="Let’s Move Your Mission Forward" lead="Talk with our team about your goals, your next program or your career. We’ll help you take the next step." crumbs={[{ label: "Contact" }]} />
       <Section surface="cream" className="contact-workspace">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="contact-form-sheet lg:col-span-7"><h2 className="mb-2 text-h2-sm">Start a conversation</h2><p className="mb-8 text-body-sm text-ink-700">Choose your enquiry type to connect with the right team.</p><ContactForm /></div>
