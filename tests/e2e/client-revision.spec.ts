@@ -14,7 +14,7 @@ test("revision navigation and mobile audience paths", async ({ page }) => {
   await page.getByRole('dialog',{name:'Menu',exact:true}).getByRole('button',{name:'Partner With Us',exact:true}).click();
   await page.getByRole('dialog',{name:'Menu',exact:true}).getByRole('link',{name:'Become a Partner',exact:true}).click();
   await expect(page).toHaveURL(/work-with-us/);
-  await expect(page.locator('main').getByRole('link',{name:'Join Our Team',exact:true})).toHaveAttribute('href','/careers');
+  await expect(page.locator('main').getByRole('link',{name:'Explore careers',exact:true})).toHaveAttribute('href','/careers');
   await expect(page.locator('main').getByRole('link',{name:'Email Deja about a partnership'})).toHaveAttribute('href',/^mailto:info@jvmsolutions.net/);
 });
 

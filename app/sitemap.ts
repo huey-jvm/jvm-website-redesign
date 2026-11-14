@@ -14,5 +14,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about", "/about/quality-compliance", "/about/community-impact", "/careers", "/work-with-us", "/contact",
     "/legal/privacy", "/legal/terms", "/legal/accessibility", "/legal/sms-consent",
   ];
-  return paths.map((p) => ({ url: `${siteUrl}${p}`, lastModified: now, changeFrequency: p === "/" ? "weekly" : "monthly", priority: p === "/" ? 1 : 0.7 }));
+  return paths.map((p) => ({ url: `${siteUrl}${p}${process.env.NEXT_PUBLIC_STATIC_EXPORT === "true" && p !== "/" ? "/" : ""}`, lastModified: now, changeFrequency: p === "/" ? "weekly" : "monthly", priority: p === "/" ? 1 : 0.7 }));
 }

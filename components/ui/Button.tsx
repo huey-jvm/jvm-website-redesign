@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "./IntentLink";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Loader2, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/cn";

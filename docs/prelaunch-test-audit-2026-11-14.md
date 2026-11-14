@@ -21,6 +21,14 @@ Eleven original failures were outdated expectations; five identified production 
 
 Lighthouse now audits `/contracting` instead of the withheld `/contracting/stars-iii` page. All performance, accessibility, best-practices and SEO score thresholds are retained.
 
+After the browser suite reached 420 passes, Lighthouse exposed mobile performance failures on the homepage and Healthcare Operations page. Photo placeholders now use CSS instead of downloading the Skullet runtime (the map still uses Skullet). The hero uses a phone derivative generated from the same original at the existing 60% horizontal focal point; desktop HD files are unchanged. Media-specific preloads prevent duplicate desktop downloads, and below-the-fold images receive low fetch priority. A browser regression checks the phone derivative, its HD dimensions and the single-image request. Failure artifacts now include the hidden Lighthouse reports so future performance issues retain their evidence.
+
 ## Release gate
+
+The browser suite passed 421 tests with 22 intentional skips at `2fdb203`. The subsequent navigation regression verifies that a destination is not prefetched on initial render, is prefetched on keyboard focus, and opens with its heading visible. Primary navigation, buttons and breadcrumbs now prefetch on intent to avoid competing hero downloads. Performance CI runs separately against the production static export, with the same score thresholds and two runs per URL. Static sitemap and canonical URLs include the final trailing slash and are checked after export.
+
+Mobile Lighthouse performance remains a cutover gate: the latest local static audit measured 88 on the homepage and 93–96 on the other three routes. Passing browser tests alone does not establish readiness for domain cutover.
+
+GitHub run `43593729467` passed all 422 browser tests (22 intentional skips), and the preview and production-check exports passed. Its HTTP/1 static audit passed three routes, with the homepage at 85/88. The audit server now supports compressed HTTP/2 on loopback to match the production CDN's asset multiplexing. A one-day self-signed audit certificate is generated in an OS temporary directory; Chromium trusts it only for the local audit invocation. Production TLS settings are unaffected. Local HTTP/2 runs showed homepage LCP at 2.9–3.0 seconds, versus 3.9 seconds with the HTTP/1 connection queue; CPU time remains independently measured and gated.
 
 Before website DNS cutover: require the updated Checks workflow, Pages preview deployment and build-only production export to pass, then verify the live preview. Real mailbox delivery and custom-domain HTTPS must still be checked during the coordinated cutover. The static contact experience intentionally uses direct email links rather than an API submission form.

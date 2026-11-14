@@ -8,12 +8,15 @@
   --skullet-speed: slow;
 }
 .photo-loading { position:absolute; inset:0; pointer-events:none; overflow:hidden; opacity:1; transition:opacity 180ms ease-out; }
+.photo-loading-fill { display:block; width:100%; height:100%; background:var(--skullet-base); animation:photo-loading-pulse 2s ease-in-out infinite; }
+@keyframes photo-loading-pulse { 50% { background:var(--skullet-highlight); } }
 .photo-loading[data-ready="true"] { opacity:0; visibility:hidden; transition:opacity 180ms ease-out, visibility 0s 180ms; }
 .mission-backdrop .photo-loading { --skullet-base:#263c47; --skullet-highlight:#344d59; }
 .route-loading { min-height:100svh; padding-block:clamp(3rem,8svh,7rem); opacity:0; animation:loading-appear 120ms ease-out 150ms forwards; }
 @keyframes loading-appear { to { opacity:1; } }
 @media (prefers-reduced-motion: reduce) {
   .photo-loading, .route-loading { --skullet-animation:none; }
+  .photo-loading-fill { animation:none; }
   .photo-loading, .photo-loading[data-ready="true"] { transition:none; }
   .route-loading { animation:none; opacity:1; }
 }

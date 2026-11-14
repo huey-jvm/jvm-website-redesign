@@ -31,7 +31,7 @@ export const assets: Asset[] = [
   { id: "AS-10", path: `${dir}/as-10-shift.png`, alt: "", kind: "texture", where: [] },
   { id: "AS-11", path: `${dir}/as-11-contracting-banner.jpg`, alt: "", kind: "photo", where: [] },
   { id: "AS-12", path: `${dir}/as-12-capability.jpg`, alt: "A blank sheet of paper and a fountain pen on a dark desk", kind: "photo", where: [] },
-  { id: "AS-13", path: `${dir}/as-05-cream-grain.png`, alt: "", kind: "texture", where: ["/about"] },
+  { id: "AS-13", path: `${dir}/as-05-cream-grain.png`, alt: "", kind: "texture", where: [] },
   { id: "AS-14", path: `/images/revision/quality-team-enhanced.png`, alt: "", kind: "photo", where: ["/about/quality-compliance"] },
   { id: "AS-15a", path: `/images/revision/team-visit.webp`, alt: "JVM colleagues during a workplace visit", kind: "photo", where: ["/careers"] },
   { id: "AS-15b", path: "/images/revision/clinical-team-enhanced.png", alt: "A group of professionals together in a clinical workplace", kind: "photo", where: ["/careers"] },

@@ -1,8 +1,31 @@
 import fs from "node:fs";
 import path from "node:path";
+import sharp from "sharp";
 import { test, expect } from "@playwright/test";
 import imageLoader from "../../lib/image-loader";
 import manifest from "../../lib/image-manifest.json";
+
+test("phone hero loads one correctly framed HD derivative without downloading the desktop image", async ({ browser }) => {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
+  try {
+    const page = await context.newPage();
+    const hash = manifest["/images/revision/mission-team-original-hd.jpg"].hash;
+    const requested: string[] = [];
+    page.on("request", request => { if (request.url().includes(`/optimized/${hash}-`)) requested.push(request.url()); });
+    await page.goto("/", { waitUntil: "networkidle" });
+    const image = page.locator(".mission-backdrop img");
+    await expect.poll(() => image.evaluate((img: HTMLImageElement) => img.complete && img.naturalHeight > 0)).toBe(true);
+    const currentSrc = await image.evaluate((img: HTMLImageElement) => img.currentSrc);
+    expect(currentSrc).toMatch(/portrait-v\d+-\d+-75\.webp$/);
+    const metadata = await sharp(path.join(process.cwd(), "public", new URL(currentSrc).pathname)).metadata();
+    expect(metadata.height).toBeGreaterThanOrEqual(1000);
+    expect([...new Set(requested)]).toHaveLength(1);
+    expect(requested.every(url => url.includes("-portrait-v"))).toBe(true);
+    const frame = await page.locator(".mission-hero").boundingBox();
+    expect(frame!.width / frame!.height).toBeLessThanOrEqual(0.6);
+    await expect(image).toHaveAttribute("srcset", /3840w/);
+  } finally { await context.close(); }
+});
 
 test("static images have real width-specific files and quality variants", () => {
   for (const [src, image] of Object.entries(manifest)) {

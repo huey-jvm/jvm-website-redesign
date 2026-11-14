@@ -55,13 +55,13 @@ test("failed photo clears its loading overlay", async ({ page }) => {
 test("ready photos do not remain masked and mobile stays within the viewport", async ({ page }) => {
   const desktopHeroRequests: string[] = [];
   page.on("request", request => {
-    if (request.url().includes(`/images/optimized/${hero.hash}-`)) desktopHeroRequests.push(request.url());
+    if (request.url().includes(`/images/optimized/${hero.hash}-`) && !request.url().includes("-portrait-v")) desktopHeroRequests.push(request.url());
   });
   await page.setViewportSize({ width: 375, height: 812 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   await expect.poll(() => page.locator(".mission-backdrop img").evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
-  const mobileHero = manifest["/images/revision/mission-team-mobile.webp"];
+  const mobileHero = hero.portrait;
   expect(await page.locator(".mission-backdrop img").evaluate((img: HTMLImageElement) => img.currentSrc)).toContain(mobileHero.hash);
   expect(desktopHeroRequests).toEqual([]);
   await expect(page.locator('.mission-backdrop .photo-loading:not([data-ready="true"])')).toHaveCount(0);

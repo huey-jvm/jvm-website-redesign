@@ -12,7 +12,7 @@ export function ImageHero({ eyebrow, title, lead, crumbs, children, image, panor
   if (fullBleed) return (
     <section className="image-hero inner-image-hero full-photo-hero surface-dark" data-hero="photo">
       <div className="absolute inset-0">
-        <Image src={image.src} mobileSrc={image.mobileSrc} alt={image.alt} fill priority quality={90} sizes="100vw" className={cn("hero-image object-cover", image.position)} />
+        <Image src={image.src} mobile={{ maxWidth: 1920, sizes: "1000px", quality: 75 }} alt={image.alt} fill priority quality={90} sizes="100vw" className={cn("hero-image object-cover", image.position)} />
       </div>
       <div className="full-photo-shade absolute inset-0" aria-hidden="true" />
       <div className="container-content relative z-10">

@@ -87,7 +87,9 @@ test("desktop chapters fill a viewport while compact sections and cards fit thei
   // The directory and CTA now share the hero's background. Check the heading,
   // rather than imposing a height ceiling on the entire combined section.
   expect(await page.locator("main > section").first().evaluate(el => parseFloat(getComputedStyle(el).minHeight))).toBeGreaterThanOrEqual(1080);
-  expect((await page.locator(".brief-heading h1").first().boundingBox())!.height).toBeLessThan(200);
+  const title = page.locator(".brief-heading h1").first();
+  await expect(title).toBeVisible();
+  expect((await title.boundingBox())!.height).toBeLessThan(200);
   await openSurface(page, "/legal/privacy");
   const chapters = page.locator(".chapter-section");
   expect(await chapters.count()).toBeGreaterThan(0);

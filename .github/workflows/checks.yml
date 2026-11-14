@@ -35,10 +35,6 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
       - name: Test
         run: pnpm test
-      - name: Lighthouse, mobile
-        run: pnpm lighthouse:mobile
-      - name: Lighthouse, desktop
-        run: pnpm lighthouse:desktop
       - name: Keep the traces of any failure
         if: failure()
         uses: actions/upload-artifact@v4
@@ -47,5 +43,41 @@ jobs:
           path: |
             test-results
             .lighthouseci
+          if-no-files-found: ignore
+          retention-days: 7
+          include-hidden-files: true
+
+  pages-performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      STATIC_EXPORT: "true"
+      PAGES_BASE_PATH: ""
+      NEXT_PUBLIC_SITE_URL: https://www.jvmsolutions.net
+      NEXT_PUBLIC_NOINDEX: "false"
+      PAGES_AUDIT_HTTP2: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Remove the API from the static build
+        run: rm -rf app/api
+      - name: Build the production Pages export
+        run: pnpm build && node scripts/pages-postbuild.mjs out && node scripts/verify-pages.mjs out
+      - name: Lighthouse on Pages export, mobile
+        run: pnpm exec lhci collect --startServerCommand="node scripts/serve-pages.mjs out 3200" && pnpm exec lhci assert
+      - name: Lighthouse on Pages export, desktop
+        run: pnpm exec lhci collect --startServerCommand="node scripts/serve-pages.mjs out 3200" --settings.preset=desktop && pnpm exec lhci assert
+      - name: Retain performance reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-lighthouse-reports
+          path: .lighthouseci
+          include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 7
