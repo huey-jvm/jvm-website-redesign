@@ -29,4 +29,6 @@ The browser suite passed 421 tests with 22 intentional skips at `2fdb203`. The s
 
 Mobile Lighthouse performance remains a cutover gate: the latest local static audit measured 88 on the homepage and 93–96 on the other three routes. Passing browser tests alone does not establish readiness for domain cutover.
 
+GitHub run `43593729467` passed all 422 browser tests (22 intentional skips), and the preview and production-check exports passed. Its HTTP/1 static audit passed three routes, with the homepage at 85/88. The audit server now supports compressed HTTP/2 on loopback to match the production CDN's asset multiplexing. A one-day self-signed audit certificate is generated in an OS temporary directory; Chromium trusts it only for the local audit invocation. Production TLS settings are unaffected. Local HTTP/2 runs showed homepage LCP at 2.9–3.0 seconds, versus 3.9 seconds with the HTTP/1 connection queue; CPU time remains independently measured and gated.
+
 Before website DNS cutover: require the updated Checks workflow, Pages preview deployment and build-only production export to pass, then verify the live preview. Real mailbox delivery and custom-domain HTTPS must still be checked during the coordinated cutover. The static contact experience intentionally uses direct email links rather than an API submission form.

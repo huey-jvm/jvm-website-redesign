@@ -1,13 +1,16 @@
 {
   "ci": {
     "collect": {
-      "startServerCommand": "pnpm start --port 3200",
+      "startServerCommand": "node scripts/serve-pages.mjs out 3200 --http2",
       "url": [
-        "http://localhost:3200/",
-        "http://localhost:3200/services/healthcare-operations/",
-        "http://localhost:3200/contracting/",
-        "http://localhost:3200/careers/"
+        "https://localhost:3200/",
+        "https://localhost:3200/services/healthcare-operations/",
+        "https://localhost:3200/contracting/",
+        "https://localhost:3200/careers/"
       ],
+      "settings": {
+        "chromeFlags": "--ignore-certificate-errors --allow-insecure-localhost"
+      },
       "numberOfRuns": 2
     },
     "assert": {
