@@ -30,11 +30,11 @@ export function OfficeMap({ src }: { src: string }) {
     const limit = setTimeout(() => setShow(false), 12000);
     return () => { clearTimeout(timer); clearTimeout(limit); };
   }, [view, active]);
-  return <div ref={root} className="office-map-preview min-w-0">
-    <div role="group" aria-label="Map view" className="flex gap-1 border-b border-cream-border bg-cream p-2">
+  return <div ref={root} className="office-map-preview flex min-w-0 flex-col">
+    <div className="relative min-h-80 flex-1">
+    <div role="group" aria-label="Map view" className="absolute bottom-8 left-3 z-20 flex gap-1 rounded-control border border-cream-border bg-cream p-1 shadow-sm sm:bottom-auto sm:left-auto sm:right-3 sm:top-3">
       {([{ value: "m", label: "Map" }, { value: "k", label: "Satellite" }] as const).map(option => <button key={option.value} type="button" aria-pressed={view === option.value} onClick={() => { if(view === option.value) return; loaded.current = false; setShow(false); setView(option.value); }} className={`min-h-11 rounded-control px-4 text-body-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-700 ${view === option.value ? "bg-ink-950 text-white" : "text-ink-900 hover:bg-gold-200 focus-visible:bg-gold-200"}`}>{option.label}</button>)}
     </div>
-    <div className="relative min-h-80">
     {active ? <iframe key={view} title="Map to JVM Solutions Texas Office" src={`${src}&t=${view}`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" tabIndex={-1} inert aria-hidden="true" onLoad={finish} onError={finish} className="pointer-events-none absolute inset-0 h-full w-full select-none border-0" /> : null}
     {show && <span className="photo-loading" aria-hidden="true"><Suspense fallback={null}><SkeletonBox width="100%" height="100%" radius={0} /></Suspense></span>}
     </div>
