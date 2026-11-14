@@ -21,6 +21,8 @@ Eleven original failures were outdated expectations; five identified production 
 
 Lighthouse now audits `/contracting` instead of the withheld `/contracting/stars-iii` page. All performance, accessibility, best-practices and SEO score thresholds are retained.
 
+After the browser suite reached 420 passes, Lighthouse exposed mobile performance failures on the homepage and Healthcare Operations page. Photo placeholders now use CSS instead of downloading the Skullet runtime (the map still uses Skullet). The hero uses a phone derivative generated from the same original at the existing 60% horizontal focal point; desktop HD files are unchanged. Media-specific preloads prevent duplicate desktop downloads, and below-the-fold images receive low fetch priority. A browser regression checks the phone derivative, its HD dimensions and the single-image request. Failure artifacts now include the hidden Lighthouse reports so future performance issues retain their evidence.
+
 ## Release gate
 
 Before website DNS cutover: require the updated Checks workflow, Pages preview deployment and build-only production export to pass, then verify the live preview. Real mailbox delivery and custom-domain HTTPS must still be checked during the coordinated cutover. The static contact experience intentionally uses direct email links rather than an API submission form.

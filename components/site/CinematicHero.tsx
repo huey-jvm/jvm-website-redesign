@@ -15,7 +15,7 @@ export function CinematicHero({ image, children }: { image: HeroPhoto; children?
   return (
     <section className="mission-hero mission-hero-editorial surface-dark bg-ink-950 text-ink-200" data-hero="photo">
       <div className="mission-backdrop">
-        <Image src={image.src} alt={image.alt} fill priority quality={90} sizes="(max-width: 1023px) 1500px, 100vw" className="hero-image" />
+        <Image src={image.src} alt={image.alt} fill priority quality={90} sizes="100vw" mobile={{ maxWidth: 1920, sizes: "1000px", quality: 75 }} className="hero-image" />
       </div>
       <div className="mission-shade" aria-hidden="true" />
       <div className="mission-stage">

@@ -38,6 +38,22 @@ for (const file of await filesUnder(root)) {
   const candidates = isMissionHero ? [...widths, 2560, 3200, 3840] : widths;
   const sizes = [...new Set([...candidates.filter(w => w < metadata.width), Math.min(metadata.width, isMissionHero ? 3840 : 1920)])];
   manifest[src] = { hash, widths: sizes };
+  if (isMissionHero) {
+    // Match the existing phone object-position:60% crop, before downloading
+    // the image. Retain the full original and desktop derivatives unchanged.
+    const cropWidth = Math.round(metadata.height * 0.6);
+    const left = Math.round((metadata.width - cropWidth) * 0.6);
+    const portraitWidths = [384, 640, 750, 828, 960, 1080, 1200, 1440].filter(width => width <= cropWidth);
+    const portraitHash = `${hash}-portrait-v2`;
+    manifest[src].portrait = { hash: portraitHash, widths: portraitWidths };
+    for (const width of portraitWidths) for (const quality of qualities) {
+      const destination = path.join(output, `${portraitHash}-${width}-${quality}.webp`);
+      try { await fs.access(destination); continue; } catch {}
+      await sharp(source).rotate().extract({ left, top: 0, width: cropWidth, height: metadata.height })
+        .resize({ width }).webp({ quality, effort: 4 }).toFile(destination);
+      generated++;
+    }
+  }
   for (const width of sizes) for (const quality of qualities) {
     const destination = path.join(output, `${hash}-${width}-${quality}.webp`);
     try { await fs.access(destination); continue; } catch {}
