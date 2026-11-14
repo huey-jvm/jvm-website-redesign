@@ -1,9 +1,15 @@
-name: GitHub Pages preview
+name: GitHub Pages
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      target:
+        description: Preview, build-only production check, or custom-domain publication
+        type: choice
+        options: [preview, production-check, production]
+        default: preview
 
 permissions:
   contents: read
@@ -17,8 +23,36 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ steps.target.outputs.publish }}
     steps:
       - uses: actions/checkout@v4
+      - name: Select publication settings
+        id: target
+        env:
+          TARGET: ${{ inputs.target || (vars.PAGES_PRODUCTION == 'true' && 'production' || 'preview') }}
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          echo 'STATIC_EXPORT=true' >> "$GITHUB_ENV"
+          if [[ "$TARGET" == production* ]]; then
+            echo 'PAGES_BASE_PATH=' >> "$GITHUB_ENV"
+            echo 'NEXT_PUBLIC_SITE_URL=https://www.jvmsolutions.net' >> "$GITHUB_ENV"
+            echo 'NEXT_PUBLIC_NOINDEX=false' >> "$GITHUB_ENV"
+          else
+            echo 'PAGES_BASE_PATH=/${{ github.event.repository.name }}' >> "$GITHUB_ENV"
+            echo 'NEXT_PUBLIC_SITE_URL=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}' >> "$GITHUB_ENV"
+            echo 'NEXT_PUBLIC_NOINDEX=true' >> "$GITHUB_ENV"
+          fi
+          if [[ "$TARGET" == production ]]; then
+            DOMAIN=$(gh api "repos/${{ github.repository }}/pages" --jq '.cname')
+            [[ "$DOMAIN" == www.jvmsolutions.net ]] || { echo 'Configure the Pages custom domain before production publication.'; exit 1; }
+          fi
+          if [[ "$TARGET" == production-check ]]; then
+            echo 'publish=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'publish=true' >> "$GITHUB_OUTPUT"
+          fi
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -30,17 +64,17 @@ jobs:
         run: rm -rf app/api
       - name: Build the static export
         run: pnpm build
-        env:
-          PAGES_BASE_PATH: /${{ github.event.repository.name }}
-          NEXT_PUBLIC_NOINDEX: "true"
       - name: Give route data the file names the browser requests
         run: node scripts/pages-postbuild.mjs out
+      - name: Verify the exported site
+        run: node scripts/verify-pages.mjs out
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
 
   deploy:
     needs: build
+    if: needs.build.outputs.publish == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

@@ -132,6 +132,20 @@ export function ContactForm({
     }
   }
 
+  if (process.env.NEXT_PUBLIC_STATIC_EXPORT === "true") {
+    return (
+      <div className={cn("space-y-5", dark ? "text-cream" : "text-ink-900")}>
+        <p className="text-body">Email the team directly using the options below. These links open your email app.</p>
+        <div className="grid gap-3">
+          <Button href={`mailto:${contact.emails.bd}`} tone={tone}>Contracting and health system enquiries</Button>
+          <Button href={`mailto:${contact.emails.general}`} tone={tone}>General, career and partner enquiries</Button>
+          <Button href={`mailto:${contact.emails.credentialing}?subject=Employment%20Verification`} tone={tone}>Employment verification</Button>
+        </div>
+        <p className="text-body-sm">Prefer to call? <a className="underline" href={contact.office.phoneHref}>{contact.office.phone}</a>. Replies within {contact.responseTime}.</p>
+      </div>
+    );
+  }
+
   if (status === "success" && routeInfo) {
     return (
       <div

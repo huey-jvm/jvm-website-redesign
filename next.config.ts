@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 import { legacyRedirects } from "./content/redirects";
 
-const pagesBasePath = process.env.PAGES_BASE_PATH;
+const pagesBasePath = process.env.PAGES_BASE_PATH ?? "";
+const isStaticExport = process.env.STATIC_EXPORT === "true" || Boolean(pagesBasePath);
 
 const server: NextConfig = {
   async redirects() {
@@ -33,7 +34,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   devIndicators: false,
-  ...(pagesBasePath ? staticExport : server),
+  ...(isStaticExport ? staticExport : server),
 };
 
 export default nextConfig;
