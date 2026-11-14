@@ -21,7 +21,7 @@ export default function CertificationsPage() {
           {businessCredentials.map((c) => <CredentialRow key={c.slug} credential={c} />)}
         </ul>
         <section aria-labelledby="vip-recognition-title" className="mt-12 grid items-center gap-8 border-t border-gold-500 pt-8 sm:grid-cols-[180px_minmax(0,1fr)] md:mt-16 md:gap-12">
-          <Image src={vip.image!} alt="National Center Veteran Institute for Procurement Graduate" width={261} height={177} className="h-auto w-[180px] object-contain" />
+          <Image src="/assets/03-credentials/vip-graduate-hd.webp" alt="National Center Veteran Institute for Procurement Graduate" width={1522} height={1033} className="h-auto w-[180px] object-contain" />
           <div>
             <p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">Procurement recognition</p>
             <h2 id="vip-recognition-title" className="mt-3 text-h3">{vip.name}</h2>

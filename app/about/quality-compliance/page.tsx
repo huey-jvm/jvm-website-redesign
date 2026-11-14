@@ -20,14 +20,12 @@ export default function QualityPage() {
     <Section className="quality-standards">
       <SectionHeader eyebrow="Our standards" title="Quality in Every Engagement" />
       <div className="space-y-8">
-        <section className="grid gap-5 border-t border-gold-500 pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-16" aria-labelledby="quality-iso-title">
+        <section className="quality-certification border-t border-gold-500" aria-labelledby="quality-iso-title">
+          <Image src="/assets/03-credentials/nsai-iso-9001-transparent.webp" alt="Quality ISO 9001:2015 — NSAI Certified" width={1045} height={1506} className="quality-certification-mark" />
           <div>
-          <div className="mb-5 flex items-center gap-3"><ClipboardCheck aria-hidden className="size-6 text-gold-700" /><p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">Quality management</p></div>
+          <div className="mb-4 flex items-center gap-3"><ClipboardCheck aria-hidden className="size-6 text-gold-700" /><p className="text-eyebrow font-semibold uppercase tracking-widest text-gold-700">Quality management</p></div>
           <h3 id="quality-iso-title" className="text-h3">{iso.name}</h3>
-          </div>
-          <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-10">
-            <Image src="/assets/03-credentials/nsai-iso-9001.png" alt="Quality ISO 9001:2015 — NSAI Certified" width={200} height={285} className="h-auto w-[180px] shrink-0" />
-            <p className="max-w-sm text-body text-ink-700">Our quality management system is certified to ISO 9001:2015 by NSAI.</p>
+          <p className="mt-4 max-w-xl text-body text-ink-700">Our quality management system is certified to ISO 9001:2015 by NSAI.</p>
           </div>
         </section>
         <section className="grid gap-5 border-t border-ink-200 pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-16" aria-labelledby="quality-joint-title">
