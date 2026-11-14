@@ -4,9 +4,9 @@
       "startServerCommand": "pnpm start --port 3200",
       "url": [
         "http://localhost:3200/",
-        "http://localhost:3200/services/healthcare-operations",
-        "http://localhost:3200/contracting",
-        "http://localhost:3200/careers"
+        "http://localhost:3200/services/healthcare-operations/",
+        "http://localhost:3200/contracting/",
+        "http://localhost:3200/careers/"
       ],
       "numberOfRuns": 2
     },

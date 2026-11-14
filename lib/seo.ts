@@ -5,14 +5,15 @@ import { contact } from "@/content/contact";
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jvmsolutions.net";
 
 export function pageMetadata(title: string, description: string, path: string): Metadata {
+  const canonical = process.env.NEXT_PUBLIC_STATIC_EXPORT === "true" && path !== "/" ? `${path.replace(/\/$/, "")}/` : path;
   return {
     title,
     description,
-    alternates: { canonical: path },
+    alternates: { canonical },
     openGraph: {
       title: `${title} | ${statements.shortName}`,
       description,
-      url: path,
+      url: canonical,
       siteName: statements.shortName,
       type: "website",
       images: [{ url: "/og-default.png", width: 1200, height: 630, alt: statements.shortName }],

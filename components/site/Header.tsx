@@ -2,7 +2,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ChevronDown } from "lucide-react";
 import { leadEyebrow } from "@/content/services";
 import { BrandLogo } from "./BrandLogo";
-import Link from "next/link";
+import Link from "@/components/ui/IntentLink";
 import { Phone, Mail } from "lucide-react";
 import type { NavGroup } from "@/content/navigation";
 import { contact } from "@/content/contact";

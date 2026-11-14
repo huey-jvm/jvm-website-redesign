@@ -25,4 +25,8 @@ After the browser suite reached 420 passes, Lighthouse exposed mobile performanc
 
 ## Release gate
 
+The browser suite passed 421 tests with 22 intentional skips at `2fdb203`. The subsequent navigation regression verifies that a destination is not prefetched on initial render, is prefetched on keyboard focus, and opens with its heading visible. Primary navigation, buttons and breadcrumbs now prefetch on intent to avoid competing hero downloads. Performance CI runs separately against the production static export, with the same score thresholds and two runs per URL. Static sitemap and canonical URLs include the final trailing slash and are checked after export.
+
+Mobile Lighthouse performance remains a cutover gate: the latest local static audit measured 88 on the homepage and 93–96 on the other three routes. Passing browser tests alone does not establish readiness for domain cutover.
+
 Before website DNS cutover: require the updated Checks workflow, Pages preview deployment and build-only production export to pass, then verify the live preview. Real mailbox delivery and custom-domain HTTPS must still be checked during the coordinated cutover. The static contact experience intentionally uses direct email links rather than an API submission form.
