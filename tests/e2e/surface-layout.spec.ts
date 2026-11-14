@@ -3,6 +3,7 @@ import { test, expect, type Page } from "@playwright/test";
 async function openSurface(page: Page, path: string) {
   await page.goto(path, { waitUntil: "domcontentloaded" });
   await expect(page.locator("main")).toBeVisible();
+  await expect(page.locator("main h1")).toBeVisible();
   await page.evaluate(() => document.fonts.ready);
 }
 
@@ -81,12 +82,15 @@ test("desktop chapters fill a viewport while compact sections and cards fit thei
   expect(await page.locator("main > section:not(.content-sized)").evaluateAll(els => els.every(el => parseFloat(getComputedStyle(el).minHeight) >= innerHeight))).toBe(true);
   expect(await page.locator(".outcomes-row > li, .outcomes-row > li > a").evaluateAll(els => els.every(el => parseFloat(getComputedStyle(el).minHeight) === 0))).toBe(true);
   const cta = page.locator(".cta-content");
+  await expect(cta).toBeVisible();
   expect((await cta.boundingBox())!.height).toBeLessThan(1080);
   await openSurface(page, "/services");
   // The directory and CTA now share the hero's background. Check the heading,
   // rather than imposing a height ceiling on the entire combined section.
   expect(await page.locator("main > section").first().evaluate(el => parseFloat(getComputedStyle(el).minHeight))).toBeGreaterThanOrEqual(1080);
-  expect((await page.locator(".brief-heading h1").first().boundingBox())!.height).toBeLessThan(200);
+  const title = page.locator(".brief-heading h1").first();
+  await expect(title).toBeVisible();
+  expect((await title.boundingBox())!.height).toBeLessThan(200);
   await openSurface(page, "/legal/privacy");
   const chapters = page.locator(".chapter-section");
   expect(await chapters.count()).toBeGreaterThan(0);
