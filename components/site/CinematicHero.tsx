@@ -1,39 +1,20 @@
 import { ChevronRight } from "lucide-react";
-import Image from "@/components/ui/Image";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { statements } from "@/content/statements";
 import { formatList } from "@/lib/list";
-import type { HeroPhoto } from "./ImageHero";
 import type { ReactNode } from "react";
+import { VideoHero } from "./VideoHero";
+import { landingVideo } from "@/content/hero-videos";
 
-export function CinematicHero({ image, children }: { image: HeroPhoto; children?: ReactNode }) {
+export function CinematicHero({ children }: { children?: ReactNode }) {
   const facts = [
     { label: "The missions we serve", value: formatList([...statements.audience]) },
     { label: "Our expertise", value: "Healthcare, Health IT, logistics and facilities management" },
     { label: "Our approach", value: "People, systems and delivery working together" },
   ];
   return (
-    <section className="mission-hero mission-hero-editorial surface-dark bg-ink-950 text-ink-200" data-hero="photo">
-      <div className="mission-backdrop">
-        <Image src={image.src} alt={image.alt} fill priority quality={90} sizes="100vw" mobile={{ maxWidth: 1920, sizes: "1000px", quality: 75 }} className="hero-image" />
-      </div>
-      <div className="mission-shade" aria-hidden="true" />
-      <div className="mission-stage">
-        <div className="container-content mission-hero-grid">
-          <div className="hero-copy">
-            <Eyebrow tone="dark" className="mission-brand lg:hidden">Veteran Led, Mission Focused</Eyebrow>
-            <h1 className="mission-title text-cream">Built to Serve.<br /><span className="mission-emphasis">Ready to Deliver.</span></h1>
-            <p className="mt-6 max-w-[43ch] text-lead-sm text-ink-200">{statements.positioning}</p>
+    <VideoHero video={landingVideo} title={<>Built to Serve.<br /><span className="mission-emphasis">Ready to Deliver.</span></>} lead={statements.positioning} facts={facts}>
             {children}
             <a href="#outcomes-title" className="mission-scroll"><span>See what makes JVM different</span><ChevronRight aria-hidden="true" className="size-4 shrink-0" /></a>
-          </div>
-        </div>
-      </div>
-      <div className="container-content">
-        <dl className="mission-facts grid gap-6 border-t border-ink-800 py-7 md:grid-cols-3">
-          {facts.map((f) => <div key={f.label}><dt className="mb-2 text-eyebrow font-semibold uppercase text-gold-500">{f.label}</dt><dd className="max-w-[40ch] text-body-sm text-cream">{f.value}</dd></div>)}
-        </dl>
-      </div>
-    </section>
+    </VideoHero>
   );
 }

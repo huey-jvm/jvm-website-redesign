@@ -24,7 +24,16 @@ export function MobileMenu({
   pathname: string;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
+  const [entered, setEntered] = useState(false);
   const [instantDismiss, setInstantDismiss] = useState(false);
+  const shown = open && (instant || entered);
+  useEffect(() => {
+    // A lazily mounted drawer needs a painted closed frame before its first
+    // transition. Later toggles simply retarget the same persistent panel.
+    let second = 0;
+    const first = requestAnimationFrame(() => { second = requestAnimationFrame(() => setEntered(true)); });
+    return () => { cancelAnimationFrame(first); cancelAnimationFrame(second); };
+  }, []);
   const releaseRef = useRef<(() => void) | undefined>(undefined);
   const close = useCallback(() => {
     releaseRef.current?.();
@@ -35,7 +44,7 @@ export function MobileMenu({
   const [chevronInstant, setChevronInstant] = useState(false);
 
   useEffect(() => {
-    if (!open) return;
+    if (!shown) return;
     const surface = panelRef.current?.parentElement;
     if (!surface) return;
     const release = isolateModal(surface);
@@ -76,39 +85,28 @@ export function MobileMenu({
       }
       document.removeEventListener("keydown", onKey);
     };
-  }, [open, close]);
+  }, [shown, close]);
 
   return (
     <div
       id="mobile-menu"
-      inert={!open}
-      className={cn(
-        "fixed inset-0 z-50 lg:hidden",
-        !(instant || (!open && instantDismiss)) &&
-          (open
-            ? "transition-opacity duration-200 ease-enter"
-            : "transition-[opacity,visibility] duration-150 ease-enter"),
-        open ? "visible opacity-100" : "invisible opacity-0",
-      )}
+      inert={!shown}
+      aria-hidden={!shown}
+      data-open={shown}
+      data-instant={instant || (!open && instantDismiss)}
+      className="mobile-drawer fixed inset-0 z-50 lg:hidden"
       role="dialog"
       aria-modal="true"
       aria-label="Menu"
     >
       <div
-        className="absolute inset-0 bg-ink-950/40"
-        onClick={close}
+        className="mobile-drawer-backdrop absolute inset-0 bg-ink-950/40"
+        onClick={() => { setInstantDismiss(false); close(); }}
         aria-hidden
       />
       <div
         ref={panelRef}
-        className={cn(
-          "absolute inset-y-0 left-0 flex w-[min(22rem,88vw)] flex-col border-r border-ink-200 bg-white shadow-float motion-reduce:translate-x-0",
-          !(instant || (!open && instantDismiss)) &&
-            "transition-[translate,opacity] ease-enter",
-          open
-            ? "translate-x-0 opacity-100 duration-200"
-            : "-translate-x-full motion-reduce:translate-x-0 opacity-0 duration-150",
-        )}
+        className="mobile-drawer-panel absolute inset-y-0 left-0 flex w-[min(22rem,88vw)] flex-col border-r border-ink-200 bg-white"
       >
         <div className="flex h-15 items-center justify-between border-b border-ink-200 px-4">
           <span className="font-semibold text-h4 text-ink-950">Menu</span>
@@ -121,7 +119,7 @@ export function MobileMenu({
           />
         </div>
         <nav aria-label="Primary" className="min-h-0 flex-1 overflow-y-auto px-2 py-3" onClick={(event) => {
-          if (event.target instanceof Element && event.target.closest("a[href]")) close();
+          if (event.target instanceof Element && event.target.closest("a[href]")) { setInstantDismiss(event.detail === 0); close(); }
         }}>
           <ul>
             {nav.map((group) =>

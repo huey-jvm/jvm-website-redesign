@@ -1,6 +1,6 @@
 import { TeamGallery } from "@/components/site/TeamGallery";
-import Image from "@/components/ui/Image";
-import { PageHero } from "@/components/site/PageHero";
+import { VideoHero } from "@/components/site/VideoHero";
+import { aboutVideo } from "@/content/hero-videos";
 import { Section, SectionHeader } from "@/components/site/Section";
 import { AboutLeadership } from "@/components/site/AboutLeadership";
 import { AboutValues } from "@/components/site/AboutValues";
@@ -10,7 +10,6 @@ import { Placeholder } from "@/components/ui/Placeholder";
 import { statements } from "@/content/statements";
 import { values } from "@/content/values";
 import { InPageNav } from "@/components/site/InPageNav";
-import { leadershipTeamPhoto } from "@/content/team";
 import { contact } from "@/content/contact";
 import { pageMetadata } from "@/lib/seo";
 import { purpose } from "@/content/purpose";
@@ -26,19 +25,14 @@ export const metadata = pageMetadata(
 export default function AboutPage() {
   return (
     <>
-      <PageHero
-        className="about-hero"
-        eyebrow="About"
+      <VideoHero
+        video={aboutVideo}
+        about
         title="About JVM Solutions"
-        crumbs={[{ label: "About" }]}
+        lead="Our work brings people, technology and operational support together. Meet the team behind JVM’s commitment to healthcare and professional services."
       >
-      <div className="mt-12 md:mt-16">
-        <div className="about-introduction inner-hero-grid grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
-          <div className="inner-hero-photo photo-feature relative aspect-[4/3]"><Image src={leadershipTeamPhoto.src} alt={leadershipTeamPhoto.alt} fill priority quality={90} sizes="(min-width:1024px) 50vw,100vw" className="object-cover" /></div>
-          <div className="inner-hero-copy"><h2 className="editorial-title text-h2-sm md:text-h2">Experience You Can Put a Face To</h2><p className="mt-5 text-lead-sm text-ink-700">Our work brings people, technology and operational support together. Meet the team behind JVM’s commitment to healthcare and professional services.</p><a href="#leadership" className="mt-6 inline-flex min-h-11 items-center text-body-sm font-semibold text-gold-700 underline underline-offset-4">Meet our leadership</a></div>
-        </div>
-      </div>
-      </PageHero>
+        <Button href="#leadership" tone="dark" className="mt-7">Meet our leadership</Button>
+      </VideoHero>
       <div className="h-12 md:h-16" aria-hidden />
       <div className="document-layout container-content grid grid-cols-1 gap-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-12 lg:[&>.document-nav]:mb-16">
         <InPageNav

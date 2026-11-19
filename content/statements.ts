@@ -4,7 +4,7 @@ export const statements = {
   category: "Integrated Healthcare Operations and Professional Services",
   tagline: "Veteran Led, Mission Focused",
   positioning:
-    "Healthcare operations, Health IT, logistics and facilities management. JVM brings people, systems and day-to-day delivery together to help your mission move forward.",
+    "JVM delivers integrated healthcare management, workforce solutions and operational readiness to support our clients’ mission readiness.",
   audience: ["Defense Health Agency", "Veterans Affairs", "Health and Human Services"],
   mission:
     "Driven by excellence and integrity, we deliver exceptional, client-focused solutions shaped by our core values.",

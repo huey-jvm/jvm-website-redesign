@@ -17,7 +17,7 @@ import { statements } from "@/content/statements";
 import { outcomes } from "@/content/outcomes";
 import { services } from "@/content/services";
 import { differentiators } from "@/content/differentiators";
-import { team, missionHeroPhoto } from "@/content/team";
+import { team } from "@/content/team";
 
 export const metadata: Metadata = {
   description: statements.positioning,
@@ -28,7 +28,7 @@ export default function HomePage() {
   const founder = team[0];
   return (
     <>
-      <CinematicHero image={missionHeroPhoto}>
+      <CinematicHero>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Button href="/services" tone="dark" size="md" variant="primary">Explore Our Services</Button>
           <Button href="/about" variant="tertiary" tone="dark" size="md">Meet JVM</Button>

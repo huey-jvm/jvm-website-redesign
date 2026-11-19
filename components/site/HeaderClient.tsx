@@ -10,7 +10,6 @@ import {
   useSyncExternalStore,
 } from "react";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
 import type { NavGroup } from "@/content/navigation";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
@@ -138,10 +137,10 @@ export function HeaderClient({
             onClick={(e) => {
               setInstant(e.detail === 0);
               setMenuMounted(true);
-              setMobileOpen(true);
+              setMobileOpen(value => !value);
             }}
           >
-            <Menu aria-hidden className="size-6" />
+            <span className="menu-toggle-lines" data-open={mobileOpen} data-instant={instant} aria-hidden="true"><span /><span /><span /></span>
           </button>
           {logo}
           <nav

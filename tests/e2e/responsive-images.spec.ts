@@ -5,25 +5,27 @@ import { test, expect } from "@playwright/test";
 import imageLoader from "../../lib/image-loader";
 import manifest from "../../lib/image-manifest.json";
 
-test("phone hero loads one correctly framed HD derivative without downloading the desktop image", async ({ browser }) => {
+test("phone video poster loads one responsive derivative without downloading the old hero", async ({ browser }) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
   try {
     const page = await context.newPage();
-    const hash = manifest["/images/revision/mission-team-original-hd.jpg"].hash;
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    const hash = manifest["/images/video/landing-poster.webp"].hash;
     const requested: string[] = [];
     page.on("request", request => { if (request.url().includes(`/optimized/${hash}-`)) requested.push(request.url()); });
     await page.goto("/", { waitUntil: "networkidle" });
-    const image = page.locator(".mission-backdrop img");
+    const image = page.locator(".video-hero-poster");
     await expect.poll(() => image.evaluate((img: HTMLImageElement) => img.complete && img.naturalHeight > 0)).toBe(true);
     const currentSrc = await image.evaluate((img: HTMLImageElement) => img.currentSrc);
-    expect(currentSrc).toMatch(/portrait-v\d+-\d+-75\.webp$/);
+    expect(currentSrc).toMatch(/\d+-90\.webp$/);
     const metadata = await sharp(path.join(process.cwd(), "public", new URL(currentSrc).pathname)).metadata();
-    expect(metadata.height).toBeGreaterThanOrEqual(1000);
+    expect(metadata.width).toBeLessThanOrEqual(1080);
+    expect(metadata.height).toBeGreaterThanOrEqual(400);
     expect([...new Set(requested)]).toHaveLength(1);
-    expect(requested.every(url => url.includes("-portrait-v"))).toBe(true);
-    const frame = await page.locator(".mission-hero").boundingBox();
-    expect(frame!.width / frame!.height).toBeLessThanOrEqual(0.6);
-    await expect(image).toHaveAttribute("srcset", /3840w/);
+    const frame = await page.locator(".video-hero-media").boundingBox();
+    const hero = await page.locator(".video-hero").boundingBox();
+    expect(frame!.height).toBeCloseTo(hero!.height, 0);
+    await expect(image).toHaveAttribute("srcset", /1920w/);
   } finally { await context.close(); }
 });
 

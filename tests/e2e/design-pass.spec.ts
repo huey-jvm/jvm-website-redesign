@@ -34,7 +34,7 @@ for (const route of routes) {
     for (const width of [320, 375, 768, 1024, 1440, 1920]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto(route, { waitUntil: "domcontentloaded" });
-      await expect(page.locator("main .brief-hero h1")).toBeVisible();
+      await expect(page.locator(route == "/about" ? "main .video-hero h1" : "main .brief-hero h1")).toBeVisible();
       await page.evaluate(() => document.fonts.ready);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${route} at ${width}px`).toBe(true);
     }
@@ -44,7 +44,7 @@ for (const route of routes) {
     test(`${route} has no serious accessibility issues at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
       await page.goto(route, { waitUntil: "domcontentloaded" });
-      await expect(page.locator("main .brief-hero h1")).toBeVisible();
+      await expect(page.locator(route == "/about" ? "main .video-hero h1" : "main .brief-hero h1")).toBeVisible();
       const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
       expect(results.violations.filter(v => v.impact === "critical" || v.impact === "serious")).toEqual([]);
     });
@@ -121,7 +121,8 @@ test("certifications show one useful record action per credential", async ({ pag
 
 test("About presents the approved founder message, values and leadership", async ({ page }) => {
   await page.goto("/about", { waitUntil: "domcontentloaded" });
-  await expect(page.locator(".about-hero .about-introduction")).toBeVisible();
+  await expect(page.locator('.about-hero[data-hero="video"]')).toBeVisible();
+  await expect(page.locator(".about-hero .video-hero-poster")).toBeVisible();
   const quote = page.locator("#story blockquote");
   await expect(quote).toContainText(purpose.quote);
   await expect(quote).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");

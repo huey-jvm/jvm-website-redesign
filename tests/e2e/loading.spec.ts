@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import manifest from "../../lib/image-manifest.json";
 import { pages } from "./pages";
 
-const hero = manifest["/images/revision/mission-team-original-hd.jpg"];
+const hero = manifest["/images/video/landing-poster.webp"];
 
 test("public page content is visible before any browser JavaScript runs", async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
@@ -24,7 +24,7 @@ test("slow hero shows a skeleton without blocking text or shifting layout", asyn
     await route.continue();
   });
   await page.goto("/", { waitUntil: "domcontentloaded" });
-  const skeleton = page.locator(".mission-backdrop .photo-loading");
+  const skeleton = page.locator(".video-hero-media .photo-loading");
   try {
     await expect(skeleton).toBeVisible();
     await expect(page.getByRole("heading", { name: "Built to Serve. Ready to Deliver." })).toBeVisible();
@@ -33,8 +33,8 @@ test("slow hero shows a skeleton without blocking text or shifting layout", asyn
     await expect(skeleton).toHaveAttribute("data-ready", "true");
     await expect(skeleton).not.toBeVisible();
     expect(await page.locator(".mission-hero").boundingBox()).toEqual(before);
-    const img = page.locator(".mission-backdrop img");
-    await expect(img).toHaveAttribute("srcset", /3840w/);
+    const img = page.locator(".video-hero-media img");
+    await expect(img).toHaveAttribute("srcset", /1920w/);
     await page.screenshot({ path: "test-results/hero-hd.png" });
   } finally { release(); }
 });
@@ -44,7 +44,7 @@ test("failed photo clears its loading overlay", async ({ page }) => {
   const hold = new Promise<void>(resolve => { release = resolve; });
   await page.route(`**/images/optimized/${hero.hash}-*`, async route => { await hold; await route.abort(); });
   await page.goto("/", { waitUntil: "domcontentloaded" });
-  const skeleton = page.locator(".mission-backdrop .photo-loading");
+  const skeleton = page.locator(".video-hero-media .photo-loading");
   try {
     await expect(skeleton).toBeVisible();
     release();
@@ -60,10 +60,9 @@ test("ready photos do not remain masked and mobile stays within the viewport", a
   await page.setViewportSize({ width: 375, height: 812 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  await expect.poll(() => page.locator(".mission-backdrop img").evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
-  const mobileHero = hero.portrait;
-  expect(await page.locator(".mission-backdrop img").evaluate((img: HTMLImageElement) => img.currentSrc)).toContain(mobileHero.hash);
-  expect(desktopHeroRequests).toEqual([]);
-  await expect(page.locator('.mission-backdrop .photo-loading:not([data-ready="true"])')).toHaveCount(0);
+  await expect.poll(() => page.locator(".video-hero-media img").evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
+  expect(await page.locator(".video-hero-media img").evaluate((img: HTMLImageElement) => img.currentSrc)).toContain(hero.hash);
+  expect(desktopHeroRequests).toHaveLength(1);
+  await expect(page.locator('.video-hero-media .photo-loading:not([data-ready="true"])')).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

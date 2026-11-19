@@ -34,6 +34,6 @@ export default function Image({ src, fill, priority, preload: shouldPreload, qua
     loading={loading ?? (highPriority ? "eager" : "lazy")} decoding="async" fetchPriority={highPriority ? "high" : fetchPriority ?? (loading === "eager" ? undefined : "low")}
     style={fill ? { position: "absolute", inset: 0, width: "100%", height: "100%", ...style } : style} />;
   const responsive = mobile && mobileSrcSet ? <picture>{portraitSrcSet ? <source media="(max-width: 479px)" srcSet={portraitSrcSet} sizes="max(100vw, 60vh)" /> : null}<source media="(max-width: 1023px)" srcSet={mobileSrcSet} sizes={mobile.sizes} />{element}</picture> : element;
-  return fill && /^\/images\/(revision|jvm)\//.test(src)
+  return fill && /^\/images\/(revision|jvm|video)\//.test(src)
     ? <PhotoLoading key={src}>{responsive}</PhotoLoading> : responsive;
 }
