@@ -12,6 +12,7 @@ test("public page content is visible before any browser JavaScript runs", async 
       await page.goto(route, { waitUntil: "domcontentloaded" });
       await expect(page.locator("main h1"), route).toBeVisible();
       await expect(page.locator("main .page-skeleton"), route).toHaveCount(0);
+      if (route === "/" || route === "/about") await expect(page.locator(".hero-video")).toHaveAttribute("poster", /\/images\/optimized\/.+\.webp$/);
     }
   } finally { await context.close(); }
 });
@@ -62,7 +63,8 @@ test("ready photos do not remain masked and mobile stays within the viewport", a
   await page.goto("/");
   await expect.poll(() => page.locator(".video-hero-media img").evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
   expect(await page.locator(".video-hero-media img").evaluate((img: HTMLImageElement) => img.currentSrc)).toContain(hero.hash);
-  expect(desktopHeroRequests).toHaveLength(1);
+  // Native video poster and responsive fallback have separate optimized sizes.
+  expect(new Set(desktopHeroRequests).size).toBe(2);
   await expect(page.locator('.video-hero-media .photo-loading:not([data-ready="true"])')).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

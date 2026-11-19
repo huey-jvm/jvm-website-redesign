@@ -5,7 +5,7 @@ import { test, expect } from "@playwright/test";
 import imageLoader from "../../lib/image-loader";
 import manifest from "../../lib/image-manifest.json";
 
-test("phone video poster loads one responsive derivative without downloading the old hero", async ({ browser }) => {
+test("phone video posters stay within their image budget without downloading the old hero", async ({ browser }) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
   try {
     const page = await context.newPage();
@@ -21,7 +21,10 @@ test("phone video poster loads one responsive derivative without downloading the
     const metadata = await sharp(path.join(process.cwd(), "public", new URL(currentSrc).pathname)).metadata();
     expect(metadata.width).toBeLessThanOrEqual(1080);
     expect(metadata.height).toBeGreaterThanOrEqual(400);
-    expect([...new Set(requested)]).toHaveLength(1);
+    const posterFiles = [...new Set(requested)];
+    expect(posterFiles).toHaveLength(2);
+    const totalBytes = posterFiles.reduce((sum, url) => sum + fs.statSync(path.join(process.cwd(), "public", new URL(url).pathname)).size, 0);
+    expect(totalBytes).toBeLessThan(200 * 1024);
     const frame = await page.locator(".video-hero-media").boundingBox();
     const hero = await page.locator(".video-hero").boundingBox();
     expect(frame!.height).toBeCloseTo(hero!.height, 0);

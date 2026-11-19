@@ -10,6 +10,7 @@ for (const [route, name] of [["/", "landing"], ["/about", "about-jvm"]]) {
       await expect.poll(() => video.evaluate((v: HTMLVideoElement) => !v.paused && v.currentTime > 0)).toBe(true);
       expect(await video.evaluate((v: HTMLVideoElement) => ({ muted: v.muted, loop: v.loop, inline: v.playsInline }))).toEqual({ muted: true, loop: true, inline: true });
       await expect(video).toHaveAttribute("src", `/videos/${name === "about-jvm" ? "about-jvm-32eef00a" : name}${width < 768 ? "-mobile" : ""}.mp4`);
+      await expect(video).toHaveAttribute("poster", /\/images\/optimized\/.+\.webp$/);
       if (name === "about-jvm") expect(await video.evaluate((v: HTMLVideoElement) => v.duration)).toBeLessThan(5.2);
       const hero = await page.locator(".video-hero").boundingBox();
       const frame = await page.locator(".video-hero-media").boundingBox();

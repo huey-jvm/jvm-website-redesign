@@ -9,7 +9,7 @@ type Connection = EventTarget & { saveData?: boolean };
 
 // The poster is server rendered. Motion is an enhancement: no video request is
 // made for reduced-motion/data-saving visitors until they explicitly press Play.
-export function VideoBackdrop({ video, children }: { video: HeroVideo; children: ReactNode }) {
+export function VideoBackdrop({ video, poster, children }: { video: HeroVideo; poster: string; children: ReactNode }) {
   const id = useId();
   const media = useRef<HTMLVideoElement>(null);
   const intent = useRef<boolean | null>(null);
@@ -61,7 +61,7 @@ export function VideoBackdrop({ video, children }: { video: HeroVideo; children:
   return <>
     <div className="video-hero-media" aria-hidden="true">
       {children}
-      <video ref={media} id={id} className="hero-video" data-ready={ready && !failed}
+      <video ref={media} id={id} className="hero-video" poster={poster} data-ready={ready && !failed}
         muted loop playsInline preload="none" disablePictureInPicture tabIndex={-1}
         onPlaying={() => { setPlaying(true); setReady(true); }}
         onPause={() => setPlaying(false)}

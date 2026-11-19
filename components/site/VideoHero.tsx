@@ -3,6 +3,8 @@ import Image from "@/components/ui/Image";
 import { VideoBackdrop } from "./VideoBackdrop";
 import { Breadcrumb } from "./Breadcrumb";
 import type { HeroVideo } from "@/content/hero-videos";
+import imageLoader from "@/lib/image-loader";
+import { preload } from "react-dom";
 
 export function VideoHero({ video, title, lead, children, facts, about = false }: {
   video: HeroVideo;
@@ -12,8 +14,10 @@ export function VideoHero({ video, title, lead, children, facts, about = false }
   facts?: { label: string; value: string }[];
   about?: boolean;
 }) {
+  const poster = imageLoader({ src: video.poster, width: 1920, quality: 75 });
+  preload(poster, { as: "image", fetchPriority: "high" });
   return <section className={`mission-hero video-hero surface-dark ${about ? "about-hero video-hero--about" : "video-hero--landing"}`} data-hero="video" aria-label={about ? "About JVM Solutions" : "JVM Solutions"}>
-    <VideoBackdrop key={video.src} video={video}>
+    <VideoBackdrop key={video.src} video={video} poster={poster}>
       <Image src={video.poster} alt="" fill priority quality={90} sizes="100vw" className="hero-image video-hero-poster" />
     </VideoBackdrop>
     <div className="video-hero-shade" aria-hidden="true" />
