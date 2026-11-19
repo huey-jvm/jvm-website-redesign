@@ -9,7 +9,7 @@ for (const [route, name] of [["/", "landing"], ["/about", "about-jvm"]]) {
       const video = page.locator(".hero-video");
       await expect.poll(() => video.evaluate((v: HTMLVideoElement) => !v.paused && v.currentTime > 0)).toBe(true);
       expect(await video.evaluate((v: HTMLVideoElement) => ({ muted: v.muted, loop: v.loop, inline: v.playsInline }))).toEqual({ muted: true, loop: true, inline: true });
-      await expect(video).toHaveAttribute("src", `/videos/${name === "about-jvm" ? "about-jvm-32eef00a" : name}${width < 768 ? "-mobile" : ""}.mp4`);
+      await expect(video).toHaveAttribute("src", `/videos/${name === "about-jvm" ? "about-jvm-32eef00a" : "landing-58adf9d2"}${width < 768 ? "-mobile" : ""}.mp4`);
       await expect(video).toHaveAttribute("poster", /\/images\/optimized\/.+\.webp$/);
       if (name === "about-jvm") expect(await video.evaluate((v: HTMLVideoElement) => v.duration)).toBeLessThan(5.2);
       const hero = await page.locator(".video-hero").boundingBox();
@@ -18,6 +18,8 @@ for (const [route, name] of [["/", "landing"], ["/about", "about-jvm"]]) {
       expect(frame!.width).toBeCloseTo(hero!.width, 0);
       const control = page.getByRole("button", { name: "Pause background video", exact: true });
       await expect(control).toHaveText("");
+      await expect(control).toHaveCSS("width", "32px");
+      await expect(control).toHaveCSS("height", "32px");
       expect(Number(await control.evaluate(el => getComputedStyle(el).opacity))).toBeLessThan(1);
       await control.hover();
       await expect(control).toHaveCSS("opacity", "1");

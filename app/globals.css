@@ -719,7 +719,9 @@ main h1,
 .video-hero .mission-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2rem; border-top:1px solid rgb(232 206 150 / .35); padding-block:1.5rem 2rem; }
 .video-hero .mission-facts dt { margin-bottom:.5rem; color:#e8ce96; font-size:.75rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; }
 .video-hero .mission-facts dd { max-width:40ch; color:#f8f5ee; font-size:.875rem; line-height:1.5; }
-.hero-video-control { position:absolute; z-index:2; top:1.5rem; right:max(1.5rem,calc((100% - 1264px) / 2)); display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; padding:0; border:1px solid rgb(255 255 255 / .4); border-radius:var(--radius-control); background:rgb(7 20 32 / .82); color:#fffaf0; opacity:.45; cursor:pointer; transition:opacity 160ms ease,background-color 150ms ease; }
+.hero-video-control { position:absolute; z-index:2; top:1.5rem; right:max(1.5rem,calc((100% - 1264px) / 2)); display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; padding:0; border:1px solid rgb(255 255 255 / .4); border-radius:var(--radius-control); background:rgb(7 20 32 / .82); color:#fffaf0; opacity:.45; cursor:pointer; transition:opacity 160ms ease,background-color 150ms ease; }
+.hero-video-control > svg { width:14px; height:14px; }
+.hero-video-control::after { content:""; position:absolute; inset:-6px; }
 .hero-video-control:is(:hover,:active) { opacity:1; background:#0b182b; }
 .hero-video-control:focus-visible { opacity:1; outline:2px solid #e8ce96; outline-offset:4px; transition:none; }
 .video-hero-breadcrumb { position:absolute; top:2rem; left:0; right:0; width:100%; }

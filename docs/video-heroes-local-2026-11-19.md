@@ -46,3 +46,7 @@ Final production-server regression: **76 passed, one intentionally skipped** (wi
 Screenshots are saved in `notes/video-heroes-review` as `home-desktop.png`, `home-phone.png`, `about-desktop.png` and `about-phone.png`. Verification uses Edge with emulated viewports, not physical phones. These results describe the local review before publication.
 
 Follow-up after the mobile full-bleed direction, icon-only control styling and replacement About footage: **21 focused checks passed**. They verify full-frame bounds on both routes, subdued rest/opaque hover and focus states, playback, fallbacks, reduced motion, data saving, white-frame contrast and drawer transitions. The drawer animation assertion records transition events so a busy test runner cannot miss a short animation merely by polling too late. ESLint and whitespace checks also passed for this follow-up.
+
+## Landing replacement - 20 November 2026
+
+Replaced the landing film with the newly supplied 1920 x 1080, 5.05-second source (SHA-256 revision `58adf9d2`). Encoded silent desktop and phone versions use revisioned URLs to bypass old caches, with an updated still poster. Playback remains at 85% speed. Both hero controls now have a 32px visual size and 14px icons, retaining their top/right placement and a 44px pointer target.
